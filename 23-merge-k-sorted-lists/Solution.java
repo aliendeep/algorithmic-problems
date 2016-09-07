@@ -1,43 +1,49 @@
+
 /**
  * Definition for singly-linked list.
- * struct ListNode {
+ * public class ListNode {
  *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
  */
-class Solution {
-public:
-    struct Compare{
-      bool operator()(const ListNode* a, const ListNode* b){
-          if(a == NULL && b == NULL)    return true;
-          if(a == NULL)                 return false;
-          if(b == NULL)                 return true;
-          return (a->val > b->val);
-      }  
-    };
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        priority_queue<ListNode*, vector<ListNode*>, Compare> min_heap;
-        // push first item into min heap from each lists
-        for(auto list_head : lists){
-            if(list_head != NULL)
-                min_heap.emplace(list_head);
-        }
-        // create a dummy node
-        ListNode* dummy = new ListNode(-1);
-        ListNode* prev = dummy;
-        while(!min_heap.empty()){
-            // Find the min 
-            auto t = min_heap.top();
-            min_heap.pop();
-            prev->next = t;
-            prev = prev->next;
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0)
+            return null;
             
-            // Insert the next item into min_heap
-            t = t->next;
-            if(t)   
-                min_heap.emplace(t);
+        Comparator<ListNode> listComparator = new Comparator<ListNode>(){
+            @Override
+            public int compare(ListNode a, ListNode b){
+                return a.val - b.val;
+            }   
+        }; 
+
+        int k = lists.length;
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>(k, listComparator);
+        
+        // Add first item from each list into the min heap
+        for(ListNode head : lists){
+            if(head != null)
+                minHeap.add(head);
         }
-        return dummy->next;
+        
+        // Create a dummy node
+        ListNode dummy = new ListNode(-1);
+        ListNode prev = dummy;
+        
+        while(!minHeap.isEmpty()){
+            ListNode t = minHeap.poll();
+            
+            // update prev
+            prev.next = t;
+            prev = prev.next;
+            
+            t = t.next;
+            // insert the next item from the same list
+            if(t != null)
+                minHeap.add(t);
+        }
+        return dummy.next;
     }
-};
+}
