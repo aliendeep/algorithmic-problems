@@ -42,6 +42,14 @@ Solutions to Leetcode problems
 
 96  Unique Binary Search Trees
 
+98  Validate Binary Search Tree
+
+100 Same Tree
+
+101 Symmetric Tree
+
+110 Balanced Binary Tree
+
 133 Clone Graph
 
 152 Maximum Product Subarray
