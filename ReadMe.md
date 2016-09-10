@@ -4,6 +4,12 @@ Solutions to Leetcode problems
 
 2   Add Two Numbers
 
+7   Reverse Integer
+
+8   String to Integer (atoi)  
+
+9   Palindrome Number
+
 17  Letter Combinations of a Phone Number
 
 23  Merge k Sorted Lists
@@ -38,6 +44,8 @@ Solutions to Leetcode problems
 
 78  Subsets
 
+94 Binary Tree Inorder Traversal
+
 95  Unique Binary Search Trees II
 
 96  Unique Binary Search Trees
@@ -48,13 +56,25 @@ Solutions to Leetcode problems
 
 101 Symmetric Tree
 
+102 Binary Tree Level Order Traversal  
+
 110 Balanced Binary Tree
 
 133 Clone Graph
 
+136 Single Number
+
+144 Binary Tree Preorder Traversal  
+
+145 Binary Tree Postorder Traversal  
+
 152 Maximum Product Subarray
 
 172 Dungeon Game
+
+173 Binary Search Tree Iterator
+
+187 Repeated DNA Sequences
 
 198 House Robber
 
@@ -67,6 +87,8 @@ Solutions to Leetcode problems
 216 Combination Sum III
 
 221 Maximal Square
+
+226 Invert Binary Tree
 
 322 Coin Change
 
