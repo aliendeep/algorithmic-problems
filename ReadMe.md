@@ -50,6 +50,10 @@ Solutions to Leetcode problems
 
 198 House Robber
 
+200 Number of Islands  
+
+204 Count Primes
+
 213 House Robber II
 
 216 Combination Sum III
@@ -57,5 +61,9 @@ Solutions to Leetcode problems
 221 Maximal Square
 
 322 Coin Change
+
+329 Longest Increasing Path in a Matrix
+
+371 Sum of Two Integers
 
 377 Combination Sum IV
