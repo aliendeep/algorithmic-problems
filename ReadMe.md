@@ -8,17 +8,27 @@ Solutions to Leetcode problems
 
 23  Merge k Sorted Lists
 
+36  Valid Sudoku
+
 37  Sudoku Solver
 
 39  Combination Sum
 
 40  Combination Sum II
 
+41  First Missing Positive
+
+43  Multiply Strings
+
 46  Permutations
+
+58  Length of Last Word 
 
 62  Unique Paths
 
 63  Unique Paths II
+
+64  Minimum Path Sum
 
 70  Climbing Stairs
 
@@ -28,7 +38,13 @@ Solutions to Leetcode problems
 
 78  Subsets
 
+95  Unique Binary Search Trees II
+
+96  Unique Binary Search Trees
+
 133 Clone Graph
+
+152 Maximum Product Subarray
 
 172 Dungeon Game
 
@@ -37,6 +53,8 @@ Solutions to Leetcode problems
 213 House Robber II
 
 216 Combination Sum III
+
+221 Maximal Square
 
 322 Coin Change
 
