@@ -28,6 +28,8 @@ Solutions to Leetcode problems
 
 46  Permutations
 
+57  Insert Interval 
+
 58  Length of Last Word 
 
 62  Unique Paths
@@ -74,6 +76,8 @@ Solutions to Leetcode problems
 
 173 Binary Search Tree Iterator
 
+179 Largest Number
+
 187 Repeated DNA Sequences
 
 198 House Robber
@@ -93,6 +97,10 @@ Solutions to Leetcode problems
 322 Coin Change
 
 329 Longest Increasing Path in a Matrix
+
+349 Intersection of Two Arrays
+
+350 Intersection of Two Arrays II
 
 371 Sum of Two Integers
 
