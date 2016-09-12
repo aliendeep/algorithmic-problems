@@ -4,13 +4,23 @@ Solutions to Leetcode problems
 
 2   Add Two Numbers
 
+3   Longest Substring Without Repeating Characters  
+
+5   Longest Palindromic Substring
+
 7   Reverse Integer
 
 8   String to Integer (atoi)  
 
 9   Palindrome Number
 
+12  Integer to Roman
+
+13  Roman to Integer
+
 17  Letter Combinations of a Phone Number
+
+20  Valid Parentheses
 
 23  Merge k Sorted Lists
 
@@ -60,7 +70,13 @@ Solutions to Leetcode problems
 
 102 Binary Tree Level Order Traversal  
 
+104 Maximum Depth of Binary Tree
+
+108 Convert Sorted Array to Binary Search Tree
+
 110 Balanced Binary Tree
+
+111 Minimum Depth of Binary Tree 
 
 133 Clone Graph
 
