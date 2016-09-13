@@ -18,7 +18,17 @@ Solutions to Leetcode problems
 
 13  Roman to Integer
 
+14  Longest Common Prefix
+
+15  3Sum
+
+16  3Sum Closest  
+
 17  Letter Combinations of a Phone Number
+
+18  4Sum
+
+19  Remove Nth Node From End of List  
 
 20  Valid Parentheses
 
@@ -104,6 +114,8 @@ Solutions to Leetcode problems
 
 213 House Robber II
 
+215 Kth Largest Element in an Array 
+
 216 Combination Sum III
 
 221 Maximal Square
@@ -113,6 +125,8 @@ Solutions to Leetcode problems
 322 Coin Change
 
 329 Longest Increasing Path in a Matrix
+
+347 Top K Frequent Elements
 
 349 Intersection of Two Arrays
 
