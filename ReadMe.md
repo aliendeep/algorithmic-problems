@@ -102,6 +102,8 @@ Solutions to Leetcode problems
 
 145 Binary Tree Postorder Traversal  
 
+146 LRU Cache
+
 152 Maximum Product Subarray
 
 172 Dungeon Game
@@ -124,6 +126,12 @@ Solutions to Leetcode problems
 
 216 Combination Sum III
 
+217 Contains Duplicate
+
+219 Contains Duplicate II
+
+220 Contains Duplicate III
+
 221 Maximal Square
 
 226 Invert Binary Tree
@@ -141,3 +149,5 @@ Solutions to Leetcode problems
 371 Sum of Two Integers
 
 377 Combination Sum IV
+
+389 Find the Difference
