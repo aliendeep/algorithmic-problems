@@ -32,6 +32,8 @@ Solutions to Leetcode problems
 
 20  Valid Parentheses
 
+22  Generate Parentheses
+
 23  Merge k Sorted Lists
 
 36  Valid Sudoku
@@ -57,6 +59,10 @@ Solutions to Leetcode problems
 63  Unique Paths II
 
 64  Minimum Path Sum
+
+66  Plus One
+
+69  Sqrt(x)
 
 70  Climbing Stairs
 
