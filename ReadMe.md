@@ -50,6 +50,10 @@ Solutions to Leetcode problems
 
 46  Permutations
 
+49  Group Anagrams
+
+50  Pow(x, n)
+
 57  Insert Interval 
 
 58  Length of Last Word 
@@ -117,6 +121,8 @@ Solutions to Leetcode problems
 198 House Robber
 
 200 Number of Islands  
+
+202 Happy Number
 
 204 Count Primes
 
