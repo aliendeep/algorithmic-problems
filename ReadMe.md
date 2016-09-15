@@ -128,6 +128,10 @@ Solutions to Leetcode problems
 
 204 Count Primes
 
+207 Course Schedule
+
+210 Course Schedule II
+
 213 House Robber II
 
 215 Kth Largest Element in an Array 
