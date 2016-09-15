@@ -102,6 +102,8 @@ Solutions to Leetcode problems
 
 136 Single Number
 
+141 Linked List Cycle
+
 144 Binary Tree Preorder Traversal  
 
 145 Binary Tree Postorder Traversal  
@@ -142,9 +144,21 @@ Solutions to Leetcode problems
 
 226 Invert Binary Tree
 
+231 Power of Two
+
+287 Find the Duplicate Number
+
 322 Coin Change
 
+326 Power of Three
+
 329 Longest Increasing Path in a Matrix
+
+342 Power of Four
+
+344 Reverse String
+
+345 Reverse Vowels of a String
 
 347 Top K Frequent Elements
 
