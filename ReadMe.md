@@ -98,9 +98,13 @@ Solutions to Leetcode problems
 
 111 Minimum Depth of Binary Tree 
 
+124 Binary Tree Maximum Path Sum
+
 133 Clone Graph
 
 136 Single Number
+
+137 Single Number II
 
 141 Linked List Cycle
 
@@ -148,7 +152,13 @@ Solutions to Leetcode problems
 
 226 Invert Binary Tree
 
+230 Kth Smallest Element in a BST
+
 231 Power of Two
+
+257 Binary Tree Paths  
+
+258 Add Digits
 
 287 Find the Duplicate Number
 
@@ -173,5 +183,7 @@ Solutions to Leetcode problems
 371 Sum of Two Integers
 
 377 Combination Sum IV
+
+378 Kth Smallest Element in a Sorted Matrix
 
 389 Find the Difference
