@@ -72,6 +72,8 @@ Solutions to Leetcode problems
 
 72  Edit Distance
 
+74  Search a 2D Matrix
+
 77  Combinations
 
 78  Subsets
@@ -156,6 +158,8 @@ Solutions to Leetcode problems
 
 231 Power of Two
 
+240 Search a 2D Matrix II
+
 242 Valid Anagram
 
 257 Binary Tree Paths  
@@ -176,11 +180,23 @@ Solutions to Leetcode problems
 
 287 Find the Duplicate Number
 
+290 Word Pattern
+
+295 Find Median from Data Stream
+
+297 Serialize and Deserialize Binary Tree
+
+299 Bulls and Cows
+
+300 Longest Increasing Subsequence
+
 322 Coin Change
 
 326 Power of Three
 
 329 Longest Increasing Path in a Matrix
+
+331 Verify Preorder Serialization of a Binary Tree
 
 342 Power of Four
 
