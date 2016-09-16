@@ -156,9 +156,23 @@ Solutions to Leetcode problems
 
 231 Power of Two
 
+242 Valid Anagram
+
 257 Binary Tree Paths  
 
 258 Add Digits
+
+263 Ugly Number
+
+264 Ugly Number II
+
+268 Missing Number
+
+278 First Bad Version
+
+279 Perfect Squares
+
+283 Move Zeroes
 
 287 Find the Duplicate Number
 
