@@ -146,7 +146,11 @@ Solutions to Leetcode problems
 
 205 Isomorphic Strings
 
+206 Reverse Linked List
+
 207 Course Schedule
+
+208 Implement Trie (Prefix Tree)
 
 210 Course Schedule II
 
