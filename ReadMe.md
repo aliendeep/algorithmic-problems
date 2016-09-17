@@ -118,9 +118,11 @@ Solutions to Leetcode problems
 
 152 Maximum Product Subarray
 
-172 Dungeon Game
+172 Factorial Trailing Zeroes
 
 173 Binary Search Tree Iterator
+
+174 Dungeon Game
 
 179 Largest Number
 
@@ -157,6 +159,10 @@ Solutions to Leetcode problems
 230 Kth Smallest Element in a BST
 
 231 Power of Two
+
+237 Delete Node in a Linked List
+
+238 Product of Array Except Self
 
 240 Search a 2D Matrix II
 
