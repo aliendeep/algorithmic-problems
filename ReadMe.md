@@ -132,9 +132,15 @@ Solutions to Leetcode problems
 
 200 Number of Islands  
 
+201 Bitwise AND of Numbers Range
+
 202 Happy Number
 
+203 Remove Linked List Elements
+
 204 Count Primes
+
+205 Isomorphic Strings
 
 207 Course Schedule
 
@@ -159,6 +165,10 @@ Solutions to Leetcode problems
 230 Kth Smallest Element in a BST
 
 231 Power of Two
+
+234 Palindrome Linked List 
+
+235 Lowest Common Ancestor of a Binary Search Tree
 
 237 Delete Node in a Linked List
 
@@ -195,6 +205,8 @@ Solutions to Leetcode problems
 299 Bulls and Cows
 
 300 Longest Increasing Subsequence
+
+318 Maximum Product of Word Lengths
 
 322 Coin Change
 
