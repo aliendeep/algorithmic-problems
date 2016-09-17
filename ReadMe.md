@@ -78,6 +78,8 @@ Solutions to Leetcode problems
 
 78  Subsets
 
+79  Word Search
+
 94 Binary Tree Inorder Traversal
 
 95  Unique Binary Search Trees II
@@ -118,6 +120,8 @@ Solutions to Leetcode problems
 
 152 Maximum Product Subarray
 
+169 Majority Element
+
 172 Factorial Trailing Zeroes
 
 173 Binary Search Tree Iterator
@@ -146,6 +150,8 @@ Solutions to Leetcode problems
 
 210 Course Schedule II
 
+212 Word Search II
+
 213 House Robber II
 
 215 Kth Largest Element in an Array 
@@ -161,6 +167,8 @@ Solutions to Leetcode problems
 221 Maximal Square
 
 226 Invert Binary Tree
+
+229 Majority Element II
 
 230 Kth Smallest Element in a BST
 
