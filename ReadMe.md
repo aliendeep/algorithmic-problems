@@ -102,7 +102,11 @@ Solutions to Leetcode problems
 
 102 Binary Tree Level Order Traversal  
 
+103 Binary Tree Zigzag Level Order Traversal 
+
 104 Maximum Depth of Binary Tree
+
+107 Binary Tree Level Order Traversal II
 
 108 Convert Sorted Array to Binary Search Tree
 
@@ -110,7 +114,13 @@ Solutions to Leetcode problems
 
 111 Minimum Depth of Binary Tree 
 
+112 Path Sum
+
 124 Binary Tree Maximum Path Sum
+
+125 Valid Palindrome 
+
+128 Longest Consecutive Sequence
 
 133 Clone Graph
 
