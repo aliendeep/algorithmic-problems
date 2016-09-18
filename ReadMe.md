@@ -32,6 +32,8 @@ Solutions to Leetcode problems
 
 20  Valid Parentheses
 
+21  Merge Two Sorted Lists
+
 22  Generate Parentheses
 
 23  Merge k Sorted Lists
@@ -80,6 +82,12 @@ Solutions to Leetcode problems
 
 79  Word Search
 
+82  Remove Duplicates from Sorted List II
+
+83  Remove Duplicates from Sorted List
+
+86  Partition List
+
 94 Binary Tree Inorder Traversal
 
 95  Unique Binary Search Trees II
@@ -120,6 +128,8 @@ Solutions to Leetcode problems
 
 152 Maximum Product Subarray
 
+160 Intersection of Two Linked Lists
+
 169 Majority Element
 
 172 Factorial Trailing Zeroes
@@ -131,6 +141,10 @@ Solutions to Leetcode problems
 179 Largest Number
 
 187 Repeated DNA Sequences
+
+189 Rotate Array
+
+190 Reverse Bits
 
 198 House Robber
 
@@ -152,7 +166,11 @@ Solutions to Leetcode problems
 
 208 Implement Trie (Prefix Tree)
 
+209 Minimum Size Subarray Sum
+
 210 Course Schedule II
+
+211 Add and Search Word - Data structure design 
 
 212 Word Search II
 
@@ -171,6 +189,8 @@ Solutions to Leetcode problems
 221 Maximal Square
 
 226 Invert Binary Tree
+
+228 Summary Ranges
 
 229 Majority Element II
 
