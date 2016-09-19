@@ -56,6 +56,8 @@ Solutions to Leetcode problems
 
 50  Pow(x, n)
 
+53  Maximum Subarray  
+
 57  Insert Interval 
 
 58  Length of Last Word 
@@ -67,6 +69,8 @@ Solutions to Leetcode problems
 64  Minimum Path Sum
 
 66  Plus One
+
+67  Add Binary  
 
 69  Sqrt(x)
 
@@ -130,6 +134,8 @@ Solutions to Leetcode problems
 
 133 Clone Graph
 
+135 Candy
+
 136 Single Number
 
 137 Single Number II
@@ -148,7 +154,17 @@ Solutions to Leetcode problems
 
 160 Intersection of Two Linked Lists
 
+162 Find Peak Element 
+
+165 Compare Version Numbers
+
+167 Two Sum II - Input array is sorted
+
+168 Excel Sheet Column Title
+
 169 Majority Element
+
+171 Excel Sheet Column Number
 
 172 Factorial Trailing Zeroes
 
@@ -163,6 +179,8 @@ Solutions to Leetcode problems
 189 Rotate Array
 
 190 Reverse Bits
+
+191 Number of 1 Bits  
 
 198 House Robber
 
@@ -238,6 +256,8 @@ Solutions to Leetcode problems
 
 268 Missing Number
 
+273 Integer to English Words
+
 278 First Bad Version
 
 279 Perfect Squares
@@ -247,6 +267,8 @@ Solutions to Leetcode problems
 287 Find the Duplicate Number
 
 290 Word Pattern
+
+292 Nim Game  
 
 295 Find Median from Data Stream
 
@@ -276,6 +298,8 @@ Solutions to Leetcode problems
 
 342 Power of Four
 
+343 Integer Break
+
 344 Reverse String
 
 345 Reverse Vowels of a String
@@ -293,3 +317,7 @@ Solutions to Leetcode problems
 378 Kth Smallest Element in a Sorted Matrix
 
 389 Find the Difference
+
+400 Nth Digit
+
+401 Binary Watch
