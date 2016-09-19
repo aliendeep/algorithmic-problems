@@ -256,15 +256,23 @@ Solutions to Leetcode problems
 
 300 Longest Increasing Subsequence
 
+303 Range Sum Query - Immutable
+
+307 Range Sum Query - Mutable
+
 318 Maximum Product of Word Lengths
 
 322 Coin Change
 
 326 Power of Three
 
+328 Odd Even Linked List 
+
 329 Longest Increasing Path in a Matrix
 
 331 Verify Preorder Serialization of a Binary Tree
+
+334 Increasing Triplet Subsequence
 
 342 Power of Four
 
