@@ -116,11 +116,17 @@ Solutions to Leetcode problems
 
 112 Path Sum
 
+113 Path Sum II
+
 124 Binary Tree Maximum Path Sum
 
 125 Valid Palindrome 
 
 128 Longest Consecutive Sequence
+
+129 Sum Root to Leaf Numbers
+
+130 Surrounded Regions
 
 133 Clone Graph
 
@@ -135,6 +141,8 @@ Solutions to Leetcode problems
 145 Binary Tree Postorder Traversal  
 
 146 LRU Cache
+
+150 Evaluate Reverse Polish Notation
 
 152 Maximum Product Subarray
 
