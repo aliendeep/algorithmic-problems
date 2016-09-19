@@ -318,6 +318,10 @@ Solutions to Leetcode problems
 
 389 Find the Difference
 
+394 Decode String
+
+397 Integer Replacement 
+
 400 Nth Digit
 
 401 Binary Watch
