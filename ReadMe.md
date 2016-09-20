@@ -296,6 +296,8 @@ Solutions to Leetcode problems
 
 334 Increasing Triplet Subsequence
 
+341 Flatten Nested List Iterator
+
 342 Power of Four
 
 343 Integer Break
@@ -320,8 +322,12 @@ Solutions to Leetcode problems
 
 394 Decode String
 
+396 Rotate Function
+
 397 Integer Replacement 
 
 400 Nth Digit
 
 401 Binary Watch
+
+402 Remove K Digits
