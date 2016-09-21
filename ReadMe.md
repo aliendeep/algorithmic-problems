@@ -50,6 +50,8 @@ Solutions to Leetcode problems
 
 41  First Missing Positive
 
+42  Trapping Rain Water
+
 43  Multiply Strings
 
 46  Permutations
@@ -73,6 +75,8 @@ Solutions to Leetcode problems
 66  Plus One
 
 67  Add Binary  
+
+68  Text Justification
 
 69  Sqrt(x)
 
