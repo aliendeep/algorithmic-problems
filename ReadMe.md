@@ -164,6 +164,8 @@ Solutions to Leetcode problems
 
 152 Maximum Product Subarray
 
+153 Find Minimum in Rotated Sorted Array
+
 160 Intersection of Two Linked Lists
 
 162 Find Peak Element 
