@@ -40,6 +40,12 @@ Solutions to Leetcode problems
 
 23  Merge k Sorted Lists
 
+26  Remove Duplicates from Sorted Array
+
+27  Remove Element
+
+28  Implement strStr()
+
 36  Valid Sudoku
 
 37  Sudoku Solver
@@ -91,6 +97,8 @@ Solutions to Leetcode problems
 78  Subsets
 
 79  Word Search
+
+80  Remove Duplicates from Sorted Array II
 
 82  Remove Duplicates from Sorted List II
 
@@ -331,6 +339,8 @@ Solutions to Leetcode problems
 377 Combination Sum IV
 
 378 Kth Smallest Element in a Sorted Matrix
+
+387 First Unique Character in a String
 
 389 Find the Difference
 
