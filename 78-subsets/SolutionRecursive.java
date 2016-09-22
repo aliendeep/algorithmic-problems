@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     void bktk(int[] nums, int lev, ArrayList<Integer> cur, List<List<Integer>> result){
         result.add(new ArrayList<Integer>(cur));
         for(int i=lev; i<nums.length; i++){

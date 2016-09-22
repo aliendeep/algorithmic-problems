@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     // Binary trick
     // logb(n) = log(n) / log(b)
     public static double getLog2(int n){

@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     // Alternative : Sorting technique
     public String sortString(String a){
         char[] x = a.toCharArray();

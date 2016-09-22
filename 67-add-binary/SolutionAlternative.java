@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public String reverse(String x){
         StringBuffer s = new StringBuffer(x);
         s.reverse();
