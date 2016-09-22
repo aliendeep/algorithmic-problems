@@ -70,9 +70,13 @@ Solutions to Leetcode problems
 
 53  Maximum Subarray  
 
+55  Jump Game
+
 57  Insert Interval 
 
 58  Length of Last Word 
+
+61  Rotate List
 
 62  Unique Paths
 
@@ -92,7 +96,11 @@ Solutions to Leetcode problems
 
 72  Edit Distance
 
+73  Set Matrix Zeroes
+
 74  Search a 2D Matrix
+
+75  Sort Colors
 
 77  Combinations
 
