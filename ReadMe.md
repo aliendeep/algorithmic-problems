@@ -46,6 +46,8 @@ Solutions to Leetcode problems
 
 28  Implement strStr()
 
+33  Search in Rotated Sorted Array
+
 36  Valid Sudoku
 
 37  Sudoku Solver
@@ -245,6 +247,8 @@ Solutions to Leetcode problems
 220 Contains Duplicate III
 
 221 Maximal Square
+
+224 Basic Calculator
 
 226 Invert Binary Tree
 
