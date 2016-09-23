@@ -42,11 +42,15 @@ Solutions to Leetcode problems
 
 23  Merge k Sorted Lists
 
+25  Reverse Nodes in k-Group 
+
 26  Remove Duplicates from Sorted Array
 
 27  Remove Element
 
 28  Implement strStr()
+
+31  Next Permutation
 
 33  Search in Rotated Sorted Array
 
@@ -63,6 +67,8 @@ Solutions to Leetcode problems
 42  Trapping Rain Water
 
 43  Multiply Strings
+
+44  Wildcard Matching
 
 46  Permutations
 
