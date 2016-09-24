@@ -1,3 +1,11 @@
+/*
+Given a digit string, return all possible letter combinations that the number could represent.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below.
+
+Input:Digit string "23"
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+*/
 public class Solution {
     void bktk(String digits, StringBuilder cur, int lev, List<String> r, HashMap<Character, String> hmap){
         if(lev == digits.length()){

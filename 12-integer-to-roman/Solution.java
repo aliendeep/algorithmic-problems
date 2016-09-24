@@ -1,8 +1,13 @@
+/*
+Given an integer, convert it to a roman numeral.
+
+Input is guaranteed to be within the range from 1 to 3999.
+*/
 import java.util.SortedMap;
 
 public class Solution {
     public String intToRoman(int num) {
-        // sorted order
+        // sorted order needed, so use TreeMap (decreasing order needed)
         SortedMap<Integer, String> mapping = new TreeMap<Integer, String>(Collections.reverseOrder());
         mapping.put(1000, "M");
         mapping.put(900, "CM");
