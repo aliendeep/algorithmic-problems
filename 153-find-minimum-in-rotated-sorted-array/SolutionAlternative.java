@@ -1,15 +1,16 @@
-class Solution {
+public class Solution {
     // Binary Search
     // Time : O(logn)
     public int findMin(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
-        
-        while(high - low > 1){
-            // If this portion of the array is not rotated at all
-            if(nums[low] < nums[high])
+        while(low <= high){
+            // if only one element or Array is not rotated at all
+            if(low == high || nums[low] < nums[high])
                 return nums[low];
-                
+            if(high - low == 1)
+                return Math.min(nums[low], nums[high]);
+
             int mid = (low+high)/2;
             // left half is sorted
             if(nums[low] < nums[mid])
@@ -18,9 +19,6 @@ class Solution {
             else 
                 high = mid;
         }
-        int r = nums[low];
-        for(int i=low+1; i<=high; i++)
-            r = Math.min(r, nums[i]);
-        return r;
+        return -1;
     }
 }

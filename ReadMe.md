@@ -160,6 +160,8 @@ Solutions to Leetcode problems
 
 113 Path Sum II
 
+115 Distinct Subsequences
+
 124 Binary Tree Maximum Path Sum
 
 125 Valid Palindrome 
@@ -195,6 +197,8 @@ Solutions to Leetcode problems
 152 Maximum Product Subarray
 
 153 Find Minimum in Rotated Sorted Array
+
+154 Find Minimum in Rotated Sorted Array II
 
 160 Intersection of Two Linked Lists
 
