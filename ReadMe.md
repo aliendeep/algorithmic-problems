@@ -58,6 +58,8 @@ Solutions to Leetcode problems
 
 33  Search in Rotated Sorted Array
 
+34  Search for a Range
+
 36  Valid Sudoku
 
 37  Sudoku Solver
@@ -79,6 +81,10 @@ Solutions to Leetcode problems
 49  Group Anagrams
 
 50  Pow(x, n)
+
+51  N-Queens
+
+52  N-Queens II
 
 53  Maximum Subarray  
 
