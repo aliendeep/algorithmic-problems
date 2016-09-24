@@ -134,7 +134,9 @@ Solutions to Leetcode problems
 
 86  Partition List
 
-94 Binary Tree Inorder Traversal
+88  Merge Sorted Array
+
+94  Binary Tree Inorder Traversal
 
 95  Unique Binary Search Trees II
 
@@ -171,6 +173,8 @@ Solutions to Leetcode problems
 124 Binary Tree Maximum Path Sum
 
 125 Valid Palindrome 
+
+127 Word Ladder
 
 128 Longest Consecutive Sequence
 
@@ -209,6 +213,8 @@ Solutions to Leetcode problems
 160 Intersection of Two Linked Lists
 
 162 Find Peak Element 
+
+164 Maximum Gap
 
 165 Compare Version Numbers
 
