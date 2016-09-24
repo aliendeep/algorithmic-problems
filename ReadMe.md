@@ -6,6 +6,8 @@ Solutions to Leetcode problems
 
 3   Longest Substring Without Repeating Characters  
 
+4   Median of Two Sorted Arrays  
+
 5   Longest Palindromic Substring
 
 7   Reverse Integer
@@ -49,6 +51,8 @@ Solutions to Leetcode problems
 27  Remove Element
 
 28  Implement strStr()
+
+30  Substring with Concatenation of All Words
 
 31  Next Permutation
 
