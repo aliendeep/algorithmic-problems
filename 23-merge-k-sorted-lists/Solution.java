@@ -1,4 +1,7 @@
-
+/*
+Merge k sorted linked lists and return it as one sorted list. 
+Analyze and describe its complexity.
+*/
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -7,6 +10,10 @@
  *     ListNode(int x) { val = x; }
  * }
  */
+
+// Heap
+// Time complexity: O(nlogK)
+
 public class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists == null || lists.length == 0)
@@ -19,6 +26,7 @@ public class Solution {
             }   
         }; 
 
+        // minHeap contains at most k items
         int k = lists.length;
         PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>(k, listComparator);
         

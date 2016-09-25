@@ -374,7 +374,15 @@ Solutions to Leetcode problems
 
 350 Intersection of Two Arrays II
 
+357 Count Numbers with Unique Digits
+
+367 Valid Perfect Square 
+
 371 Sum of Two Integers
+
+373 Find K Pairs with Smallest Sums
+
+374 Guess Number Higher or Lower
 
 377 Combination Sum IV
 
