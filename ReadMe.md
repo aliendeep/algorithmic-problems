@@ -404,6 +404,8 @@ Solutions to Leetcode problems
 
 394 Decode String
 
+395 Longest Substring with At Least K Repeating Characters
+
 396 Rotate Function
 
 397 Integer Replacement 
@@ -413,3 +415,9 @@ Solutions to Leetcode problems
 401 Binary Watch
 
 402 Remove K Digits
+
+404 Sum of Left Leaves
+
+405 Convert a Number to Hexadecimal  
+
+406 Queue Reconstruction by Height
