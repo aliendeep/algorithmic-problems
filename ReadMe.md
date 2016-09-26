@@ -362,6 +362,8 @@ Solutions to Leetcode problems
 
 334 Increasing Triplet Subsequence
 
+338 Counting Bits  
+
 341 Flatten Nested List Iterator
 
 342 Power of Four
@@ -377,6 +379,8 @@ Solutions to Leetcode problems
 349 Intersection of Two Arrays
 
 350 Intersection of Two Arrays II
+
+355 Design Twitter 
 
 357 Count Numbers with Unique Digits
 
@@ -395,6 +399,8 @@ Solutions to Leetcode problems
 387 First Unique Character in a String
 
 389 Find the Difference
+
+392 Is Subsequence
 
 394 Decode String
 
