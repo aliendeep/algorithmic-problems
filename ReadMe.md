@@ -332,6 +332,8 @@ Solutions to Leetcode problems
 
 287 Find the Duplicate Number
 
+289 Game of Life
+
 290 Word Pattern
 
 292 Nim Game  
@@ -392,15 +394,23 @@ Solutions to Leetcode problems
 
 374 Guess Number Higher or Lower
 
+376  Wiggle Subsequence
+
 377 Combination Sum IV
 
 378 Kth Smallest Element in a Sorted Matrix
+
+382 Linked List Random Node
 
 387 First Unique Character in a String
 
 389 Find the Difference
 
+390 Elimination Game
+
 392 Is Subsequence
+
+393 UTF-8 Validation
 
 394 Decode String
 
