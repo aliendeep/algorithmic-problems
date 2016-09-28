@@ -298,6 +298,8 @@ Solutions to Leetcode problems
 
 226 Invert Binary Tree
 
+227 Basic Calculator II
+
 228 Summary Ranges
 
 229 Majority Element II
@@ -309,6 +311,8 @@ Solutions to Leetcode problems
 234 Palindrome Linked List 
 
 235 Lowest Common Ancestor of a Binary Search Tree
+
+236 Lowest Common Ancestor of a Binary Tree
 
 237 Delete Node in a Linked List
 
@@ -415,6 +419,10 @@ Solutions to Leetcode problems
 377 Combination Sum IV
 
 378 Kth Smallest Element in a Sorted Matrix
+
+380 Insert Delete GetRandom O(1) 
+
+381 Insert Delete GetRandom O(1) - Duplicates allowed
 
 382 Linked List Random Node
 
