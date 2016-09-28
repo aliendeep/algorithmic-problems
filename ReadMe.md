@@ -172,6 +172,12 @@ Solutions to Leetcode problems
 
 115 Distinct Subsequences
 
+121 Best Time to Buy and Sell Stock
+
+122 Best Time to Buy and Sell Stock II
+
+123 Best Time to Buy and Sell Stock III
+
 124 Binary Tree Maximum Path Sum
 
 125 Valid Palindrome 
@@ -237,6 +243,8 @@ Solutions to Leetcode problems
 179 Largest Number
 
 187 Repeated DNA Sequences
+
+188 Best Time to Buy and Sell Stock IV 
 
 189 Rotate Array
 
@@ -308,6 +316,8 @@ Solutions to Leetcode problems
 
 240 Search a 2D Matrix II
 
+241 Different Ways to Add Parentheses
+
 242 Valid Anagram
 
 257 Binary Tree Paths  
@@ -348,7 +358,11 @@ Solutions to Leetcode problems
 
 303 Range Sum Query - Immutable
 
+306 Additive Number
+
 307 Range Sum Query - Mutable
+
+309 Best Time to Buy and Sell Stock with Cooldown  
 
 318 Maximum Product of Word Lengths
 
@@ -361,6 +375,8 @@ Solutions to Leetcode problems
 329 Longest Increasing Path in a Matrix
 
 331 Verify Preorder Serialization of a Binary Tree
+
+332 Reconstruct Itinerary
 
 334 Increasing Triplet Subsequence
 
