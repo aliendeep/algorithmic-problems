@@ -132,6 +132,10 @@ Solutions to Leetcode problems
 
 83  Remove Duplicates from Sorted List
 
+84  Largest Rectangle in Histogram
+
+85  Maximal Rectangle
+
 86  Partition List
 
 88  Merge Sorted Array
@@ -308,6 +312,8 @@ Solutions to Leetcode problems
 
 221 Maximal Square
 
+222 Count Complete Tree Nodes
+
 224 Basic Calculator
 
 226 Invert Binary Tree
@@ -352,6 +358,10 @@ Solutions to Leetcode problems
 
 273 Integer to English Words
 
+274 H-Index
+
+275 H-Index II
+
 278 First Bad Version
 
 279 Perfect Squares
@@ -381,6 +391,8 @@ Solutions to Leetcode problems
 307 Range Sum Query - Mutable
 
 309 Best Time to Buy and Sell Stock with Cooldown  
+
+316 Remove Duplicate Letters
 
 318 Maximum Product of Word Lengths
 
