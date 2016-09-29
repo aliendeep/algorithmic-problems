@@ -172,6 +172,16 @@ Solutions to Leetcode problems
 
 115 Distinct Subsequences
 
+116 Populating Next Right Pointers in Each Node
+
+117 Populating Next Right Pointers in Each Node II
+
+118 Pascal's Triangle
+
+119 Pascal's Triangle II
+
+120 Triangle
+
 121 Best Time to Buy and Sell Stock
 
 122 Best Time to Buy and Sell Stock II
@@ -189,6 +199,10 @@ Solutions to Leetcode problems
 129 Sum Root to Leaf Numbers
 
 130 Surrounded Regions
+
+131 Palindrome Partitioning
+
+132 Palindrome Partitioning II
 
 133 Clone Graph
 
