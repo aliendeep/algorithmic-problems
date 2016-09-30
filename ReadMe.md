@@ -52,17 +52,21 @@ Solutions to Leetcode problems
 
 28  Implement strStr()
 
-30  Substring with Concatenation of All Words
+29  Divide Two Integers  
 
-31  Next Permutation
+30  Substring with Concatenation of All Words
 
 33  Search in Rotated Sorted Array
 
 34  Search for a Range
 
+35  Search Insert Position
+
 36  Valid Sudoku
 
 37  Sudoku Solver
+
+38  Count and Say
 
 39  Combination Sum
 
@@ -75,6 +79,8 @@ Solutions to Leetcode problems
 43  Multiply Strings
 
 44  Wildcard Matching
+
+45  Jump Game II
 
 46  Permutations
 
@@ -166,6 +172,8 @@ Solutions to Leetcode problems
 
 108 Convert Sorted Array to Binary Search Tree
 
+109 Convert Sorted List to Binary Search Tree
+
 110 Balanced Binary Tree
 
 111 Minimum Depth of Binary Tree 
@@ -216,11 +224,15 @@ Solutions to Leetcode problems
 
 137 Single Number II
 
+138 Copy List with Random Pointer  
+
 139 Word Break
 
 140 Word Break II
 
 141 Linked List Cycle
+
+142 Linked List Cycle II  
 
 144 Binary Tree Preorder Traversal  
 
@@ -243,6 +255,8 @@ Solutions to Leetcode problems
 164 Maximum Gap
 
 165 Compare Version Numbers
+
+166 Fraction to Recurring Decimal  
 
 167 Two Sum II - Input array is sorted
 
@@ -368,6 +382,8 @@ Solutions to Leetcode problems
 
 283 Move Zeroes
 
+284 Peeking Iterator 
+
 287 Find the Duplicate Number
 
 289 Game of Life
@@ -384,7 +400,11 @@ Solutions to Leetcode problems
 
 300 Longest Increasing Subsequence
 
+301 Remove Invalid Parentheses
+
 303 Range Sum Query - Immutable
+
+304 Range Sum Query 2D - Immutable 
 
 306 Additive Number
 
@@ -392,9 +412,13 @@ Solutions to Leetcode problems
 
 309 Best Time to Buy and Sell Stock with Cooldown  
 
+313 Super Ugly Number
+
 316 Remove Duplicate Letters
 
 318 Maximum Product of Word Lengths
+
+319 Bulb Switcher   
 
 322 Coin Change
 
@@ -452,7 +476,13 @@ Solutions to Leetcode problems
 
 382 Linked List Random Node
 
+385 Mini Parser   
+
+386 Lexicographical Numbers  
+
 387 First Unique Character in a String
+
+388 Longest Absolute File Path
 
 389 Find the Difference
 
@@ -469,6 +499,10 @@ Solutions to Leetcode problems
 396 Rotate Function
 
 397 Integer Replacement 
+
+398 Random Pick Index  
+
+399 Evaluate Division   
 
 400 Nth Digit
 

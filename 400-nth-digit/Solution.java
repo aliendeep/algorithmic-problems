@@ -1,23 +1,26 @@
 public class Solution {
     // Simulation
-    // 1*9, 2*90, 3*900
+    // 1 length digit - 9 (1 to 9)
+    // 2 lengths digit - 2*90 = 90 (10 .. 99)
+    // 3 lengths digit - 3*90*10 = 900 (100 .. 1000)
+    // 4 lengths digit - 4*900*10 
+    public final static int offset = 1;
     public int findNthDigit(int n) {
-        // digitLen = 1, 2, 3, ...
-        int digitLen = 1;
-        // cnt: 9, 90, 900, ..
+        // length of the digit
+        int len = 1;
         // long: to avoid overflow
         long cnt = 9;
-        // RangeStart: 1, 100, 1000, ..
-        int rangeStart = 1;
         
-        while(n > digitLen*cnt){
-            n -= digitLen*cnt;
+        int number = 1;
+        while(n > len*cnt){
+            n -= len*cnt;
             cnt *= 10;
-            rangeStart *= 10;
-            digitLen++;
+            number *= 10;
+            len++;
         }
         
-        rangeStart += (n-1)/digitLen;
-        return Integer.toString(rangeStart).charAt((n-1)%digitLen) - '0';
+        number += (n - offset)/len;
+        String num = Integer.toString(number);
+        return num.charAt((n - offset) % len) - '0';
     }
 }
