@@ -44,6 +44,8 @@ Solutions to Leetcode problems
 
 23  Merge k Sorted Lists
 
+24  Swap Nodes in Pairs
+
 25  Reverse Nodes in k-Group 
 
 26  Remove Duplicates from Sorted Array
@@ -330,6 +332,8 @@ Solutions to Leetcode problems
 
 224 Basic Calculator
 
+225 Implement Stack using Queues
+
 226 Invert Binary Tree
 
 227 Basic Calculator II
@@ -451,6 +455,8 @@ Solutions to Leetcode problems
 349 Intersection of Two Arrays
 
 350 Intersection of Two Arrays II
+
+354 Russian Doll Envelopes
 
 355 Design Twitter 
 
