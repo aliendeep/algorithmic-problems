@@ -138,6 +138,8 @@ Solutions to Leetcode problems
 
 70  Climbing Stairs
 
+71  Simplify Path
+
 72  Edit Distance
 
 73  Set Matrix Zeroes
@@ -154,6 +156,8 @@ Solutions to Leetcode problems
 
 80  Remove Duplicates from Sorted Array II
 
+81  Search in Rotated Sorted Array II
+
 82  Remove Duplicates from Sorted List II
 
 83  Remove Duplicates from Sorted List
@@ -165,6 +169,14 @@ Solutions to Leetcode problems
 86  Partition List
 
 88  Merge Sorted Array
+
+89  Gray Code
+
+90  Subsets II 
+
+91  Decode Ways
+
+92  Reverse Linked List II
 
 93  Restore IP Addresses
 
@@ -545,3 +557,7 @@ Solutions to Leetcode problems
 405 Convert a Number to Hexadecimal  
 
 406 Queue Reconstruction by Height
+
+409 Longest Palindrome
+
+410 Split Array Largest Sum
