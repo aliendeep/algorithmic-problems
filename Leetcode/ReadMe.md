@@ -58,6 +58,10 @@ Solutions to Leetcode problems
 
 30  Substring with Concatenation of All Words
 
+31  Next Permutation
+
+32  Longest Valid Parentheses   
+
 33  Search in Rotated Sorted Array
 
 34  Search for a Range
@@ -86,6 +90,10 @@ Solutions to Leetcode problems
 
 46  Permutations
 
+47  Permutations II  
+
+48  Rotate Image
+
 49  Group Anagrams
 
 50  Pow(x, n)
@@ -96,11 +104,19 @@ Solutions to Leetcode problems
 
 53  Maximum Subarray  
 
+54  Spiral Matrix
+
 55  Jump Game
+
+56  Merge Intervals
 
 57  Insert Interval 
 
 58  Length of Last Word 
+
+59  Spiral Matrix II
+
+60 Permutation Sequence
 
 61  Rotate List
 
@@ -109,6 +125,8 @@ Solutions to Leetcode problems
 63  Unique Paths II
 
 64  Minimum Path Sum
+
+65  Valid Number  
 
 66  Plus One
 
@@ -346,6 +364,8 @@ Solutions to Leetcode problems
 
 231 Power of Two
 
+232 Implement Queue using Stacks
+
 234 Palindrome Linked List 
 
 235 Lowest Common Ancestor of a Binary Search Tree
@@ -355,6 +375,8 @@ Solutions to Leetcode problems
 237 Delete Node in a Linked List
 
 238 Product of Array Except Self
+
+239 Sliding Window Maximum
 
 240 Search a 2D Matrix II
 
@@ -437,6 +459,8 @@ Solutions to Leetcode problems
 332 Reconstruct Itinerary
 
 334 Increasing Triplet Subsequence
+
+336 Palindrome Pairs
 
 338 Counting Bits  
 
