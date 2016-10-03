@@ -10,6 +10,8 @@ Solutions to Leetcode problems
 
 5   Longest Palindromic Substring
 
+6   ZigZag Conversion
+
 7   Reverse Integer
 
 8   String to Integer (atoi)  
@@ -148,6 +150,8 @@ Solutions to Leetcode problems
 
 75  Sort Colors
 
+76  Minimum Window Substring  
+
 77  Combinations
 
 78  Subsets
@@ -214,6 +218,8 @@ Solutions to Leetcode problems
 
 113 Path Sum II
 
+114 Flatten Binary Tree to Linked List   
+
 115 Distinct Subsequences
 
 116 Populating Next Right Pointers in Each Node
@@ -250,6 +256,8 @@ Solutions to Leetcode problems
 
 133 Clone Graph
 
+134 Gas Station  
+
 135 Candy
 
 136 Single Number
@@ -266,19 +274,31 @@ Solutions to Leetcode problems
 
 142 Linked List Cycle II  
 
+143 Reorder List 
+
 144 Binary Tree Preorder Traversal  
 
 145 Binary Tree Postorder Traversal  
 
 146 LRU Cache
 
+147 Insertion Sort List
+
+148 Sort List  
+
+149 Max Points on a Line 
+
 150 Evaluate Reverse Polish Notation
+
+151 Reverse Words in a String
 
 152 Maximum Product Subarray
 
 153 Find Minimum in Rotated Sorted Array
 
 154 Find Minimum in Rotated Sorted Array II
+
+155 Min Stack
 
 160 Intersection of Two Linked Lists
 
@@ -317,6 +337,8 @@ Solutions to Leetcode problems
 191 Number of 1 Bits  
 
 198 House Robber
+
+199 Binary Tree Right Side View 
 
 200 Number of Islands  
 
@@ -359,6 +381,8 @@ Solutions to Leetcode problems
 221 Maximal Square
 
 222 Count Complete Tree Nodes
+
+223 Rectangle Area
 
 224 Basic Calculator
 
@@ -450,6 +474,8 @@ Solutions to Leetcode problems
 
 309 Best Time to Buy and Sell Stock with Cooldown  
 
+310 Minimum Height Trees
+
 313 Super Ugly Number
 
 316 Remove Duplicate Letters
@@ -498,9 +524,13 @@ Solutions to Leetcode problems
 
 357 Count Numbers with Unique Digits
 
+365 Water and Jug Problem  
+
 367 Valid Perfect Square 
 
 371 Sum of Two Integers
+
+372 Super Pow
 
 373 Find K Pairs with Smallest Sums
 

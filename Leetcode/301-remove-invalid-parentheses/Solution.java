@@ -10,41 +10,49 @@ Examples:
 */
 
 public class Solution {
-    // https://discuss.leetcode.com/topic/34875/easy-short-concise-and-fast-java-dfs-3-ms-solution
-    // DFS
     public List<String> removeInvalidParentheses(String s) {
+        Queue<String> Q = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
         List<String> result = new ArrayList<>();
-        removeInvalidParen(s, 0, 0, new char[]{'(', ')'}, result);
-        return result;
-    }
-    public void removeInvalidParen(String s, int start, int removePos, char[] order, List<String> result){
-        // Use a counter to keep track of the parenthesis
-        int counter = 0;
-        for(int i = start; i<s.length(); i++){
-            char c = s.charAt(i);
-            if(c == order[0])
-                counter++;
-            else if(c == order[1])
-                counter--;
-            if(counter >= 0)
+        Q.add(s);
+        visited.add(s);
+        
+        boolean found = false;
+        while(!Q.isEmpty()){
+            String front = Q.remove();    
+            if(isValid(front)){
+                result.add(front);
+                found = true;
+            }
+            if(found)
                 continue;
-            // S[0..i] is balanced or in case where order[0] = '(' and order[1] = ')'
-            // Number of left parenthesis is <= number of right parenthesis. So, we can go on removing any extra ')'
-            for(int j=removePos; j<=i; j++){
-                // if it's possible to remove, either starting or the previous character is not the same (to avoid duplicate result)
-                if(s.charAt(j) == order[1] && (j == removePos || s.charAt(j-1) != order[1])){
-                    String rest = s.substring(0, j) + s.substring(j+1);
-                    // remove jth char
-                    removeInvalidParen(rest, i, j, order, result);
+            // Generate all possible states
+            for(int i=0; i<front.length(); i++){
+                // Only remove ( or )
+                if(front.charAt(i) != '(' && front.charAt(i) != ')')
+                    continue;
+                // remove ith char
+                String rest = front.substring(0, i) + front.substring(i+1);
+                if(!visited.contains(rest)){
+                    Q.add(rest);
+                    visited.add(rest);
                 }
             }
-            // Return all possible results.
-            return;
         }
-        String reversed = new StringBuilder(s).reverse().toString();
-        if(order[0] == '(')
-            removeInvalidParen(reversed, 0, 0, new char[]{')', '('}, result);
-        else
-            result.add(reversed);
+        return result;
+    }
+    
+    public boolean isValid(String s){
+        int cnt = 0;
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) == '(')
+                cnt++;
+            else if(s.charAt(i) == ')'){
+                if(cnt == 0)
+                    return false;
+                cnt--;
+            }
+        }
+        return cnt == 0;
     }
 }
