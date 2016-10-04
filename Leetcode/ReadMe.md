@@ -194,6 +194,8 @@ Solutions to Leetcode problems
 
 98  Validate Binary Search Tree
 
+99  Recover Binary Search Tree
+
 100 Same Tree
 
 101 Symmetric Tree
@@ -203,6 +205,10 @@ Solutions to Leetcode problems
 103 Binary Tree Zigzag Level Order Traversal 
 
 104 Maximum Depth of Binary Tree
+
+105 Construct Binary Tree from Preorder and Inorder Traversal  
+
+106 Construct Binary Tree from Inorder and Postorder Traversal
 
 107 Binary Tree Level Order Traversal II
 
@@ -500,6 +506,8 @@ Solutions to Leetcode problems
 
 336 Palindrome Pairs
 
+337 House Robber III  
+
 338 Counting Bits  
 
 341 Flatten Nested List Iterator
@@ -547,6 +555,10 @@ Solutions to Leetcode problems
 381 Insert Delete GetRandom O(1) - Duplicates allowed
 
 382 Linked List Random Node
+
+383 Ransom Note 
+
+384 Shuffle an Array
 
 385 Mini Parser   
 
