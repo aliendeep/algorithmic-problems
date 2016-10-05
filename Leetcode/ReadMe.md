@@ -428,6 +428,22 @@ Solutions to Leetcode problems
 
 242 Valid Anagram
 
+243 Shortest Word Distance 
+
+244 Shortest Word Distance II 
+
+245 Shortest Word Distance III  
+
+246 Strobogrammatic Number
+
+247 Strobogrammatic Number II
+
+249 Group Shifted Strings
+
+252 Meeting Rooms 
+
+253 Meeting Rooms II
+
 257 Binary Tree Paths  
 
 258 Add Digits
@@ -438,7 +454,11 @@ Solutions to Leetcode problems
 
 264 Ugly Number II
 
+266 Palindrome Permutation
+
 268 Missing Number
+
+270 Closest Binary Search Tree Value
 
 273 Integer to English Words
 
@@ -461,6 +481,8 @@ Solutions to Leetcode problems
 290 Word Pattern
 
 292 Nim Game  
+
+293 Flip Game
 
 295 Find Median from Data Stream
 
@@ -512,6 +534,8 @@ Solutions to Leetcode problems
 
 338 Counting Bits  
 
+339 Nested List Weight Sum
+
 341 Flatten Nested List Iterator
 
 342 Power of Four
@@ -521,6 +545,8 @@ Solutions to Leetcode problems
 344 Reverse String
 
 345 Reverse Vowels of a String
+
+346 Moving Average from Data Stream
 
 347 Top K Frequent Elements
 
@@ -534,7 +560,11 @@ Solutions to Leetcode problems
 
 357 Count Numbers with Unique Digits
 
+359 Logger Rate Limiter
+
 365 Water and Jug Problem  
+
+366 Find Leaves of Binary Tree
 
 367 Valid Perfect Square 
 
@@ -601,6 +631,8 @@ Solutions to Leetcode problems
 405 Convert a Number to Hexadecimal  
 
 406 Queue Reconstruction by Height
+
+408 Valid Word Abbreviation
 
 409 Longest Palindrome
 
