@@ -12,16 +12,29 @@ canConstruct("aa", "aab") -> true
 */
 
 public class Solution {
+    // Time: O(m + n)
+    // Space: O(L) where L is the number of distinct characters appearing in the letter
     public boolean canConstruct(String ransomNote, String magazine) {
-        int[] cnt = new int[256];
-        for(int i=0; i<magazine.length(); i++)
-            cnt[magazine.charAt(i)]++;
-        
+        Map<Character,Integer> freq = new HashMap<>();
         for(int i=0; i<ransomNote.length(); i++){
-            cnt[ransomNote.charAt(i)]--;
-            if(cnt[ransomNote.charAt(i)] < 0)
-                return false;
+            char c = ransomNote.charAt(i);
+            if(!freq.containsKey(c))
+                freq.put(c, 1);
+            else
+                freq.put(c, freq.get(c)+1);
         }
-        return true;
+        
+        for(char c : magazine.toCharArray()){
+            if(freq.containsKey(c)){
+                freq.put(c, freq.get(c)-1);
+                if(freq.get(c) == 0){
+                    freq.remove(c);
+                    // All characters are matched
+                    if(freq.isEmpty())
+                        break;
+                }
+            }
+        }
+        return freq.isEmpty();
     }
 }

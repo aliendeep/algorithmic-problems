@@ -374,6 +374,8 @@ Solutions to Leetcode problems
 
 213 House Robber II
 
+214 Shortest Palindrome
+
 215 Kth Largest Element in an Array 
 
 216 Combination Sum III
