@@ -450,6 +450,8 @@ Solutions to Leetcode problems
 
 253 Meeting Rooms II
 
+256 Paint House
+
 257 Binary Tree Paths  
 
 258 Add Digits
@@ -483,6 +485,8 @@ Solutions to Leetcode problems
 283 Move Zeroes
 
 284 Peeking Iterator 
+
+285 Inorder Successor in BST 
 
 286 Walls and Gates
 
@@ -519,6 +523,8 @@ Solutions to Leetcode problems
 310 Minimum Height Trees
 
 313 Super Ugly Number
+
+314 Binary Tree Vertical Order Traversal 
 
 316 Remove Duplicate Letters
 
@@ -574,7 +580,11 @@ Solutions to Leetcode problems
 
 357 Count Numbers with Unique Digits
 
+359 Logger Rate Limiter
+
 360 Sort Transformed Array
+
+362 Design Hit Counter
 
 365 Water and Jug Problem  
 
