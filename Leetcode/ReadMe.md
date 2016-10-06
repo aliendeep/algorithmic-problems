@@ -312,6 +312,8 @@ Solutions to Leetcode problems
 
 160 Intersection of Two Linked Lists
 
+161 One Edit Distance
+
 162 Find Peak Element 
 
 164 Maximum Gap
@@ -482,6 +484,8 @@ Solutions to Leetcode problems
 
 279 Perfect Squares
 
+280 Wiggle Sort
+
 283 Move Zeroes
 
 284 Peeking Iterator 
@@ -546,6 +550,8 @@ Solutions to Leetcode problems
 
 332 Reconstruct Itinerary
 
+333 Largest BST Subtree
+
 334 Increasing Triplet Subsequence
 
 336 Palindrome Pairs
@@ -584,7 +590,11 @@ Solutions to Leetcode problems
 
 360 Sort Transformed Array
 
+361 Bomb Enemy
+
 362 Design Hit Counter
+
+364 Nested List Weight Sum II
 
 365 Water and Jug Problem  
 
