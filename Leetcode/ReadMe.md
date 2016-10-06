@@ -306,6 +306,10 @@ Solutions to Leetcode problems
 
 155 Min Stack
 
+156 Binary Tree Upside Down
+
+157 Read N Characters Given Read4
+
 160 Intersection of Two Linked Lists
 
 162 Find Peak Element 
@@ -321,6 +325,8 @@ Solutions to Leetcode problems
 168 Excel Sheet Column Title
 
 169 Majority Element
+
+170 Two Sum III - Data structure design
 
 171 Excel Sheet Column Number
 
@@ -450,6 +456,8 @@ Solutions to Leetcode problems
 
 260 Single Number III
 
+261 Graph Valid Tree
+
 263 Ugly Number
 
 264 Ugly Number II
@@ -466,6 +474,8 @@ Solutions to Leetcode problems
 
 275 H-Index II
 
+277 Find the Celebrity
+
 278 First Bad Version
 
 279 Perfect Squares
@@ -473,6 +483,8 @@ Solutions to Leetcode problems
 283 Move Zeroes
 
 284 Peeking Iterator 
+
+286 Walls and Gates
 
 287 Find the Duplicate Number
 
@@ -515,6 +527,8 @@ Solutions to Leetcode problems
 319 Bulb Switcher   
 
 322 Coin Change
+
+323 Number of Connected Components in an Undirected Graph
 
 326 Power of Three
 
@@ -560,13 +574,15 @@ Solutions to Leetcode problems
 
 357 Count Numbers with Unique Digits
 
-359 Logger Rate Limiter
+360 Sort Transformed Array
 
 365 Water and Jug Problem  
 
 366 Find Leaves of Binary Tree
 
 367 Valid Perfect Square 
+
+369 Plus One Linked List
 
 371 Sum of Two Integers
 

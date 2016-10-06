@@ -51,7 +51,7 @@ import java.util.*;
  */
 
 // Time: O(n)
-// Space: O(n)
+// Extra: Space: O(h)
 public class Solution {
     // (height, node value)
     List<List<Integer>> r;
