@@ -454,6 +454,8 @@ Solutions to Leetcode problems
 
 253 Meeting Rooms II
 
+254 Factor Combinations 
+
 256 Paint House
 
 257 Binary Tree Paths  
@@ -477,6 +479,8 @@ Solutions to Leetcode problems
 269 Alien Dictionary
 
 270 Closest Binary Search Tree Value
+
+271 Encode and Decode Strings 
 
 273 Integer to English Words
 
@@ -509,6 +513,8 @@ Solutions to Leetcode problems
 292 Nim Game  
 
 293 Flip Game
+
+294 Flip Game II
 
 295 Find Median from Data Stream
 
@@ -593,6 +599,8 @@ Solutions to Leetcode problems
 349 Intersection of Two Arrays
 
 350 Intersection of Two Arrays II
+
+351 Android Unlock Patterns 
 
 354 Russian Doll Envelopes
 
