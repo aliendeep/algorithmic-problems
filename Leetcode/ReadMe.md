@@ -310,6 +310,8 @@ Solutions to Leetcode problems
 
 157 Read N Characters Given Read4
 
+159 Longest Substring with At Most Two Distinct Characters
+
 160 Intersection of Two Linked Lists
 
 161 One Edit Distance
@@ -458,6 +460,8 @@ Solutions to Leetcode problems
 
 258 Add Digits
 
+259 3Sum Smaller
+
 260 Single Number III
 
 261 Graph Valid Tree
@@ -469,6 +473,8 @@ Solutions to Leetcode problems
 266 Palindrome Permutation
 
 268 Missing Number
+
+269 Alien Dictionary
 
 270 Closest Binary Search Tree Value
 
@@ -508,6 +514,8 @@ Solutions to Leetcode problems
 
 297 Serialize and Deserialize Binary Tree
 
+298 Binary Tree Longest Consecutive Sequence
+
 299 Bulls and Cows
 
 300 Longest Increasing Subsequence
@@ -536,6 +544,8 @@ Solutions to Leetcode problems
 
 319 Bulb Switcher   
 
+320 Generalized Abbreviation
+
 322 Coin Change
 
 323 Number of Connected Components in an Undirected Graph
@@ -562,6 +572,8 @@ Solutions to Leetcode problems
 
 339 Nested List Weight Sum
 
+340 Longest Substring with At Most K Distinct Characters 
+
 341 Flatten Nested List Iterator
 
 342 Power of Four
@@ -575,6 +587,8 @@ Solutions to Leetcode problems
 346 Moving Average from Data Stream
 
 347 Top K Frequent Elements
+
+348 Design Tic-Tac-Toe
 
 349 Intersection of Two Arrays
 
@@ -617,6 +631,8 @@ Solutions to Leetcode problems
 377 Combination Sum IV
 
 378 Kth Smallest Element in a Sorted Matrix
+
+379 Design Phone Directory 
 
 380 Insert Delete GetRandom O(1) 
 
