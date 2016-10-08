@@ -318,6 +318,8 @@ Solutions to Leetcode problems
 
 162 Find Peak Element 
 
+163 Missing Ranges
+
 164 Maximum Gap
 
 165 Compare Version Numbers
@@ -601,6 +603,8 @@ Solutions to Leetcode problems
 350 Intersection of Two Arrays II
 
 351 Android Unlock Patterns 
+
+353 Design Snake Game
 
 354 Russian Doll Envelopes
 
