@@ -548,6 +548,8 @@ Solutions to Leetcode problems
 
 316 Remove Duplicate Letters
 
+317 Shortest Distance from All Buildings
+
 318 Maximum Product of Word Lengths
 
 319 Bulb Switcher   
@@ -701,3 +703,5 @@ Solutions to Leetcode problems
 409 Longest Palindrome
 
 410 Split Array Largest Sum
+
+415 Add Strings

@@ -30,6 +30,7 @@ public class Solution extends Reader4 {
         for(int start=0; start<n; start += 4){
             char[] t = new char[4];
             int l = read4(t);
+            // public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)            
             System.arraycopy(t, 0, buf, start, Math.min(l, n - start));
             if(l < 4)
                 return Math.min(start + l, n);
