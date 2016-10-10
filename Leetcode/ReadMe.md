@@ -476,6 +476,8 @@ Solutions to Leetcode problems
 
 266 Palindrome Permutation
 
+267 Palindrome Permutation II
+
 268 Missing Number
 
 269 Alien Dictionary
@@ -483,6 +485,8 @@ Solutions to Leetcode problems
 270 Closest Binary Search Tree Value
 
 271 Encode and Decode Strings 
+
+272 Closest Binary Search Tree Value II
 
 273 Integer to English Words
 
@@ -520,6 +524,8 @@ Solutions to Leetcode problems
 
 295 Find Median from Data Stream
 
+296 Best Meeting Point
+
 297 Serialize and Deserialize Binary Tree
 
 298 Binary Tree Longest Consecutive Sequence
@@ -529,6 +535,8 @@ Solutions to Leetcode problems
 300 Longest Increasing Subsequence
 
 301 Remove Invalid Parentheses
+
+302 Smallest Rectangle Enclosing Black Pixels
 
 303 Range Sum Query - Immutable
 
@@ -541,6 +549,8 @@ Solutions to Leetcode problems
 309 Best Time to Buy and Sell Stock with Cooldown  
 
 310 Minimum Height Trees
+
+312 Burst Balloons
 
 313 Super Ugly Number
 
@@ -613,6 +623,8 @@ Solutions to Leetcode problems
 355 Design Twitter 
 
 357 Count Numbers with Unique Digits
+
+358 Rearrange String k Distance Apart
 
 359 Logger Rate Limiter
 
@@ -698,6 +710,8 @@ Solutions to Leetcode problems
 
 406 Queue Reconstruction by Height
 
+407 Trapping Rain Water II 
+
 408 Valid Word Abbreviation
 
 409 Longest Palindrome
@@ -705,3 +719,7 @@ Solutions to Leetcode problems
 410 Split Array Largest Sum
 
 415 Add Strings
+
+416 Partition Equal Subset Sum
+
+417 Pacific Atlantic Water Flow  
