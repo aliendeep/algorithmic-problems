@@ -452,6 +452,8 @@ Solutions to Leetcode problems
 
 249 Group Shifted Strings
 
+251 Flatten 2D Vector
+
 252 Meeting Rooms 
 
 253 Meeting Rooms II
@@ -541,6 +543,8 @@ Solutions to Leetcode problems
 303 Range Sum Query - Immutable
 
 304 Range Sum Query 2D - Immutable 
+
+305 Number of Islands II
 
 306 Additive Number
 
