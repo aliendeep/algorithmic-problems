@@ -5,7 +5,10 @@ You code should return the length of the LIS.
 Link: http://www.lintcode.com/en/problem/longest-increasing-subsequence/
 */
 
-public class Solution {
+// Time complexity: O(n^2)
+// Space: O(n)
+
+public class LIS {
     /**
      * @param nums: The integer array
      * @return: The length of LIS (longest increasing subsequence)

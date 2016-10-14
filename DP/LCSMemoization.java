@@ -6,8 +6,9 @@ Your code should return the length of LCS.
 Link: http://www.lintcode.com/en/problem/longest-common-subsequence/
 */
 
-// Time: O(mn)
-public class Solution {
+// Time complexity: O(mn)
+// Space: O(mn)
+public class LCSMemoization {
     /**
      * @param A, B: Two strings.
      * @return: The length of longest common subsequence of A and B.

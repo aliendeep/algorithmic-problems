@@ -4,8 +4,10 @@ Given a sequence of integers, find the longest increasing subsequence (LIS).
 You code should return the length of the LIS.
 Link: http://www.lintcode.com/en/problem/longest-increasing-subsequence/
 */
+// Time complexity: O(n^2)
+// Space: O(n)
 
-public class Solution {
+public class LISMemoization {
     /**
      * @param nums: The integer array
      * @return: The length of LIS (longest increasing subsequence)

@@ -3,7 +3,13 @@ Given two strings, find the longest common subsequence (LCS).
 
 Your code should return the length of LCS.
 */
-public class Solution {
+
+// Time complexity: O(mn)
+// Space: O(mn)
+
+import java.util.*;
+
+public class LCS {
     /**
      * @param A, B: Two strings.
      * @return: The length of longest common subsequence of A and B.

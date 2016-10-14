@@ -10,7 +10,9 @@ http://www.lintcode.com/en/problem/edit-distance/
 
 */
 
-public class Solution {
+// Time complexity: O(mn)
+// Space: O(mn)
+public class EditDistance {
     /**
      * @param word1 & word2: Two string.
      * @return: The minimum number of steps.

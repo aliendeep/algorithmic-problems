@@ -9,7 +9,7 @@ You have the following 3 operations permitted on a word:
 http://www.lintcode.com/en/problem/edit-distance/
 */
 
-public class Solution {
+public class EditDistance {
     /**
      * @param word1 & word2: Two string.
      * @return: The minimum number of steps.
