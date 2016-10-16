@@ -2,6 +2,27 @@
 // Catalan Number
 // https://leetcode.com/problems/unique-binary-search-trees/
 
+public class CountBinarySearchTreeHelper {
+  public int numTreesHelper(int n, int[] dp){
+    if(n == 0)      return 1;
+    if(dp[n] != 0)
+        return dp[n];
+    int sum = 0;
+    for(int i=1; i<=n; i++){
+      int left = numTreesHelper(i-1, dp);
+      int right = numTreesHelper(n-i, dp);
+      sum += left * right;
+    }
+    dp[n] = sum;
+    return dp[n];
+  }
+  
+  public int numTrees(int n){
+    int[] dp = new int[n+1];
+    return numTreesHelper(n, dp);
+  }
+}
+
 class CountBinarySearchTree{
   public int numTreesRecursive(int n){
     if(n == 0)
@@ -14,7 +35,6 @@ class CountBinarySearchTree{
     }
     return sum;
   }
-
     // http://www.geeksforgeeks.org/program-nth-catalan-number/
     // Catalan Number
     public int numTrees(int n) {
