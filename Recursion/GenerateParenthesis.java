@@ -1,3 +1,6 @@
+// Time complexity: Catalan Number (2n)! / (n! (n+1)!)
+// C(n) = /sum_{i=1_n} C(i)*C(n-1)
+
 public class GenerateParenthesis{
     public void genParenthesis(int leftParenRem, int rightParenRem, StringBuffer cur, List<String> r){
         if(leftParenRem == 0 && rightParenRem == 0){

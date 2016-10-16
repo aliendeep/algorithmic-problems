@@ -16,6 +16,8 @@
 - Subset Sum
 - Partition Equal Subset Sum  
 - Decode String Ways
+- Count Unique Binary Search Trees (Catalan Number)
+- Longest Increasing Path in a matrix
 
 ## Graph
 
@@ -23,7 +25,7 @@
 - Dijkstra's Algorithm
 - Topological Sort
 
-## Backtracking
+## Recursion / Backtracking
 
 - Permutations (Unique Numbers)
 - Permutations II (May contain duplicate)
@@ -37,6 +39,7 @@
 - Palindrome Partitioning - partition s such that every substring of the partition is a palindrome
 - All Palindromic permutations of a string
 - Letter Combinations of a Phone Number
-- Generate Parentheses
+- Generate Parentheses (Catalan Number)
 - Factor Combinations
 - Generalized Abbreviation
+- Generate BSTs (Catalan Number)
