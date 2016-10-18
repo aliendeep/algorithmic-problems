@@ -1,38 +1,53 @@
+/*
+Given a string s and a dictionary of words dict, add spaces in s to construct a sentence where each word is a valid dictionary word.
+
+Return all such possible sentences.
+
+For example, given
+s = "catsanddog",
+dict = ["cat", "cats", "and", "sand", "dog"].
+
+A solution is ["cats and dog", "cat sand dog"].
+*/
+
 public class Solution {
-    // Memoization
-    // Word, all possible valid constructions of that word
+    int n;
+    // <Word, all possible valid constructions of that word>
     Map<String, List<String>> wordMap;
-    
-    public List<String> wordBreakHelper(String s, Set<String> wordDict) {
+
+    public List<String> bktk(String s, Set<String> wordDict){
         List<String> result = new ArrayList<>();
-        if(s.length() == 0)
+
+        if(s.length() == 0){
             return result;
-        if(wordMap.containsKey(s))
-            return wordMap.get(s);
+        }
         
+        if(wordMap.containsKey(s)){
+            return wordMap.get(s);
+        }
+            
         // full word is a dictionary word
         if(wordDict.contains(s)){
-            result.add(s);
+            result.add(s);            
         }
         
-        for(int i=1; i<s.length(); i++){
-            // if the rest of the strinsg starting from i is a valid dictionary word
-            String rest = s.substring(i);
-            if(wordDict.contains(rest)){
-                String prevWord = s.substring(0, i);
-                List<String> prev = wordBreakHelper(prevWord, wordDict);
-                for(String str : prev){
-                    result.add(str + " " + rest);
+        for(int i=1; i<=s.length(); i++){
+            String first = s.substring(0, i);
+            if(wordDict.contains(first)){
+                String rest = s.substring(i);
+                List<String> candidates = bktk(rest, wordDict);
+                for(String str : candidates){
+                    result.add(first + " " + str);
                 }
-            }    
+            }
         }
-        
         wordMap.put(s, result);
-        return result;            
+        return result;
     }
     
     public List<String> wordBreak(String s, Set<String> wordDict) {
-        wordMap = new HashMap<String, List<String>>();
-        return wordBreakHelper(s, wordDict);
+        this.n = s.length();
+        wordMap = new HashMap<>();
+        return bktk(s, wordDict);
     }
 }
