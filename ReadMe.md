@@ -18,6 +18,9 @@
 - Decode String Ways
 - Count Unique Binary Search Trees (Catalan Number)
 - Longest Increasing Path in a matrix
+- Guess Number Higher or Lower II (minimize the maximum loss)
+- Egg Dropping Puzzle (minimize the maximum loss)
+- Count Numbers with Unique Digits
 
 ## Graph
 
