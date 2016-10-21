@@ -314,6 +314,8 @@
 
 157 Read N Characters Given Read4
 
+158 Read N Characters Given Read4 II - Call multiple times 
+
 159 Longest Substring with At Most Two Distinct Characters
 
 160 Intersection of Two Linked Lists
@@ -347,6 +349,8 @@
 174 Dungeon Game
 
 179 Largest Number
+
+186 Reverse Words in a String II 
 
 187 Repeated DNA Sequences
 
@@ -398,6 +402,8 @@
 
 217 Contains Duplicate
 
+218 The Skyline Problem
+
 219 Contains Duplicate II
 
 220 Contains Duplicate III
@@ -425,6 +431,8 @@
 231 Power of Two
 
 232 Implement Queue using Stacks
+
+233 Number of Digit One  
 
 234 Palindrome Linked List 
 
@@ -458,6 +466,8 @@
 
 249 Group Shifted Strings
 
+250 Count Univalue Subtrees  
+
 251 Flatten 2D Vector
 
 252 Meeting Rooms 
@@ -465,6 +475,8 @@
 253 Meeting Rooms II
 
 254 Factor Combinations 
+
+255 Verify Preorder Sequence in Binary Search Tree 
 
 256 Paint House
 
@@ -481,6 +493,8 @@
 263 Ugly Number
 
 264 Ugly Number II
+
+265 Paint House II 
 
 266 Palindrome Permutation
 
@@ -502,6 +516,8 @@
 
 275 H-Index II
 
+276 Paint Fence
+
 277 Find the Celebrity
 
 278 First Bad Version
@@ -509,6 +525,10 @@
 279 Perfect Squares
 
 280 Wiggle Sort
+
+281 Zigzag Iterator
+
+282 Expression Add Operators  
 
 283 Move Zeroes
 
@@ -520,9 +540,13 @@
 
 287 Find the Duplicate Number
 
+288 Unique Word Abbreviation  
+
 289 Game of Life
 
 290 Word Pattern
+
+291 Word Pattern II 
 
 292 Nim Game  
 
@@ -556,15 +580,21 @@
 
 307 Range Sum Query - Mutable
 
+308 Range Sum Query 2D - Mutable 
+
 309 Best Time to Buy and Sell Stock with Cooldown  
 
 310 Minimum Height Trees
+
+311 Sparse Matrix Multiplication
 
 312 Burst Balloons
 
 313 Super Ugly Number
 
 314 Binary Tree Vertical Order Traversal 
+
+315 Count of Smaller Numbers After Self  
 
 316 Remove Duplicate Letters
 
@@ -576,15 +606,23 @@
 
 320 Generalized Abbreviation
 
+321 Create Maximum Number  
+
 322 Coin Change
 
 323 Number of Connected Components in an Undirected Graph
+
+324 Wiggle Sort II   
+
+325 Maximum Size Subarray Sum Equals k 
 
 326 Power of Three
 
 328 Odd Even Linked List 
 
 329 Longest Increasing Path in a Matrix
+
+330 Patching Array  
 
 331 Verify Preorder Serialization of a Binary Tree
 
@@ -593,6 +631,8 @@
 333 Largest BST Subtree
 
 334 Increasing Triplet Subsequence
+
+335 Self Crossing   
 
 336 Palindrome Pairs
 
@@ -626,11 +666,15 @@
 
 351 Android Unlock Patterns 
 
+352 Data Stream as Disjoint Intervals
+
 353 Design Snake Game
 
 354 Russian Doll Envelopes
 
 355 Design Twitter 
+
+356 Line Reflection 
 
 357 Count Numbers with Unique Digits
 
@@ -644,6 +688,8 @@
 
 362 Design Hit Counter
 
+363 Max Sum of Rectangle No Larger Than K
+
 364 Nested List Weight Sum II
 
 365 Water and Jug Problem  
@@ -652,7 +698,11 @@
 
 367 Valid Perfect Square 
 
+368 Largest Divisible Subset   
+
 369 Plus One Linked List
+
+370 Range Addition  
 
 371 Sum of Two Integers
 
@@ -661,6 +711,8 @@
 373 Find K Pairs with Smallest Sums
 
 374 Guess Number Higher or Lower
+
+375 Guess Number Higher or Lower II   
 
 376  Wiggle Subsequence
 
@@ -692,6 +744,8 @@
 
 390 Elimination Game
 
+391 Perfect Rectangle  
+
 392 Is Subsequence
 
 393 UTF-8 Validation
@@ -714,6 +768,8 @@
 
 402 Remove K Digits
 
+403 Frog Jump  
+
 404 Sum of Left Leaves
 
 405 Convert a Number to Hexadecimal  
@@ -728,8 +784,32 @@
 
 410 Split Array Largest Sum
 
+412 Fizz Buzz  
+
+413 Arithmetic Slices  
+
+414 Third Maximum Number  
+
 415 Add Strings
 
 416 Partition Equal Subset Sum
 
 417 Pacific Atlantic Water Flow  
+
+418 Sentence Screen Fitting 
+
+419 Battleships in a Board  
+
+421 Maximum XOR of Two Numbers in an Array  
+
+422 Valid Word Square 
+
+423 Reconstruct Original Digits from English  
+
+424 Longest Repeating Character Replacement  
+
+425 Word Squares
+
+432 All O`one Data Structure  
+
+433 Minimum Genetic Mutation  

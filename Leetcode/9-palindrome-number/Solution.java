@@ -1,6 +1,8 @@
 /*
 Determine whether an integer is a palindrome. Do this without extra space.
 */
+
+// If n has d digits; then 10^d −1  ≤ n < 10^d 
 public class Solution {
     public boolean isPalindrome(int x) {
         if(x == 0)

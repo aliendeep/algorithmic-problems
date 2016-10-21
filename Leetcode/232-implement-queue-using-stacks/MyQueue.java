@@ -30,7 +30,7 @@ class MyQueue {
             s2.addFirst(s1.removeFirst());
         }
     }
-    // Removes the element from in front of queue.
+    // Removes the element from queue
     public void pop() {
         if(s2.isEmpty())
             transfer();
