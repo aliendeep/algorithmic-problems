@@ -14,6 +14,38 @@ Link: http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/
 // Time: O(n*Amount) where n is the type of coins
 import java.util.*;
 
+class CoinChangeWaysMemoized {
+    // space: O(n*Amount)
+    // Include nth coin or not
+    public final static int MOD = 1000007;
+    public int getCount(ArrayList<Integer> coin, int n, int amount, int[][] dp){
+        if(amount == 0)                 return 1;
+        if(amount < 0)                  return 0;
+        if(n < 0)                       return 0;
+        if(dp[n][amount] != -1)         return dp[n][amount];
+        
+        int x = getCount(coin, n-1, amount, dp) % MOD;
+        int y = 0;
+        if(amount >= coin.get(n))
+            y = getCount(coin, n, amount - coin.get(n), dp) % MOD;
+        dp[n][amount] = (x + y) % MOD;      
+        return dp[n][amount];
+    }
+    public int coinchange2(ArrayList<Integer> coins, int amount) {
+        int n = coins.size();
+        if(n == 0)          return 0;
+        if(amount == 0)     return 1;
+        // init
+        int[][] dp = new int[n][amount+1];
+        for(int[] t : dp)
+           Arrays.fill(t, -1);
+
+        return getCount(coins, n-1, amount, dp);
+    }
+}
+
+
+
 class CoinChangeWays{
   // Space: O(n) Solution
   public int coinCount(int[] coins, int amount){
