@@ -1,0 +1,3 @@
+- Use one stack for the number
+- One stack for the character
+- Tricky case: 3[a2[c]] 
