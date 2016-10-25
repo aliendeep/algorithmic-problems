@@ -813,3 +813,11 @@
 432 All O`one Data Structure  
 
 433 Minimum Genetic Mutation  
+
+437 Path Sum III  
+
+438 Find All Anagrams in a String   
+
+439 Ternary Expression Parser  
+
+442 Find All Duplicates in an Array

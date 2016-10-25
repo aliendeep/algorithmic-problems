@@ -65,11 +65,11 @@ public class Solution {
         NestedInteger result = new NestedInteger();
         while(index < s.length() && s.charAt(index) != ']'){
             char c = s.charAt(index);
-            // negative number
             if(c == '['){
                 index++;
                 result.add(recurNestedInt(s));
             }
+            // negative number
             else if(c == '-' || Character.isDigit(c)){
                 result.add(intToNestedInteger(s));
             }

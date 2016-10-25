@@ -312,7 +312,7 @@ public class AllOne {
         obj.inc("hello");
         obj.inc("world");
         obj.inc("world");
-        System.out.println("hello "+obj.getMaxKey());        
+        System.out.println(obj.getMaxKey());        
         obj.inc("leet");
         obj.inc("leet");
         obj.inc("leet");
@@ -320,9 +320,9 @@ public class AllOne {
         obj.dec("leet");
         System.out.println(obj.getMaxKey());        
         obj.dec("world");
-        System.out.println("hello "+obj.getMaxKey());        
+        System.out.println(obj.getMaxKey());        
         obj.dec("leet");
-        System.out.println("hello "+obj.getMaxKey());        
+        System.out.println(obj.getMaxKey());        
         System.out.println(obj.getMaxKey());        
         System.out.println(obj.getMinKey());        
     }
