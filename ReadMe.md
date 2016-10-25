@@ -21,6 +21,18 @@
 - Guess Number Higher or Lower II (minimize the maximum loss)
 - Egg Dropping Puzzle (minimize the maximum loss)
 - Count Numbers with Unique Digits
+- Max Sum Without Adjacent Elements
+- Repeating Subsequence
+- Palindromic Partioning (Min Cut)
+- Rod Cut (Maximum value obtainable)
+- Rod Cutting Min Cost(Hard)
+- Max Rectangle in Binary Matrix (all 1s)
+- Maximum sum rectangle in a 2D matrix (Kadene's 2d version)
+- Stairs (Count Ways)
+- Jump Game (Is reachable - DP version)
+- Jump Game (Minimum number of steps - DP version)
+- Interleaving String
+- Count Distinct Subsequences
 
 ## Graph
 
@@ -46,3 +58,7 @@
 - Factor Combinations
 - Generalized Abbreviation
 - Generate BSTs (Catalan Number)
+
+## Hash
+- Implement a HashTable
+- Unique Character in a stream
