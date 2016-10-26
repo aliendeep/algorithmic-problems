@@ -32,16 +32,16 @@ public class Solution {
         Arrays.fill(color, WHITE);
         
         Map<Integer, Set<Integer>> graph = new HashMap<Integer, Set<Integer>>();
-        for(int i=0; i<prerequisites.length; i++){
-            int x = prerequisites[i][0];
-            int y = prerequisites[i][1];
-            Set<Integer> edges = graph.get(y);
-            if(edges == null){
-                edges = new HashSet<>();
+            for(int i=0; i<prerequisites.length; i++){
+                int x = prerequisites[i][0];
+                int y = prerequisites[i][1];
+                Set<Integer> edges = graph.get(y);
+                if(edges == null){
+                    edges = new HashSet<>();
+                }
+                edges.add(x);
+                graph.put(y, edges);
             }
-            edges.add(x);
-            graph.put(y, edges);
-        }
         
         Stack<Integer> stk = new Stack<Integer>();
         for(int i=0; i<numCourses; i++){
