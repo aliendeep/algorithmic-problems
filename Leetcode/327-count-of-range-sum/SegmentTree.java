@@ -60,6 +60,7 @@ public class Solution {
         }
     }
     
+    # TODO
     public int countRangeSum(int[] nums, int lower, int upper) {
         int n = nums.length;
         if(n == 0)          return 0;
@@ -70,16 +71,6 @@ public class Solution {
             sTree.update(i, 1);
         }
         
-        int[] cumSum = new int[n];
-        cumSum[0] = nums[0];
-        for(int i=1; i<n; ++i){
-            cumSum[i] = cumSum[i-1] + nums[i]; 
-        }
-        
-        TreeSet<Pair> sortedSum = new HashSet<>();
-        for(int i=0; i<n; ++i){
-            sortedSum.add(new Pair(cumSum[i], i));
-        }
-        sortedSum.add(new Pair(Integer.MAX_VALUE, n));
+        # TOOD
     }
 }
