@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class LRUCache {
     LinkedHashMap<Integer, Integer> cache;
     public LRUCache(int capacity) {
@@ -23,3 +25,4 @@ public class LRUCache {
         cache.put(key, value);
     }
 }
+

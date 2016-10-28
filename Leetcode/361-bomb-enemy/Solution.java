@@ -14,52 +14,73 @@ return 3. (Placing a bomb at (1,1) kills 3 enemies)
 */
 
 public class Solution {
-    // ["0E00","E0WE","0E00"]
-    public int calculateVal(char[][] grid, int start, int end) {
-        int r = grid.length;
-        int c = grid[0].length;
-        int cnt = 0;
-        int i = start - 1;
-        while(i >= 0 && grid[i][end] != 'W'){
-            if(grid[i][end] == 'E')
-                cnt++;
-            i--;
-        }
-        i = start + 1;
-        while(i < r && grid[i][end] != 'W'){
-            if(grid[i][end] == 'E')
-                cnt++;
-            i++;
-        }
-        int j = end - 1;
-        while(j >= 0 && grid[start][j] != 'W'){
-            if(grid[start][j] == 'E')
-                cnt++;
-            j--;
-        }
-        j = end + 1;
-        while(j < c && grid[start][j] != 'W'){
-            if(grid[start][j] == 'E')
-                cnt++;
-            j++;;
-        }
-        return cnt;
+    // O(mn) Solution
+    // DP
+    class Cell{
+        // Number of enemies to its left including itself
+        public int left;
+        // Number of enemies to its right including itself
+        public int right;
+        // Number of enemies to its up including itself        
+        public int up;
+        // Number of enemies to its down including itself        
+        public int down;
     }
-
+    
     public int maxKilledEnemies(char[][] grid) {
         int r = grid.length;
-        if(r == 0)  
-            return 0;
+        if(r == 0)          return 0;
         int c = grid[0].length;
         
-        int result = 0;
-        for(int i=0; i<r; i++){
-            for(int j=0; j<c; j++){
-                if(grid[i][j] == '0'){
-                    result = Math.max(result, calculateVal(grid, i, j));
+        Cell[][] cell = new Cell[r][c];
+        // left & up
+        for(int i=0; i<r; ++i){
+            for(int j=0; j<c; ++j){
+                cell[i][j] = new Cell();
+                if(grid[i][j] == 'W')
+                    continue;
+                    
+                if(i == 0){
+                    cell[i][j].up = (grid[i][j] == 'E' ? 1 : 0); 
+                }
+                else{
+                    cell[i][j].up = cell[i-1][j].up + (grid[i][j] == 'E' ? 1 : 0); 
+                }
+
+                if(j == 0){
+                    cell[i][j].left = (grid[i][j] == 'E' ? 1 : 0); 
+                }
+                else{
+                    cell[i][j].left = cell[i][j-1].left + (grid[i][j] == 'E' ? 1 : 0); 
                 }
             }
-        }           
-        return result;
+        }
+        
+        int maxKill = 0;        
+        for(int i=r-1; i>=0; --i){
+            for(int j=c-1; j>=0; --j){
+                if(grid[i][j] == 'W')
+                    continue;
+
+                if(i == r-1){
+                    cell[i][j].down = (grid[i][j] == 'E' ? 1 : 0); 
+                }
+                else{
+                    cell[i][j].down = cell[i+1][j].down + (grid[i][j] == 'E' ? 1 : 0); 
+                }
+
+                if(j == c-1){
+                    cell[i][j].right = (grid[i][j] == 'E' ? 1 : 0); 
+                }
+                else{
+                    cell[i][j].right = cell[i][j+1].right + (grid[i][j] == 'E' ? 1 : 0); 
+                }
+                
+                // if it's empty spot
+                if(grid[i][j] == '0')
+                    maxKill = Math.max(maxKill, cell[i][j].up + cell[i][j].left + cell[i][j].down + cell[i][j].right);
+            }
+        }
+        return maxKill;
     }
 }
