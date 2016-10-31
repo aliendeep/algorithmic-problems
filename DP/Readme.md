@@ -33,3 +33,5 @@
 - Jump Game (Minimum number of steps - DP version)
 - Interleaving String
 - Count Distinct Subsequences
+- Weighted Job Scheduling
+- Maximum number of A’s using given four keys
