@@ -814,10 +814,20 @@
 
 433 Minimum Genetic Mutation  
 
+435 Non-overlapping Intervals
+
+436 Find Right Interval
+
 437 Path Sum III  
 
 438 Find All Anagrams in a String   
 
 439 Ternary Expression Parser  
 
+440 K-th Smallest in Lexicographical Order  
+
+441 Arranging Coins
+
 442 Find All Duplicates in an Array
+
+444 Sequence Reconstruction
