@@ -50,9 +50,9 @@ public class Solution {
         }    
         
         // Algorithm        
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-                for(int k=0; k<n; k++){
+        for(int k=0; k<n; k++){
+            for(int i=0; i<n; i++){
+                for(int j=0; j<n; j++){
                     // if node exists
                     if(d[i][k] != -1 && d[k][j] != -1)
                         d[i][j] = d[i][k] * d[k][j];    
