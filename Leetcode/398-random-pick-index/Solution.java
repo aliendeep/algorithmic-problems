@@ -15,28 +15,77 @@ solution.pick(3);
 // pick(1) should return 0. Since in the array only nums[0] is equal to 1.
 solution.pick(1);
 */
-//  Reservoir Sampling
 public class Solution {
-    public static final int FIXED_NUM = 0;
-    // Array is sorted
-    Random randomNum;
-    int[] a;
+    class Info{
+        int num;
+        int index;
+        public Info(int n, int i){
+            num = n;
+            index = i;
+        }
+    }    
+    Info[] numIndex;
+    int n;
+    
+    // Sort: O(nlogn)
     public Solution(int[] nums) {
-        randomNum = new Random();
-        a = nums;
+        this.n = nums.length;
+        numIndex = new Info[n];
+        
+        for(int i=0; i<n; ++i){
+            numIndex[i] = new Info(nums[i], i);            
+        }
+        
+        // Sort by the num
+        Arrays.sort(numIndex, new Comparator<Info>(){
+            @Override
+            public int compare(Info a, Info b){
+                return Integer.compare(a.num, b.num);
+            }
+        });
     }
     
-    public int pick(int target) {
-        int resultIndex = -1;
-        int n = 1;
-        for(int i=0; i<a.length; i++){
-            if(a[i] != target)
-                continue;
-            if(randomNum.nextInt() % n == FIXED_NUM)
-                resultIndex = i;
-            n++;
+    // O(logn)
+    int lowerBound(int target){
+        // Find the first index of the target that occurred in the info array
+        int l = 0, h = n-1;
+        while(h - l > 3){
+            int mid = (l+h)/2;
+            if(numIndex[mid].num > target)
+                h = mid-1;
+            else
+                l = mid;
         }
-        return resultIndex;
+        for(int i=l; i<=h; ++i){
+            if(numIndex[i].num == target)
+                return i;
+        }
+        return -1;
+    }
+
+    // O(logn)
+    int upperBound(int target){
+        // Find the last index of the target that occurred in the info array
+        int l = 0, h = n-1;
+        while(h - l > 3){
+            int mid = (l+h)/2;
+            if(numIndex[mid].num > target)
+                h = mid-1;
+            else
+                l = mid;
+        }
+        for(int i=h; i>=l; --i){
+            if(numIndex[i].num == target)
+                return i;
+        }
+        return -1;
+    }
+    public int pick(int target) {
+        Random rand = new Random();
+        int lowerIndex = lowerBound(target);
+        int upperIndex = upperBound(target);
+        int randIndex = lowerIndex + rand.nextInt(upperIndex - lowerIndex + 1);
+        return numIndex[randIndex].index;
     }
 }
 

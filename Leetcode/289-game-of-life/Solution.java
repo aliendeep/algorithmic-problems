@@ -16,7 +16,18 @@ Could you solve it in-place? Remember that the board needs to be updated at the 
 updated values to update other cells.
 In this question, we represent the board using a 2D array. In principle, the board is infinite, which would cause problems when the 
 active area encroaches the border of the array. How would you address these problems?
+
+Sample Input:
+[[]]
+[[1],[1],[1],[1],[0],[0],[1],[0],[1],[1]]
+[[0,0,0,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]]
+
+Sample Output:
+[[]]
+[[0],[1],[1],[0],[0],[0],[0],[0],[0],[0]]
+[[0,0,0,0,0],[0,0,0,0,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]]
 */
+
 // Bit Manipulation
 public class Solution {
     boolean isValid(int i, int j, int r, int c){

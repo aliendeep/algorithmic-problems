@@ -22,7 +22,7 @@ Visually, the graph looks like the following:
          / \
          \_/
 */
-         
+
 /**
  * Definition for undirected graph.
  * class UndirectedGraphNode {
@@ -31,29 +31,43 @@ Visually, the graph looks like the following:
  *     UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
  * };
  */
-public class Solution {
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        if(node == null)
-            return null;
-            
-        // Original node to copy mapping
-        HashMap<UndirectedGraphNode, UndirectedGraphNode> mapping = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
 
-        Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
-        mapping.put(node, new UndirectedGraphNode(node.label));
-        queue.add(node);
+public class Solution {
+    // Use a hashmap
+    // BFS
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if(node == null)    
+            return null;
+
+        // label to node
+        Map<Integer, UndirectedGraphNode> map = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+
+        Queue<UndirectedGraphNode> Q = new LinkedList<UndirectedGraphNode>();
+        Q.add(node);
+        visited.add(node.label);
         
-        while(!queue.isEmpty()){
-            UndirectedGraphNode t = queue.remove();
-            for(UndirectedGraphNode adjacentNode : t.neighbors){
-                if(mapping.containsKey(adjacentNode) == false){
-                    mapping.put(adjacentNode, new UndirectedGraphNode(adjacentNode.label));
-                    // Add this neighbor to the queue
-                    queue.add(adjacentNode);
+        while(!Q.isEmpty()){
+            UndirectedGraphNode front = Q.remove();
+            
+            if(!map.containsKey(front.label)){
+               UndirectedGraphNode copied = new UndirectedGraphNode(front.label);
+               map.put(front.label, copied);
+            }
+            
+            for(UndirectedGraphNode neighbor : front.neighbors){
+                int nlabel = neighbor.label;
+                if(!map.containsKey(nlabel)){
+                   UndirectedGraphNode copied = new UndirectedGraphNode(nlabel);
+                   map.put(nlabel, copied);
                 }
-                mapping.get(t).neighbors.add(mapping.get(adjacentNode));
+                map.get(front.label).neighbors.add(map.get(nlabel));
+                if(!visited.contains(nlabel)){
+                    Q.add(neighbor);
+                    visited.add(nlabel);
+                }
             }
         }
-        return mapping.get(node);
+        return map.get(node.label);
     }
 }
