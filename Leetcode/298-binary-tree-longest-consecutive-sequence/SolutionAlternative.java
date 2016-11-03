@@ -31,30 +31,26 @@ Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
  *     TreeNode(int x) { val = x; }
  * }
  */
+// Main Idea: Reset length
 public class Solution {
-    int result = 0;
-    public int lcs(TreeNode root) {
-        if(root == null) 
+    public int longestConsecutive(TreeNode root) {
+        if(root == null)
             return 0;
-
-        int left = lcs(root.left);
-        int right = lcs(root.right);
-        
-        int cnt = 1;
-        if (root.left != null && root.left.val == root.val + 1) {
-            cnt = Math.max(cnt, left+1);
-        }
-        if (root.right != null && root.right.val == root.val + 1) {
-            cnt = Math.max(cnt, right+1);
-        }
-        result = Math.max(result, cnt);
-        return cnt;
+        return Math.max(helper(root.left, 1, root.val), helper(root.right, 1, root.val));
     }
     
-    public int longestConsecutive(TreeNode root) {
-        if (root == null) 
-            return 0;
-        lcs(root);
-        return result;
-    }    
+    public int helper(TreeNode node, int len, int parentVal){
+        if(node == null)
+            return len;
+        // increasing
+        if(node.val - parentVal == 1)
+            len++;
+        // reset the length
+        else
+            len = 1;
+        
+        int left = helper(node.left, len, node.val);
+        int right = helper(node.right, len, node.val);
+        return Math.max(Math.max(left, right), len);
+    }
 }
