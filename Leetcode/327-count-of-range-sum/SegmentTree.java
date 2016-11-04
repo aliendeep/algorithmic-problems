@@ -1,76 +1,125 @@
-public class Solution {
-    class SegmentTree{
-        int n;
-        int[] node;
+class SegmentTree{
+    // no of leaves in the segment tree
+    int n;
+    int _n;
+    int[] node;
+    
+    // Root Node Index : 1
+    public SegmentTree(int _n){
+        this._n = _n;
+        // Find the closest power of 2
+        n = 1;
+        while(n < _n){
+          n *= 2;
+        }
+        node = new int[n*2];
+    }
 
-        public SegmentTree(int _n){
-            n = 1;
-            // closest power of 2
-            while(n < _n){
-                n *= 2;
-            }
-            // Number of leaves = n
-            // 1 to 2n-1 are used.
-            node = new int[n*2 + 1];            
-        }  
-        
-        public void updateRecur(int index, int diff, int nodeIndex, int lowIndex, int upperIndex){
+    public void addDiffRecursive(int nodeIndex, int low, int high, int arrIndex, int diff){
+        if(low == high){
+            // leaf
             node[nodeIndex] += diff;
-            // if it's leaf
-            if(upperIndex - lowIndex == 1)      return;
-            int midIndex = (upperIndex + lowIndex)/2;            
-            if(index < midIndex){
-                // left child
-                updateRecur(index, diff, 2*nodeIndex, lowIndex, midIndex);
-            }
-            else{
-                // right child
-                updateRecur(index, diff, 2*nodeIndex + 1, midIndex, upperIndex);
-            }
+            return;
         }
+        int mid = (int)(low+high)/2;
+        if(arrIndex > mid)
+            addDiffRecursive(2*nodeIndex+1, mid+1, high, arrIndex, diff);
+        if(arrIndex <= mid)
+            addDiffRecursive(2*nodeIndex, low, mid, arrIndex, diff);
+    
+        node[nodeIndex] = node[2*nodeIndex] + node[2*nodeIndex+1];
+    }
+    // Add difference
+    public void addDiff(int i, int diff){
+        addDiffRecursive(1, 0, _n-1, i, diff);
+    }
+    
+    public int rangeSumRecursive(int nodeIndex, int low, int high, int i, int j){
+        // return range sum of a[i...j]
+        // outside range
+        if(high < i || low > j)
+            return 0;
             
-        public void update(int index, int val){
-            updateRecur(index, val, 1, 0, n);
+        // completely within range
+        if(low >= i && high <= j)
+            return node[nodeIndex];
+            
+        int mid = (int)(low+high)/2;
+        if(i > mid){
+            // right 
+            return rangeSumRecursive(nodeIndex*2 + 1, mid+1, high, i, j);
+        }        
+        if(j <= mid){
+            // left
+            return rangeSumRecursive(nodeIndex*2, low, mid, i, j);
         }
+        return rangeSumRecursive(nodeIndex*2, low, mid, i, mid) + 
+                            rangeSumRecursive(nodeIndex*2+1, mid+1, high, mid+1, j);
+    }
+    public int rangeSum(int i, int j){
+        return rangeSumRecursive(1, 0, _n-1, i, j);
+    }
+}
 
-        public int rangeSumRecursive(int lower, int upper, int nodeIndex, int lowIndex, int upperIndex){
-            // If the lowIndex and upperIndex is within lower & upper, then return
-            if(lower >= lowIndex && upperIndex <= upper)
-                return node[nodeIndex];
-            // If the lowIndex and upperIndex is outside of lower & upper, then return 0
-            if(lower >= upperIndex || upper <= lowIndex)
-                return 0;
-                
-            int midIndex = (upperIndex + lowIndex)/2;            
-            return rangeSumRecursive(lower, upper, 2*nodeIndex, lowIndex, midIndex) +
-                   rangeSumRecursive(lower, upper, 2*nodeIndex + 1, midIndex, upperIndex);
-        }
+public class Solution{
+  // Find first occurrence of target
+  public int lowerBound(long[] nums, long target){
+      int index = Arrays.binarySearch(nums, target);
+      if(index < 0){
+        index =  -index - 1;
+      }
+      return index;
+  }
 
-        public int rangeSum(int lower, int upper){
-            return rangeSumRecursive(lower, upper, 1, 0, n);
-        }
+  public int countRangeSum(int[] nums, int lowerRange, int upperRange) {
+    int n = nums.length;
+    if(n == 0)
+        return 0;
+    // cum sum
+    long[] sums = new long[n];
+    sums[0] = nums[0];
+    for(int i=1;i<n; ++i){
+      sums[i] = sums[i-1] + nums[i];
     }
-    
-    class Pair{
-        int sum;
-        int index;
-        public Pair(int s, int i){
-            sum = s;
-            index = i;
-        }
+
+    Set<Long> set = new HashSet<>();
+    for(int i=0;i<n; ++i){
+      set.add(sums[i]);
+    }    
+
+    long[] t = new long[set.size()];
+    int in = 0;
+    Iterator it = set.iterator();
+    while(it.hasNext()){
+      t[in++] = (long)it.next();
     }
-    
-    # TODO
-    public int countRangeSum(int[] nums, int lower, int upper) {
-        int n = nums.length;
-        if(n == 0)          return 0;
-        if(lower > upper)   return 0;
-        
-        SegmentTree sTree = new SegmentTree(n+1);
-        for(int i=0; i<=n; ++i){
-            sTree.update(i, 1);
-        }
-        
-        # TOOD
+    Arrays.sort(t);
+
+    // Build the segment tree
+    SegmentTree st = new SegmentTree(n);
+    for(int i=0; i<n; ++i){
+      int pos = Arrays.binarySearch(t, sums[i]);
+      st.addDiff(pos, 1);
     }
+
+    long cnt = 0;
+    long lower = lowerRange;
+    long upper = upperRange;
+
+    for(int i=0; i<n; ++i){
+      // Find the range of lower and upper in the sorted cum sum array
+      int lowerIndex = lowerBound(t, lower);
+      int upperIndex = lowerBound(t, upper+1) - 1;
+
+      int ssum = st.rangeSum(lowerIndex, upperIndex);
+
+      cnt += ssum;
+      // update range
+      lower += nums[i];
+      upper += nums[i];
+      int pos = Arrays.binarySearch(t, sums[i]);
+      st.addDiff(pos, -1);
+    }
+    return (int)cnt;
+  }
 }
