@@ -12,40 +12,82 @@ To the right of 6 there is 1 smaller element (1).
 To the right of 1 there is 0 smaller element.
 Return the array [2, 1, 1, 0].
 */
-// Binary Indexed tree
-public class Solution {
-    int getSum(int[] bit, int index){
-        int sum = 0;
-        while(index > 0){
-            sum += bit[index];
-            // get parent
-            index = index - (index & -index);
-        }
-        return sum;
+import java.util.*;
+
+class BinaryIndexedTree{
+  int[] bit;
+
+  public BinaryIndexedTree(int[] a){
+    int n = a.length;
+    bit = new int[n+1];
+  }
+  
+  public int lsb(int index){
+    return index & -index;
+  }
+
+  // 1 indexing
+  public void addDiff(int index, int diff){
+    while(index < bit.length){
+      bit[index] += diff;
+      index = index + lsb(index);
+    }    
+  }
+
+  // Get sum of (0..index)
+  public int getSum(int index){
+    index++;
+    int sum = 0;
+    while(index > 0){
+      sum += bit[index];
+      index = index - lsb(index);
+    }
+    return sum;
+  }
+
+  // i: 0 indexing. add the diff
+  public void addDifference(int i, int diff){
+    addDiff(i+1, diff);
+  }
+}
+
+public class Solution{
+  public List<Integer> countSmaller(int[] nums) {
+    int n = nums.length;
+    BinaryIndexedTree bit = new BinaryIndexedTree(nums);
+    int[] t = nums.clone();
+    Arrays.sort(t);
+
+    Integer[] result = new Integer[n];
+    for(int i=n-1; i>=0; --i){
+      int pos = Arrays.binarySearch(t, nums[i]);
+      result[i] = bit.getSum(pos-1);
+      bit.addDifference(pos, 1);      
+    }
+    return Arrays.asList(result);
+  }  
+}
+
+public class Solution2{
+  // Alternative
+  public List<Integer> countSmaller(int[] nums) {
+    int n = nums.length;
+    BinaryIndexedTree bit = new BinaryIndexedTree(nums);
+    int[] t = nums.clone();
+    Arrays.sort(t);
+    
+    int[] posArray = new int[n];
+    for(int i=0; i<n; i++){
+        int pos = Arrays.binarySearch(t, nums[i]);
+        bit.addDifference(pos, 1);  
+        posArray[i] = pos;
     }
     
-    void update(int[] bit, int index, int val){
-        while(index < bit.length){
-            bit[index] += val;
-            // get next
-            index = index + (index & -index);
-        }
+    Integer[] result = new Integer[n];
+    for(int i=0; i<n; ++i){
+      result[i] = bit.getSum(posArray[i]-1);
+      bit.addDifference(posArray[i], -1);      
     }
-
-    public List<Integer> countSmaller(int[] nums) {
-        int n = nums.length;
-        int[] t = nums.clone();
-        Arrays.sort(t);
-        for(int i=0; i<n; i++){
-            nums[i] = Arrays.binarySearch(t, nums[i]) + 1;
-        }
-        
-        int[] bit = new int[n+1];
-        Integer[] r = new Integer[n];
-        for(int i=n-1; i>=0; i--){
-            r[i] = getSum(bit, nums[i] - 1);
-            update(bit, nums[i], 1);
-        }
-        return Arrays.asList(r);
-    }
+    return Arrays.asList(result);
+  }  
 }

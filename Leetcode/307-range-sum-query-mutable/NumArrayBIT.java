@@ -14,61 +14,72 @@ You may assume the number of calls to update and sumRange function is distribute
 */
 
 // Binary Indexed Tree Solution
-class NumArray {
-    int[] binaryIndexedTree;
-    int[] nums;
+class BinaryIndexedTree{
+  int[] bit;
+  int[] nums;
 
-    public NumArray(int[] nums) {
-        this.nums = nums;
-        int n = nums.length;
-        // Construct Binary Indexed Tree from the original array
-        binaryIndexedTree = new int[n+1];
-        // 0th node contains the dummy node
-        for(int i=1; i<=n; i++){
-            updateBinaryIndexedTree(i, nums[i-1]);
-        }
+  public BinaryIndexedTree(int[] a){
+    int n = a.length;
+    this.nums = a;
+    bit = new int[n+1];
+
+    // construct the bit
+    for(int i=1; i<=n; ++i){
+      addDiff(i, nums[i-1]);
     }
-    
-    public int getNext(int index){
-        return index + (index & -index);
+  }
+  
+  public int lsb(int index){
+    return index & -index;
+  }
+
+  // 1 indexing
+  private void addDiff(int index, int diff){
+    while(index < bit.length){
+      bit[index] += diff;
+      index = index + lsb(index);
+    }    
+  }
+
+  // Get sum of (0..index)
+  public int getSum(int index){
+    index++;
+    int sum = 0;
+    while(index > 0){
+      sum += bit[index];
+      index = index - lsb(index);
     }
-    
-    public int getParent(int index){
-        return index - (index & -index);
+    return sum;
+  }
+
+  // i: 0 indexing. Set the value of a[i] to val
+  public void set(int i, int val){
+    int diff = val - nums[i];
+    nums[i] = val;
+    addDiff(i+1, diff);
+  }
+}
+
+public class NumArrayBIT {
+    BinaryIndexedTree bit;
+    public NumArrayBIT(int[] nums) {
+        bit = new BinaryIndexedTree(nums);
     }
-    
-    // index (1 indexing)
-    void updateBinaryIndexedTree(int index, int val){
-        // While in range
-        while(index < binaryIndexedTree.length){
-            binaryIndexedTree[index] += val;
-            index = getNext(index);
-        }
-    }
-    
-    // Get sum of (0..i) 
-    public int getSum(int index){
-        index++;
-        int sum = 0;
-        
-        while(index > 0){
-            sum += binaryIndexedTree[index];
-            index = getParent(index);
-        }
-        return sum;
-    }
-    
+
     void update(int i, int val) {
-        int diff = val - nums[i];
-        // Update value
-        nums[i] = val;
-        updateBinaryIndexedTree(i+1, diff);
+        bit.set(i, val);
     }
 
     public int sumRange(int i, int j) {
-        return getSum(j) - getSum(i-1);
+        return bit.getSum(j) - bit.getSum(i-1);
     }
 }
+
+// Your NumArray object will be instantiated and called as such:
+// NumArray numArray = new NumArray(nums);
+// numArray.sumRange(0, 1);
+// numArray.update(1, 10);
+// numArray.sumRange(1, 2);
 // Your NumArray object will be instantiated and called as such:
 // NumArray numArray = new NumArray(nums);
 // numArray.sumRange(0, 1);
