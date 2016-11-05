@@ -39,3 +39,26 @@ public class Solution {
         return r;
     }
 }
+
+// Alternative Solution
+// https://leetcode.com/articles/summary-ranges/
+public class Solution2 {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> r = new ArrayList<>();
+        int n = nums.length; 
+        for(int start = 0, end = 0; end < n; ++end){
+            if(end+1 < n && nums[end+1] == nums[end] + 1)
+                continue;
+            // only one element
+            if(start == end){
+                r.add(nums[start] + "");
+            }
+            else{
+                r.add(nums[start] + "->" + nums[end]);
+            }
+            // start the next range
+            start = end + 1;
+        }
+        return r;
+    }
+}

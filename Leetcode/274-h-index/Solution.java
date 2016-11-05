@@ -14,26 +14,23 @@ What are the possible values of h-index?
 A faster approach is to use extra space.
 */
 public class Solution {
-    // O(n) Solution    
+    // O(n)
     public int hIndex(int[] citations) {
-        // Let h be the h-index of the author. 
-        // h must need to follow the constraint 0<=h<=n, where n is the number of papers
         int n = citations.length;
+        if(n == 0)      return 0;
+        
         int[] cnt = new int[n+1];
-        for(int i=0; i<n; i++){
-            // if the citation count is greater than no of published paper then it contrinute to the nth item of cnt as h_max = n
-            if(citations[i] >= n)
-                cnt[n]++;
-            else
-                cnt[citations[i]]++;
+        for(int citation : citations){
+            cnt[Math.min(citation, n)]++;            
         }
-        // A scientist has index h if h of his/her N papers have at least h citations each
-        int cntCum = 0;
-        for(int i=n; i>=0; i--){
-            cntCum += cnt[i];
-            if(cntCum >= i)
-                return i;
+        
+        // N papers have at least h citations each
+        int k = n;
+        int sum = cnt[n];
+        while(k > sum){   
+            k--;
+            sum += cnt[k];    
         }
-        return 0;
+        return k;
     }
 }

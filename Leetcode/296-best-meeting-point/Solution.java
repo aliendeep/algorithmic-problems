@@ -15,6 +15,7 @@ Hint:
 Try to solve it in one dimension first. How can this solution apply to the two dimension case?
 */
 
+// Collect points in sorted order
 public class Solution {
     public int minDistance(List<Integer> A, int median){
         int dist = 0;

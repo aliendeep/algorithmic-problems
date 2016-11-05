@@ -58,3 +58,23 @@ public class Solution {
         return result;
     }    
 }
+
+// cleaner
+// https://leetcode.com/articles/binary-tree-longest-consecutive-sequence/
+public class Solution2 {
+    public int longestConsecutive(TreeNode node, int parent, int length) {
+        if(node == null)
+            return length;
+        if(parent != -1 && parent + 1 == node.val)
+            length++;
+        else
+            // reset length
+            length = 1;
+        return Math.max(length, Math.max(longestConsecutive(node.left, node.val, length), 
+                                         longestConsecutive(node.right, node.val, length)));
+    }
+    
+    public int longestConsecutive(TreeNode root) {
+        return longestConsecutive(root, -1, 0);
+    }
+}
