@@ -832,4 +832,10 @@
 
 444 Sequence Reconstruction
 
+447 Number of Boomerangs  
+
 448 Find All Numbers Disappeared in an Array
+
+452 Minimum Number of Arrows to Burst Balloons
+
+453 Minimum Moves to Equal Array Elements
