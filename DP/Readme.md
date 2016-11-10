@@ -25,7 +25,7 @@
 - Repeating Subsequence
 - Palindromic Partioning (Min Cut)
 - Rod Cut (Maximum value obtainable)
-- Rod Cutting Min Cost(Hard)
+- Rod Cutting Min Cost (Hard)
 - Max Rectangle in Binary Matrix (all 1s)
 - Maximum sum rectangle in a 2D matrix (Kadene's 2d version)
 - Stairs (Count Ways)
