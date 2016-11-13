@@ -849,3 +849,11 @@
 452 Minimum Number of Arrows to Burst Balloons
 
 453 Minimum Moves to Equal Array Elements
+
+454 4Sum II
+
+455 Assign Cookies
+
+456 132 Pattern
+
+459 Repeated Substring Pattern
