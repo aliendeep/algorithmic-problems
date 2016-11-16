@@ -53,3 +53,27 @@ public class Solution {
         return ugly[n-1];
     }
 }
+
+// Solution 2
+public class Solution2 {
+    // Bruteforce
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        int p = primes.length;
+        int[] index = new int[p];
+
+        int[] ugly = new int[n];
+        Arrays.fill(ugly, Integer.MAX_VALUE);
+        
+        ugly[0] = 1;
+        for(int i=1; i<n; ++i){
+            for(int j=0; j<p; ++j){
+                ugly[i] = Math.min(ugly[i], primes[j]*ugly[index[j]]);
+            }
+            for(int j=0; j<p; ++j){
+                if(ugly[i] == primes[j]*ugly[index[j]]) 
+                    index[j]++;  
+            }
+        }
+        return ugly[n-1];
+    }
+}
