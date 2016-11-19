@@ -15,30 +15,81 @@ return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
 Follow Up:
 Can you do it in O(n) time?
 */
+/*
+Sample Input:
+[1,-1,5,-2,3]
+3
+[-1, 1, -1]
+-1
+[100]
+100
+[-2,0,1,-1]
+0
+[-1,5,6,1,0,0,-8,8,-1,3]
+-1
+
+Sample Output:
+4
+3
+1
+3
+5
+*/
 
 public class Solution {
-    // nums[i] = Sum of elements from 0 to i inclusively
-    // Sum of elements from i to j is nums[j] - nums[i - 1] 
-    // Exception: Sum of elements from 0 to i: dp[i]
+    // O(n) Solution
     public int maxSubArrayLen(int[] nums, int k) {
         int n = nums.length;
+        if(n == 0)          return 0;
+
+        int maxLen = 0;
+        // 1 indexing
+        int[] cumsum = new int[n+1];
+        for(int i=1; i<=n; ++i){
+            cumsum[i] = cumsum[i-1] + nums[i-1];
+            if(cumsum[i] == k)
+                maxLen = Math.max(maxLen, i);
+        }
+        Map<Integer, Integer> map = new HashMap<>();        
+        for(int i=1; i<=n; ++i){
+            int target = cumsum[i] - k;
+            if(map.containsKey(target)){
+                maxLen = Math.max(maxLen, i - map.get(target));
+            }
+            // contains the leftmost index (if multiple number occurs)
+            if(!map.containsKey(cumsum[i]))
+                map.put(cumsum[i], i);
+        }
+        return maxLen;
+    }
+}
+
+// O(N) Solution
+public class Solution2 {
+    public int maxSubArrayLen(int[] nums, int k) {
+        int n = nums.length;
+        if(n == 0)
+            return 0;
+            
+        int[] cumsum = new int[n];
+        cumsum[0] = nums[0];
         for(int i=1; i<n; i++){
-            nums[i] += nums[i-1];
+            cumsum[i] = cumsum[i-1] + nums[i];
         }
         int maxLen = 0;
         // Sum to leftmost index entry
         Map<Integer, Integer> map = new HashMap<>();
-        // to make sum from 0 to i consistent
         map.put(0, -1);
-        for(int end=0; end<n; end++){
-            int target = nums[end] - k;
+
+        for(int end=0; end<n; ++end){
+            int target = cumsum[end] - k;
             // See if the target has occurred before
             if(map.containsKey(target)){
                 maxLen = Math.max(maxLen, end - map.get(target));
             }
             // contains the left most index.
-            if(!map.containsKey(nums[end])){
-                map.put(nums[end], end);
+            if(!map.containsKey(cumsum[end])){
+                map.put(cumsum[end], end);
             }
         }
         return maxLen;

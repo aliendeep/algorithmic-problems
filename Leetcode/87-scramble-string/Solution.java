@@ -36,6 +36,18 @@ We say that "rgtae" is a scrambled string of "great".
 
 Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
 */
+/*
+https://www.interviewbit.com/problems/scramble-string/
+
+Lets first think of a bruteforce solution. 
+Obviously the 2 strings need to have the same number of characters and the same character set, otherwise the answer is definitely no.
+
+In the bruteforce solution, we loop to find out the root of the tree. 
+Lets say the root is the ith character of string s1. Then the first part of s1 [0…i) can either match ( be a scrambled string of ) to s2[0…i) or s2(i+1 .. L]. 
+Depending on which part s1[0…i) matches to, we match the remaining part of s1 to remaining part of s2. Just to clarify when we say s1 matches s2, 
+we mean s1 is a scrambled string of s2.
+*/
+
 public class Solution {
     // Recursive
     public boolean isScramble(String s1, String s2) {
