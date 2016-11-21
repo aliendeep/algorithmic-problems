@@ -27,18 +27,29 @@ Binary tree [1,2,3], return false.
  *     TreeNode(int x) { val = x; }
  * }
  */
+
 public class Solution {
-    public boolean isValidBST(TreeNode root, long minValue, long maxValue) {
-        if(root == null)    
+    // Alternative: in order traversal 
+    long prev;
+    public boolean inorder(TreeNode node){
+        if(node == null)    
             return true;
-        if(root.val <= minValue || root.val >= maxValue)
+        
+        if(!inorder(node.left))
             return false;
-        return isValidBST(root.left, minValue, root.val) &&
-               isValidBST(root.right, root.val, maxValue);
+        
+        if(node.val <= prev)
+            return false;
+        
+        prev = node.val;
+        
+        if(!inorder(node.right))
+            return false;
+        return true;
+        
     }
-    
     public boolean isValidBST(TreeNode root) {
-        if(root == null)    return true;
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+        prev = Long.MIN_VALUE;
+        return inorder(root);
     }
 }
