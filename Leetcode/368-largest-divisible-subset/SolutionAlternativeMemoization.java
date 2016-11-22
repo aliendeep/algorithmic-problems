@@ -20,9 +20,6 @@ Result: [1,2,4,8]
 public class Solution {
     int[] dp;
     int[] parent;
-    // dp[i] = Length of the longest subset whose largest element is nums[i]
-    // dp[i] = 1 + dp[j] if nums[j] % nums[i] == 0 
-    // Otherwise, dp[i] = 1
     public int getLongestPath(int index, int[] nums) {
         if(dp[index] != -1)
             return dp[index];
@@ -40,9 +37,6 @@ public class Solution {
         return dp[index];
     }
 
-    // We can extend a subset if:
-    // If the new element is larger than all other elements in the subset, then we can extend the subset if the new element is divisible by the largest element of the subset 
-    // If the new element is smaller than all other elements in the subset, then if new element can divide the smallest of the subset
     public List<Integer> largestDivisibleSubset(int[] nums) {
         int n = nums.length;
         if(n == 0)
@@ -57,7 +51,6 @@ public class Solution {
         parent = new int[n];
         int startIndex = -1;
         int maxLength = 0;
-        // Add smaller element at the front
         for(int i=0; i<n; i++){
             int len = getLongestPath(i, nums);
             if(maxLength < len){

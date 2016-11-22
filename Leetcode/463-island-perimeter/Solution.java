@@ -36,3 +36,28 @@ public class Solution {
         return perimeter;
     }
 }
+
+public class Solution2 {
+    public int islandPerimeter(int[][] grid) {
+        int r = grid.length;
+        if( r == 0)
+            return 0;
+
+        int c = grid[0].length;
+        int perimeter = 0;
+        int[][] moves = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        for(int i=0; i<r; ++i){
+            for(int j=0; j<c; ++j){
+                if(grid[i][j] == 1){
+                    for(int k=0; k<4; ++k){
+                        int x = i + moves[k][0];
+                        int y = j + moves[k][1];
+                        if(x < 0 || x >= r || y < 0 || y >= c || grid[x][y] == 0)  
+                            perimeter++;
+                    }
+                }
+            }
+        }
+        return perimeter;
+    }
+}

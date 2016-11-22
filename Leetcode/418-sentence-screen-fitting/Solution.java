@@ -59,7 +59,8 @@ public class Solution {
         int[] cnt = new int[n];
         int[] next = new int[n];
         
-        // Compute what's going to be the index of the sentence in the next line if the index of first word in the current line is i in the 
+        // Compute what's going to be the index of the sentence in the next line if the index of first word in the current line 
+        // is i in the 
         // sentence array
         // Also, keep track how many times the current row can accoomodate the whole sentence 
         for(int i=0; i<n; i++){

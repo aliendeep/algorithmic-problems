@@ -12,7 +12,6 @@ E 0 W E
 
 return 3. (Placing a bomb at (1,1) kills 3 enemies)
 */
-
 public class Solution {
     // O(mn) Solution
     // DP
@@ -39,19 +38,14 @@ public class Solution {
                 cell[i][j] = new Cell();
                 if(grid[i][j] == 'W')
                     continue;
-                    
-                if(i == 0){
-                    cell[i][j].up = (grid[i][j] == 'E' ? 1 : 0); 
+                
+                cell[i][j].up = (grid[i][j] == 'E' ? 1 : 0);     
+                cell[i][j].left = (grid[i][j] == 'E' ? 1 : 0); 
+                if(i > 0){
+                    cell[i][j].up += cell[i-1][j].up;
                 }
-                else{
-                    cell[i][j].up = cell[i-1][j].up + (grid[i][j] == 'E' ? 1 : 0); 
-                }
-
-                if(j == 0){
-                    cell[i][j].left = (grid[i][j] == 'E' ? 1 : 0); 
-                }
-                else{
-                    cell[i][j].left = cell[i][j-1].left + (grid[i][j] == 'E' ? 1 : 0); 
+                if(j > 0){
+                    cell[i][j].left += cell[i][j-1].left; 
                 }
             }
         }
@@ -61,20 +55,13 @@ public class Solution {
             for(int j=c-1; j>=0; --j){
                 if(grid[i][j] == 'W')
                     continue;
-
-                if(i == r-1){
-                    cell[i][j].down = (grid[i][j] == 'E' ? 1 : 0); 
-                }
-                else{
-                    cell[i][j].down = cell[i+1][j].down + (grid[i][j] == 'E' ? 1 : 0); 
-                }
-
-                if(j == c-1){
-                    cell[i][j].right = (grid[i][j] == 'E' ? 1 : 0); 
-                }
-                else{
-                    cell[i][j].right = cell[i][j+1].right + (grid[i][j] == 'E' ? 1 : 0); 
-                }
+                cell[i][j].down = (grid[i][j] == 'E' ? 1 : 0); 
+                cell[i][j].right = (grid[i][j] == 'E' ? 1 : 0); 
+                
+                if(i < r-1)                
+                    cell[i][j].down += cell[i+1][j].down; 
+                if(j < c-1)
+                    cell[i][j].right += cell[i][j+1].right; 
                 
                 // if it's empty spot
                 if(grid[i][j] == '0')

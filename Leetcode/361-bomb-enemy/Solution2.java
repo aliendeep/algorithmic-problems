@@ -13,6 +13,7 @@ E 0 W E
 return 3. (Placing a bomb at (1,1) kills 3 enemies)
 */
 
+// Bruteforce
 public class Solution {
     // ["0E00","E0WE","0E00"]
     public int calculateVal(char[][] grid, int start, int end) {
