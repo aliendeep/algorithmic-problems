@@ -36,3 +36,36 @@ public class Solution {
         return s;
     }
 }
+public class Solution2 {
+    public String next(String s){
+        int n = s.length();
+        int cnt = 1;
+        int i = 1;
+        StringBuilder r = new StringBuilder();
+        while(i < n){
+            if(s.charAt(i-1) == s.charAt(i)){
+                ++cnt;
+                ++i;
+                continue;
+            }
+            r.append(cnt);
+            r.append(s.charAt(i-1));
+            // reset cnt
+            cnt = 1;
+            ++i;
+        }
+        r.append(cnt);
+        r.append(s.charAt(n-1));
+        return r.toString();
+    }
+    
+    public String countAndSay(int n) {
+        int i = 1;
+        String r = new String("1");
+        while(i < n){
+            r = next(r);
+            ++i;
+        }
+        return r;
+    }
+}
