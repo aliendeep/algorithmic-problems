@@ -45,3 +45,37 @@ public class Solution {
         
     }
 }
+
+// Stack
+class Solution2 {
+    public String simplifyPath(String path) {
+        String[] tokens = path.split("/");
+        int n = tokens.length;
+
+        Deque<String> stk = new LinkedList<>();
+        for(int i=0; i<n; ++i){
+            if(tokens[i].length() == 0)
+                continue;
+            if(tokens[i].equals("..")){
+                if(!stk.isEmpty())
+                    stk.pop();
+            }    
+            else if(!tokens[i].equals(".")){
+                stk.push(tokens[i]);
+            }
+        }
+        List<String> t = new ArrayList<>();
+        while(!stk.isEmpty()){
+            t.add(stk.pop());
+        }
+        
+        StringBuilder r = new StringBuilder();
+        for(int i=t.size()-1; i>=0; --i){
+            r.append("/");
+            r.append(t.get(i));
+        }
+        if(r.length() == 0)
+            return "/";
+        return r.toString();
+    }
+}

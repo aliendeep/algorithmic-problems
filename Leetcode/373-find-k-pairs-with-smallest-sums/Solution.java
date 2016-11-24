@@ -27,52 +27,72 @@ Return: [1,3],[2,3]
 All possible pairs are returned from the sequence:
 [1,3],[2,3]
 */
-
 public class Solution {
     // min heap
-    class Pair{
-        int first, second;
-        Pair(int f, int s){
-            this.first = f;
-            this.second = s;
-        }
-    };
     public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<int[]> r = new ArrayList<>();
         int n = nums1.length;
         int m = nums2.length;
-        if(nums1 == null || n == 0 || nums2 == null || m == 0)
+        if(n == 0 || m == 0 || k == 0)
             return r;
-    
-        Comparator<Pair> comp = new Comparator<Pair>(){
+        
+        PriorityQueue<int[]> minHeap = new PriorityQueue(k, new Comparator<int[]>(){
             @Override
-            public int compare(Pair a, Pair b){
-                return nums1[a.first] + nums2[a.second] - (nums1[b.first] + nums2[b.second]);
+            public int compare(int[] x, int[] y){
+               return Integer.compare(nums1[x[0]]+nums2[x[1]], nums1[y[0]]+nums2[y[1]]);
             }
-        };
+        });
 
-        PriorityQueue<Pair> Q = new PriorityQueue<Pair>(k, comp);
         boolean[][] visited = new boolean[n][m];
         // Index of the number taken from the first array, Index of the number taken from the second array
-        Q.add(new Pair(0, 0));
+        minHeap.add(new int[]{0, 0});
         visited[0][0] = true;
         // Either increment the index of the first array or increment the index of the second array
         int[][] move = new int[][]{{0, 1}, {1, 0}};
 
-        while(!Q.isEmpty() && k > 0){
-            Pair p = Q.poll();
-            r.add(new int[]{nums1[p.first], nums2[p.second]});
+        while(!minHeap.isEmpty() && k > 0){
+            int[] p = minHeap.poll();
+            r.add(new int[]{nums1[p[0]], nums2[p[1]]});
             // For the two moves
             for(int i=0; i<2; i++){
-                int x = p.first + move[i][0];
-                int y = p.second + move[i][1];
-                if(x < n && y < m && !visited[x][y]){
-                    Q.add(new Pair(x, y));
-                    visited[x][y] = true;
+                int x = p[0] + move[i][0];
+                int y = p[1] + move[i][1];
+                if(x < n && y < m){
+                    if(!visited[x][y]){
+                        minHeap.add(new int[]{x, y});
+                        visited[x][y] = true;
+                    }
                 }
             }            
             k--;
         } 
         return r;
+    }
+}
+
+// Bruteforce: maxHeap
+class Solution2 {
+    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        PriorityQueue<int[]> maxHeap = new PriorityQueue(k, new Comparator<int[]>(){
+           @Override
+           public int compare(int[] x, int[] y){
+               return Integer.compare(y[0]+y[1], x[0]+x[1]);
+           }
+        });
+        
+        for(int i=0; i<nums1.length; ++i){
+            for(int j=0; j<nums2.length; ++j){
+                int[] t = new int[2];
+                t[0] = nums1[i];
+                t[1] = nums2[j];
+                maxHeap.add(t);
+            }
+        }
+        // remove extra k elements
+        while(maxHeap.size() > k){
+            maxHeap.poll();
+        }
+        List<int[]> result = new ArrayList<>(maxHeap);
+        return result;
     }
 }

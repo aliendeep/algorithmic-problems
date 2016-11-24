@@ -95,7 +95,8 @@ public class Solution {
                 // invalid or water
                 if(x < 0 || x >= m || y < 0 || y >= n || parent[v] == -1)
                     continue;
-                    
+                
+                // If neighbor is another island, then connect them and decrease land cnt
                 if(findSet(u) != findSet(v)){
                     union(u, v);
                     landCnt--;

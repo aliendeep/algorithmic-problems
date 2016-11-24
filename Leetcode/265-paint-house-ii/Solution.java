@@ -55,3 +55,37 @@ public class Solution {
         
     }
 }
+
+// Iterative
+class Solution2 {
+    public int minCostII(int[][] costs) {
+        int n = costs.length;
+        if(n == 0)      return 0;
+        int k = costs[0].length;
+        
+        int[][] dp = new int[n][k];
+        for(int[] t : dp)
+            Arrays.fill(t, -1);
+            
+        // init
+        for(int color=0; color<k; ++color){
+            dp[0][color] = costs[0][color];
+        }
+        
+        for(int i=1; i<n; i++){
+            for(int j=0; j<k; j++){
+                int cost = Integer.MAX_VALUE;
+                for(int t=0; t<k; t++){
+                    if(t == j)  continue;
+                    cost = Math.min(cost, dp[i-1][t]);
+                }
+                dp[i][j] = cost + costs[i][j];
+            }
+        }
+        int minCost = Integer.MAX_VALUE;
+        for(int j=0; j<k; j++)
+            minCost = Math.min(minCost, dp[n-1][j]);
+        
+        return minCost;
+    }
+}

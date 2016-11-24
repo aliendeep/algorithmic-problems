@@ -23,64 +23,47 @@ Hints:
 - Topological Sort via DFS - A great video tutorial (21 minutes) on Coursera explaining the basic concepts of Topological Sort.
 - Topological sort could also be done via BFS.
 */
-
 public class Solution {
-    // Topological sort via BFS
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-        if(numCourses == 0)     return new int[0];
-        
+    public int[] findOrder(int n, int[][] prerequisites) {
+        if(n == 0)     return new int[0];
         // indegree of all nodes
-        int[] indegree = new int[numCourses];
+        int[] indegree = new int[n];
         // Construct the graph
-        Map<Integer, Set<Integer>> graph = new HashMap<>();
+        List<Set<Integer>> graph = new ArrayList<>();
+        for(int i=0; i<n; ++i)
+            graph.add(new HashSet<>());
+            
         for(int i=0; i<prerequisites.length; i++){
             int x = prerequisites[i][0];
             int y = prerequisites[i][1];
-            Set<Integer> edges = graph.get(y);
-            if(edges == null){
-                edges = new HashSet<>();
-            }
             // To take course 0 you have to first take course 1, which is expressed as a pair: [0, 1]            
             // Same edge can occur multiple times in the input
-            if(edges.add(x)){
+            if(graph.get(y).add(x)){
                 indegree[x]++;
             }
-            graph.put(y, edges);
         }
-        
-        Queue<Integer> Q = new LinkedList();
-        // Add all node with indegree 0 to the queue
-        for(int i=0; i<numCourses; ++i){
-            if(indegree[i] == 0) 
+        Queue<Integer> Q = new LinkedList<>();
+        for(int i=0; i<n; ++i){
+            if(indegree[i] == 0){
                 Q.add(i);
+            }
         }
-        
-        List<Integer> result = new ArrayList<>();
+        int[] r = new int[n];
+        int i = 0;
         while(!Q.isEmpty()){
-            int front = Q.remove();
-            result.add(front);
-            
-            Set<Integer> adj = graph.get(front);
-            // reduce indegree of all adjacent nodes by 1
-            if(adj != null){
-                for(int neighbor : adj){
-                    indegree[neighbor]--;
-                    if(indegree[neighbor] == 0){
-                        Q.add(neighbor);
-                    }
+            int t = Q.remove();
+            r[i++] = t;
+            Set<Integer> edges = graph.get(t);
+            for(int neigh : edges){
+                indegree[neigh]--;
+                if(indegree[neigh] == 0){
+                    Q.add(neigh);
                 }
             }
         }
-        
         // Cycle
-        if(result.size() != numCourses)
+        if(i < n)
             return new int[0];
-        
-        int[] r = new int[result.size()];
-        int i = 0;
-        for(int t : result){
-            r[i++] = t;
-        }
         return r;
     }
 }

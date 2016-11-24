@@ -51,3 +51,23 @@ public class Solution {
         return moneyAmount(dp, 1, n);        
     }
 }
+
+class Solution2 {
+    // Alternative: Bottom up
+    public int getMoneyAmount(int n) {
+        int[][] dp = new int[n+1][n+1];
+        
+        for(int len=1; len<n; ++len){
+            for(int start=1; start+len<=n; ++start){
+                int end = start + len;
+                int cost = Integer.MAX_VALUE;
+                for(int x = start; x < end; ++x){
+                    int t = x + Math.max(dp[start][x-1], dp[x+1][end]);
+                    cost = Math.min(cost, t);
+                }
+                dp[start][end] = cost;
+            }
+        }       
+        return dp[1][n];
+    }
+}

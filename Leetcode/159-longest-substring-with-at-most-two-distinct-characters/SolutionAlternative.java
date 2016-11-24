@@ -15,6 +15,15 @@ Test case:
 "aaa"
 "tcbbbbaaaaa"
 "ccaabbb"
+Sample Output:
+5
+3
+8
+14
+2
+3
+9
+5
 */
 
 public class Solution {

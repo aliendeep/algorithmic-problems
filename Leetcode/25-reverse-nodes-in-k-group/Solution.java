@@ -61,3 +61,29 @@ public class Solution {
         return dummy.next;
     }   
 }
+// Alternative: Recursive
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode cur = head;
+        int cnt = 0;
+        while(cur != null && cnt != k){
+            cur = cur.next;
+            cnt++;
+        }
+        
+        if(cnt == k){
+            cur = reverseKGroup(cur, k);
+            // reverse current k group
+            ListNode prev = cur;
+            ListNode curr = head;
+            while(cnt-- > 0){
+                ListNode next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            head = prev;
+        }
+        return head;
+    }
+}
