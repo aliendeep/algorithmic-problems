@@ -102,9 +102,10 @@ class CoinChangeWays{
 
   public static void main(String args[]){
       CoinChangeWays ob = new CoinChangeWays();
-      int coins[] = {2, 5, 3, 6};
-      System.out.println("Number of solutions: " + ob.coinCount(coins, 10));
+      int coins[] = {1, 2, 3};
+      //int coins[] = {2, 5, 3, 6};
+      System.out.println("Number of solutions: " + ob.coinCount(coins, 4));
       System.out.println("Solutions:");  
-      ob.printSolution(coins, 10);
+      ob.printSolution(coins, 4);
    }  
 }
