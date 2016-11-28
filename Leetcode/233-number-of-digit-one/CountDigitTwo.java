@@ -1,3 +1,4 @@
+// Count number of 2 
 public class CountDigitTwo {
     public int countDigitTwo(int n) {
         if(n < 0)

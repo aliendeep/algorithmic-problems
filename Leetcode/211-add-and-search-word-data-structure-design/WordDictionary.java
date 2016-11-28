@@ -69,7 +69,8 @@ public class WordDictionary {
         System.out.println(wordDictionary.search("pad"));        
         System.out.println(wordDictionary.search("bad"));        
         System.out.println(wordDictionary.search("b.."));        
-        System.out.println(wordDictionary.search(".ad"));       }
+        System.out.println(wordDictionary.search(".ad"));       
+    }
 }
 
 // Your WordDictionary object will be instantiated and called as such:

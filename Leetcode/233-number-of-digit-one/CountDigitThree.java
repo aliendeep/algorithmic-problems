@@ -2,8 +2,8 @@ public class CountDigitThree {
     public int countDigitThree(int n) {
         if(n < 0)
             return 0;
-        long startOffset = 2; // 2, 20, 200, 2000
-        long endOffset = 3;  // 3, 30, 300, 3000 (exclusive)
+        long startOffset = 3; 
+        long endOffset = 4;  
         long power = 1;
         long period = 10;
         int cnt = 0;

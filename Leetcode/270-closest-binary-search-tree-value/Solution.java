@@ -27,11 +27,13 @@ public class Solution {
                 minDiff = diff;
                 r = cur.val;
             }
-            // All nodes in the right subtree will have larger value than root, So diff will be greater if we traverse the right subtree and we can prune
+            // All nodes in the right subtree will have larger value than root, 
+            // So diff will be greater if we traverse the right subtree and we can prune
             if((double)cur.val > target){
                 cur = cur.left;
             }
-            // As cur.val <= target, all nodes in the left subtree is less than cur and diff will be greater if we traverse the left subtree
+            // As cur.val <= target, all nodes in the left subtree is less than cur and 
+            // diff will be greater if we traverse the left subtree
             else{
                 cur = cur.right;
             }

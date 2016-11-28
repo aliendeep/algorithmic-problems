@@ -38,3 +38,26 @@ public class MovingAverage {
  * MovingAverage obj = new MovingAverage(size);
  * double param_1 = obj.next(val);
  */
+
+class MovingAverage2 {
+    int size;
+    Queue<Integer> Q;
+    int curSum;
+
+    /** Initialize your data structure here. */
+    public MovingAverage(int size) {
+        this.size = size;
+        Q = new LinkedList<>();
+        curSum = 0;
+    }
+    
+    public double next(int val) {
+        curSum += val;
+        Q.add(val);
+        // remove the earliest element
+        if(Q.size() > size){
+            curSum -= Q.remove();
+        }
+        return curSum*1.0 / Q.size();
+    }
+}
