@@ -128,4 +128,39 @@ class Solution2{
     }
 }   
 
-// Recursive
+class Solution3 {
+    // Recursive
+    int i;
+    public String decode(String s) {
+        StringBuilder r = new StringBuilder();
+        int n = s.length();
+        while(i < n && s.charAt(i) != ']'){
+            char c = s.charAt(i);
+            if(!Character.isDigit(c)){
+                r.append(c);
+                ++i;
+            }
+            else{
+                int num = 0;
+                while(i < n && Character.isDigit(s.charAt(i))){
+                    num = num*10 + (s.charAt(i) - '0');
+                    ++i;
+                }
+                // skip the [
+                ++i;
+                String temp = decode(s);
+                // skip the ]
+                ++i;
+                while(num-- > 0){
+                    r.append(temp);
+                }
+            }
+        }
+        return r.toString();
+    }
+
+    public String decodeString(String s) {
+        int i = 0;
+        return decode(s);
+    }
+}
