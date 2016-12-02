@@ -23,94 +23,136 @@ All words have the same length.
 All words contain only lowercase alphabetic characters.
 */
 
-public class WordLadderAllPaths {
+import java.util.*;
+
+public class WordLadderAllPaths{
     // BFS + DFS
     // BFS to find the shortest distance to all nodes 
     // DFS to print the path
-  public ArrayList<ArrayList<String>> findLadders(String start, String end, ArrayList<String> dictList) {
-      Set<String> dict = new HashSet<>(dictList);
-      // end is not included in the dictionary
-        dict.add(end);
-        // <node, neighbors> mapping
-        Map<String, ArrayList<String>> neighbors = new HashMap<>();
-        Map<String, Integer> distance = new HashMap<>();
-        // bfs to compute distance
-        bfs(start, end, dict, neighbors, distance);
-        // DFS to print all the paths
-        return findPaths(start, end, neighbors, distance);
-  }
-  
-    public ArrayList<ArrayList<String>> findPaths(String word, String end, Map<String, ArrayList<String>> neighbors, 
-                                        Map<String, Integer> distance){
-        ArrayList<ArrayList<String>> result = new ArrayList();
+    Map<String, List<String>> neighbors;
+    // distance from begin word
+    Map<String, Integer> distance;
+    String endWord;
+    // dictionary
+    Set<String> wordList;
+    int srcToDest;
+    
+    public ArrayList<ArrayList<String>> findLadders(String start, String end, ArrayList<String> dictList) {
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        wordList = new HashSet<>(dictList);
+        wordList.add(end);
 
-        if(word.equals(end)){
-            ArrayList<String> p = new ArrayList<>();
-            p.add(word);
-            result.add(p);
+        this.endWord = end;
+        // <node, neighbors> mapping
+        neighbors = new HashMap<>();
+        distance = new HashMap<>();
+        srcToDest = 0;
+        bfs(start);
+        
+        // no path
+        if(!distance.containsKey(end))
             return result;
+            
+        srcToDest = distance.get(end);
+        // DFS to print all the paths
+        ArrayList<String> cur = new ArrayList<>();
+        cur.add(start);
+        
+        findPaths(start, cur, result);
+        return result;
+    }
+
+    public void findPaths(String word, ArrayList<String> cur, ArrayList<ArrayList<String>> result){
+        if(cur.size() > srcToDest + 1)
+            return;
+        if(word.equals(endWord)){
+            result.add(new ArrayList<>(cur));
+            return;
         }
 
-        ArrayList<String> adjacentNodes = neighbors.get(word);
-        if(adjacentNodes != null){
-            for(String adjacent : adjacentNodes){
-                if(distance.get(adjacent) == distance.get(word) + 1){
-                    ArrayList<ArrayList<String>> next = findPaths(adjacent, end, neighbors, distance);
-                    for(ArrayList<String> t : next){
-                        ArrayList<String> path = new ArrayList<>();
-                        path.add(word);
-                        path.addAll(t);
-                        result.add(path);
-                    }
+        int dist = distance.get(word);
+        List<String> adj =  neighbors.get(word);
+        if(adj != null){
+            for(String n : adj){
+                if(distance.get(n) == dist + 1){
+                    cur.add(n);
+                    findPaths(n, cur, result);
+                    cur.remove(cur.size() - 1);
                 }
             }
         }
-        return result;
     }
-      
-  
-    public void bfs(String start, String end, Set<String> dict, 
-                    Map<String, ArrayList<String>> neighbors,  Map<String, Integer> distance){
+
+    public void bfs(String beginWord){
         Queue<String> Q = new LinkedList<>();
-        Q.add(start);
-        distance.put(start, 0);
+        Q.add(beginWord);
+        distance.put(beginWord, 0);
         
         while(!Q.isEmpty()){
             String front = Q.remove();
-            if(front.equals(end))
+            if(front.equals(endWord)){
                 break;    
-            // Find all adjacent nodes
+            }
             StringBuilder node = new StringBuilder(front);
             int dist = distance.get(front);
-            ArrayList<String> adjacent =  new ArrayList<>();
-
-            for(int l=0; l<node.length(); ++l){
+            // Find all adjacent nodes
+            List<String> adjacent =  new ArrayList<>();
+            for(int position=0; position<node.length(); ++position){
                 // change at most one character
                 for(int i=0; i<26; ++i){
                     char c = (char)(i + 'a');
                     // same character
-                    if(front.charAt(l) == c)
+                    if(front.charAt(position) == c)
                         continue;
                     
-                    node.setCharAt(l, c);
+                    node.setCharAt(position, c);
 
                     String t = node.toString();
 
-                    //  valid word and not visited yet or end word (doesn't exist in the dictionary)
-                    if(dict.contains(t) && !distance.containsKey(t)){
-                        Q.add(t);
+                    if(wordList.contains(t)){              
                         adjacent.add(t);
-                        distance.put(t, dist + 1);
-                    }
-                    else if(distance.containsKey(t) && distance.get(t) == dist + 1){
-                        adjacent.add(t);
+                        //  valid word and not visited yet 
+                        if(!distance.containsKey(t)){
+                            Q.add(t);
+                            distance.put(t, dist + 1);
+                        }
                     }
                     // revert
-                    node.setCharAt(l, front.charAt(l));
+                    node.setCharAt(position, front.charAt(position));
                 }
             }
             // directed edge
             neighbors.put(front, adjacent);
-        }        
-    } 
+        }       
+    }
+    public static void print(ArrayList<String> t){
+        for(String n : t){
+            System.out.print(n + " ");
+        }
+        System.out.println();
+    }
+
+    public static void test(String[] d, String start, String end){
+        ArrayList<String> dict = new ArrayList<>();
+        for(String t : d)
+            dict.add(t);
+
+        WordLadderAllPaths s = new WordLadderAllPaths();
+        ArrayList<ArrayList<String>> r = s.findLadders(start, end, dict);
+
+        for(ArrayList<String> t : r)
+            print(t);
+
+    }
+    public static void main(String[] args){
+        String[] d1 = {"hot","dot","dog","lot","log"};
+        //test(d1, "hit", "cog");
+        String[] d2 = {"hot","cog","dog","tot","hog","hop","pot","dot"};
+        //test(d2, "hot", "dog");
+        String[] d3 = {"a","b","c"};
+        //test(d3, "a", "c");
+        String[] f = {"baba", "abba", "aaba", "bbbb", "abaa", "abab", "aaab", "abba", "abba", "abba", "bbba", "aaab", "abaa", "baba","baaa"};
+        // Result: [bbaa baaa baba babb ] [bbaa bbba baba babb ] [bbaa bbba bbbb babb ] 
+        test(f, "bbaa", "babb");
+    }   
 }
