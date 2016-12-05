@@ -1,0 +1,25 @@
+## Dynamic Programming
+
+- Coin Sum Infinite
+- Max Product Subarray
+- Best Time to Buy and Sell Stocks I
+- Ways to Decode
+- Stairs
+- Jump Game Array
+- Min Jumps Array 
+- Max Sum Without Adjacent Elements
+- Edit Distance
+- Longest Increasing Subsequence
+- Repeating Sub-Sequence
+- Distinct Subsequences
+- Interleaving Strings  
+- Scramble String
+- Unique Paths in a Grid
+- Max Rectangle in Binary Matrix
+- Rod Cutting
+- Queen Attack 
+- Evaluate Expression To True
+- Longest valid Parentheses
+- Word Break
+- Word Break II
+- Palindrome Partitioning II
