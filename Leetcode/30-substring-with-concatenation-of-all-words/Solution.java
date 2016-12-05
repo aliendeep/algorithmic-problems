@@ -7,7 +7,6 @@ words: ["foo", "bar"]
 
 You should return the indices: [0,9].
 (order does not matter).
-
 */
 
 public class Solution {
