@@ -1,5 +1,6 @@
 /*
-A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+A strobogrammatic number is a number that looks the same when rotated 180 degrees 
+(looked at upside down).
 
 Find all strobogrammatic numbers that are of length = n.
 
@@ -9,7 +10,14 @@ Given n = 2, return ["11","69","88","96"].
 Hint:
 
 Try to use recursion and notice that it should recurse with n - 2 instead of n - 1.
+Input: 
+3
+4
+Output:
+[101, 111, 181, 609, 619, 689, 808, 818, 888, 906, 916, 986]
+[1001, 1111, 1691, 1881, 1961, 6009, 6119, 6699, 6889, 6969, 8008, 8118, 8698, 8888, 8968, 9006, 9116, 9696, 9886, 9966]
 */
+import java.util.*;
 
 public class Solution {
     // 1 Length strobogrammatic strings
@@ -27,7 +35,6 @@ public class Solution {
         t.append(start);
         t.append(mid);
         t.append(end);
-        System.out.print(t);
         return t.toString();
     }
     
@@ -44,6 +51,7 @@ public class Solution {
         List<String> result = new ArrayList<>();
         for(String str : sub){
             // Skip adding 0 at the front
+            // Only the first call will have lev == n 
             if(n != lev){
                 result.add(addPrefixSuffix('0', str, '0'));
             }
@@ -55,6 +63,91 @@ public class Solution {
         return result;    
     }
     public List<String> findStrobogrammatic(int n) {
-        return findStrobogrammaticHelper(n, n);
+        List<String>  r = findStrobogrammaticHelper(n, n);
+        Collections.sort(r);
+        return r;
     }
+    public static void main(String[] args){
+        Solution ob = new Solution();
+        System.out.println(ob.findStrobogrammatic(4));
+    }      
+}
+
+// Iterative Solution
+class Solution2 {
+    public String addPrefixSuffix(char start, String mid, char end){
+        StringBuilder t = new StringBuilder();
+        t.append(start);
+        t.append(mid);
+        t.append(end);
+        return t.toString();
+    }
+
+    public List<String> findStrobogrammatic(int n) {
+        List<String> prev, cur;
+        if(n % 2 == 0)
+            prev = new ArrayList<>(Arrays.asList(""));
+        else
+            prev = new ArrayList<>(Arrays.asList("0", "1", "8"));          
+        
+        if(n < 2)
+            return prev;
+
+        for(; n>1; n-=2){
+            cur = new ArrayList<>();
+            for(String str : prev){
+                if(n > 3)
+                    cur.add(addPrefixSuffix('0', str, '0'));
+                
+                cur.add(addPrefixSuffix('1', str, '1'));
+                cur.add(addPrefixSuffix('6', str, '9'));
+                cur.add(addPrefixSuffix('8', str, '8'));
+                cur.add(addPrefixSuffix('9', str, '6'));
+            }
+            prev = new ArrayList<>(cur);
+        }     
+        Collections.sort(prev);
+        return prev;
+    }
+}
+
+// Recursive
+class Solution3 {
+    public final static char[][] map = {{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
+
+    List<String> result; 
+    public List<String> findStrobogrammatic(int n) {
+        char[] s = new char[n];
+        result = new ArrayList<>();
+        findStrobogrammaticHelper(s, 0, n-1);
+        Collections.sort(result);
+        return result;
+    }
+
+    public void findStrobogrammaticHelper(char[] cur, int l, int r){
+        // found n length string
+        if(l > r){
+            result.add(new String(cur));
+            return;
+        }
+        for(int i=0; i<map.length; ++i){
+            char[] pair = map[i];
+            // can't start with 0
+            if(l == 0 && i == 0)
+                continue;
+
+            // 1 length 
+            // need to be the same
+            if(l == r && pair[0] != pair[1])
+                continue;
+
+            cur[l] = pair[0];
+            cur[r] = pair[1];
+            findStrobogrammaticHelper(cur, l+1, r-1);                       
+        }
+    }
+    public static void main(String[] args){
+        Solution ob = new Solution();
+        System.out.println(ob.findStrobogrammatic(4));
+    }      
 }
