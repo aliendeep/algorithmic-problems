@@ -1,5 +1,6 @@
 /*
-Given a string S, you are allowed to convert it to a palindrome by adding characters in front of it. Find and return the shortest palindrome you can find by performing this transformation.
+Given a string S, you are allowed to convert it to a palindrome by adding characters 
+in front of it. Find and return the shortest palindrome you can find by performing this transformation.
 
 For example:
 
@@ -17,7 +18,8 @@ public class Solution {
             end++;
         }
     }
-    // Find the longest palindrome substring starts from index 0. Answer: reverse part of rest of subtring + s
+    // Find the longest palindrome substring starts from index 0. 
+    // Answer: reverse part of rest of substring + s
     public String shortestPalindrome(String s) {
         int n = s.length();
         int maxLen = 0;
@@ -43,5 +45,60 @@ public class Solution {
             return rev.toString();
         }
         return new StringBuilder(s.substring(1)).reverse().toString() + s; 
+    }
+}
+
+// O(n) Solution
+// https://discuss.leetcode.com/topic/27261/clean-kmp-solution-with-super-detailed-explanation/
+class Solution2 {
+    // KMP Modification
+    // Compute lps array
+    public String shortestPalindrome(String s) {
+        if(s.length() <= 1)     return s;
+        StringBuilder rev = new StringBuilder(s);
+        rev.reverse();
+        StringBuilder r = new StringBuilder();
+        r.append(s);
+        r.append("#");
+        r.append(rev);
+        
+        int n = r.length();
+        int[] lps = new int[n];
+        // Compute lps array
+        int len = 0;
+        int i = 1;
+        while(i < n){
+            if(r.charAt(len) == r.charAt(i)){
+                len++;
+                lps[i] = len;
+                i++;
+            }
+            else{
+                if(len != 0){
+                    len = lps[len-1];
+                }
+                else{
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+        // Can be appended only at the beginning
+        return new StringBuilder(s.substring(lps[n - 1])).reverse().toString() + s;
+    }
+}
+
+// Recursive Solution O(n^2)
+class Solution3 {
+    public String shortestPalindrome(String s) {
+        int n = s.length();
+        int j = 0;
+        for(int i=n-1; i>=0; --i){
+            if(s.charAt(i) == s.charAt(j))
+                j++;
+        }
+        if(j == n)      return s;
+        String suffix = s.substring(j);
+        return new StringBuilder(suffix).reverse().toString() + shortestPalindrome(s.substring(0, j)) + suffix; 
     }
 }
