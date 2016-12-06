@@ -1,3 +1,10 @@
+/*
+Count the number of prime numbers less than a non-negative number, n.
+*/
+
+// Optimization j += 2i, as sum of two odd number is even, (j += i) Already
+// crossed off
+
 public class Solution {
     public int countPrimes(int n) {
         if(n <= 2)  return 0;

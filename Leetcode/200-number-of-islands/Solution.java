@@ -19,7 +19,7 @@ Answer: 3
 
 https://leetcode.com/problems/number-of-islands/
 */
-
+// Time: O(V+E) : O(rc)
 public class Solution {
     int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
