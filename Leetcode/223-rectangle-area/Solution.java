@@ -12,6 +12,7 @@ public class Solution {
         return (x2-x1)*(y2-y1); 
     }
     
+    // both endpoints check neccesary
     boolean isIntersect(int A, int B, int C, int D, int E, int F, int G, int H){
         return A <= G && C >= E && B <= H && D >= F;
     }

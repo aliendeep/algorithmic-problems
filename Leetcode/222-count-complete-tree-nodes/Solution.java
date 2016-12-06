@@ -14,6 +14,7 @@ It can have between 1 and 2h nodes inclusive at the last level h.
  *     TreeNode(int x) { val = x; }
  * }
  */
+//O(log(n)^2).
 public class Solution {
     //  A tree consisting of only a root node has a height of 0. In a full binary tree, number of nodes = 2^(h+1) - 1
     // Here a tree consisting of only a root node returns 1
