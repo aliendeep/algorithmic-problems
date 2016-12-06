@@ -1,7 +1,7 @@
 /*
-Find all possible combinations of k numbers that add up to a number n, given that only numbers from 1 to 9 can be used and 
-each combination should be a unique set of numbers.
-
+Find all possible combinations of k numbers that add up to a number n, given 
+that only numbers from 1 to 9 can be used and each combination should be a 
+unique set of numbers.
 
 Example 1:
 
@@ -29,8 +29,7 @@ public class Solution {
                 result.add(new ArrayList<Integer>(cur));
             }
             return;
-        }
-        
+        }        
         // prune early if sum of the numbers is greater than target
         if(sum > target)
             return;

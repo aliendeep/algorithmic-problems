@@ -22,6 +22,8 @@ Sample Input:
 Sample Output:
 [[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]
 */
+
+// TreeMap Solution
 public class Solution {
     public List<int[]> getSkyline(int[][] buildings) {
         List<int[]> heights = new ArrayList<>();
@@ -40,28 +42,80 @@ public class Solution {
             }
         });
         
-        List<int[]> result = new ArrayList<>();  
-        TreeMap<Integer, Integer> heightMap = new TreeMap<>(Collections.reverseOrder());
+        List<int[]> result = new ArrayList<>();
+        
+        // Java doesn't have multimap!! this is just poor man's multimap.
+        TreeMap<Integer /* height */, Integer /* count */> heightMap = new TreeMap<>(Collections.reverseOrder());
         heightMap.put(0, 1);
+        
+        int prevHeight = 0;
+        for(int[] h : heights){
+            int x = h[0];
+            int height = h[1];
+            boolean left = false;
+            if (height < 0) {
+                height = -height;
+                left = true;
+            }
 
+            // if left edge
+            if(left){
+                if(!heightMap.containsKey(height))
+                    heightMap.put(height, 1);
+                else    
+                    heightMap.put(height, heightMap.get(height) + 1);
+            }
+            else{  // right
+                int cnt = heightMap.get(height);
+                if(cnt == 1){
+                    heightMap.remove(height);  // 0
+                }
+                else
+                    heightMap.put(height, cnt-1);
+            }
+            int curHeight = heightMap.firstKey();
+            if(prevHeight != curHeight){
+                result.add(new int[]{h[0], curHeight});
+                prevHeight = curHeight;
+            }
+        }
+        return result;
+    }
+}
+
+// Max Heap Solution
+class Solution2 {
+    public List<int[]> getSkyline(int[][] buildings) {
+        List<int[]> heights = new ArrayList<>();
+        for(int[] building : buildings){
+            // negative of height to distinguish between left and right edge
+            heights.add(new int[]{building[0], -building[2]});
+            heights.add(new int[]{building[1],  building[2]});
+        }
+        
+        Collections.sort(heights, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                if(a[0] != b[0])
+                    return Integer.compare(a[0], b[0]);
+                return Integer.compare(a[1], b[1]);
+            }
+        });
+        
+        List<int[]> result = new ArrayList<>();  
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        maxHeap.add(0);
         int prevHeight = 0;
         for(int[] h : heights){
             // if left edge
             if(h[1] < 0){
-                if(!heightMap.containsKey(-h[1]))
-                    heightMap.put(-h[1], 1);
-                else    
-                    heightMap.put(-h[1], heightMap.get(-h[1]) + 1);
+                maxHeap.add(-h[1]);
             }
             else{
-                int cnt = heightMap.get(h[1]);
-                if(cnt == 1){
-                    heightMap.remove(h[1]);
-                }
-                else
-                    heightMap.put(h[1], cnt-1);
+                // Priority queue remove is O(n)
+                maxHeap.remove(h[1]);
             }
-            int curHeight = heightMap.firstKey();
+            int curHeight = maxHeap.peek();
             if(prevHeight != curHeight){
                 result.add(new int[]{h[0], curHeight});
                 prevHeight = curHeight;
