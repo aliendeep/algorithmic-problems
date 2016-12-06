@@ -63,15 +63,7 @@ class Solution2 {
     }
 }
 
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
+
 // Follow up: Modifty the TreeNode structure to keep a node count
 class Solution3 {
     // Number of nodes in the subtree

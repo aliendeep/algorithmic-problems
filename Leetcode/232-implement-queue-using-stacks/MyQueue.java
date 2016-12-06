@@ -11,6 +11,7 @@ Depending on your language, stack may not be supported natively. You may simulat
 as long as you use only standard operations of a stack.
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
 */
+
 import java.util.*;
 
 class MyQueue {
@@ -61,5 +62,4 @@ class MyQueue {
       s.pop();
       System.out.println(s.empty());
     }
-
 }
