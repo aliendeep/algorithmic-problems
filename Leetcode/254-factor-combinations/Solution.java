@@ -43,30 +43,65 @@ Sample Input:
 Sample Output:
 [[2,6],[3,4],[2,2,3]]
 [[2,16],[4,8],[2,2,8],[2,4,4],[2,2,2,4],[2,2,2,2,2]]
-[[3,7949571],[7,3406959],[9,2649857],[3,3,2649857],[21,1135653],[3,7,1135653],[63,378551],[3,21,378551],[7,9,378551],[3,3,7,378551]]
+[[3,7949571],[7,3406959],[9,2649857],[3,3,2649857],[21,1135653],[3,7,1135653],
+[63,378551],[3,21,378551],[7,9,378551],[3,3,7,378551]]
 */
 
-// Initial Solution
-public class Solution {
-    public void bktk(int n, int start, List<Integer> cur, List<List<Integer>> r){
-        if(n == 1 && cur.size() > 1){
-            r.add(new ArrayList<Integer>(cur));
-            return;
-        }
+import java.util.*;
 
-        for(int i=start; i<=n; i++){
-            if(n % i == 0) {
-                cur.add(i);
-                bktk(n/i, i, cur, r);
-                cur.remove(cur.size()-1);
-            }
-        }
-    }
-    
-    public List<List<Integer>> getFactors(int n) {
-        List<List<Integer>> r = new ArrayList<>();
-        List<Integer> cur = new ArrayList<>();
-        bktk(n, 2, cur, r);
-        return r;
-    }
+public class Solution {
+  public void bktk(int n, int start, List<Integer> cur, List<List<Integer>> r){
+      if(n == 1){
+          if(cur.size() > 1){
+            r.add(new ArrayList<Integer>(cur));
+          }
+          return;
+      }
+
+      for(int i=start; i*i<=n; i++){
+          if(n % i == 0) {
+            cur.add(i);
+            bktk(n/i, i, cur, r);
+            cur.remove(cur.size()-1);
+          }
+      }
+      cur.add(n);
+      bktk(1, -1, cur, r);
+      cur.remove(cur.size()-1);
+  }
+  
+  public List<List<Integer>> getFactors(int n) {
+      List<List<Integer>> r = new ArrayList<>();
+      List<Integer> cur = new ArrayList<>();
+      bktk(n, 2, cur, r);
+      return r;
+  }
+  public static void main(String[] args){
+    Solution ob = new Solution();
+    System.out.println(ob.getFactors(12));
+  }        
+}
+
+class Solution2 {
+  public void bktk(int n, int start, List<Integer> cur, List<List<Integer>> r){
+      if(n == 1 && cur.size() > 1){
+          r.add(new ArrayList<Integer>(cur));
+          return;
+      }
+
+      for(int i=start; i<=n; i++){
+          if(n % i == 0) {
+              cur.add(i);
+              bktk(n/i, i, cur, r);
+              cur.remove(cur.size()-1);
+          }
+      }
+  }
+  
+  public List<List<Integer>> getFactors(int n) {
+      List<List<Integer>> r = new ArrayList<>();
+      List<Integer> cur = new ArrayList<>();
+      bktk(n, 2, cur, r);
+      return r;
+  }
 }

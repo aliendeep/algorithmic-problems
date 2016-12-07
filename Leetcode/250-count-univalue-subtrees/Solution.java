@@ -30,7 +30,6 @@ public class Solution {
             val = 0;
         }
     }
-
     public int countUnivalSubtrees(TreeNode root) {
         Info n = new Info();
         countUnivalSubtreesHelper(root, n);
@@ -52,5 +51,31 @@ public class Solution {
         }
         else
             return false;
+    }
+}
+
+class Solution {
+    int cntUniVal;
+    public int countUnivalSubtrees(TreeNode root) {
+        cntUniVal = 0;
+        helper(root);
+        return cntUniVal;
+    }
+
+    public boolean helper(TreeNode node){        
+        if(node == null)                                
+            return true;
+
+        boolean left = helper(node.left);
+        boolean right = helper(node.right);
+        if(left && right){
+            if(node.left != null && node.val != node.left.val)
+                return false;
+            if(node.right != null && node.val != node.right.val)
+                return false;
+            cntUniVal++;
+            return true;
+        }
+        return false;
     }
 }

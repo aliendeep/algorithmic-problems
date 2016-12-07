@@ -10,7 +10,7 @@ Return 2. Because there are two triplets which sums are less than 2:
 Follow up:
 Could you solve it in O(n^2) runtime?
 */
-
+// O(n^2)
 public class Solution {
     public int threeSumSmaller(int[] nums, int target) {
         // Need to find three different indices
@@ -35,6 +35,31 @@ public class Solution {
             }
             else
                 end--;
+        }
+        return cnt;
+    }
+}
+
+class Solution2 {
+    public int threeSumSmaller(int[] nums, int target) {
+        // Need to find three different indices
+        int n = nums.length;
+        // Sort the array
+        Arrays.sort(nums);
+        int cnt = 0;
+        for(int i=0; i<n-2; i++){
+            int mid = i+1;
+            int end = n-1;
+            while(mid < end){
+                if(nums[i] + nums[mid] + nums[end] < target){
+                    cnt += end - mid;
+                    mid++;
+                }
+                // sum >= target
+                else{
+                    end--;    
+                }
+            }
         }
         return cnt;
     }

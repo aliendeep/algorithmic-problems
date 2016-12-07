@@ -16,15 +16,9 @@ return 2.
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
-/**
- * Definition for an interval.
- * public class Interval {
- *     int start;
- *     int end;
- *     Interval() { start = 0; end = 0; }
- *     Interval(int s, int e) { start = s; end = e; }
- * }
- */
+/*
+- Divide each intervals into start and end parts
+*/
 public class Solution {
     class Info{
         int time;
@@ -72,5 +66,46 @@ public class Solution {
             }
         }   
         return maxRooms;
+    }
+}
+
+// Time : O(nlogn)
+// Space: O(n)
+class Solution2 {
+    public int minMeetingRooms(Interval[] intervals) {
+        int n = intervals.length;
+        if(n <= 1)
+            return n; 
+
+        // Sort the intervals by start time
+        Arrays.sort(intervals, new Comparator<Interval>(){
+           @Override
+           public int compare(Interval a, Interval b){
+               return Integer.compare(a.start, b.start);
+           }
+        });
+        
+        PriorityQueue<Interval> minHeap = new PriorityQueue<Interval>(new Comparator<Interval>(){
+           @Override
+           public int compare(Interval a, Interval b){
+               return Integer.compare(a.end, b.end);
+           }
+        });
+        
+        minHeap.add(intervals[0]);
+        for(int i=1; i<n; i++){
+            // Pop the meeting room that finishes earliest
+            Interval t = minHeap.poll();
+            // We can use the same room
+            if(t.end <= intervals[i].start)
+                t.end = intervals[i].end;    
+            // overlaps, need a new room
+            else
+                minHeap.add(intervals[i]);
+
+            // push the meeting room t again
+            minHeap.add(t);
+        }
+        return minHeap.size();
     }
 }
