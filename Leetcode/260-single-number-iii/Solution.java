@@ -1,5 +1,6 @@
 /*
-Given an array of numbers nums, in which exactly two elements appear only once and all the other elements appear exactly twice. Find the two elements that appear only once.
+Given an array of numbers nums, in which exactly two elements appear only once and 
+all the other elements appear exactly twice. Find the two elements that appear only once.
 
 For example:
 
@@ -17,6 +18,28 @@ public class Solution {
         
         // Find the lowest set bit in aXorB
         int lowestDifferentBit = aXorB & ~(aXorB-1);
+        int a = 0, b = 0;
+        for(int n : nums){
+            if((lowestDifferentBit & n) != 0)
+                a ^= n;
+            else
+                b ^= n;
+        }
+        int[] t = new int[2];
+        t[0] = a;
+        t[1] = b;
+        return t;
+    }
+}
+
+class Solution2 {
+    public int[] singleNumber(int[] nums) {
+        int aXorB = 0;
+        for(int n : nums)
+            aXorB ^= n;
+        
+        // Find the lowest set bit in aXorB
+        int lowestDifferentBit = aXorB & -aXorB;
         int a = 0, b = 0;
         for(int n : nums){
             if((lowestDifferentBit & n) != 0)
