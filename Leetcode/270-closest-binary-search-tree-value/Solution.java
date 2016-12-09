@@ -41,3 +41,33 @@ public class Solution {
         return r;
     }
 }
+
+
+class Solution2 {
+    // Time: O(logn)
+    // Space: O(logh) where h is the height
+    // Binary Search
+    double minDiff = Double.MAX_VALUE;
+    int r;
+    public void closestValueRecursive(TreeNode root, double target) {
+        if(root == null)
+            return;
+        double diff = Math.abs((double)root.val - target);
+        if(minDiff > diff){
+            minDiff = diff;
+            r = root.val;
+        }
+        // All nodes in the right subtree will have larger value than root, So diff will be greater if we traverse the right subtree and we can prune
+        if((double)root.val > target)
+            closestValueRecursive(root.left, target);
+        else
+            closestValueRecursive(root.right, target);
+    }
+    
+    public int closestValue(TreeNode root, double target) {
+        r = -1;
+        minDiff = Double.MAX_VALUE;
+        closestValueRecursive(root, target);
+        return r;
+    }
+}
