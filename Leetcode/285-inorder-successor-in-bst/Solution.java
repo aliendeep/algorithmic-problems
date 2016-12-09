@@ -20,7 +20,29 @@ class TreeNode {
       TreeNode(int x) { val = x; }
 }
 
-public class Solution {
+public class Solution{
+    /*
+        All values are unique in the BST
+        Successor of a node is the smallest node that is larger than the 
+        given node
+        Approach: Similar to binary search in a sorted list
+    */
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode successor = null;
+        TreeNode cur = root;
+        while(cur != null){
+            if(p.val < cur.val){
+                successor = cur;
+                cur = cur.left;
+            }    
+            else
+                cur = cur.right;
+        }
+        return successor;
+    }    
+}
+
+class Solution2 {
     public TreeNode findMin(TreeNode node){
         if(node == null)
             return null;
@@ -55,4 +77,25 @@ public class Solution {
         }
         return successor;
     }
+}
+
+class Predecessor{
+    /*
+        Predecessor of a node is the largest node that is smaller than the given 
+        node
+        Approach: Similar to binary search in a sorted list
+    */
+    public TreeNode inorderPredecessor(TreeNode root, TreeNode p) {
+        TreeNode predecessor = null;
+        TreeNode cur = root;
+        while(cur != null){
+            if(p.val > cur.val){
+                predecessor = cur;
+                cur = cur.right;
+            }    
+            else
+                cur = cur.left;
+        }
+        return predecessor;
+    }    
 }
