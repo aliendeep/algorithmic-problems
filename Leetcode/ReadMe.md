@@ -816,6 +816,8 @@
 
 433 Minimum Genetic Mutation  
 
+434 Number of Segments in a String  
+
 435 Non-overlapping Intervals
 
 436 Find Right Interval
@@ -857,3 +859,13 @@
 456 132 Pattern
 
 459 Repeated Substring Pattern
+
+462 Minimum Moves to Equal Array Elements II 
+
+463 Island Perimeter  
+
+464 Can I Win
+
+467 Unique Substrings in Wraparound String  
+
+469 Convex Polygon
