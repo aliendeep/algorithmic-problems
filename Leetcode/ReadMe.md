@@ -868,4 +868,12 @@
 
 467 Unique Substrings in Wraparound String  
 
+468 Validate IP Address
+
 469 Convex Polygon
+
+471 Encode String with Shortest Length
+
+474 Ones and Zeroes
+
+475 Heaters
