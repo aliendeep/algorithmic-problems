@@ -35,3 +35,7 @@
 - Count Distinct Subsequences
 - Weighted Job Scheduling
 - Maximum number of A’s using given four keys
+- Coins in a Line (Game Theory)
+- Coins in a Line II 
+- Coins in a Line (MinMax)
+- Dices Sum along with Probability (Variant of KnapSack)
