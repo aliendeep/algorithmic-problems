@@ -1,3 +1,10 @@
+/*
+Given an integer, write a function to determine if it is a power of three.
+
+Follow up:
+Could you do it without using any loop / recursion?
+*/
+
 public class Solution {
     /*
         n = 3^x
@@ -9,5 +16,16 @@ public class Solution {
             return false;
         double x = Math.round((Math.log10(n) / Math.log10(3)));  
         return (Math.pow(3, x) == n);
+    }
+}
+
+class Solution2{
+    // Recursive
+    public boolean isPowerOfThree(int n) {
+        if(n == 0)
+            return false;
+        if(n == 1)
+            return true;
+        return n%3 == 0 && isPowerOfThree(n/3);
     }
 }

@@ -1,8 +1,10 @@
 /*
-Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
+Given an array nums and a target value k, find the maximum length of a subarray 
+that sums to k. If there isn't one, return 0 instead.
 
 Note:
-The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
+The sum of the entire nums array is guaranteed to fit within the 32-bit 
+signed integer range.
 
 Example 1:
 Given nums = [1, -1, 5, -2, 3], k = 3,
@@ -50,6 +52,7 @@ public class Solution {
             if(cumsum[i] == k)
                 maxLen = Math.max(maxLen, i);
         }
+        
         Map<Integer, Integer> map = new HashMap<>();        
         for(int i=1; i<=n; ++i){
             int target = cumsum[i] - k;

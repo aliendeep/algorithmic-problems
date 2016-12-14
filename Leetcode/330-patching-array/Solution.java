@@ -1,5 +1,7 @@
 /*
-Given a sorted positive integer array nums and an integer n, add/patch elements to the array such that any number in range [1, n] inclusive can be formed by the sum of some elements in the array. Return the minimum number of patches required.
+Given a sorted positive integer array nums and an integer n, add/patch elements 
+to the array such that any number in range [1, n] inclusive can be formed by the 
+sum of some elements in the array. Return the minimum number of patches required.
 
 Example 1:
 nums = [1, 3], n = 6
@@ -18,17 +20,15 @@ The two patches can be [2, 4].
 Example 3:
 nums = [1, 2, 2], n = 5
 Return 0.
+Sample Input:
+[1,2,31,33]
+2147483647    
+Sample Output:
+28
 */
 
 public class Solution {
     // Greedy
-    /*
-    Sample Input:
-    [1,2,31,33]
-    2147483647    
-    Sample Output:
-    28
-    */
     // nums array is sorted
     public int minPatches(int[] nums, int n) {
         int patchCount = 0;
