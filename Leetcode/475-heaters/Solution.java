@@ -94,3 +94,26 @@ class Solution2 {
         return maxRadius;
     }
 }
+
+// Alternative: Sorting
+class Solution3{
+    // Alternative
+    public int findRadius(int[] houses, int[] heaters) {
+        int n = houses.length;
+        if(n == 0)
+            return 0;
+        int m = heaters.length;   
+        Arrays.sort(houses);
+        Arrays.sort(heaters);
+        
+        int radius = Integer.MIN_VALUE;
+        int j = 0;
+        for(int i=0; i<n; ++i){
+            while(j+1 < m && Math.abs(houses[i] - heaters[j]) >= Math.abs(houses[i] - heaters[j+1])){
+                j++;
+            }
+            radius = Math.max(radius, Math.abs(houses[i] - heaters[j]));
+        }
+        return radius;
+    }
+}

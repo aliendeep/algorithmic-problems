@@ -46,7 +46,19 @@ Output: "Neither"
 Explanation: This is neither a IPv4 address nor a IPv6 address.
 */
 public class Solution {
+    public int count(String s, char c){
+        int cnt = 0;
+        for(int i=0; i<s.length(); ++i){
+            if(s.charAt(i) == c)
+                cnt++;
+        }
+        return cnt;
+    }
+    
     public boolean isIPV6(String IP){
+        if(count(IP, ':') != 7)
+            return false;
+        
         if(IP.indexOf(":") == -1)
             return false;
 
@@ -57,6 +69,15 @@ public class Solution {
         for(int i=0; i<8; ++i){
             if(str[i].length() > 4)
                 return false;
+            for(int j=0; j<str[i].length(); ++j){
+                char c = str[i].charAt(j);
+                if(Character.isDigit(c))
+                    continue;
+               if((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))
+                    continue;
+               return false;
+            }
+
             try{
                 int val = Integer.parseInt(str[i], 16);
             }
@@ -69,6 +90,8 @@ public class Solution {
     }
 
     public boolean isIPV4(String IP){
+        if(count(IP, '.') != 3)
+            return false;
         String[] str = IP.split("\\.");
         if(str.length != 4)
             return false;
@@ -77,6 +100,13 @@ public class Solution {
             if(str[i].length() > 1 && str[i].charAt(0) == '0'){
                 return false;
             }
+            for(int j=0; j<str[i].length(); ++j){
+                char c = str[i].charAt(j);
+                if(Character.isDigit(c))
+                    continue;
+               return false;
+            }
+            
             Integer val;
             try{
                 val = Integer.parseInt(str[i]);
