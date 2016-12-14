@@ -1,3 +1,21 @@
+/*
+Given a nested list of integers, implement an iterator to flatten it.
+
+Each element is either an integer, or a list -- whose elements may also be 
+integers or other lists.
+
+Example 1:
+Given the list [[1,1],2,[1,1]],
+
+By calling next repeatedly until hasNext returns false, the order of elements 
+returned by next should be: [1,1,2,1,1].
+
+Example 2:
+Given the list [1,[4,[6]]],
+
+By calling next repeatedly until hasNext returns false, the order of elements 
+returned by next should be: [1,4,6].
+*/
 /**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
@@ -51,3 +69,76 @@ public class NestedIterator implements Iterator<Integer> {
  * NestedIterator i = new NestedIterator(nestedList);
  * while (i.hasNext()) v[f()] = i.next();
  */
+
+// Alternative: Using Iterator
+class NestedIterator implements Iterator<Integer> {
+    Deque<Iterator<NestedInteger>> stk;
+    NestedInteger nextNI;
+    
+    public NestedIterator(List<NestedInteger> nestedList) {
+        stk = new LinkedList<>();
+        stk.addFirst(nestedList.iterator());
+    }
+
+    @Override
+    public Integer next() {
+        return nextNI != null ? nextNI.getInteger() : null;    
+    }
+
+    @Override
+    public boolean hasNext() {
+        while(!stk.isEmpty()){
+            // Empty list
+            if(!stk.peekFirst().hasNext())
+                stk.removeFirst();
+            else{
+                nextNI = stk.removeFirst().next(); 
+                // Next element is an integer
+                if(nextNI.isInteger()){
+                    return true;
+                }
+                else{
+                    // sublist
+                    stk.addFirst(nextNI.getList().iterator());
+                }
+            }
+        }
+        return false;
+    }
+}
+
+// Recursive (Solution 3)
+// Flatten the whole nestedList
+public class NestedIterator implements Iterator<Integer> {
+    Queue<NestedInteger> Q;
+    Iterator<NestedInteger> it;
+    
+    public NestedIterator(List<NestedInteger> nestedList) {
+        Q = new LinkedList<NestedInteger>();
+        flatten(nestedList);
+        it = Q.iterator();
+    }
+    
+    public void flatten(List<NestedInteger> nestedList){
+        for(NestedInteger n : nestedList){
+            // Append n to the end of the flattenList
+            if(n.isInteger()){
+                Q.add(n);
+            }
+            else{
+                List<NestedInteger> subList = n.getList();
+                flatten(subList);
+            }
+        }    
+    }
+
+    @Override
+    public Integer next() {
+        return it.next().getInteger();    
+    }
+
+    @Override
+    public boolean hasNext() {
+        return it.hasNext();    
+    }
+}

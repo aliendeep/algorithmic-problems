@@ -5,7 +5,8 @@ You may assume the following rules:
 
 A move is guaranteed to be valid and is placed on an empty block.
 Once a winning condition is reached, no more moves is allowed.
-A player who succeeds in placing n of their marks in a horizontal, vertical, or diagonal row wins the game.
+A player who succeeds in placing n of their marks in a horizontal, vertical, 
+or diagonal row wins the game.
 Example:
 Given n = 3, assume that player 1 is "X" and player 2 is "O" in the board.
 
@@ -101,3 +102,40 @@ public class TicTacToe {
  * TicTacToe obj = new TicTacToe(n);
  * int param_1 = obj.move(row,col,player);
  */
+
+// Alternative: Less space
+public class TicTacToe {
+    int n;
+    int[] rowCnt;
+    int[] colCnt;
+    int d1, d2;
+    /** Initialize your data structure here. */
+    public TicTacToe(int n) {
+        this.n = n;
+        rowCnt = new int[n];
+        colCnt = new int[n];
+    }
+    
+    /** Player {player} makes a move at ({row}, {col}).
+        @param row The row of the board.
+        @param col The column of the board.
+        @param player The player, can be either 1 or 2.
+        @return The current winning condition, can be either:
+                0: No one wins.
+                1: Player 1 wins.
+                2: Player 2 wins. */
+                
+    public int move(int row, int col, int player) {
+        int val = (player == 1) ? 1 : -1;
+        rowCnt[row] += val;
+        colCnt[col] += val;
+        if(row == col)     
+            d1 += val;
+        if(row + col == n-1)      
+            d2 += val;
+        // check if this is a winning state
+        if(Math.abs(rowCnt[row]) == n || Math.abs(colCnt[col]) == n  || Math.abs(d1) == n || Math.abs(d2) == n)
+            return player;
+        return 0;
+    }
+}
