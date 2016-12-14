@@ -1,6 +1,9 @@
 /*
-An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel. The black pixels are connected, i.e., there is only one black region. Pixels are connected horizontally and vertically. Given the location (x, y) of one of the black pixels, return the area of the smallest (axis-aligned) rectangle that encloses all black pixels.
-
+An image is represented by a binary matrix with 0 as a white pixel and 1 as a 
+black pixel. The black pixels are connected, i.e., there is only one black region. 
+Pixels are connected horizontally and vertically. Given the location (x, y) of 
+one of the black pixels, return the area of the smallest (axis-aligned) 
+rectangle that encloses all black pixels.
 For example, given the following image:
 
 [
@@ -12,6 +15,7 @@ and x = 0, y = 2,
 Return 6.
 */
 // O(rlogc + clogr) Solution (Binary Search)
+// Solve the 1D version of this problem first
 public class Solution {
     public boolean isAnyRowContainsOne(char[][] image, int c){
         int r = image.length;

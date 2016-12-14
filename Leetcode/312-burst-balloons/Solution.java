@@ -1,5 +1,9 @@
 /*
-Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.
+Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number 
+on it represented by array nums. You are asked to burst all the balloons. 
+If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. 
+Here left and right are adjacent indices of i. After the burst, the left and 
+right then becomes adjacent.
 
 Find the maximum coins you can collect by bursting the balloons wisely.
 
@@ -51,5 +55,38 @@ public class Solution{
         }
         dp[start][end] = r;
         return r;
+    }
+}
+
+class Solution2{
+    // Time Complexity: O(n^3)
+    // Divide & Conquer
+    // Find the last balloon to burst
+    // Then, the left and right side becomes independent
+    public int maxCoins(int[] nums) {
+        int n = nums.length;
+        // Add 1 at the beginning and end 
+        int[] A = new int[n+2];
+        A[0] = 1;
+        int i = 1;
+        // Burst all 0 ballons
+        for(int num : nums){
+            if(num > 0)
+                A[i++] = num;
+        }        
+
+        A[i] = 1;
+
+        n = A.length;
+        int[][] dp = new int[n][n];
+        for(int k = 2; k < n; ++k){
+            for(int start = 0; start < n - k; ++start){
+                int end = start + k;
+                for(i=start+1; i<end; ++i){            
+                    dp[start][end] = Math.max(dp[start][end], A[start]*A[i]*A[end] + dp[start][i] + dp[i][end]);
+                }
+            }
+        }
+        return dp[0][n-1];
     }
 }

@@ -47,6 +47,7 @@ Sample Output:
  *     TreeNode(int x) { val = x; }
  * }
  */
+
 // Recursive: Cleaner
 public class Codec {
     public static String nullNode = "#";
@@ -148,7 +149,7 @@ class Codec2 {
 }
 
 // Queue
-public class Codec {
+public class Codec3 {
     public static String nullNode = "#";
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {

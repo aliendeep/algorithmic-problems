@@ -1,5 +1,6 @@
 /*
-Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).
+Given a binary tree, return the vertical order traversal of its nodes' values. 
+(ie, from top to bottom, column by column).
 
 If two nodes are in the same row and column, the order should be from left to right.
 
@@ -109,5 +110,62 @@ public class Solution {
             r.add(entry.getValue());
         }
         return r;
+    }
+}
+
+// Recursive
+class Solution2 {
+    // One pass algorithm
+    class Info{
+        int val;
+        int depth;
+        public Info(int v, int d){
+            val = v;
+            depth = d;
+        }
+    }
+    
+    void getDistance(TreeNode node, int distance, int depth, TreeMap<Integer, List<Info>> map){
+        if(node == null)
+            return;
+        
+        List<Info> list = map.get(distance);
+        if(list == null){
+            list = new ArrayList<>();
+        }
+        list.add(new Info(node.val, depth));
+        map.put(distance, list);
+        
+        getDistance(node.left, distance - 1, depth+1, map);        
+        getDistance(node.right, distance + 1, depth+1, map);        
+    }   
+    
+    public List<List<Integer>> verticalOrder(TreeNode root) {
+        if(root == null)
+            return Collections.EMPTY_LIST;
+            
+        TreeMap<Integer, List<Info>> map = new TreeMap<>();
+        getDistance(root, 0, 0, map);
+        
+        List<List<Integer>> result = new ArrayList<>();
+        for(Map.Entry<Integer, List<Info>> entry : map.entrySet()){
+            List<Info> l = entry.getValue();
+            if(l.size() > 1){
+                // sort based on depth
+                Collections.sort(l, new Comparator<Info>(){
+                    @Override
+                    public int compare(Info a, Info b){
+                        return Integer.compare(a.depth, b.depth);
+                    }
+                });
+            }
+            List<Integer> t = new ArrayList<>();
+            for(Info i : l)
+                t.add(i.val);
+
+            result.add(t);
+        }
+
+        return result;
     }
 }

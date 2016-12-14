@@ -1,10 +1,16 @@
 /*
-A 2d grid map of m rows and n columns is initially filled with water. We may perform an addLand operation which turns the water at position (row, col) into a land. Given a list of positions to operate, count the number of islands after each addLand operation. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+A 2d grid map of m rows and n columns is initially filled with water. 
+We may perform an addLand operation which turns the water at position 
+(row, col) into a land. Given a list of positions to operate, count the number 
+of islands after each addLand operation. An island is surrounded by water and 
+is formed by connecting adjacent lands horizontally or vertically. You may 
+assume all four edges of the grid are all surrounded by water.
 
 Example:
 
 Given m = 3, n = 3, positions = [[0,0], [0,1], [1,2], [2,1]].
-Initially, the 2d grid grid is filled with water. (Assume 0 represents water and 1 represents land).
+Initially, the 2d grid grid is filled with water. (Assume 0 represents water 
+and 1 represents land).
 
 0 0 0
 0 0 0
@@ -37,6 +43,7 @@ Can you do it in time complexity O(k log mn), where k is the length of the posit
 */
 
 // Union Find - Basic Solution
+// (Weighting and Path compression)
 // Cormen
 public class Solution {
     int n;
@@ -49,6 +56,8 @@ public class Solution {
         return n*x + y;
     }
     
+    // Proportional to the height of the tree
+    // O(h) Worst case O(n)
     public int findSet(int x){
         if(x != parent[x])
             parent[x] = findSet(parent[x]);
@@ -59,6 +68,7 @@ public class Solution {
         link(findSet(x), findSet(y));
     }
     
+    // O(1)
     public void link(int x, int y){
         if(rank[x] > rank[y])
             parent[y] = x;
@@ -70,6 +80,13 @@ public class Solution {
         }
     }
     
+    // Worst Case: O(n^2): Balanced: O(nlogn
+    /*
+            https://docs.google.com/viewer?url=https%3A%2F%2Fwww.cs.princeton.edu%2F~rs%2FAlgsDS07%2F01UnionFind.pdf
+            With Weighting and Path compression, The algorithm runs in O((M+N) log* N) 
+            where M is the number of operations (link and find )
+            and N is the number of positions
+    */
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
         this.n = n;
         List<Integer> result =  new ArrayList<>();
@@ -96,7 +113,8 @@ public class Solution {
                 if(x < 0 || x >= m || y < 0 || y >= n || parent[v] == -1)
                     continue;
                 
-                // If neighbor is another island, then connect them and decrease land cnt
+                // If neighbor is another island, then connect them and 
+                // decrease land cnt
                 if(findSet(u) != findSet(v)){
                     union(u, v);
                     landCnt--;

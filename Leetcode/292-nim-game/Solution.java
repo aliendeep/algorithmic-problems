@@ -22,3 +22,41 @@ public class Solution {
         return n%4 == 0 ? false : true;        
     }
 }
+
+// Approach 2: Gives stack overflow for large number (1348820612)
+class Solution2 {
+    static int[] move = {1, 2, 3};
+    // True - winning state
+    // false - losing state
+    Map<Integer, Boolean> dp;
+    public boolean canWin(int n){
+        if(n == 0)
+            return false;
+
+        if(dp.containsKey(n))
+            return dp.get(n);
+        
+        for(int i=0; i<3; ++i){
+            if(n >= move[i]){
+                int next = n - move[i];
+                if(!canWin(next)){
+                    dp.put(n, true);
+                    return true;
+                }
+            }
+        }
+        dp.put(n, false);
+        return false;
+        
+    }
+    
+    public boolean canWinNim(int n) {
+        dp = new HashMap<>();
+        if(n <= 1000){
+            return canWin(n);
+        }
+        else{
+            return n%4 == 0 ? false : true;
+        }
+    }
+}
