@@ -59,6 +59,7 @@ public class Solution {
 // https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
 class Solution2 {
     int[] parent;
+
     public int findSet(int node){
         while(node != parent[node]){
             node = parent[node];
@@ -90,17 +91,17 @@ class Solution2 {
     }
 }
 
-// Alternative: union find (weighted rank)
+// Alternative: union find (weighted rank) + path compression
 class Solution3 {
     int[] parent;
     int[] rank;
     
     public int findSet(int node){
-        while(node != parent[node]){
-            node = parent[node];
-        }
-        return node;
+        if(node != parent[node])
+            parent[node] = findSet(node);
+        return parent[node];
     }
+
     public void link(int u, int v){
         if(rank[u] > rank[v]){
             parent[v] = u;
@@ -111,14 +112,18 @@ class Solution3 {
                 rank[u] += 1;
         }
     }
+
     public void union(int x, int y){
         link(findSet(x), findSet(y));
     }
+    
     public int countComponents(int n, int[][] edges) {
+        // Make Set
         parent = new int[n];
         for(int i=0; i<n; ++i){
             parent[i] = i;
         }
+
         rank = new int[n];
         Arrays.fill(rank, 0);
         

@@ -1,5 +1,8 @@
 /*
-Given two arrays of length m and n with digits 0-9 representing two numbers. Create the maximum number of length k <= m + n from digits of the two. The relative order of the digits from the same array must be preserved. Return an array of the k digits. You should try to optimize your time and space complexity.
+Given two arrays of length m and n with digits 0-9 representing two numbers. 
+Create the maximum number of length k <= m + n from digits of the two. 
+The relative order of the digits from the same array must be preserved. 
+Return an array of the k digits. You should try to optimize your time and space complexity.
 
 Example 1:
 nums1 = [3, 4, 6, 5]
@@ -99,9 +102,12 @@ public class Solution {
     }
 }
 
+
+// Time complexity: O(m+n)^2
 class SolutionStack {
     // Find maximum number by removing k digits
     // Greedy
+    // O(n)
     public int[] findMaximumNumber(int[] nums, int k){
         if(nums.length == 0 || k == 0)     return nums;
         // Return empty array
@@ -133,6 +139,7 @@ class SolutionStack {
         return result;
     }
     
+    // O(m + n)^2
     public int[] mergeTwoArrays(int[] t1, int[] t2, int k){
         int[] t = new int[k];
         int p1 = 0, p2 = 0;
@@ -167,13 +174,6 @@ class SolutionStack {
         return p1 < nums1.length;
     }
 
-    public void print(int[] A){
-        System.out.println();
-        for(int i=0; i<A.length; i++)
-            System.out.print(A[i] + " ");
-        System.out.println();
-    }
-
     // Number of digits taken from Array 1: i
     // Number of digits taken from Array 2: k - i
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
@@ -184,13 +184,12 @@ class SolutionStack {
         for(int i=0; i<=k; i++){
             if(len1 < i || len2 < k - i)
                 continue;
-            int a = len1 - i;
-            int b = len2 - (k - i);
-            // Number of digits taken from Array 1: i
+            // removing len1 - i digits from nums1. Length pf t1 = len1 - (len1 - i) = i
             int[] t1 = findMaximumNumber(nums1, len1 - i);
-            // Number of digits taken from Array 2: k - i
+            // removing len2 - (k-i) digits from nums2. Length pf t2 = len2 - (len2 - (k - i)) = k - i
             int[] t2 = findMaximumNumber(nums2, len2 - (k - i));
 
+            // mergeTwoArrays : O(m+n)^2
             int[] t = mergeTwoArrays(t1, t2, k);
 
             if(compareArrays(t, 0, result, 0)){

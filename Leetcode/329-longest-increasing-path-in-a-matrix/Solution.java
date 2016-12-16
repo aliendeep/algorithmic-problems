@@ -28,12 +28,73 @@ The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
 
 import java.util.SortedMap;
 
+// Solution : Construct graph and find longest path 
+// O(n^2)
 public class Solution {
+    // n - row
+    // m - col
+    int n, m;
+    List<List<Integer>> graph;
     int[][] move = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-    public int dfs(int[][] matrix, int r, int c, int[][] d, int prev){
-        if(matrix[r][c] <= prev)
-            return 0;
+    int[] dp;
     
+    public int getLongestPath(int node){
+        if(dp[node] != -1)
+            return dp[node];
+        
+        int longestPath = 1;
+        List<Integer> adj = graph.get(node);
+        if(adj != null){
+            for(int neighbor : adj){
+                longestPath = Math.max(longestPath, getLongestPath(neighbor) + 1);
+            }
+        }
+        dp[node] = longestPath;
+        return longestPath;
+    }
+    
+    public int longestIncreasingPath(int[][] matrix) {
+        n = matrix.length;
+        if(n == 0)
+            return 0;
+        m = matrix[0].length;
+        int nodes = n*m;
+        // Construct the graph
+        graph = new ArrayList<>();
+        for(int i=0; i<nodes; ++i)
+            graph.add(new ArrayList<>());
+            
+        for (int r = 0; r < n; ++r) {
+            for (int c = 0; c < m; ++c) {
+                int id = r*m + c;
+                for(int i=0; i<4; i++){
+                    int r1 = r + move[i][0];            
+                    int c1 = c + move[i][1];
+                    if(r1 < 0 || r1 >= n || c1 < 0 || c1 >= m || matrix[r1][c1] <= matrix[r][c])
+                        continue;
+                    int id1 = r1*m + c1;
+                    // directed graph
+                    graph.get(id).add(id1);
+                }
+            }
+        }
+        // Find the longest path
+        dp = new int[nodes];
+        Arrays.fill(dp, -1);
+        
+        int maxLen = 0;
+        for(int i=0; i<nodes; ++i){
+            maxLen = Math.max(maxLen, getLongestPath(i));
+        }
+        return maxLen;
+    }
+}
+
+// Time complexity: O(rc)
+// longest path (No need to construct the graph before)
+class Solution2 {
+    int[][] move = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+    public int dfs(int[][] matrix, int r, int c, int[][] d){
         if(d[r][c] != 0)
             return d[r][c];
         
@@ -41,9 +102,9 @@ public class Solution {
         for(int i=0; i<4; i++){
             int r1 = r+move[i][0];            
             int c1 = c+move[i][1];
-            if(r1 < 0 || r1 >= matrix.length || c1 < 0 || c1 >= matrix[0].length)
+            if(r1 < 0 || r1 >= matrix.length || c1 < 0 || c1 >= matrix[0].length || matrix[r][c] >= matrix[r1][c1])
                 continue;
-            len = Math.max(len, dfs(matrix, r1, c1, d, matrix[r][c]));
+            len = Math.max(len, dfs(matrix, r1, c1, d));
         } 
         d[r][c] = len + 1;
         return d[r][c]; 
@@ -57,15 +118,59 @@ public class Solution {
         int maxLength = 1;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                maxLength = Math.max(maxLength, dfs(matrix, i, j, d, Integer.MIN_VALUE));
+                maxLength = Math.max(maxLength, dfs(matrix, i, j, d));
             }
         }
         return maxLength;
     }
 }
 
+// O(mn) Solution (Similar as Solution 2)
+class Solution3 {
+    // n - row
+    // m - col
+    int n, m;
+    int[][] move = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+    public int getLongestPath(int[][] matrix, int nodeId, int[] dp){
+        if(dp[nodeId] != -1)
+            return dp[nodeId];
+        
+        // Get row and col
+        int r = nodeId / m;
+        int c = nodeId % m;
+        int longestPath = 1;
+        for(int i=0; i<4; i++){
+            int r1 = r + move[i][0];            
+            int c1 = c + move[i][1];
+            if(r1 < 0 || r1 >= n || c1 < 0 || c1 >= m || matrix[r1][c1] <= matrix[r][c])
+                continue;
+            longestPath =  Math.max(longestPath, getLongestPath(matrix, r1*m + c1, dp) + 1);
+        }        
+        dp[nodeId] = longestPath;
+        return longestPath;
+    }
+    
+    public int longestIncreasingPath(int[][] matrix) {
+        n = matrix.length;
+        if(n == 0)
+            return 0;
+        m = matrix[0].length;
+        int nodes = n*m;
+
+        // Find the longest path
+        int[] dp = new int[nodes];
+        Arrays.fill(dp, -1);
+
+        int maxLen = 0;
+        for(int i=0; i<nodes; ++i){
+            maxLen = Math.max(maxLen, getLongestPath(matrix, i, dp));
+        }
+        return maxLen;
+    }
+}
+
 // Topological Sort + DP
-class Solution2 {
+class Solution3 {
     class Pair{
         public int x, y;
         public Pair(int x, int y){

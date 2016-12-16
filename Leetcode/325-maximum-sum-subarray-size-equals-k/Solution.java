@@ -38,7 +38,10 @@ Sample Output:
 5
 */
 
+import java.util.*;
+
 public class Solution {
+    // the sum from i to j is cumsum[j] - cumsum[i - 1] except that from 0 to j is sum[j].   
     // O(n) Solution
     public int maxSubArrayLen(int[] nums, int k) {
         int n = nums.length;
@@ -65,36 +68,10 @@ public class Solution {
         }
         return maxLen;
     }
-}
 
-// O(N) Solution
-public class Solution2 {
-    public int maxSubArrayLen(int[] nums, int k) {
-        int n = nums.length;
-        if(n == 0)
-            return 0;
-            
-        int[] cumsum = new int[n];
-        cumsum[0] = nums[0];
-        for(int i=1; i<n; i++){
-            cumsum[i] = cumsum[i-1] + nums[i];
-        }
-        int maxLen = 0;
-        // Sum to leftmost index entry
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, -1);
-
-        for(int end=0; end<n; ++end){
-            int target = cumsum[end] - k;
-            // See if the target has occurred before
-            if(map.containsKey(target)){
-                maxLen = Math.max(maxLen, end - map.get(target));
-            }
-            // contains the left most index.
-            if(!map.containsKey(cumsum[end])){
-                map.put(cumsum[end], end);
-            }
-        }
-        return maxLen;
-    }
+    public static void main(String[] args){
+        int[] a = {-2, -1, 2, 1};
+        Solution ob = new Solution();
+        System.out.println(ob.maxSubArrayLen(a, 1));
+    }    
 }

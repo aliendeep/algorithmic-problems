@@ -65,3 +65,35 @@ class Solution2 {
         return dp.get(amount) == Integer.MAX_VALUE ? -1 : dp.get(amount);
     }
 }
+
+
+// Memoization
+class Solution3 {
+    // dp[i] : minimum no of coins needed to make ith amount
+    public int getMinCoin(int[] coins, int target, int[] dp){
+        if(target <= 0)
+            return 0;
+        
+        if(dp[target] != -1)
+            return dp[target];
+        
+        int minNumberCoin = Integer.MAX_VALUE;
+        for(int coin : coins){
+            if(coin > target)
+                continue;
+            int cntUsingCoin = getMinCoin(coins, target - coin, dp);
+            if(cntUsingCoin == Integer.MAX_VALUE)
+                continue;
+            minNumberCoin = Math.min(minNumberCoin,  cntUsingCoin + 1);
+        }
+        dp[target] = minNumberCoin;
+        return minNumberCoin;
+    }
+    
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount+1];
+        Arrays.fill(dp, -1);
+        int r = getMinCoin(coins, amount, dp);
+        return r == Integer.MAX_VALUE ? -1 : r;
+    }
+}

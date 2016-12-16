@@ -29,3 +29,13 @@ class Solution2{
         return n%3 == 0 && isPowerOfThree(n/3);
     }
 }
+
+// Interesting Idea
+class Solution3 {
+    // https://discuss.leetcode.com/topic/33595/ternary-number-solution
+    // Alternative: Base 3 number
+    // Power of 3 will be something like 10,100,1000, etc, analogous to binary numbers that are powers of 2.
+    public boolean isPowerOfThree(int n) {
+        return Integer.toString(n, 3).matches("10*");
+    }
+}

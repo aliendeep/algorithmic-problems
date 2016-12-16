@@ -65,10 +65,11 @@ public class Solution {
         return -1;
     }
     
+    // (n|1) - Nearest odd that is not less than n   
     public static int index(int i, int n){
         return (1 + 2*i) % (n | 1);
     }
-    
+
     public void wiggleSort(int[] nums) {
         int n = nums.length;
         // Use the find Kth largest element to find the median
