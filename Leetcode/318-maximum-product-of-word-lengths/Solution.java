@@ -19,6 +19,7 @@ Return 0
 No such pair of words.
 */
 
+// O(n^2
 public class Solution {
     // lower case letters - 26 bits required, So int is sufficient
     public int maxProduct(String[] words) {
@@ -31,6 +32,7 @@ public class Solution {
         
         for(int i=0; i<n; i++){
             for(int j=0; j<words[i].length(); j++){
+                // Set jth bit to 1 if ith letter exists
                 map[i] |= 1<<(words[i].charAt(j) - 'a');
             }
         }

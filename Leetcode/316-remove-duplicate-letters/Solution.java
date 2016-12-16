@@ -51,8 +51,48 @@ public class Solution {
     }
 }
 
+// StringBuilder Solution
 class Solution2 {
-    // Greedy
+    // O(n) Solution
+    public String removeDuplicateLetters(String s) {
+        int[] cnt = new int[26];
+        boolean[] visited = new boolean[26];
+        int n = s.length();
+        for(int i=0; i<n; ++i){
+            cnt[s.charAt(i) - 'a']++;
+        }
+        
+        StringBuilder r = new StringBuilder();
+        r.setLength(26);
+        
+        int len = 0;
+        for(int i=0; i<n; ++i){
+            char c = s.charAt(i);
+            // decrease count
+            cnt[c - 'a']--;
+            // if already visited
+            if(visited[c - 'a'])
+                continue;
+            
+            // More count of the stack top is available later
+            while(len > 0 && r.charAt(len-1) > c && cnt[r.charAt(len-1) - 'a'] > 0){
+                // remove the character from the result
+                visited[r.charAt(len-1) - 'a'] = false;
+                // decrease len
+                len--;
+            }   
+            r.setCharAt(len, c);
+            // increase length of the result
+            len++;
+            visited[c - 'a'] = true;
+        } 
+        r.setLength(len);
+        return r.toString();
+   }
+}
+
+// Recursive
+class Solution3 {
     public String removeDuplicateLetters(String s) {
         int n = s.length();
         if(n == 0)

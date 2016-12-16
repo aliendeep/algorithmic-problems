@@ -29,3 +29,10 @@ class Solution3 {
         return (n & (n-1)) == 0;
     }
 }
+
+    // Alternative: Base 2 number
+public class Solution {
+    public boolean isPowerOfTwo(int n) {
+        return Integer.toString(n, 2).matches("10*");
+    }
+}

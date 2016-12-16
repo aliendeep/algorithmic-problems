@@ -96,7 +96,7 @@ public class Solution{
       List<Integer> result = new ArrayList<>();
       for(int i=0; i<n; ++i){
         result.add(st.rangeSum(0, posArray[i]-1));
-        // Decrement the value at pos
+        // Decrement the value at pos (Set it to 0)
         st.addDiff(posArray[i], -1);                
       }
       return result;

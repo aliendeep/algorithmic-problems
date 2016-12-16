@@ -210,3 +210,6 @@ class Solution2{
         return minSum == Integer.MAX_VALUE ? -1 : minSum;
    }
 }
+
+// Another Idea: Instead of keeping seperate visited for all bfs, only visit the
+// cell that have been visited before

@@ -124,7 +124,7 @@ class Solution2 {
             depth = d;
         }
     }
-    
+        
     void getDistance(TreeNode node, int distance, int depth, TreeMap<Integer, List<Info>> map){
         if(node == null)
             return;
