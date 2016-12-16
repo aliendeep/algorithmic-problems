@@ -34,6 +34,39 @@ Return true (self crossing)
 */
 
 public class Solution {
+    /* 
+        Explanation: https://discuss.leetcode.com/topic/38068/another-python
+                b                              b
+       +----------------+             +----------------+
+       |                |             |                |
+       |                |             |                | a
+     c |                |           c |                |
+       |                | a           |                |    f
+       +----------->    |             |                | <----+
+                d       |             |                |      | e
+                        |             |                       |
+                                      +-----------------------+
+                                                   d        
+        - if d crosses a, then length of a >= c
+        - if f crosses a, then length of a >= c - e and f >= d - b
+        - Both cases: d >= b (d should be at least as equal to b)
+    */
+    public boolean isSelfCrossing(int[] x) {
+        int b = 0, c = 0, d = 0, e = 0, f = 0;
+        for(int a : x){
+            if((d >= b && b > 0) && (a >= c || ((a >= c-e && c-e >= 0) && (f >= d-b && d-b >= 0))))
+                return true;
+            f = e;
+            e = d;
+            d = c;
+            c = b;
+            b = a;
+        }
+        return false;
+    }
+}
+
+class Solution2 {
     public boolean isSelfCrossing(int[] x) {
         if(x.length >= 5 && x[3] == x[1] && x[2] + x[4] >= x[0])
             return true;

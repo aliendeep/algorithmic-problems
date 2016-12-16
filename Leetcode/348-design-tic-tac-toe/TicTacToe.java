@@ -88,7 +88,7 @@ public class TicTacToe {
     public int move(int row, int col, int player) {
         rowCnt[player-1][row]++;
         colCnt[player-1][col]++;
-        if(row == col)          d1[player-1]++;
+        if(row == col)            d1[player-1]++;
         if(row + col == n-1)      d2[player-1]++;
         // check if this is a winning state
         if(rowCnt[player-1][row] == n || colCnt[player-1][col] == n  || d1[player-1] == n || d2[player-1] == n)

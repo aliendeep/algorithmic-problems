@@ -12,12 +12,74 @@ Given words = ["abcd", "dcba", "lls", "s", "sssll"]
 Return [[0, 1], [1, 0], [3, 2], [2, 4]]
 The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
 */
-// Time: O(m * n^2)
-// m = number of words in the list
-// n = length of the word
 import java.util.*;
 
+// Cleaner Solution
+// O(n*k^2)
+// n - number of words
+// k = number of length of the string
 public class Solution {
+    public boolean isPalindrome(String word){
+        for(int i=0, j=word.length()-1; i<j; i++, j--)
+            if(word.charAt(i) != word.charAt(j))
+                return false;
+        return true;
+    }
+    
+    public void addToResult(List<List<Integer>> r, int i, int j){
+        List<Integer> x = new ArrayList<>();
+        x.add(i);
+        x.add(j);
+        r.add(x);
+    }
+    
+    // All words are unique
+    public List<List<Integer>> palindromePairs(String[] words) {
+        List<List<Integer>> r = new ArrayList<>();
+        int n = words.length;
+        // Put reverse of all strings into a map
+        Map<String, Integer> map = new HashMap<>();
+        for(int i=0; i<n; ++i){
+            StringBuilder s = new StringBuilder(words[i]);
+            s.reverse();
+            map.put(s.toString(), i);
+        }
+        
+        // Handle the case where "" is in the words list
+        if(map.containsKey("")){
+            int index = map.get("");
+            for(int i=0; i<n; ++i){
+                String s = words[i];
+                if(s.equals(""))
+                    continue;
+                if(isPalindrome(s)){
+                    addToResult(r, index, i);
+                }
+            }
+        }
+        for(int i=0; i<n; ++i){
+            String s = words[i];
+            // All possible splitting of the ith word
+            for(int j=0; j<s.length(); ++j){
+                String left = s.substring(0, j);
+                String right = s.substring(j);
+                // Need to add the right part to the front
+                if(isPalindrome(left) && map.containsKey(right) && map.get(right) != i){
+                      addToResult(r, map.get(right), i);  
+                }
+                // Need to append the left part to the end
+                // Covers the case when left == "" and right = s is palindrome, then result = (s, "")
+                if(map.containsKey(left) && isPalindrome(right) && map.get(left) != i){
+                      addToResult(r, i, map.get(left));  
+                }
+            }
+        }   
+        return r;
+    }
+}
+
+
+class Solution2 {
     public boolean isPalindrome(String word){
         for(int i=0, j=word.length()-1; i<j; i++, j--)
             if(word.charAt(i) != word.charAt(j))

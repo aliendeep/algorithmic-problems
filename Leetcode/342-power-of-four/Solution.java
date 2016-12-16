@@ -36,3 +36,10 @@ class Solution3 {
         return (n > 0 && (n & (n-1)) == 0 && (n & 0x55555555) != 0);
     }
 }
+
+// Base 4 number (Interesting)
+class Solution4 {
+    public boolean isPowerOfFour(int num) {
+        return Integer.toString(num, 4).matches("10*");
+    }
+}

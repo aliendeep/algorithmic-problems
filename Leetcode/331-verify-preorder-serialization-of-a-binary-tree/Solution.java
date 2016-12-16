@@ -36,6 +36,33 @@ Return false
 */
 
 public class Solution {
+    // Stack
+    public boolean isValidSerialization(String preorder) {
+        String[] pre = preorder.split(",");
+        Deque<String> stk = new LinkedList<>();
+        for(int i=0; i<pre.length; i++){
+            String s = pre[i];
+            // current char i #
+            if(s.equals("#")){
+                while(!stk.isEmpty() && stk.peekFirst().equals("#")){
+                    // pop the previous # (Left child)
+                    stk.pop(); 
+                    if(stk.isEmpty())
+                        return false;
+                    // pop the parent of the left child (number)
+                    stk.pop();
+                    // Current # will work as the processed left subtree of immediate upper level
+                }    
+            }
+            // if s is a number, push this into stack
+            // if s is #, then push it
+            stk.push(s);
+        }        
+        return stk.size() == 1 && stk.pop().equals("#");
+    }
+}
+
+class Solution2 {
     // Keep removing the leaf nodes
     // Each leaf node is followed by two #
     // Replace two ## by one #
@@ -65,5 +92,42 @@ public class Solution {
         if(stk.size() != 1)
             return false;
         return stk.pop().compareTo("#") == 0;
+    }
+}
+
+class Solution3 {
+    // https://discuss.leetcode.com/topic/35976/7-lines-easy-java-solution
+    // difference of indegree and outdegree
+    public boolean isValidSerialization(String preorder) {
+        String[] nodes = preorder.split(",");
+        int diff = 1;
+        for(int i=0; i<nodes.length; ++i){
+            if(--diff < 0)
+                return false;
+            if(!nodes[i].equals("#"))
+                diff += 2;
+                
+        }
+        return diff == 0;
+    }
+}
+
+class Solution4 {
+    // Counting Indegree and Outdegree
+    public boolean isValidSerialization(String preorder) {
+        String[] nodes = preorder.split(",");
+        // Indegree of root is 0 
+        int diff = -1;
+        for(int i=0; i<nodes.length; ++i){
+            // All nodes have one incoming edge
+            diff++;
+            if(diff > 0)
+                return false;
+            // Non leaf nodes have two outdegrees
+            if(!nodes[i].equals("#"))
+                diff -= 2;
+                
+        }
+        return diff == 0;
     }
 }

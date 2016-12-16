@@ -30,6 +30,9 @@ at depth 3; 1 + 4*2 + 6*3 = 27)
  *     public List<NestedInteger> getList();
  * }
  */
+// DFS
+// O(n) Solution
+// O(height)
 public class Solution {
     public int getSubListSum(NestedInteger ni, int depth){
         if(ni.isInteger())
@@ -52,6 +55,7 @@ public class Solution {
 }
 
 // Alternatve: Iterative: Use queue
+// O(n) Solution
 class Solution2 {
     class NInfo{
         NestedInteger ni;
