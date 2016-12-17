@@ -22,7 +22,7 @@ Explanation: Remove all the digits from the number and it is left with nothing w
 */
 
 public class Solution {
-    // Stack
+    // Stack O(n)
     public String removeKdigits(String num, int k) {
         if(num.length() == 0 || k == 0)
             return num;

@@ -8,6 +8,25 @@
  * }
  */
 public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> r = new ArrayList<>();
+        if(root == null)
+            return r;
+        Deque<TreeNode> stk = new LinkedList<>();
+        stk.push(root);
+        while(!stk.isEmpty()){
+            TreeNode t = stk.pop();
+            r.add(t.val);
+            if(t.right != null)
+                stk.push(t.right);
+            if(t.left != null)
+                stk.push(t.left);
+        }
+        return r;
+   }
+}
+
+class Solution2 {
     class Cmd{
         TreeNode n;
         boolean expand;

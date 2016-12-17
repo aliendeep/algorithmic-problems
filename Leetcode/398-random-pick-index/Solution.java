@@ -15,6 +15,7 @@ solution.pick(3);
 // pick(1) should return 0. Since in the array only nums[0] is equal to 1.
 solution.pick(1);
 */
+// Sort + Binary Search
 public class Solution {
     class Info{
         int num;
@@ -94,3 +95,30 @@ public class Solution {
  * Solution obj = new Solution(nums);
  * int param_1 = obj.pick(target);
  */
+
+
+// Reservoir Sampling
+class Solution2 {
+    public static final int FIXED_NUM = 0;
+    Random randomNum;
+    int[] a;
+    
+    public Solution(int[] nums) {
+        randomNum = new Random();
+        a = nums;
+    }
+    
+    public int pick(int target) {
+        int resultIndex = -1;
+        int cntTarget = 1;
+        for(int i=0; i<a.length; i++){
+            if(a[i] == target){
+                // Change Index with fixed probability (first element is chosen with probability 1 because cntTarget = 1 intiially)
+                if(randomNum.nextInt(cntTarget) == FIXED_NUM)
+                    resultIndex = i;
+                cntTarget++;
+            }
+        }
+        return resultIndex;
+    }
+}

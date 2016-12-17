@@ -88,6 +88,7 @@ class Solution2 {
         removeHelper(s, 0, set, new StringBuilder(), maxLeft, maxRight, 0);
         return new ArrayList<String>(set);
     }
+    
     public void removeHelper(String s, int i, Set<String> set, StringBuilder cur, int removeLeftRem, 
                                 int removeRightRem, int openParen){
         if(removeLeftRem < 0 || removeRightRem < 0 || openParen < 0)

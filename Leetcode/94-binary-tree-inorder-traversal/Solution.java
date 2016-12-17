@@ -8,6 +8,54 @@
  * }
  */
 public class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> r = new ArrayList<>();
+        if(root == null)
+            return r;
+        Deque<TreeNode> stk = new LinkedList<>();
+        TreeNode cur = root;
+        // insert leftmost path in the stk
+        while(cur != null){
+            stk.push(cur);
+            cur = cur.left;
+        }
+        while(!stk.isEmpty()){
+            TreeNode t = stk.pop();
+            r.add(t.val);
+            if(t.right != null){
+                cur = t.right;
+                while(cur != null){
+                    stk.push(cur);
+                    cur = cur.left;
+                }
+            }
+        }
+        return r;
+    }
+}
+
+// left, root, right
+class Solution2 {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> r = new ArrayList<>();
+        if(root == null)
+            return r;
+        Deque<TreeNode> stk = new LinkedList<>();
+        TreeNode cur = root;
+        while(cur != null || !stk.isEmpty()){
+            while(cur != null){
+                stk.push(cur);
+                cur = cur.left;
+            }     
+            cur = stk.pop();
+            r.add(cur.val);
+            cur = cur.right;
+        }
+        return r;
+    }
+}
+
+class Solution3 {
     class Cmd{
         TreeNode n;
         boolean expand;
