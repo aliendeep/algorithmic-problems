@@ -23,3 +23,4 @@
 - Word Break
 - Word Break II
 - Palindrome Partitioning II
+- Coins in a Line
