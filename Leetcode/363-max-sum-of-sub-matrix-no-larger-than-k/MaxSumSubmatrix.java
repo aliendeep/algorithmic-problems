@@ -61,7 +61,7 @@ class MaxSumSubmatrixLessSpace{
             // Calculate sum between current left and right for every row 'r'
             int[] sum = new int[nr];    
 
-            for(int c2=c1;c2<nc; ++c2){
+            for(int c2=c1; c2<nc; ++c2){
                 for(int r=0; r<nr; r++)
                     sum[r] += matrix[r][c2];
 
