@@ -17,6 +17,7 @@ solution.reset();
 solution.shuffle();
 */
 
+// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 public class Solution {
     int[] original;
     Random gen;
@@ -39,12 +40,14 @@ public class Solution {
             A[i] = original[i];
             
         for(int i=0; i<n; i++){
-            // Generate a random number in [i, A.size()-1]
-            int index = i + gen.nextInt(n - i);
-            // Swap
-            int t = A[i];
-            A[i] = A[index];
-            A[index] = t;
+            // Generate a random number between [0..i]
+            int index = gen.nextInt(i+1);
+            if(i != index){
+                // Swap
+                int t = A[i];
+                A[i] = A[index];
+                A[index] = t;
+            }
         }
         return A;
     }

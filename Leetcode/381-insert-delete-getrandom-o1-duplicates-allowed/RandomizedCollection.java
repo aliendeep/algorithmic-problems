@@ -4,7 +4,8 @@ Design a data structure that supports all following operations in average O(1) t
 Note: Duplicate elements are allowed.
 insert(val): Inserts an item val to the collection.
 remove(val): Removes an item val from the collection if present.
-getRandom: Returns a random element from current collection of elements. The probability of each element being returned is 
+getRandom: Returns a random element from current collection of elements. 
+The probability of each element being returned is 
 linearly related to the number of same value the collection contains.
 Example:
 
@@ -28,6 +29,16 @@ collection.remove(1);
 
 // getRandom should return 1 and 2 both equally likely.
 collection.getRandom();
+
+Sample Input:
+["RandomizedCollection","insert","insert","insert","getRandom","remove","getRandom"]
+[[],[1],[1],[2],[],[1],[]]
+
+["RandomizedCollection","insert","remove","insert"]
+[[],[1],[1],[1]]
+
+["RandomizedCollection","insert","insert","insert","insert","insert","insert","remove","remove","remove","remove","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom"]
+[[],[10],[10],[20],[20],[30],[30],[10],[10],[30],[30],[],[],[],[],[],[],[],[],[],[]]
 */
 // Allow duplicates
 // Design a data structure that supports all following operations in average O(1) time.
