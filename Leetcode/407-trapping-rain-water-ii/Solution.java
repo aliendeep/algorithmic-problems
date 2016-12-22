@@ -1,5 +1,6 @@
 /*
-Given an m x n matrix of positive integers representing the height of each unit cell in a 2D elevation map, compute the volume of water it is able to trap after raining.
+Given an m x n matrix of positive integers representing the height of each unit 
+cell in a 2D elevation map, compute the volume of water it is able to trap after raining.
 
 Note:
 Both m and n are less than 110. The height of each unit cell is greater than 0 and is less than 20,000.
@@ -63,7 +64,8 @@ public class Solution {
                 int y1 = t.y + move[i][1];
                 if(x1 < 0 || x1 >= R || y1 < 0 || y1 >= C || visited[x1][y1])
                     continue;
-                // If the water level of this adjacent cell is lower, then we can collect this water and increase the water level of that cell if needed
+                // If the water level of this adjacent cell is lower, then we can 
+                // collect this water and increase the water level of that cell if needed
                 if(heightMap[x1][y1] < t.h){
                     vol += t.h - heightMap[x1][y1];
                 }

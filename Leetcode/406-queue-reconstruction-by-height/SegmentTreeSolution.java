@@ -103,7 +103,7 @@ class SegmentTree{
 public class Solution{
     public int[][] reconstructQueue(int[][] people) {
         int n = people.length;
-        // Sort by height increasing, sort by weight decreasing
+        // Sort by height increasing. (tie: sort by number of people decreasing)
         Arrays.sort(people, new Comparator<int[]>(){
             @Override
             public int compare(int[] a, int[] b){
