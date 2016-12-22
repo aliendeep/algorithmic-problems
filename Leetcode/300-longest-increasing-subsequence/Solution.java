@@ -84,7 +84,7 @@ class Solution2 {
 // Arrays.binary Search. Better to write own binary search because
 // If the range contains multiple elements with the specified value, 
 // there is no guarantee which one will be found.
-class Solution3 {
+class Solution2 {
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
         if(nums == null || n == 0)
