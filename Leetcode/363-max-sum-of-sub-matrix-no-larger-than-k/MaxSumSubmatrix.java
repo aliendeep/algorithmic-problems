@@ -46,6 +46,9 @@ public class MaxSumSubmatrix{
 
         MaxSumSubmatrixLessSpace ob1 = new MaxSumSubmatrixLessSpace();
         System.out.println(ob1.maxSumSubmatrix(input));
+
+        MaxSubMatrix3 ob2 = new MaxSubMatrix3();
+        System.out.println(ob2.maxSumSubmatrix(input));
     }       
 }
 
@@ -77,15 +80,5 @@ class MaxSumSubmatrixLessSpace{
             }
         }
         return maxSum;
-    }
-    public static void main(String args[]){
-        int input[][] = {
-                        {1, 2, -1, -4, -20},
-                        {-8, -3, 4, 2, 1},
-                        {3, 8, 10, 1, 3},
-                        {-4, -1, 1, 7, -6}
-                        };
-        MaxSumSubmatrix ob = new MaxSumSubmatrix();
-        System.out.println(ob.maxSumSubmatrix(input));
     }       
 }

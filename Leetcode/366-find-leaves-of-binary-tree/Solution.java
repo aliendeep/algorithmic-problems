@@ -1,5 +1,6 @@
 /*
-Given a binary tree, collect a tree's nodes as if you were doing this: Collect and remove all leaves, repeat until the tree is empty.
+Given a binary tree, collect a tree's nodes as if you were doing this: Collect 
+and remove all leaves, repeat until the tree is empty.
 
 Example:
 Given binary tree 
@@ -91,6 +92,57 @@ public class Solution {
         if(root == null)
             return r;
         computeHeight(root);
+        return r;
+    }
+}
+
+
+// Time: O(nlogn)
+// Space: O(n)
+class Solution2 {
+    // (height, node value)
+    TreeMap<Integer, List<Integer>> map;
+    
+    // O(h) space, O(nlohn) time
+    public int computeHeight(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        if(root.left == null && root.right == null){
+            if(!map.containsKey(1)){
+                List<Integer> l = new ArrayList<>();
+                l.add(root.val);
+                map.put(1, l);
+            }
+            else{
+                map.get(1).add(root.val);
+            }
+            return 1;
+        }
+        int lH = computeHeight(root.left);
+        int rH = computeHeight(root.right);
+        int height = Math.max(lH, rH) + 1;
+        if(!map.containsKey(height)){
+            List<Integer> l = new ArrayList<>();
+            l.add(root.val);
+            map.put(height, l);
+        }
+        else{
+            map.get(height).add(root.val);
+        }
+        return height;
+    }
+    
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        List<List<Integer>> r = new ArrayList<>();
+        if(root == null)
+            return r;
+        map = new TreeMap<>();
+        // compute height info of all nodes
+        computeHeight(root);
+        for (Map.Entry<Integer,List<Integer>> entry : map.entrySet()) {
+            r.add(entry.getValue());
+         }
         return r;
     }
 }

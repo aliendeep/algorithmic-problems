@@ -1,5 +1,6 @@
 /*
-Your task is to calculate ab mod 1337 where a is a positive integer and b is an extremely large positive integer given in the form of an array.
+Your task is to calculate ab mod 1337 where a is a positive integer and b is an 
+extremely large positive integer given in the form of an array.
 
 Example1:
 
@@ -16,7 +17,8 @@ Result: 1024
 */
 
 // x mod y = (mn) mod y = (m mod y) (n mod y)
-// x^325 = x^300 x^20 x^5 = (x^(100))^3 (x^(10))^2 x^5. at each bit of 325, the base is actually x^10 of previous base.
+// x^325 = x^300 x^20 x^5 = (x^(100))^3 (x^(10))^2 x^5. at each bit of 325, 
+// the base is actually x^10 of previous base.
 public class Solution {
     public static final int kMod = 1337;
     public int pow(int x, int y){

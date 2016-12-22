@@ -1,5 +1,6 @@
 /*
-Given a positive integer num, write a function which returns True if num is a perfect square else False.
+Given a positive integer num, write a function which returns True if num is a 
+perfect square else False.
 
 Note: Do not use any built-in library function such as sqrt.
 
@@ -35,5 +36,29 @@ public class Solution {
                 return true;
         }
         return false;
+    }
+}
+
+class Solution2 {
+    // Alternative
+    // Square number follows the series: 1 + 3 + 5 + 7 + ..
+    public boolean isPerfectSquare(int num) {
+        for(int i=1; num > 0; i+=2){
+            num -= i;
+        }
+        return num == 0;
+    }
+}
+
+class Solution3 {
+    // Alternative: Newton method to calculate the sqr of the num
+    // https://en.wikipedia.org/wiki/Integer_square_root#Using_only_integer_division
+    public boolean isPerfectSquare(int num) {
+        long x = num/2 + 1;
+        while(x*x > num){
+            // right shift: divide by 2
+            x = (x + num/x) >> 1;
+        }
+        return x*x == num;
     }
 }
