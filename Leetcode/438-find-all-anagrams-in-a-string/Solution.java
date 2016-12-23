@@ -1,7 +1,8 @@
 /*
 Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
 
-Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+Strings consists of lowercase English letters only and the length of both strings 
+s and p will not be larger than 20,100.
 
 The order of output does not matter.
 
@@ -68,5 +69,39 @@ public class Solution {
             r.add(start);
         }
        return r;
+    }
+}
+
+class Solution2 {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> r = new ArrayList<>();
+        int n = s.length();
+        int m = p.length();
+        if(n == 0 || m == 0 || n < m)
+            return r;
+        int[] cnt = new int[256];
+        for(char c : p.toCharArray()){
+            cnt[c]++;
+        }
+        int start = 0, end = 0, count = m;
+        while(end < n){
+            if(cnt[s.charAt(end)] >= 1){
+                count--;
+            }
+            cnt[s.charAt(end)]--;
+            end++;
+
+            // if all characters of p have been covered
+            if(count == 0){
+                r.add(start);
+            }
+            if(end - start == m){
+                if(cnt[s.charAt(start)] >= 0)
+                    count++;
+                cnt[s.charAt(start)]++;
+                start++;               
+            }
+        }
+        return r;
     }
 }

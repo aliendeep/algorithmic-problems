@@ -1,5 +1,6 @@
 /*
-Given a collection of intervals, find the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+Given a collection of intervals, find the minimum number of intervals you need 
+to remove to make the rest of the intervals non-overlapping.
 
 Note:
 You may assume the interval's end point is always bigger than its start point.
@@ -21,7 +22,8 @@ Input: [ [1,2], [2,3] ]
 
 Output: 0
 
-Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
+Explanation: You don't need to remove any of the intervals since they're already 
+non-overlapping.
 */
 /**
  * Definition for an interval.
@@ -32,6 +34,7 @@ Explanation: You don't need to remove any of the intervals since they're already
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
+// Greedy
 public class Solution {
     public int eraseOverlapIntervals(Interval[] intervals) {
         int n = intervals.length; 
@@ -59,7 +62,6 @@ public class Solution {
                     // make t cur
                     curIndex = i;
                 }
-                // remove t
                 else{
                     removeflag[i] = 1;
                 }
@@ -75,5 +77,29 @@ public class Solution {
             cnt += removeflag[i];
         }
         return cnt;
+    }
+}
+
+// Alternative: Find the maximum number of intervals that are non overlapping
+class Solution2 {
+    public int eraseOverlapIntervals(Interval[] intervals) {
+        int n = intervals.length; 
+        if(n <= 1)      return 0;
+        // Sort by the end time
+        Arrays.sort(intervals, new Comparator<Interval>(){
+            @Override
+            public int compare(Interval a, Interval b){
+                return Integer.compare(a.end, b.end);
+            }
+        });
+        int nonOverlappingIntervalCnt = 1;
+        int end = intervals[0].end;
+        for(int i=1; i<n; ++i){
+            if(intervals[i].start >= end){
+                end = intervals[i].end;
+                nonOverlappingIntervalCnt++;
+            }
+        }
+        return n - nonOverlappingIntervalCnt;
     }
 }

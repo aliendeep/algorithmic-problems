@@ -1,7 +1,12 @@
 /*
-Given a set of intervals, for each of the interval i, check if there exists an interval j whose start point is bigger than or equal to the end point of the interval i, which can be called that j is on the "right" of i.
+Given a set of intervals, for each of the interval i, check if there exists an 
+interval j whose start point is bigger than or equal to the end point of the 
+interval i, which can be called that j is on the "right" of i.
 
-For any interval i, you need to store the minimum interval j's index, which means that the interval j has the minimum start point to build the "right" relationship for interval i. If the interval j doesn't exist, store -1 for the interval i. Finally, you need output the stored value of each interval as an array.
+For any interval i, you need to store the minimum interval j's index, which means 
+that the interval j has the minimum start point to build the "right" relationship 
+for interval i. If the interval j doesn't exist, store -1 for the interval i. 
+Finally, you need output the stored value of each interval as an array.
 
 Note:
 You may assume the interval's end point is always bigger than its start point.
@@ -40,6 +45,7 @@ Show Similar Problems
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
+// O(n^2) Solution
 public class Solution {
     class Info{
         Interval interval;
@@ -84,6 +90,91 @@ public class Solution {
                 }
             }
         }
+        return result;
+    }
+}
+
+// O(nlogn) Solution
+public class Solution {
+    public int[] findRightInterval(Interval[] intervals) {
+        int n = intervals.length; 
+        int[] result = new int[n];
+
+        // Start, index
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        for(int i=0; i<n; ++i){
+            map.put(intervals[i].start, i);    
+        }
+
+        for(int i=0; i<n; ++i){
+            Integer key = map.ceilingKey(intervals[i].end);
+            result[i] = (key == null) ? -1 : map.get(key);
+        }
+        
+        return result;
+    }
+}
+
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+class Info{
+    int start;
+    int index;
+    public Info(int i, int in){
+        start = i;
+        index = in;
+    }
+}
+
+// Binary Search
+class Solution2 {
+    // Find the index of least start value, that is equal or larger than target
+    public int binarySearch(Info[] a, int target){
+        int low = 0;
+        int high = a.length-1;
+        while(high - low > 3){
+            int mid = (low+high)/2;
+            if(a[mid].start < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid;
+            }
+        }
+        for(int i=low; i<=high; ++i){
+            if(a[i].start >= target)
+                return a[i].index;
+        }
+        return -1;
+    }
+    
+    public int[] findRightInterval(Interval[] intervals) {
+        int n = intervals.length; 
+        Info[] info = new Info[n];
+        for(int i=0; i<n; ++i){
+            info[i] = new Info(intervals[i].start, i);
+        }
+        
+        // Sort by the start time
+        Arrays.sort(info, new Comparator<Info>(){
+            @Override
+            public int compare(Info a, Info b){
+                return Integer.compare(a.start, b.start);
+            }
+        });
+        
+        int[] result = new int[n];
+        for(int i=0; i<n; ++i){
+            result[i] = binarySearch(info, intervals[i].end);
+        }
+        
         return result;
     }
 }

@@ -1,9 +1,11 @@
 /*
-Given a non-empty string containing an out-of-order English representation of digits 0-9, output the digits in ascending order.
+Given a non-empty string containing an out-of-order English representation of 
+digits 0-9, output the digits in ascending order.
 
 Note:
 Input contains only lowercase English letters.
-Input is guaranteed to be valid and can be transformed to its original digits. That means invalid inputs such as "abc" or "zerone" are not permitted.
+Input is guaranteed to be valid and can be transformed to its original digits. That 
+means invalid inputs such as "abc" or "zerone" are not permitted.
 Input length is less than 50,000.
 Example 1:
 Input: "owoztneoer"
@@ -14,8 +16,42 @@ Input: "fviefuro"
 
 Output: "45"
 */
-
+// Cleaner 
+// Try to count unique letter 
 public class Solution {
+    public String originalDigits(String s) {
+        int n = s.length();
+        int[] cnt = new int[10];
+        for(int i=0; i<n; ++i){
+            char c = s.charAt(i);
+            if(c == 'z')    cnt[0]++;
+            if(c == 'o')    cnt[1]++; // 0, 1, 2, 4
+            if(c == 'w')    cnt[2]++;
+            if(c == 'h')    cnt[3]++; // 3-8
+            if(c == 'u')    cnt[4]++;
+            if(c == 'f')    cnt[5]++; // 4-5
+            if(c == 'x')    cnt[6]++; 
+            if(c == 's')    cnt[7]++; // 6 - 7
+            if(c == 'g')    cnt[8]++;
+            if(c == 'i')    cnt[9]++; // 9, 5, 6, 8
+        }
+        cnt[1] -= (cnt[2] + cnt[0] + cnt[4]);
+        cnt[3] -= cnt[8];
+        cnt[5] -= cnt[4];
+        cnt[7] -= cnt[6];
+        cnt[9] = cnt[9] - (cnt[5] + cnt[6] + cnt[8]);
+        StringBuilder r = new StringBuilder();
+        for(int i=0; i<10; ++i){
+            while(cnt[i] > 0){
+                r.append(i);
+                cnt[i]--;
+            }
+        }
+        return r.toString();
+    }
+}
+
+class Solution2 {
     String[] map = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
     Map<Character, Integer> uniqueMap;
     

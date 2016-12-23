@@ -21,7 +21,8 @@ Sample Output:
 [null,null,null,null,null,null,null,null,"b","a"]
 [null,null,null,null,null,null,null,"hello"]
 [null,null,""]
-*/public class AllOne {
+*/
+public class AllOne {
     Map<String, Integer> map;
     List<Set<String>> cntKey;
     int min, max;

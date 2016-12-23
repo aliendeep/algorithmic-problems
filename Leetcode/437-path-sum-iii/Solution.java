@@ -61,3 +61,97 @@ public class Solution {
         return count;
     }
 }
+
+// O(n^2)
+class Solution2 {
+    int total = 0;
+ 
+    public int hasPathSum(TreeNode node, int sum) {
+        if(node == null)          
+            return 0;
+        int cnt = 0;
+        if(sum == node.val)       
+            cnt++;
+        cnt += hasPathSum(node.left, sum - node.val);
+        cnt += hasPathSum(node.right, sum - node.val); 
+        return cnt;
+    }
+
+    public void getPathSum(TreeNode node, int sum) {
+        if(node == null)
+            return;
+        total += hasPathSum(node, sum);
+        getPathSum(node.left, sum);
+        getPathSum(node.right, sum);
+    }
+
+    public int pathSum(TreeNode root, int sum) {
+        total = 0;
+        getPathSum(root, sum);
+        return total;
+    }
+}
+
+// Alternative
+// Time complexity: O(n)
+// Space Complexity: O(height)
+class Solution3 {
+    public int pathSumHelper(TreeNode root, int target, int curSum, Map<Integer, Integer> map) {
+        if(root == null)
+            return 0;
+
+        curSum += root.val;
+        int sum = curSum - target;
+        int npaths = map.getOrDefault(sum, 0);
+        
+        if(curSum == target)
+            npaths++;
+        
+        // increment path Count
+        if(!map.containsKey(curSum)){
+            map.put(curSum, 1);
+        }
+        else{
+            map.put(curSum, map.get(curSum) + 1);
+        }
+        npaths += pathSumHelper(root.left, target, curSum, map);
+        npaths += pathSumHelper(root.right, target, curSum, map);
+        // decrement path Count
+        map.put(curSum, map.get(curSum) - 1);
+        if(map.get(curSum) == 0)
+            map.remove(curSum);
+            
+        return npaths;
+    }
+    
+    public int pathSum(TreeNode root, int sum) {
+       // <Number, Count>
+       Map<Integer, Integer> map = new HashMap<>();
+       return pathSumHelper(root, sum, 0, map);
+    }
+}
+
+// Count the prefix sum 
+class Solution4 {
+    public int cntPathSum(TreeNode node, int sum, int target, Map<Integer, Integer> map){
+        if(node == null)
+            return 0;
+        int cnt = 0;
+        sum += node.val;
+        cnt += map.getOrDefault(sum - target, 0);
+
+        map.put(sum, map.getOrDefault(sum, 0) + 1);
+        
+        cnt += cntPathSum(node.left, sum, target, map);       
+        cnt += cntPathSum(node.right, sum, target, map);   
+
+        map.put(sum, map.get(sum) - 1);
+        return cnt;
+    }
+    public int pathSum(TreeNode root, int sum) {
+       // <Number, Count>
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        return cntPathSum(root, 0, sum, map);
+    }
+}

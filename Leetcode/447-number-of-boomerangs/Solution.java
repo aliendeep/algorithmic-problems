@@ -1,7 +1,10 @@
 /*
-Given n points in the plane that are all pairwise distinct, a "boomerang" is a tuple of points (i, j, k) such that the distance between i and j equals the distance between i and k (the order of the tuple matters).
+Given n points in the plane that are all pairwise distinct, a "boomerang" is a 
+tuple of points (i, j, k) such that the distance between i and j equals the 
+distance between i and k (the order of the tuple matters).
 
-Find the number of boomerangs. You may assume that n will be at most 500 and coordinates of points are all in the range [-10000, 10000] (inclusive).
+Find the number of boomerangs. You may assume that n will be at most 500 and 
+coordinates of points are all in the range [-10000, 10000] (inclusive).
 
 Example:
 Input:
@@ -39,6 +42,8 @@ public class Solution {
                 }
             }
             // traverse all entries
+            // Total number of permutations of size 2 from n different points is 
+            // nP2 = n!/(n-2)! = n * (n-1). 
             for(Map.Entry<Long, Integer> entry : map.entrySet()){
                 int val = entry.getValue();
                 cnt += val*(val-1);
