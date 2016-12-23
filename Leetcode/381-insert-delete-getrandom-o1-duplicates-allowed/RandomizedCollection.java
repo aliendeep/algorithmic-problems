@@ -15,7 +15,8 @@ RandomizedCollection collection = new RandomizedCollection();
 // Inserts 1 to the collection. Returns true as the collection did not contain 1.
 collection.insert(1);
 
-// Inserts another 1 to the collection. Returns false as the collection contained 1. Collection now contains [1,1].
+// Inserts another 1 to the collection. Returns false as the collection contained 1. 
+Collection now contains [1,1].
 collection.insert(1);
 
 // Inserts 2 to the collection, returns true. Collection now contains [1,1,2].
@@ -37,7 +38,9 @@ Sample Input:
 ["RandomizedCollection","insert","remove","insert"]
 [[],[1],[1],[1]]
 
-["RandomizedCollection","insert","insert","insert","insert","insert","insert","remove","remove","remove","remove","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom","getRandom"]
+["RandomizedCollection","insert","insert","insert","insert","insert","insert",
+"remove","remove","remove","remove","getRandom","getRandom","getRandom","getRandom",
+"getRandom","getRandom","getRandom","getRandom","getRandom","getRandom"]
 [[],[10],[10],[20],[20],[30],[30],[10],[10],[30],[30],[],[],[],[],[],[],[],[],[],[]]
 */
 // Allow duplicates
@@ -109,3 +112,62 @@ public class RandomizedCollection {
  * boolean param_2 = obj.remove(val);
  * int param_3 = obj.getRandom();
  */
+
+class RandomizedCollection2 {
+    // Val, Indices
+    Map<Integer, Set<Integer>> map;
+    List<Integer> list;
+    Random rand;
+    
+    /** Initialize your data structure here. */
+    public RandomizedCollection() {
+        map = new HashMap<>();        
+        list = new ArrayList<>();
+        rand = new Random();
+    }
+    
+    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+    public boolean insert(int val) {
+        boolean ret = false;
+        Set<Integer> set = map.get(val);
+        if(set == null){
+            ret = true;
+            map.put(val, new HashSet<>());
+        }
+        int index = list.size();
+        map.get(val).add(index);
+        list.add(val);
+        return ret;
+    }
+    
+    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+    public boolean remove(int val) {
+        Set<Integer> set = map.get(val);
+        if(set == null)
+            return false;
+        // remove the first index of the val O(1)
+        int index = set.iterator().next();
+        map.get(val).remove(index);
+        // size becomes 0
+        if(map.get(val).size() == 0)
+            map.remove(val);
+            
+        int lastIndex = list.size()-1;
+        int lastElement = list.get(lastIndex);
+        // Swap the element with the last element
+        if(index != lastIndex){
+            list.set(index, lastElement);
+            // update index of the last element in the hashSet
+            map.get(lastElement).remove(lastIndex);
+            map.get(lastElement).add(index);
+        }
+        // Remove the last element O(1)
+        list.remove(lastIndex);
+        return true;
+    }
+    
+    /** Get a random element from the collection. */
+    public int getRandom() {
+        return list.get(rand.nextInt(list.size()));
+    }
+}
