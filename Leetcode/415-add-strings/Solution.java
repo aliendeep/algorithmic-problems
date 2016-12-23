@@ -1,5 +1,6 @@
 /*
-Given two non-negative numbers num1 and num2 represented as string, return the sum of num1 and num2.
+Given two non-negative numbers num1 and num2 represented as string, 
+return the sum of num1 and num2.
 
 Note:
 
@@ -18,6 +19,7 @@ public class Solution {
         x.reverse();
         StringBuilder y = new StringBuilder(num2);
         y.reverse();
+        
         int carry = 0;
         int i = 0, j = 0;
         StringBuilder sum = new StringBuilder();
