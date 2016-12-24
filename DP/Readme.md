@@ -39,3 +39,4 @@
 - Coins in a Line II 
 - Coins in a Line (MinMax)
 - Dices Sum along with Probability (Variant of KnapSack)
+- Box Stacking Problem (3d LIS)

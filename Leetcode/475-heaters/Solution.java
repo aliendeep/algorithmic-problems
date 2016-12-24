@@ -73,7 +73,7 @@ public class Solution {
     }
 }
 
-// Alternative
+// Alternative: O(nlogn)
 class Solution2 {
     public int findRadius(int[] houses, int[] heaters) {
         TreeSet<Integer> set = new TreeSet<>();

@@ -1,5 +1,8 @@
 /*
-Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.
+Given a non-empty string check if it can be constructed by taking a substring 
+of it and appending multiple copies of the substring together. You may assume 
+the given string consists of lowercase English letters only and its length will 
+not exceed 10000.
 
 Example 1:
 Input: "abab"
@@ -29,6 +32,7 @@ public class Solution {
             return false;
         List<Integer> a = new ArrayList<>();
         a.add(1);
+        // The length of the repeating substring should be a divisor of total length
         for(int i=2; i*i<=n; i++){
             if(n % i == 0){
                 a.add(i);

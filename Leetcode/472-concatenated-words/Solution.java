@@ -6,7 +6,8 @@ A concatenated word is defined as a string that is comprised entirely of at leas
 two shorter words in the given array.
 
 Example:
-Input: ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+Input: ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat",
+"ratcatdogcat"]
 
 Output: ["catsdogcats","dogcatsdog","ratcatdogcat"]
 
@@ -44,6 +45,7 @@ public class Solution {
         int n = words.length;
         if(n == 0)
             return r;
+        
         Set<String> dict = new HashSet<>();
         for(String word : words){
             dict.add(word);

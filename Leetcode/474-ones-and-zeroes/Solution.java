@@ -24,6 +24,7 @@ Output: 2
 Explanation: You could form "10", but then you'd have nothing left. Better form 
 "0" and "1".
 */
+// O(kmn)
 public class Solution {
     public int getValue(int[] weight0, int[] weight1, int capacity1, int capacity2, int i, int[][][] dp){
         if(capacity1 < 0 || capacity2 < 0 || i < 0)
