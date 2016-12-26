@@ -53,4 +53,5 @@ public class Solution {
         ListNode m1 = sortList(left);
         ListNode m2 = sortList(right);
         return merge(m1, m2);
-    }}
+    }
+}

@@ -4,14 +4,12 @@ Given an input string, reverse the string word by word.
 For example,
 Given s = "the sky is blue",
 return "blue is sky the".
-
 */
 
 public class Solution {
     public static String reverseWords(String str) {
         String[] s = str.trim().split(" ");
         StringBuilder result = new StringBuilder();
-        System.out.println(s.length);
         for(int i=s.length-1; i>=0; i--){
           if(s[i].length() > 0){
             result.append(s[i]);

@@ -36,7 +36,8 @@ Output:
 true
 
 Explanation:
-The sequences [1,2], [1,3], and [2,3] can uniquely reconstruct the original sequence [1,2,3].
+The sequences [1,2], [1,3], and [2,3] can uniquely reconstruct the 
+original sequence [1,2,3].
 Example 4:
 
 Input:
@@ -93,14 +94,7 @@ public class Solution {
             }    
         }
         return true;
-    }
-    
-    public void print(List<Integer> r){
-        for(int n : r){
-            System.out.print(n + " ");
-        }
-        System.out.println();
-    }
+    }}
     
     public boolean checkSeq(int n, int source, int[] org){
         visited = new int[n+1];
@@ -110,7 +104,6 @@ public class Solution {
         if(!dfs(source))
             return false;
 
-        //print(result);
         if(result.size() != org.length)
             return false;
 
@@ -126,9 +119,12 @@ public class Solution {
     
     public boolean sequenceReconstruction(int[] org, int[][] seqs) {
         int n = org.length;
+        // Check if all the numbers of the original sequeunce is found in the
+        // sequence array
         int[] copy = new int[org.length+1];
         for(int i=0; i<org.length; ++i)
             copy[i] = org[i];
+
         for(int[] seq: seqs){
             for(int t : seq){
                 if(t <= 0 || t > n)
@@ -165,8 +161,7 @@ public class Solution {
             }
         }
         
-
-        // if multiple nodes have 0 indegree return false
+        // if multiple nodes have 0 indegree return false (ambiguity)
         // If no nodes has 0 indegree return false
         int nRoot = 0;
         int source = -1;
@@ -195,7 +190,6 @@ public class Solution {
         if(!checkSeq(n, source, org)){
             return false;
         }
-
         return true;
     }
 }

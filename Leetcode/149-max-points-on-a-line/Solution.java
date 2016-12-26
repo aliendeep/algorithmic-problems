@@ -11,6 +11,17 @@
  */
 // O(n^2)
 // [[1, 2], [3, 6], [5, 6]]
+/**
+ * Definition for a point.
+ * class Point {
+ *     int x;
+ *     int y;
+ *     Point() { x = 0; y = 0; }
+ *     Point(int a, int b) { x = a; y = b; }
+ * }
+ */
+// O(n^2)
+// [[1, 2], [3, 6], [5, 6]]
 public class Solution {
     public void print(Point p){
         System.out.print("[ "+p.x + " , " + p.y +" ] ");
@@ -29,19 +40,13 @@ public class Solution {
                 }
                 // vertical (slope infinity)
                 else if(points[i].x == points[j].x){
-                    if(map.containsKey(Double.MAX_VALUE))
-                        map.put(Double.MAX_VALUE, map.get(Double.MAX_VALUE)+1);
-                    else
-                        map.put(Double.MAX_VALUE, 1);
+                    map.put(Double.MAX_VALUE, map.getOrDefault(Double.MAX_VALUE, 0) + 1);
                 }
                 else{
                     double slope = 0.0;
                     if(points[i].y != points[j].y)
                         slope = (double)(points[i].y - points[j].y)/(double)(points[i].x - points[j].x);
-                    if(map.containsKey(slope))
-                        map.put(slope, map.get(slope)+1);
-                    else
-                        map.put(slope, 1);
+                    map.put(slope, map.getOrDefault(slope, 0) + 1);
                 }
             }
             int localMax = 0;
