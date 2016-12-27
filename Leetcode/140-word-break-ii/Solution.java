@@ -9,6 +9,51 @@ dict = ["cat", "cats", "and", "sand", "dog"].
 
 A solution is ["cats and dog", "cat sand dog"].
 */
+// Cleaner
+public class Solution {
+    // Memoization
+    // index (0, i)
+    Map<Integer, Set<String>> map;
+    String s;
+    int n;
+    Set<String> wordDict;
+    
+    public Set<String> bktk(int k){
+        Set<String> result = new HashSet<>();
+        if(k <= 0){
+            return result;
+        }
+        if(map.containsKey(k))
+            return map.get(k);
+
+        // whole word
+        String sub = s.substring(0, k);
+        if(wordDict.contains(sub)){
+            result.add(sub);
+        }
+
+        for(int i=1; i<k; ++i){
+            String end = s.substring(i, k);
+            if(wordDict.contains(end)){
+                Set<String> all = bktk(i);
+                for(String str : all){
+                    result.add(str + " " + end);
+                }
+            }            
+        }
+        map.put(k, result);
+        return result;
+    }
+    
+    public List<String> wordBreak(String s, Set<String> dict) {
+        n = s.length();
+        wordDict = dict;
+        this.s = s;
+        map = new HashMap<>();
+        Set<String> r = bktk(n);
+        return new ArrayList<>(r);
+    }
+}
 
 public class Solution {
     int n;

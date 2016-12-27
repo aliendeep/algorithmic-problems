@@ -92,3 +92,25 @@ class Solution3 {
        return (s1.size() == s2.size()) && (ss.size() == s1.size());
    }
 }
+
+// Simplest
+class Solution4 {
+    public boolean wordPattern(String pattern, String str) {
+        int n = pattern.length();
+        String[] s = str.split(" ");
+        if(s.length != n)
+            return false;
+        Map<Character, String> map1 = new HashMap<>();
+        Map<String, Character> map2 = new HashMap<>();
+        for(Integer i=0; i<n; ++i){
+            char c = pattern.charAt(i);
+            if(map1.containsKey(c) && !map1.get(c).equals(s[i]))
+                return false;
+            map1.put(c, s[i]);            
+            if(map2.containsKey(s[i]) && map2.get(s[i]) != c)
+                return false;
+            map2.put(s[i], c);            
+        }     
+        return true;
+   }
+}
