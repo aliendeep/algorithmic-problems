@@ -1,21 +1,61 @@
 /*
-There are two sorted arrays nums1 and nums2 of size m and n respectively.
+https://www.interviewbit.com/problems/median-of-array/
 
-Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+Split arrays into two parts
+Left part                                |  Right Part
+{ nums1[0], nums1[1], … , nums1[i - 1] } |  { nums1[i], nums1[i + 1], … , nums1[m - 1] }
+{ nums2[0], nums2[1], … , nums2[j - 1] } |  { nums2[j], nums2[j + 1], … , nums2[n - 1] }
 
-Example 1:
-nums1 = [1, 3]
-nums2 = [2]
+Condition 1:
+Length of left part = Length of right part or 
+Length of left part = Length of right part + 1 
+Search for i in [0...m] such that
+   i + j    = (m-i) + (n-j) + 1
+=> i + j    = m + n + 1 + i + j 
+=> 2(i + j) = m + n + 1 
+=> j        = (m + n + 1)/2 - i
 
-The median is 2.0
-Example 2:
-nums1 = [1, 2]
-nums2 = [3, 4]
+Condition 2:
+- nums1[i-1] <= nums2[j] or i == 0 or j == n and
+- nums2[j-1] <= nums1[i] or j == 0 or i == m
 
-The median is (2 + 3)/2 = 2.5
-
+Binary Search
+- if nums1[i'-1]   > nums2[j'], then we need to search in [0 ... i'-1]
+- if nums2[j' - 1] > nums1[i'], then we need to search in [i'+1 .. m]
 */
 public class Solution {
+    // nums1 is the smaller array
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        if(m > n)
+            return findMedianSortedArrays(nums2, nums1);
+        int i, j;
+        int ilow = 0;
+        int ihigh = m;
+        while(ilow <= ihigh){
+            i = (ilow + ihigh)/2;
+            j = (m + n + 1)/2 - i;
+            if(i > 0 && j < n && nums1[i-1] > nums2[j]){
+                ihigh = i-1;
+            }
+            else if(j > 0 && i < m && nums2[j-1] > nums1[i]){
+                ilow = i+1;
+            }
+            else{
+                double median1 = Math.max(i == 0 ? Integer.MIN_VALUE: nums1[i-1], j == 0? Integer.MIN_VALUE : nums2[j-1]);
+                // odd
+                if((m + n) % 2 == 1)
+                    return median1;    
+                double median2 = Math.min(i == m ? Integer.MAX_VALUE: nums1[i], j == n ? Integer.MAX_VALUE : nums2[j]);
+                return (median1 + median2)/2.0;
+            }
+        }
+        return 1;
+    }
+}
+
+class Solution2 {
     // Cut based approach
     // https://discuss.leetcode.com/topic/16797/very-concise-o-log-min-m-n-iterative-solution-with-detailed-explanation
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -61,6 +101,47 @@ public class Solution {
                 return (double)(Math.max(l1, l2) + Math.min(r1, r2))/2.0;
         }
         // Shouldn't reach here
+        return -1;
+    }
+}
+
+class Solution3 {
+    // nums1 is the smaller array
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        if(m > n)
+            return findMedianSortedArrays(nums2, nums1);
+        int i, j;
+        int ilow = 0;
+        int ihigh = m;            
+        int size_sum = ((m+n) % 2 == 0) ? (m+n)/2 : (m+n+1)/2;  
+        while(ihigh - ilow > 3){
+            i = (ilow + ihigh)/2;
+            j = size_sum - i;
+            if(i > 0 && j < n && nums1[i-1] > nums2[j]){
+                ihigh = i-1;
+            }
+            else if(j > 0 && i < m && nums2[j-1] > nums1[i]){
+                ilow = i+1;
+            }
+            else
+                break;
+        }
+        for(i=ilow; i<=ihigh; ++i){
+            j = size_sum - i;            
+            if(i > 0 && j < n && nums1[i-1] > nums2[j])
+                continue;
+            else if(j > 0 && i < m && nums2[j-1] > nums1[i])
+                continue;
+            
+            double median1 = Math.max(i == 0 ? Integer.MIN_VALUE: nums1[i-1], j == 0? Integer.MIN_VALUE : nums2[j-1]);
+            // odd
+            if((m + n) % 2 == 1)
+                return median1;    
+            double median2 = Math.min(i == m ? Integer.MAX_VALUE: nums1[i], j == n ? Integer.MAX_VALUE : nums2[j]);
+            return (median1 + median2)/2.0;
+        }        
         return -1;
     }
 }

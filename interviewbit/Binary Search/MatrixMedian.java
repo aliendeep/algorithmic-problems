@@ -1,5 +1,6 @@
 /*
-Given a N cross M matrix in which each row is sorted, find the overall median of the matrix. Assume N*M is odd.
+Given a N cross M matrix in which each row is sorted, find the overall median 
+of the matrix. Assume N*M is odd.
 
 For example,
 
