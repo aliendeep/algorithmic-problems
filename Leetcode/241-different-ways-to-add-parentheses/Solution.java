@@ -54,7 +54,6 @@ public class Solution {
 }
 
 class Solution2 {
-    //Memoization
     Map<String, List<Integer>> dp;
     
     public List<Integer> compute(String input){
@@ -104,5 +103,70 @@ class Solution2 {
     public List<Integer> diffWaysToCompute(String input) {
         dp = new HashMap<>();
         return compute(input);
+    }
+}
+
+//Memoization
+class Solution3 {
+    int n;
+    String input;
+    List<List<List<Integer>>> dp;
+    
+    public List<Integer> compute(int i, int j) {
+        if(i > j)
+            return new ArrayList<>();
+
+        try{
+            int number = Integer.parseInt(input.substring(i, j+1));
+            List<Integer> t = new ArrayList<>();
+            t.add(number);
+            return t;
+        }
+        catch(NumberFormatException ex){
+            
+        }
+
+        if(dp.get(i).get(j) != null)
+            return dp.get(i).get(j);
+            
+        List<Integer> result = new ArrayList<>();
+        for(int k = i; k <= j; ++k) {
+            char c = input.charAt(k);
+            // operator
+            if(!Character.isDigit(c)){
+                List<Integer> left = compute(i, k-1);
+                // skip the operator
+                List<Integer> right = compute(k+1, j);
+                for(int l : left){
+                    for(int r : right){
+                        if(c == '+'){
+                            result.add(l+r);
+                        }
+                        else if(c == '-'){
+                            result.add(l-r);    
+                        }
+                        else if(c == '*'){
+                            result.add(l*r);    
+                        }
+                    }
+                }
+           }
+        }
+        dp.get(i).set(j, result);
+        return result;
+    }
+    
+    public List<Integer> diffWaysToCompute(String s) {
+        n = s.length();
+        input = s;
+        dp = new ArrayList<>();
+        for (int i = 0; i < n; ++i) {
+            dp.add(new ArrayList<>());
+            for (int j = 0; j < n; ++j) {
+                dp.get(i).add(null);
+            }
+        }
+
+        return compute(0, n-1);
     }
 }

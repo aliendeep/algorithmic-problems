@@ -1,8 +1,11 @@
 /*
-Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes 
+in the tree.
 
-According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w as the 
-lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is 
+defined between two nodes v and w as the 
+lowest node in T that has both v and w as descendants (where we allow a node to 
+be a descendant of itself).”
 
         _______3______
        /              \
@@ -11,7 +14,8 @@ lowest node in T that has both v and w as descendants (where we allow a node to 
    6      _2       0       8
          /  \
          7   4
-For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another example is LCA of nodes 5 and 4 is 5, 
+For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another 
+example is LCA of nodes 5 and 4 is 5, 
 since a node can be a descendant of itself according to the LCA definition.
 */
 public class Solution {
@@ -120,5 +124,36 @@ class Solution4 {
         while(!ancestors.contains(q))
             q = parent.get(q);
         return q;
+    }
+}
+
+public class Solution4 {
+    boolean getPath(TreeNode node, TreeNode v, List<TreeNode> path){
+      if(node == null)
+        return false;
+    
+      if (node == v || getPath(node.left, v, path) || getPath(node.right, v, path)) {
+        path.add(node);
+        return true;
+      }
+      return false;
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> x = new ArrayList<>();
+        if(!getPath(root, p, x))
+            return null;
+        List<TreeNode> y = new ArrayList<>();
+        if(!getPath(root, q, y))
+            return null;
+            
+        int i = x.size()-1, j = y.size()-1;
+        while(i >= 0 && j >= 0){
+            if(x.get(i).val == y.get(j).val && (i == 0 || j == 0 || x.get(i-1).val != y.get(j-1).val)) 
+                return x.get(i);
+            i--;
+            j--;
+        } 
+        return null;
     }
 }
