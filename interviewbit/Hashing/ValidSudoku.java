@@ -1,3 +1,8 @@
+/*
+Determine if a Sudoku is valid, according to: http://sudoku.com.au/TheRules.aspx
+
+The Sudoku board could be partially filled, where empty cells are filled with the character ‘.’.
+*/
 public class ValidSudoku {
     boolean isValid(int[] cnt){
         for(int c=1; c<=9; c++)

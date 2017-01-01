@@ -1,5 +1,7 @@
 /*
-Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+Given an array S of n integers, are there elements a, b, c, and d in S such that 
+a + b + c + d = target? Find all unique quadruplets in the array which gives the 
+sum of target.
 
 Note: The solution set must not contain duplicate quadruplets.
 
@@ -63,4 +65,93 @@ public class Solution {
         }
         return r;
     }
+}
+
+class Solution2 {
+    int[] nums;
+    List<List<Integer>> result;
+    
+    public List<List<Integer>> fourSum(int[] a, int target) {
+        nums = a;
+        result = new ArrayList<>();
+        int n = nums.length;
+        if(n < 4)   
+            return result;
+        Arrays.sort(nums);
+        int min = nums[0];
+        int max = nums[n-1];
+        if(4*min > target || 4*max < target)
+            return result;
+        
+        // Choose first number
+        for(int i=0; i<n-3; ++i){
+            int x = nums[i];
+            // avoid duplicate
+            if(i > 0 && nums[i-1] == nums[i])
+                continue;
+            // x is too small
+            if(x + 3*max < target)
+                continue;
+            // x is too large
+            if(x*4 > target)
+                break;
+            // Same number
+            if(4*x == target){
+                if(nums[i+3] == x)
+                    result.add(Arrays.asList(x, x, x, x));
+                break;
+            }
+            threeSum(x, target - x, i+1, n);
+        }
+        return result;
+    }
+    
+    public void threeSum(int x, int target, int l, int h){
+        int min = nums[l];
+        int max = nums[h-1];
+        if(3*min > target || 3*max < target)
+            return;
+
+        // Choose second number
+        for(int i=l; i<h-2; ++i){
+            int y = nums[i];
+            // avoid duplicate
+            if(i > l && nums[i-1] == nums[i])
+                continue;
+            // y too small
+            if(y + 2*max < target)
+                continue;
+            // y too large
+            if(3*y > target)
+                break;
+            if(3*y == target){
+                if(nums[i+2] == y)
+                    result.add(Arrays.asList(x, y, y, y));
+                break;
+            }
+            twoSum(x, y, target - y, i+1, h);
+        }
+    }
+
+    public void twoSum(int x, int y, int target, int l, int h){
+        int i = l, j = h - 1;
+        while(i < j){
+            int sum = nums[i] + nums[j];
+            if(sum == target){
+                result.add(Arrays.asList(x, y, nums[i], nums[j]));
+                i++;
+                j--;
+                // Avoid duplicates
+                while(i < j && nums[i] == nums[i-1])
+                    ++i;
+                while(i < j && nums[j] == nums[j+1])
+                    --j;
+            }
+            else if(sum < target){
+                i++;
+            }
+            else
+                j--;
+        }
+    }    
 }

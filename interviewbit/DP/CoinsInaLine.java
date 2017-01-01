@@ -1,5 +1,7 @@
 /*
-There are N coins (Assume N is even) in a line. Two players take turns to take a coin from one of the ends of the line until there are no more coins left. The player with the larger amount of money wins. Assume that you go first.
+There are N coins (Assume N is even) in a line. Two players take turns to take a 
+coin from one of the ends of the line until there are no more coins left. 
+The player with the larger amount of money wins. Assume that you go first.
 
 Write a program which computes the maximum amount of money you can win.
 
@@ -50,4 +52,48 @@ public class Solution {
         
         return getValue(a, 0, n-1, dp);
   }
+}
+
+class Solution2 {
+    int[] cumSum;
+    int[][] dp;
+    ArrayList<Integer> values;
+    
+    int sum(int i, int j){
+        return cumSum[j] - (i > 0 ? cumSum[i-1] : 0);         
+    }
+    
+    public int getValue(int i, int j){
+        if(i > j)
+            return 0;
+        if(i == j)
+            return values.get(i);
+            
+        if(dp[i][j] != -1)
+            return dp[i][j];
+        
+        // Take ith item        
+        int x = sum(i, j) - getValue(i+1, j);
+        // Take jth item        
+        int y = sum(i, j) - getValue(i, j-1);
+        dp[i][j] = Math.max(x, y);
+        return dp[i][j];
+    }
+    public int maxcoin(ArrayList<Integer> a) {
+        values = a;
+        int n = a.size();
+        if(n == 0)
+            return 0;
+        cumSum = new int[n];
+        cumSum[0] = a.get(0);
+        for(int i=1; i<n; ++i){
+            cumSum[i] = cumSum[i-1] + a.get(i); 
+        }
+
+        dp = new int[n][n];
+        for(int[] t : dp)
+            Arrays.fill(t, -1);
+        
+        return getValue(0, n-1);
+    }
 }

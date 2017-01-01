@@ -7,7 +7,8 @@ COLORFUL number:
 
 A number can be broken into different contiguous sub-subsequence parts. 
 Suppose, a number 3245 can be broken into parts like 3 2 4 5 32 24 45 324 245. 
-And this number is a COLORFUL number, since product of every digit of a contiguous subsequence is different
+And this number is a COLORFUL number, since product of every digit of a 
+contiguous subsequence is different
 Example:
 
 N = 23
@@ -20,31 +21,22 @@ this number is a COLORFUL number since product of every digit of a sub-sequence 
 Output : 1
 */
 public class Solution {
-    public int computeProduct(String sub){
-        int num = Integer.parseInt(sub);
-      if(num < 10) return num;
-    int product = 1;
-    while(num > 0){
-      product *= num % 10;
-      num = num / 10;
-    }
-    return product;        
-    }
-    
   public int colorful(int a) {
-      if(a < 10)  
-          return 1;
-      String num = String.valueOf(a);
-      int n = num.length();
-      Set<Integer> set = new HashSet<>();
-
-        for(int i=1; i<=n; ++i){
-          for(int j=0; i+j<=n; ++j){
-              String sub = num.substring(j, i+j); 
-              int product = computeProduct(sub);
-              if(set.contains(product))
+      // Single digitis
+      if(a < 10)  return 1;
+      String s = Integer.toString(a);
+      int n = s.length();
+      Set<Long> products = new HashSet<>();
+      // For all length of substring
+      for(int l=1; l<=n; ++l){
+          for(int i=0; i<n-l+1; ++i){
+              String p = s.substring(i, i+l); 
+              long product = 1;
+              for(int j=0; j<p.length(); ++j){
+                  product *=(p.charAt(j) - '0');
+              }
+              if(!products.add(product))
                   return 0;
-              set.add(product);
           }
       }
       return 1;

@@ -66,3 +66,54 @@ public class Solution {
         bktk(board, 0, 0, row, col, box);
     }
 }
+
+class Solution2 {
+    public void solveSudoku(char[][] board) {
+        solve(board);
+    }
+    
+    public boolean isValid(char[][] board, int i, int j, char num){
+        for(int r=0; r<9; ++r){
+            if(board[r][j] == num)
+                return false;
+        }
+        for(int c=0; c<9; ++c){
+            if(board[i][c] == num)
+                return false;
+        }
+        
+        int sr = 3*(i/3);
+        int sc = 3*(j/3);
+        for(int r=0; r<3; ++r){
+            for(int c=0; c<3; ++c){
+                if(board[sr+r][sc+c] == num)
+                    return false;
+            }
+        }        
+        return true;
+    }
+    
+    public boolean solve(char[][] board){
+        for(int i=0; i<board.length; ++i){
+            for(int j=0; j<board.length; ++j){
+                if(board[i][j] == '.'){
+                    // Try all possible num
+                    for(int num=1; num<=9; ++num){
+                        char c = (char)(num + '0');
+                        if(isValid(board, i, j, c)){
+                            board[i][j] = c;
+                            // Rest of the board is solvable
+                            if(solve(board))
+                                return true;
+                            // revert
+                            board[i][j] = '.';
+                        }
+                    }
+                    // No solution
+                    return false;
+                }
+            }    
+        }    
+        return true;
+    }
+}

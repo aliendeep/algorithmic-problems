@@ -11,3 +11,5 @@
 - Copy List
 - Longest Substring Without Repeat
 - Window String
+- Points On The Straight Line
+- Substring Concatenation
