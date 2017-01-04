@@ -1,11 +1,15 @@
 /*
-Given a graph consisting n nodes (labelled 1 to )n where a specific given node s represents the starting position s and 
-an edge between two nodes is of a given length, which may or may not be equal to other lengths in the graph.
+Given a graph consisting n nodes (labelled 1 to )n where a specific given node s 
+represents the starting position s and 
+an edge between two nodes is of a given length, which may or may not be equal to 
+other lengths in the graph.
 
-It is required to calculate the shortest distance from the start position (Node s) to all of the other nodes in the graph.
+It is required to calculate the shortest distance from the start position (Node s) 
+to all of the other nodes in the graph.
 
 Note: If a node is unreachable, the distance is assumed as -1.
-If there are edges between the same pair of nodes with different weights, they are to be considered as is, like multiple edges.
+If there are edges between the same pair of nodes with different weights, 
+they are to be considered as is, like multiple edges.
 
 Sample Input
 1
@@ -65,7 +69,6 @@ public class Dijkstra{
       visited.add(u);
       // for all adjancent neighbors
       List<Edge> adj = graph.get(u);
-      List<Node> candidate = new ArrayList<>();
       // for all adjacent nodes, relax
       for(int i=0; i<adj.size(); i++){
         Edge e = adj.get(i);
@@ -73,10 +76,10 @@ public class Dijkstra{
         if(visited.contains(e.v))
             continue;
 
-        if(d[e.v] > d[u] + e.weight)
+        if(d[e.v] > d[u] + e.weight){
             d[e.v] = d[u] + e.weight;
-
-        minHeap.add(new Node(e.v, d[e.v]));
+            minHeap.add(new Node(e.v, d[e.v]));
+        }
       }      
     }
     // print

@@ -60,15 +60,7 @@ public class Solution {
     }
 }
 
-/**
- * Definition for a point.
- * class Point {
- *     int x;
- *     int y;
- *     Point() { x = 0; y = 0; }
- *     Point(int a, int b) { x = a; y = b; }
- * }
- */
+// Solution 2
 // O(n^2)
 class Pair{
     int dx; 
@@ -90,6 +82,30 @@ class Pair{
     @Override
     public int hashCode(){
         return dx*10000003 + dy;    
+    }
+}
+
+// Alternative : hashCode 
+class Pair2{
+    int dx; 
+    int dy;
+    public Pair2(int x, int y){
+        dx = x;
+        dy = y;
+    }
+
+    @Override
+    public boolean equals(Object ob){
+        if(ob instanceof Pair2){
+            Pair2 p = (Pair2)ob;
+            return p.dx == dx && p.dy == dy;
+        }
+        return false;
+    }
+    
+    @Override
+    public int hashCode(){
+        return Objects.hash(dx, dy);
     }
 }
 

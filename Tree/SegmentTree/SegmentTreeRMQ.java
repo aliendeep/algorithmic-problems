@@ -1,6 +1,6 @@
 // Range Minimum Query
 class SegmentTreeRMQ{
-  // Number of nodes in the tree
+  // Number of leaves in the tree
   int n;
 
   // original array size (leaf nodes: 0 to _n-1)
@@ -54,7 +54,7 @@ class SegmentTreeRMQ{
     if(i > mid){
       return queryRangeMinRecursive(2*nodeIndex + 1, mid+1, upper, i, j);
     }
-    else if(i <= mid){
+    else if(j <= mid){
       return queryRangeMinRecursive(2*nodeIndex, lower, mid, i, j);      
     }
 

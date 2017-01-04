@@ -2,11 +2,17 @@
 
 Problem Statement
     
-Charlie has a grid of n rows by m columns. The rows are numbered 0 through n-1 from top to bottom. The columns are numbered 0 through m-1 from left to right.
-Each cell of the grid contains a positive integer. The integers in Charlie's grid are a permutation of the numbers 1 through n*m. (I.e., each of these numbers occurs in the grid exactly once.)
-Given a grid, its value list is a sequence constructed by listing all values in the grid in row major order. That is, we first list the values in row 0 from left to right, then the values in row 1 from left to right, and so on.
-You are given the ints n and m: the dimensions of Charlie's grid. You are also given a int[] grid: the value list for Charlie's grid. (Formally, grid[i*m+j] is the value stored in row i, column j of the grid.)
-Charlie can modify his grid in two ways: He may swap any two rows, and he may swap any two columns. Charlie now wonders whether there is a sequence of swaps that would sort his grid - that is, rearrange its elements in such a way that the value list of the new grid will be the ordered sequence (1,2,3,...,n*m).
+Charlie has a grid of n rows by m columns. The rows are numbered 0 through n-1 from top to bottom. 
+The columns are numbered 0 through m-1 from left to right.
+Each cell of the grid contains a positive integer. The integers in Charlie's grid are a permutation of 
+the numbers 1 through n*m. (I.e., each of these numbers occurs in the grid exactly once.)
+Given a grid, its value list is a sequence constructed by listing all values in the grid in row major order. 
+That is, we first list the values in row 0 from left to right, then the values in row 1 from left to right, and so on.
+You are given the ints n and m: the dimensions of Charlie's grid. You are also given a int[] grid: the value list 
+for Charlie's grid. (Formally, grid[i*m+j] is the value stored in row i, column j of the grid.)
+Charlie can modify his grid in two ways: He may swap any two rows, and he may swap any two columns. Charlie now wonders 
+whether there is a sequence of swaps that would sort his grid - that is, rearrange its elements in such a way that the 
+value list of the new grid will be the ordered sequence (1,2,3,...,n*m).
 If it is possible to sort Charlie's grid, return "Possible". Otherwise, return "Impossible".
 Definition
     
@@ -103,7 +109,9 @@ Returns: "Possible"
 }
 Returns: "Impossible"
 
-This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. 
+Any unauthorized use or reproduction of this information without the prior written 
+consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
 */
 import java.util.*;
 import java.util.regex.*;
