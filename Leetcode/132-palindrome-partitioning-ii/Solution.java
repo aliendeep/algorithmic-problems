@@ -51,3 +51,67 @@ public class Solution {
         return cut[n-1];
     }
 }
+
+// Shortest path solution
+// Generate all substrings
+// Edge from i to j+1 if s[i..j] is a palindrome
+public class Solution {
+    public int minCut(String s) {
+        int n = s.length();
+        // Palindrome lookup table
+        boolean[][] isPalindrome = new boolean[n][n];
+        for(int i=0; i<n; ++i)
+            isPalindrome[i][i] = true;
+        
+        for(int l=1; l<n; ++l){
+            int i = 0, j = l;
+            while(j < n){
+                if(s.charAt(i) == s.charAt(j) && (i + 1 > j - 1 || isPalindrome[i+1][j-1])){
+                    isPalindrome[i][j] = true;
+                }
+                ++i;
+                ++j;
+            }
+        }
+        
+        // Construct graph (directed edge)       
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=0; i<n; ++i){
+            graph.add(new ArrayList<>());
+            for(int j=i; j<n; ++j){
+                if(isPalindrome[i][j]){
+                    graph.get(i).add(j+1);
+                }
+            }
+        }
+        
+        int[] d = new int[n+1];
+        Arrays.fill(d, -1);
+        
+        // BFS (find shortest path from 0 to n-1)
+        Queue<Integer> Q = new LinkedList<>();
+        Q.add(0);
+        d[0] = 0;
+        while(!Q.isEmpty()){
+            int size = Q.size();
+            for(int i=0; i<size; ++i){
+                int t = Q.remove();
+                if(t == n)
+                    return d[n] - 1;
+                List<Integer> neighbor = graph.get(t);
+                if(neighbor == null)
+                    continue;
+                for(int x=neighbor.size()-1; x>=0; --x){
+                    int adj = neighbor.get(x);
+                    if(d[adj] != -1)
+                        continue;
+                    d[adj] = d[t] + 1;
+                    if(adj == n)
+                        return d[n] - 1;
+                    Q.add(adj);
+                }
+            }
+        }
+        return -1;
+    }
+}

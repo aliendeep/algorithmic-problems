@@ -57,3 +57,73 @@ public class Solution {
         return mapping.get(node);
     }
 }
+
+class Solution2 {
+    // Use a hashmap
+    // BFS
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if(node == null)    
+            return null;
+
+        // label to node
+        Map<Integer, UndirectedGraphNode> map = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+
+        Queue<UndirectedGraphNode> Q = new LinkedList<UndirectedGraphNode>();
+        Q.add(node);
+        visited.add(node.label);
+        
+        while(!Q.isEmpty()){
+            UndirectedGraphNode front = Q.remove();
+            
+            if(!map.containsKey(front.label)){
+               UndirectedGraphNode copied = new UndirectedGraphNode(front.label);
+               map.put(front.label, copied);
+            }
+            
+            for(UndirectedGraphNode neighbor : front.neighbors){
+                int nlabel = neighbor.label;
+                if(!map.containsKey(nlabel)){
+                   UndirectedGraphNode copied = new UndirectedGraphNode(nlabel);
+                   map.put(nlabel, copied);
+                }
+                map.get(front.label).neighbors.add(map.get(nlabel));
+                if(!visited.contains(nlabel)){
+                    Q.add(neighbor);
+                    visited.add(nlabel);
+                }
+            }
+        }
+        return map.get(node.label);
+    }
+}
+
+class SolutionDFS {
+    public void dfs(UndirectedGraphNode node, Set<Integer> visited, Map<Integer, UndirectedGraphNode> map){
+        visited.add(node.label);
+        
+        if(!map.containsKey(node.label)){
+            map.put(node.label, new UndirectedGraphNode(node.label));
+        }
+        
+        for(UndirectedGraphNode neighbor : node.neighbors){
+            if(!map.containsKey(neighbor.label)){
+                map.put(neighbor.label, new UndirectedGraphNode(neighbor.label));
+            }
+            map.get(node.label).neighbors.add(map.get(neighbor.label));
+
+            if(!visited.contains(neighbor.label))
+                dfs(neighbor, visited, map);
+        }
+    }
+    
+    // DFS
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if(node == null)    return null;
+        Map<Integer, UndirectedGraphNode> map = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+
+        dfs(node, visited, map);
+        return map.get(node.label);
+    }
+}

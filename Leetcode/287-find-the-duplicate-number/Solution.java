@@ -32,31 +32,48 @@ public class Solution {
 }
 
 // O(1) Space
+// Binary Search
 class Solution2 {
     // O(nlogn) Solution
     // Pigeonhole principle
+    public int cntElementsLessOrEqual(int[] nums, int target){
+        int cnt = 0;
+        for(int n : nums){
+            if(n <= target)
+                cnt++;
+        }
+        return cnt;
+    }
+    public int cntElements(int[] nums, int target){
+        int cnt = 0;
+        for(int n : nums){
+            if(n == target)
+                cnt++;
+        }
+        return cnt;
+    }
+    
     public int findDuplicate(int[] nums) {
         int n = nums.length;
         if(n == 0)
             return -1;
         int low = 1;
         int high = n - 1;
-        while(low < high){
+        while(high - low > 3){
             int mid = (high - low)/2 + low;
-            int cnt  = 0;
-            // Count number of items < mid
-            for(int i : nums){
-                if(i <= mid)
-                    cnt++;
-            }
-            // duplicate number is on the other side
+            int cnt  = cntElementsLessOrEqual(nums, mid);
             if(cnt <= mid){
                 low = mid + 1;
             }
+            // cnt > mid
             else{
                 high = mid;
             }
         }
-        return low;
+        for(int dup = low; dup <= high; ++dup){
+            if(cntElements(nums, dup) > 1)
+                return dup;
+        }
+        return -1;
     }
 }

@@ -41,7 +41,6 @@ public class Solution {
             cur.remove(cur.size()-1);
             return;
         }
-        // left subtree
         cur.add(root.val);
         binaryTreePaths(root.left, cur, result);
         binaryTreePaths(root.right, cur, result);
@@ -92,5 +91,28 @@ class Solution2 {
          List<Integer> cur = new ArrayList<>(); 
          binaryTreePaths(root, cur, result);
          return result;
+    }
+}
+
+class Solution3 {
+    public void getPaths(TreeNode node, String cur, List<String> result){
+        // if leaf
+        if(node.left == null && node.right == null){
+            result.add(cur + node.val);
+            return;
+        }
+        if(node.left != null){
+            getPaths(node.left, cur + node.val + "->", result);
+        }
+        if(node.right != null){
+            getPaths(node.right, cur + node.val + "->", result);
+        }
+    }
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList<>();
+        if(root == null)
+            return result;
+        getPaths(root, "", result);
+        return result;
     }
 }

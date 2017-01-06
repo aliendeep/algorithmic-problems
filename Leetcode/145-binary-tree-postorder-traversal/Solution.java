@@ -1,3 +1,17 @@
+/*
+Given a binary tree, return the postorder traversal of its nodes' values.
+
+For example:
+Given binary tree {1,#,2,3},
+   1
+    \
+     2
+    /
+   3
+return [3,2,1].
+
+Note: Recursive solution is trivial, could you do it iteratively?
+*/
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -7,6 +21,24 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+// Recursive
+class Solution {
+    public void postOrder(TreeNode node, List<Integer> r){
+        if(node == null)    return;
+        postOrder(node.left, r);
+        postOrder(node.right, r);
+        r.add(node.val);
+    }
+
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> r = new ArrayList<>();
+        postOrder(root, r);
+        return r;
+    }
+}
+
+// Iterative
 public class Solution {
     class Cmd{
         TreeNode n;
