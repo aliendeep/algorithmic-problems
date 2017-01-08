@@ -1,5 +1,6 @@
 /*
-Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
+Given a singly linked list where elements are sorted in ascending order, 
+convert it to a height balanced BST.
 */
 
 /**
@@ -55,6 +56,35 @@ public class Solution {
         TreeNode right = inOrderHelper(mid+1, end);
         root.right = right;
 
+        return root;
+    }
+}
+
+// O(nlogn) Solution
+public class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null)
+            return null;
+        if(head.next == null)
+            return new TreeNode(head.val);
+
+        // Find the mid point
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            prev = slow;
+            slow = slow.next;
+        }
+        
+        // divide two lists
+        ListNode second = slow.next;
+        prev.next = null;
+
+        TreeNode root = new TreeNode(slow.val);
+        root.left = sortedListToBST(head);
+        root.right = sortedListToBST(second);
         return root;
     }
 }

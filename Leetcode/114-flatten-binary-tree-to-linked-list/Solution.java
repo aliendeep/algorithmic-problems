@@ -77,3 +77,41 @@ class Solution2 {
         flatten(right);
     }
 }
+
+
+// Time : O(1) Space
+class Solution3 {
+    public void flatten(TreeNode root) {
+        if(root == null)
+            return;
+        
+        TreeNode cur = root;
+        while(cur != null){
+            if(cur.left != null){
+                // find the right most node of left child
+                TreeNode prev = cur.left;
+                while(prev.right != null){
+                    prev = prev.right;
+                }
+                
+                prev.right = cur.right;
+                cur.right = cur.left;
+                cur.left = null;
+            }
+            cur = cur.right;
+        }
+    }
+}
+
+class Solution4 {
+    TreeNode prev = null;
+    public void flatten(TreeNode root) {
+        if(root == null)
+            return;
+        flatten(root.right);
+        flatten(root.left);
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
+}
