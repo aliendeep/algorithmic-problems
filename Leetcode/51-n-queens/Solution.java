@@ -1,9 +1,11 @@
 /*
-The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such 
+that no two queens attack each other.
 
 Given an integer n, return all distinct solutions to the n-queens puzzle.
 
-Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+Each solution contains a distinct board configuration of the n-queens' placement, 
+where 'Q' and '.' both indicate a queen and an empty space respectively.
 
 For example,
 There exist two distinct solutions to the 4-queens puzzle:
@@ -22,7 +24,8 @@ There exist two distinct solutions to the 4-queens puzzle:
 */
 
 public class Solution {
-    public void solve(int r, int n, int[] row, boolean[] col, boolean[] d1, boolean[] d2, List<List<String>> result){
+    public void solve(int r, int n, int[] row, boolean[] col, boolean[] d1, boolean[] d2, 
+                        List<List<String>> result){
         if(r == n){
             // Process Solution            
             List<String> oneSol = new ArrayList<>();
