@@ -1,5 +1,6 @@
 /*
-Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
+Given a m x n matrix, if an element is 0, set its entire row and column to 0. 
+Do it in place.
 */
 
 public class Solution {
@@ -17,7 +18,8 @@ public class Solution {
                 firstRowFlag = true;
         }
         
-        // Use the first row and first column as the temporary array to keep track of the 0s appeared in rows & columns
+        // Use the first row and first column as the temporary array to keep 
+        // track of the 0s appeared in rows & columns
         for(int i=1; i<r; i++){
             for(int j=1; j<c; j++){
                 if(matrix[i][j] == 0){

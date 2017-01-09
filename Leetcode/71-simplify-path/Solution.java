@@ -12,7 +12,6 @@ In this case, you should return "/".
 Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
 In this case, you should ignore redundant slashes and return "/home/foo".
 */
-
 public class Solution {
     public String simplifyPath(String path) {
         String[] paths = path.split("/");
@@ -47,7 +46,7 @@ public class Solution {
 }
 
 // Stack
-class Solution2 {
+class Solution {
     public String simplifyPath(String path) {
         String[] tokens = path.split("/");
         int n = tokens.length;
@@ -64,18 +63,11 @@ class Solution2 {
                 stk.push(tokens[i]);
             }
         }
-        List<String> t = new ArrayList<>();
-        while(!stk.isEmpty()){
-            t.add(stk.pop());
-        }
-        
         StringBuilder r = new StringBuilder();
-        for(int i=t.size()-1; i>=0; --i){
+        while(!stk.isEmpty()){
             r.append("/");
-            r.append(t.get(i));
+            r.append(stk.pollLast());
         }
-        if(r.length() == 0)
-            return "/";
-        return r.toString();
+        return r.length() == 0 ? "/" : r.toString();
     }
 }

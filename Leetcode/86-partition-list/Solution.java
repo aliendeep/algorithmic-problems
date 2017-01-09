@@ -1,3 +1,14 @@
+/*
+Given a linked list and a value x, partition it such that all nodes less than x 
+come before nodes greater than or equal to x.
+
+You should preserve the original relative order of the nodes in each of the two 
+partitions.
+
+For example,
+Given 1->4->3->2->5->2 and x = 3,
+return 1->2->2->4->3->5.
+*/
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -53,5 +64,35 @@ public class Solution {
         }
         
         return dummy.next;
+    }
+}
+
+// One pass Solution
+class Solution2 {
+    public ListNode partition(ListNode head, int x) {
+        if(head == null || head.next == null)
+            return head;
+        // less than x
+        ListNode firstHead = new ListNode(-1);
+        ListNode firstPrev = firstHead;
+        // >= x
+        ListNode secondHead = new ListNode(-1);
+        ListNode secondPrev = secondHead;
+
+        ListNode cur = head;
+        while(cur != null){
+            if(cur.val < x){
+                firstPrev.next = cur;
+                firstPrev = firstPrev.next;
+            }
+            else{
+                secondPrev.next = cur;
+                secondPrev = secondPrev.next;
+            }
+            cur = cur.next;
+        }
+        secondPrev.next = null;
+        firstPrev.next = secondHead.next;
+        return firstHead.next;
     }
 }

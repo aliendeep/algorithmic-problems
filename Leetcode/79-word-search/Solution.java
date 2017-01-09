@@ -17,6 +17,8 @@ word = "ABCCED", -> returns true,
 word = "SEE", -> returns true,
 word = "ABCB", -> returns false.
 */
+// DFS
+// visited array
 public class Solution {
     boolean isValid(int x, int y, int r, int c){
         if(x >= 0 && x < r && y >= 0 && y < c )

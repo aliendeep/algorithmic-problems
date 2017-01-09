@@ -1,8 +1,10 @@
 /*
-Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+Write an efficient algorithm that searches for a value in an m x n matrix. 
+This matrix has the following properties:
 
 Integers in each row are sorted from left to right.
-The first integer of each row is greater than the last integer of the previous row.
+The first integer of each row is greater than the last integer of the previous 
+row.
 For example,
 
 Consider the following matrix:
@@ -38,7 +40,7 @@ public class Solution {
 
 // Alternative: Binary Search
 // Treat the whole matrix as a 1D matrix
-// O(logn)
+// O(log(rc))
 class Solution2 {
     public boolean searchMatrix(int[][] matrix, int target) {
       int r = matrix.length;

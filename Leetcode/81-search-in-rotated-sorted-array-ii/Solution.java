@@ -4,11 +4,51 @@ What if duplicates are allowed?
 
 Would this affect the run-time complexity? How and why?
 
-Write a function to determine if a given target is in the array.
-*/
+Suppose an array sorted in ascending order is rotated at some pivot unknown to 
+you beforehand.
 
+(i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
+
+Write a function to determine if a given target is in the array.
+
+The array may contain duplicates.
+*/
+// cleaner
 public class Solution {
-    // Recursive
+    public boolean search(int[] a, int target) {
+        int n = a.length;
+        int l = 0, h = n-1;
+        while(h - l > 3){
+            int mid = (l+h)/2;
+            if(a[mid] == target)
+                return true;
+            // left side sorted
+            if(a[l] < a[mid]){
+                if(a[l] <= target && target < a[mid])
+                    h = mid - 1;
+                else
+                    l = mid + 1;
+            }
+            // right half sorted
+            else if(a[l] > a[mid]){
+                if(a[mid] < target && target <= a[h])
+                    l = mid + 1;
+                else
+                    h = mid - 1;
+            }
+            // a[l] == a[mid]
+            else
+                l++;
+        }
+        for(int i=l; i<=h; i++){
+            if(a[i] == target)
+                return true;
+        }
+        return false;
+    }
+}
+
+class Solution2{
     public boolean binarySearch(int[] a, int low, int high, int target){
         if(low > high)          
             return false;

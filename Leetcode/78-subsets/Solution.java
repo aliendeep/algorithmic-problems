@@ -17,8 +17,47 @@ If nums = [1,2,3], a solution is:
   []
 ]
 */
-
+// Backtracking
 public class Solution {
+    void bktk(int[] nums, int start, List<Integer> cur, List<List<Integer>> r){
+        r.add(new ArrayList<Integer>(cur));
+        for(int i=start; i<nums.length; i++){
+            cur.add(nums[i]);
+            bktk(nums, i+1, cur, r);
+            cur.remove(cur.size()-1);
+        }
+    }    
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> r = new ArrayList<List<Integer>>();
+        List<Integer> cur = new ArrayList();
+        bktk(nums, 0, cur, r);
+        return r;
+    }
+}
+
+// Backtracking Solution2
+class Solution2 {
+    void bktk(int[] nums, int lev, ArrayList<Integer> cur, List<List<Integer>> result){
+        if(lev == nums.length){
+            result.add(new ArrayList<Integer>(cur));
+            return;
+        }            
+        // without
+        bktk(nums, lev+1, cur, result);
+        // with
+        cur.add(nums[lev]);
+        bktk(nums, lev+1, cur, result);
+        cur.remove(cur.size()-1);
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        ArrayList<Integer> cur =  new ArrayList<Integer>();
+        bktk(nums, 0, cur, result);
+        return result;
+    }
+}
+
+class Solution3 {
     // Binary trick
     // logb(n) = log(n) / log(b)
     public static double getLog2(int n){
@@ -49,7 +88,7 @@ public class Solution {
     }
 }
 
-class Solution2 {
+class Solution4 {
     // Alternative
     public List<Integer> convertToSet(String s, int[] nums){
         List<Integer> r = new ArrayList<>();
