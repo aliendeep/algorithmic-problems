@@ -52,7 +52,6 @@ public class Solution {
     
         // Append the previous head to the tail
         cur.next = head;
-        return second;
-        
+        return second;        
     }
 }

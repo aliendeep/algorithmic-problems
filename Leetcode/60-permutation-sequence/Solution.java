@@ -45,3 +45,36 @@ public class Solution {
         return r.toString();
     }
 }   
+
+
+// i = 1 to n
+class Solution2 {
+    int[] f;
+    // Given n will be between 1 and 9 inclusive.
+    public Solution(){
+        // calculate factorial
+        f = new int[10];
+        f[0] = 1;
+        for(int i=1; i<10; i++)
+            f[i] = f[i-1]*i;
+    }
+
+    public String getPermutation(int n, int k) {
+        // Create the list of the number
+        List<Integer> a = new ArrayList<>();
+        for(int i=1; i<=n; i++){
+            a.add(i);
+        }        
+        
+        k--;
+        StringBuilder r = new StringBuilder();
+        for(int i=1; i<=n; i++){
+            int index = k/f[n-i];
+            r.append(a.get(index));
+            // remove that number
+            a.remove(index);
+            k -= index*f[n-i];
+        }
+        return r.toString();
+    }
+}
