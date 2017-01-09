@@ -64,6 +64,34 @@ class SegmentTree{
         return getIndexRecursive(1, 0, _n-1, sum);
     }
 
+    
+    public int rangeSumRecursive(int nodeIndex, int low, int high, int i, int j){
+        // return range sum of a[i...j]
+        // outside range
+        if(high < i || low > j)
+            return 0;
+            
+        // completely within range
+        if(low >= i && high <= j)
+            return node[nodeIndex];
+            
+        int mid = (int)(low+high)/2;
+        if(i > mid){
+            // right 
+            return rangeSumRecursive(nodeIndex*2 + 1, mid+1, high, i, j);
+        }        
+        if(j <= mid){
+            // left
+            return rangeSumRecursive(nodeIndex*2, low, mid, i, j);
+        }
+        return rangeSumRecursive(nodeIndex*2, low, mid, i, mid) + 
+                            rangeSumRecursive(nodeIndex*2+1, mid+1, high, mid+1, j);
+    }
+    
+    public int rangeSum(int i, int j){
+        return rangeSumRecursive(1, 0, _n-1, i, j);
+    }
+
     // Binary Search
     public int findIndex(int sum){
         int low = 0;

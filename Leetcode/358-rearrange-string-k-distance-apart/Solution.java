@@ -28,7 +28,6 @@ The same letters are at least distance 2 from each other.
 */
 
 import java.util.*;
-
 // Greedy
 // Keep count and next valid position
 class Solution2 {

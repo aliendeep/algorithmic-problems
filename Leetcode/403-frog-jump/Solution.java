@@ -117,3 +117,41 @@ class Solution {
         return canCross(stones, dp, 0, 0) == 1 ? true : false;
     }
 }
+
+// O(n^2logn)
+public class Solution {
+    int n;
+    public int canCross(int[] stones, int[][] dp, int index, int k) {
+        if(index == n-1)
+            return 1;
+        if(dp[index][k] != -1)
+            return dp[index][k];
+        
+        // the frog can only jump in the forward direction
+        dp[index][k] = 0;
+        int pos = Arrays.binarySearch(stones, index+1, n, stones[index] + k);
+        if(pos >= 0 && canCross(stones, dp, pos, k) == 1){
+            dp[index][k] = 1;
+            return 1;
+        }
+        pos = Arrays.binarySearch(stones, index+1, n, stones[index] + k + 1);
+        if(pos >= 0 && canCross(stones, dp, pos, k + 1) == 1){
+            dp[index][k] = 1;
+            return 1;
+        }
+        pos = Arrays.binarySearch(stones, index+1, n, stones[index] + k - 1);
+        if(pos >= 0 && canCross(stones, dp, pos, k - 1) == 1){
+            dp[index][k] = 1;
+            return 1;
+        }
+        return dp[index][k];
+    }
+
+    public boolean canCross(int[] stones) {
+        n = stones.length;
+        int[][] dp = new int[n+1][n+1];
+        for(int[] t : dp)
+            Arrays.fill(t, -1);
+        return canCross(stones, dp, 0, 0) == 1;
+    }
+}

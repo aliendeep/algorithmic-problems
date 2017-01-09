@@ -82,3 +82,45 @@ class Solution2 {
         return maxLen;
     }
 }
+
+
+// Alternative
+//  O(n + N) variation, where n is the number of words 
+//  N is the total number of characters in all words.
+class Solution3 {
+    class Info{
+        int mask;
+        // length of the word
+        int length;
+        public Info(int m, int l){
+            mask = m;
+            length = l;
+        }
+    }
+    public int maxProduct(String[] words) {
+        int n = words.length;
+        if(n == 0)  return 0;
+        List<Info> list = new ArrayList<>();
+        for(int k=0; k<n; ++k){
+            String word = words[k];
+            int mask = 0;
+            for(int i=0; i<word.length(); ++i){
+                mask |= 1<<(word.charAt(i) - 'a');
+            }
+            list.add(new Info(mask, word.length()));
+        }
+        
+        // for all possible mask (At most 2^52)
+        int l = list.size();
+        int maxLen = 0;
+        for(int i=0; i<l; ++i){
+            for(int j=i+1; j<l; ++j){
+                Info a = list.get(i);
+                Info b = list.get(j);
+                if((a.mask & b.mask) == 0)
+                    maxLen = Math.max(maxLen, a.length * b.length);
+            }
+        }
+        return maxLen;
+    }
+}

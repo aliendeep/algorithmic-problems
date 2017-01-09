@@ -14,7 +14,51 @@ E 0 W E
 
 return 3. (Placing a bomb at (1,1) kills 3 enemies)
 */
+import java.util.*;
+
 public class Solution {
+    int getKillCount(int dir, char[][] grid, int r, int c, int[][][] dp){
+        int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int row = grid.length;
+        int col = grid[0].length;
+        if(r < 0 || r >= row || c < 0 || c <= col)
+            return 0;
+        if(grid[r][c] == 'W')   return 0;
+        if(dp[dir][r][c]!= -1) return dp[dir][r][c];
+        // either enemy or 0
+        int _r  = r + move[dir][0];
+        int _c  = r + move[dir][1];
+        dp[dir][r][c] = (grid[r][c] == 'E' ? 1 : 0) + getKillCount(dir, grid, _r, _c, dp);
+        return dp[dir][r][c];
+    }
+
+    public int maxKilledEnemies(char[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        int maxKill = 0;
+
+        int[][][] dp = new int[4][row][col];
+        for(int[][] x : dp){
+            for(int[] y : x)
+                Arrays.fill(dp, -1);
+        }
+
+        for(int r=0; r<row; ++r){
+            for(int c=0; c<col; ++c){
+                if(grid[r][c] == '0'){
+                    int sum = 0;
+                    for(int i=0; i<4; ++i){
+                        sum += getKillCount(i, grid, r, c, dp);
+                    }
+                    maxKill = Math.max(maxKill, sum);
+                }
+            }            
+        }
+        return maxKill;
+    }
+}
+
+class Solution2 {
     // O(mn) Solution
     // DP
     class Cell{
@@ -75,7 +119,7 @@ public class Solution {
 }
 
 // Bruteforce
-class Solution2 {
+class Solution3 {
     // ["0E00","E0WE","0E00"]
     public int calculateVal(char[][] grid, int start, int end) {
         int r = grid.length;
