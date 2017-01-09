@@ -16,6 +16,16 @@ Example 2:
    / \
   2   3
 Binary tree [1,2,3], return false.
+Sample Input:
+[2,1,3]
+[]
+[1,1]
+[2147483647]
+Sample Output:
+true
+true
+false
+true
 */
 
 /**
@@ -40,5 +50,61 @@ public class Solution {
     public boolean isValidBST(TreeNode root) {
         if(root == null)    return true;
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+}
+
+class Solution2 {
+    // Alternative: in order traversal 
+    long prev;
+    public boolean inorder(TreeNode node){
+        if(node == null)    
+            return true;
+        
+        if(!inorder(node.left))
+            return false;
+        
+        if(node.val <= prev)
+            return false;
+        
+        prev = node.val;
+        
+        if(!inorder(node.right))
+            return false;
+        return true;
+        
+    }
+    public boolean isValidBST(TreeNode root) {
+        prev = Long.MIN_VALUE;
+        return inorder(root);
+    }
+}
+
+// Queue (level order traversal)
+class Solution3 {
+    class Info{
+        TreeNode node;
+        long lower;
+        long upper;
+        public Info(TreeNode n, long l, long u){
+            node = n;
+            lower = l;
+            upper = u;
+        }
+    }
+    public boolean isValidBST(TreeNode root) {
+        if(root == null)
+            return true;
+        Queue<Info> Q = new LinkedList<>();
+        Q.add(new Info(root, Long.MIN_VALUE, Long.MAX_VALUE));
+        while(!Q.isEmpty()){
+            Info f = Q.remove();
+            if(f.node.val <= f.lower || f.node.val >= f.upper)
+                return false;
+            if(f.node.left != null)
+                Q.add(new Info(f.node.left, f.lower, f.node.val));
+            if(f.node.right != null)
+                Q.add(new Info(f.node.right, f.node.val, f.upper));
+        }
+        return true;
     }
 }
