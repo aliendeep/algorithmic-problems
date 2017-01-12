@@ -13,7 +13,6 @@ Note:
 */
 
 public class Solution {
-    // Time complexity: O(nlogk)
     class Entry{
       int num;
       int index;

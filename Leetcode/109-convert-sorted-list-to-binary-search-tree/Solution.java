@@ -11,15 +11,6 @@ convert it to a height balanced BST.
  *     ListNode(int x) { val = x; }
  * }
  */
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 public class Solution {
     private ListNode node;
     

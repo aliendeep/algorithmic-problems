@@ -94,7 +94,7 @@ public class Solution {
 // longest path (No need to construct the graph before)
 class Solution2 {
     int[][] move = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-    public int dfs(int[][] matrix, int r, int c, int[][] d){
+    public int longestPath(int[][] matrix, int r, int c, int[][] d){
         if(d[r][c] != 0)
             return d[r][c];
         
@@ -104,7 +104,7 @@ class Solution2 {
             int c1 = c+move[i][1];
             if(r1 < 0 || r1 >= matrix.length || c1 < 0 || c1 >= matrix[0].length || matrix[r][c] >= matrix[r1][c1])
                 continue;
-            len = Math.max(len, dfs(matrix, r1, c1, d));
+            len = Math.max(len, longestPath(matrix, r1, c1, d));
         } 
         d[r][c] = len + 1;
         return d[r][c]; 
@@ -118,7 +118,7 @@ class Solution2 {
         int maxLength = 1;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                maxLength = Math.max(maxLength, dfs(matrix, i, j, d));
+                maxLength = Math.max(maxLength, longestPath(matrix, i, j, d));
             }
         }
         return maxLength;

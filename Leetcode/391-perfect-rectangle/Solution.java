@@ -139,7 +139,7 @@ public class Solution {
                 }
             }
             // items left but y range is invalid
-            while(!Q.isEmpty() && verticalRangeOfCurrentLine != yRange)
+            if(!Q.isEmpty() && verticalRangeOfCurrentLine != yRange)
                 return false;
         }
         return true;

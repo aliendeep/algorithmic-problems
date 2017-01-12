@@ -100,9 +100,9 @@ class Solution3 {
         int[] cnt = new int[26];
         for(int i=0; i<n; i++){
             cnt[s.charAt(i) - 'a']++;
-        }
+        }        
         int lowestPosition = 0;
-        // Find the postion 
+        // Find the postion for the smallest s[i]
         for(int i=0; i<n; i++){
             if(s.charAt(i) < s.charAt(lowestPosition))
                 lowestPosition = i;
@@ -115,5 +115,62 @@ class Solution3 {
         // replace all: first parameter String
         String rest = s.substring(lowestPosition+1).replaceAll("" + firstChar, "");
         return  firstChar + removeDuplicateLetters(rest);             
+    }
+}
+
+// Iterative
+// Time: O(26*n)
+class Solution4 {
+    // O(n)
+    public void updateCount(String s, int start, int[] cnt, Set<Character> taken){
+        Arrays.fill(cnt, 0);
+        for(int i=start; i<s.length(); i++){
+            int c = s.charAt(i) - 'a';
+            cnt[c]++;
+        }   
+    }
+    
+    // O(n)
+    public int findLowestAvailableCharacter(String s, int start, int[] cnt, Set<Character> taken){
+        int lowestPosition = start;
+        for(int i=start; i<s.length(); i++){
+            char c = s.charAt(i);
+            if(taken.contains(c))
+                continue;
+            if(taken.contains(s.charAt(lowestPosition)) || c < s.charAt(lowestPosition))
+                lowestPosition = i;
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] == 0){
+                break;
+            }
+        }
+        return lowestPosition;
+    }
+
+    public String removeDuplicateLetters(String s) {
+        int n = s.length();
+        if(n == 0)      return "";
+        int[] cnt = new int[26];
+        int unique = 0;
+        for(int i=0; i<n; i++){
+            int c = s.charAt(i) - 'a';
+            cnt[c]++;
+            if(cnt[c] == 1)
+                unique++;
+        }   
+        
+        // Number of unique character is atmost 26
+        StringBuilder result = new StringBuilder();
+        Set<Character> taken = new HashSet<>();
+        int start = 0;
+        for(int i=0; i<unique; ++i){
+            int index = findLowestAvailableCharacter(s, start, cnt, taken);
+            char c = s.charAt(index);
+            result.append(c);
+            taken.add(c);
+            start = index + 1;
+            updateCount(s, start, cnt, taken);
+        }
+        return result.toString();
     }
 }

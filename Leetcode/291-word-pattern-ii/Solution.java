@@ -33,7 +33,8 @@ public class Solution {
         if(i == n && j == m)  return true;
         // only one of them reached end
         if(i == n || j == m)  return false;
-
+        if(n - i > m - j)   
+            return false;
         // Current pattern char
         char cur = pattern.charAt(i);
         // if we have matched the current pattern char to some string before

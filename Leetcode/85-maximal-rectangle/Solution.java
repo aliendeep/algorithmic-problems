@@ -9,8 +9,17 @@ For example, given the following matrix:
 1 1 1 1 1
 1 0 0 1 0
 Return 6.
+
+Sample Input:
+["10100","10111","11111","10010"]
+["11"]
+["11111111","11111110","11111110","11111000","01111000"]
+Sample Output:
+6
+2
+21
 */
-// Less Space
+// Less Space and time O(rc)
 public class Solution {
     // if any previous height is higher than current height, then we don't need to remember that previous height 
     public int largestRectangleArea(int[] heights){
@@ -101,8 +110,72 @@ class Solution2 {
     }
 }
 
+// O(r^2c)
+class Solution3 {
+    class HeightWidth{
+        int h, w;
+        public HeightWidth(int h1, int w1){
+            h = h1;
+            w = w1;
+        }
+    }
+    public int maximalRectangle(char[][] matrix) {
+        int r = matrix.length;
+        if(matrix == null || r == 0 || matrix[0].length == 0)
+            return 0;
+        int c = matrix[0].length;
+        HeightWidth[][] dp = new HeightWidth[r][c];     
+        
+        // init
+        dp[r-1][c-1] = matrix[r-1][c-1] == '0' ? new HeightWidth(0, 0) : new HeightWidth(1, 1);
+        for(int i=r-2; i>=0; i--){
+            int h = 0, w = 0;
+            if(matrix[i][c-1] == '1'){
+                h = dp[i+1][c-1].h + 1;
+                w = 1;
+            }
+            dp[i][c-1] = new HeightWidth(h, w);
+        }
+        
+        for(int j=c-2; j>=0; j--){
+            int h = 0, w = 0;
+            if(matrix[r-1][j] == '1'){
+                h = 1;
+                w = dp[r-1][j+1].w + 1;
+            }
+            dp[r-1][j] = new HeightWidth(h, w);
+        }
+        
+        for(int i=r-2; i>=0; i--){
+            for(int j=c-2; j>=0; j--){
+                int h = 0, w = 0;
+                if(matrix[i][j] == '1'){
+                    h = dp[i+1][j].h + 1;
+                    w = dp[i][j+1].w + 1;
+                }
+                dp[i][j] = new HeightWidth(h, w);
+            }
+        }
+        int maxRect = 0;
+        for(int i=0; i<r; i++){
+            for(int j=0; j<c; j++){
+                // if it's a candidate
+                if(matrix[i][j] == '1' && dp[i][j].w * dp[i][j].h > maxRect){
+                    // get the minimum width
+                    int width = c;
+                    for(int k=0; k<dp[i][j].h; ++k){
+                        width = Math.min(width, dp[i+k][j].w);
+                        maxRect = Math.max(maxRect, width*(k+1));
+                    }
+                }
+            }
+        }
+        return maxRect;
+    }
+}
+
 // DP
-class Solution {
+class Solution4 {
     // height -  number of '1's above including the current one. 
     // The value of left & right means the boundaries of the rectangle which contains the current point with a height of value height.
     // https://discuss.leetcode.com/topic/6650/share-my-dp-solution    
