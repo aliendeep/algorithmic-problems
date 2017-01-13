@@ -71,9 +71,7 @@ class SolutionFollowUp {
             List<Integer> l = map.get(c);
             if(l.size() == 0)
                 l = new ArrayList<>();
-
-            l.add(i);
-            map.set(c, l);
+            l.get(c).add(i);
         }
         
         int index = 0;

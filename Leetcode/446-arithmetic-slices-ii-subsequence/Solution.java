@@ -1,5 +1,6 @@
 /*
-A sequence of numbers is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.
+A sequence of numbers is called arithmetic if it consists of at least three elements 
+and if the difference between any two consecutive elements is the same.
 
 For example, these are arithmetic sequences:
 
@@ -10,13 +11,16 @@ The following sequence is not arithmetic.
 
 1, 1, 2, 5, 7
 
-A zero-indexed array A consisting of N numbers is given. A subsequence slice of that array is any sequence of integers (P0, P1, ..., Pk) such that 0 ≤ P0 < P1 < ... < Pk < N.
+A zero-indexed array A consisting of N numbers is given. A subsequence slice of 
+that array is any sequence of integers (P0, P1, ..., Pk) such that 0 ≤ P0 < P1 < ... < Pk < N.
 
-A subsequence slice (P0, P1, ..., Pk) of array A is called arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] is arithmetic. In particular, this means that k ≥ 2.
+A subsequence slice (P0, P1, ..., Pk) of array A is called arithmetic if the 
+sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] is arithmetic. In particular, this means that k ≥ 2.
 
 The function should return the number of arithmetic subsequence slices in the array A.
 
-The input contains N integers. Every integer is in the range of -231 and 231-1 and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 231-1.
+The input contains N integers. Every integer is in the range of -2^31 and 2^31-1 
+and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 2^31-1.
 
 
 Example:
@@ -55,5 +59,27 @@ public class Solution {
             }
         }
         return result;
+    }
+}
+
+// O(n^2)
+class Solution2 {
+    public int numberOfArithmeticSlices(int[] A) {
+        int n = A.length;
+        Map<Integer,Integer>[] map = new Map[n];
+        int ans = 0;
+        for(int i=0; i<n; ++i){
+            map[i] = new HashMap<>();
+            for(int j=0; j<i; ++j){
+                long diff = (long)A[i] - A[j];
+                if(diff < Integer.MIN_VALUE || diff > Integer.MAX_VALUE) 
+                    continue;
+                int cnt1 = map[i].getOrDefault((int)diff, 0); 
+                int cnt2 = map[j].getOrDefault((int)diff, 0);
+                ans += cnt2;
+                map[i].put((int)diff, cnt1 + cnt2 + 1);
+            }
+        }
+        return ans;
     }
 }

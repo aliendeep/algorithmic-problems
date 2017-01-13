@@ -70,3 +70,44 @@ public class Solution {
         return isSubsetSum(nums, n-1, sum/2);
     }
 }
+
+class Solution2 {
+    // Time Complexity: O(n*Sum)
+    public boolean subsetSum(int[] nums, int sum){
+        int n = nums.length;
+        // Both the array size and each of the array element will not exceed 100.
+        boolean[][] dp = new boolean[sum+1][n+1];
+        for(int i=0; i<=n; i++){
+            // if sum is 0, then true
+            dp[0][i] = true;
+        }
+        
+        for(int s=0; s<=sum; s++){
+            // if sum is > 0 and number of elements is 0, then false
+            dp[s][0] = false;
+        }
+
+        for(int s=1; s<=sum; s++){
+            for(int j=1; j<=n; j++){
+                dp[s][j] = dp[s][j-1];
+                if(nums[j-1] <= s){
+                    dp[s][j] = dp[s][j] || dp[s-nums[j-1]][j-1];
+                }
+            }            
+        }
+        return dp[sum][n];
+    }
+    
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for(int i : nums){
+            sum += i;
+        }
+        // if sum of all of the numbers is odd, then return false;
+        if(sum % 2 == 1)
+            return false;
+        
+        int targetSum = sum/2;
+        return subsetSum(nums, targetSum);
+   }
+}

@@ -48,3 +48,41 @@ public class Solution {
         return dp[nt][ns];
     }
 }
+
+// Memoization (Stack Overflow)
+// Run locally by increasing stack size
+// Example: java -Xss4m Solution <input.txt 
+class Solution2 {
+    String s;
+    String t;
+    int n, m;
+    int[][] dp;
+    
+    public int getCntSubsequences(int i, int j){
+        // empty string to empty string matching
+        if(i == 0 && j == 0)    return 1;
+        if(j == 0)              return 0;
+        // t is empty, so only way to match is to delete all characters of s
+        if(i == 0)              return 1;
+        if(dp[i][j] != -1)      return dp[i][j];
+
+        int x = getCntSubsequences(i, j-1);
+        int y = 0;
+        if(t.charAt(i-1) == s.charAt(j-1))
+            y = getCntSubsequences(i-1, j-1);
+
+        dp[i][j] = x + y;
+        return dp[i][j];
+    }
+    
+    public int numDistinct(String str, String tr) {
+        s = str;
+        t = tr;
+        n = s.length();
+        m = t.length();
+        dp = new int[m+1][n+1];
+        for(int[] x : dp)
+            Arrays.fill(x, -1);
+        return getCntSubsequences(m, n);
+    }
+}

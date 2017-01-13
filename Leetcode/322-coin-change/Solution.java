@@ -70,30 +70,30 @@ class Solution2 {
 // Memoization
 class Solution3 {
     // dp[i] : minimum no of coins needed to make ith amount
-    public int getMinCoin(int[] coins, int target, int[] dp){
-        if(target <= 0)
+    int[] dp;
+    public int getMinCoin(int[] coins, int target){
+        if(target == 0)
             return 0;
-        
         if(dp[target] != -1)
             return dp[target];
         
-        int minNumberCoin = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
         for(int coin : coins){
-            if(coin > target)
-                continue;
-            int cntUsingCoin = getMinCoin(coins, target - coin, dp);
-            if(cntUsingCoin == Integer.MAX_VALUE)
-                continue;
-            minNumberCoin = Math.min(minNumberCoin,  cntUsingCoin + 1);
+            if(coin <= target){
+                int cnt = getMinCoin(coins, target - coin);
+                if(cnt < Integer.MAX_VALUE)
+                    cnt++;
+                min = Math.min(min,  cnt);
+            }
         }
-        dp[target] = minNumberCoin;
-        return minNumberCoin;
+        dp[target] = min;
+        return dp[target];
     }
     
     public int coinChange(int[] coins, int amount) {
-        int[] dp = new int[amount+1];
+        dp = new int[amount+1];
         Arrays.fill(dp, -1);
-        int r = getMinCoin(coins, amount, dp);
+        int r = getMinCoin(coins, amount);
         return r == Integer.MAX_VALUE ? -1 : r;
     }
 }

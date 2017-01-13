@@ -28,12 +28,16 @@ public class Solution {
         s0[0] = 0;
         // buy
         s1[0] = -prices[0];
+        // sell
         s2[0] = Integer.MIN_VALUE;
         for(int i=1; i<n; ++i){
             s0[i] = Math.max(s0[i-1], s2[i-1]);
+                            // buy, stay
             s1[i] = Math.max(s0[i-1] - prices[i], s1[i-1]);
+            // sell
             s2[i] = s1[i-1] + prices[i];
         }
+        // rest or sell (final answer can't be in buy state)
         return Math.max(s0[n-1], s2[n-1]);
     }
 }

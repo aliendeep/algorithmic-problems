@@ -212,3 +212,37 @@ class Solution5 {
         return maxLength;
     }
 }
+
+
+class Solution6 {
+    // Alternative: O(n^2)
+    public int maxEnvelopes(int[][] envelopes) {
+        int n = envelopes.length;
+        if(envelopes == null || n == 0 || envelopes[0] == null || envelopes[0].length != 2)
+            return 0;
+        
+        // Sort by width (increasing order) 
+        Arrays.sort(envelopes, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                return Integer.compare(a[0], b[0]);
+            }
+        });
+        
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        
+        for(int i=0; i<n; ++i){
+            for(int j=0; j<i; ++j){
+                // smaller envelope fits into larger envelope
+                if(envelopes[j][1] < envelopes[i][1] && envelopes[j][0] < envelopes[i][0]){
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        int maxLength = 1;
+        for(int i=0; i<n; i++)
+            maxLength = Math.max(maxLength, dp[i]);
+        return maxLength;
+    }
+}

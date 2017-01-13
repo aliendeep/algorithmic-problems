@@ -11,6 +11,7 @@ For example, given the following matrix:
 Return 4.
 */
 public class Solution {
+    // dp[i][j] represents size of the maximal square sub-matrix with all 1s including matrix[i][j] 
     public int maximalSquare(char[][] matrix) {
         int r = matrix.length;
         if(r == 0)
@@ -21,13 +22,17 @@ public class Solution {
         int[][] dp = new int[r][c];
         // init
         for(int j=0; j<c; j++){
-            dp[0][j] = matrix[0][j] - '0';
-            maxLen = Math.max(maxLen, dp[0][j]);            
+            if(matrix[0][j] == '1'){
+                dp[0][j] = 1;
+                maxLen = 1;
+            }
         }
         // first col
         for(int i=0; i<r; i++){
-            dp[i][0] = matrix[i][0] - '0';
-            maxLen = Math.max(maxLen, dp[i][0]);            
+            if(matrix[i][0] == '1'){
+                dp[i][0] = 1;
+                maxLen = 1;
+            }
         }
         for(int i=1; i<r; i++){
             for(int j=1; j<c; j++){

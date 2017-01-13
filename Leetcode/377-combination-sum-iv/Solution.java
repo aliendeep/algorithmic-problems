@@ -42,6 +42,7 @@ public class Solution {
     }
 }
 
+// O(n*target)
 class Solution2 {
     // Alternative: Memoization
     public int combinationSum(int[] nums, int target, int[] dp) {
@@ -62,6 +63,29 @@ class Solution2 {
         int[] dp = new int[target+1];
         Arrays.fill(dp, -1);
         
+        return combinationSum(nums, target, dp);
+    }
+}
+
+// Reduce memory usage
+public class Solution {
+    // If target is a large number
+    public int combinationSum(int[] nums, int target, Map<Integer, Integer> dp) {
+        if(target == 0)               return 1;
+        if(dp.containsKey(target))    return dp.get(target);
+        
+        int cnt = 0;
+        for(int i=0; i<nums.length; ++i){
+            if(nums[i] <= target){
+                cnt += combinationSum(nums, target - nums[i], dp);
+            }
+        }
+        dp.put(target, cnt);
+        return cnt;
+    }
+    public int combinationSum4(int[] nums, int target) {
+        int n = nums.length;
+        Map<Integer, Integer> dp = new HashMap<>();
         return combinationSum(nums, target, dp);
     }
 }

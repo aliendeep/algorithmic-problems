@@ -36,7 +36,7 @@ public class Solution {
     }
 }
 
-// Alternative
+// Alternative : O(n^2)
 class Solution2 {
    public int integerBreak(int n) {
         if(n == 0)

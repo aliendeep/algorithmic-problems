@@ -7,7 +7,8 @@ Rules for a valid pattern:
 Each pattern must connect at least m keys and at most n keys.
 All the keys must be distinct.
 If the line connecting two consecutive keys in the pattern passes through any other keys, 
-the other keys must have previously selected in the pattern. No jumps through non selected key is allowed.
+the other keys must have previously selected in the pattern. No jumps through non 
+selected key is allowed.
 The order of keys used matters.
 
 Explanation:

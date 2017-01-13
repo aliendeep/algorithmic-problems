@@ -11,7 +11,7 @@ Another example is ")()())", where the longest valid parentheses substring is
 public class Solution {
     // Time & Space: O(n)
     public int longestValidParentheses(String s) {
-        // Stack contains indices of the left parenthesis
+        // Stack contains indices of the parenthesis
         Deque<Integer> stk = new LinkedList<>();
         stk.push(-1);
         int maxLength = 0;

@@ -95,6 +95,7 @@ class Solution4 {
             sum = s;
         }
     }
+    
     public Info helper(int[] nums, int l, int h) {
         // one element
         if(l == h)  return new Info(nums[l], nums[l], nums[l], nums[l]);

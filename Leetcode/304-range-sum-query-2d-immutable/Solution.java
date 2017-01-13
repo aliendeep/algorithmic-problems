@@ -58,29 +58,42 @@ dp[i][j]   =          dp[i-1][j]    +     dp[i][j-1]    -   dp[i-1][j-1]   +
 
 import java.util.*;
 
-// dp O(mn) time init
+// dp O(mn) time 
 // Query: O(1)
 public class NumMatrix {
-    int[][] dp;
+    int[][] cumSum;
 
     public NumMatrix(int[][] matrix) {
         int r = matrix.length;
         if(r > 0){
             int c = matrix[0].length;
             
-            dp = new int[r+1][c+1];
-            // dp[i][j] = sum of the element (matrix[0][0] to matrix[i-1][j-1])
-            for(int i=1; i<=r; i++){
-                for(int j=1; j<=c; j++){
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + matrix[i-1][j-1];        
+            cumSum = new int[r][c];
+            // cumSum[i][j] = sum of the element (matrix[0][0] to matrix[i-1][j-1])
+            cumSum[0][0] = matrix[0][0];
+            // first column
+            for(int i=1; i<r; i++){    
+                cumSum[i][0] = cumSum[i-1][0] + matrix[i][0];
+            }
+            // first row
+            for(int j=1; j<c; j++){
+                cumSum[0][j] = cumSum[0][j-1] + matrix[0][j];
+            }
+            
+            for(int i=1; i<r; i++){
+                for(int j=1; j<c; j++){
+                    cumSum[i][j] = cumSum[i][j-1] + cumSum[i-1][j] - cumSum[i-1][j-1] + matrix[i][j];        
                 }
             }
         }
     }
 
     public int sumRegion(int row1, int col1, int row2, int col2) {
-        return dp[row2+1][col2+1] - dp[row2+1][col1] - dp[row1][col2+1] + dp[row1][col1]; 
-    }
+        return cumSum[row2][col2] - 
+                (col1 > 0 ? cumSum[row2][col1-1] : 0) - 
+                (row1 > 0 ? cumSum[row1-1][col2] : 0) + 
+                ((row1 > 0 && col1 > 0) ? cumSum[row1-1][col1-1] : 0);  
+    } 
 
     public static void main(String[] args){
         int[][] nums =  {

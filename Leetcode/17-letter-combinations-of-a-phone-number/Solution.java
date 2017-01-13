@@ -39,3 +39,28 @@ public class Solution {
         return r;
     }
 }
+
+class Solution2 {
+    String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    String digits;
+    public void gen(StringBuilder cur, int lev, List<String> r){
+        if(lev == digits.length()){
+            r.add(cur.toString());
+            return;
+        }
+        String map = mapping[digits.charAt(lev) - '0'];
+        for(int i=0; i<map.length(); ++i){
+            cur.append(map.charAt(i));
+            gen(cur, lev+1, r);
+            cur.deleteCharAt(cur.length()-1);
+        }
+    }
+    public List<String> letterCombinations(String d) {
+        List<String> r = new ArrayList<>();
+        if(d.length() == 0)
+            return r;
+        digits = d;
+        gen(new StringBuilder(), 0, r);
+        return r;
+    }
+}

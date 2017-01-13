@@ -254,35 +254,35 @@ class Solution4 {
 
 // Longest path problem O(n^2) Solution
 class Solution5 {
-    public int longestPath(int nodeIndex, int[] nums, int[] dp, int[] parent){
+   public int longestPath(int nodeIndex, int[] nums, int[] dp, int[] child){
         int n = nums.length;
 
         if(dp[nodeIndex] != -1)
             return dp[nodeIndex];
 
         int maxLen = 1;
-        int par = nodeIndex;
+        int ch = nodeIndex;
         // Already sorted
         for(int i=nodeIndex + 1; i<n; ++i){
             if(nums[i] % nums[nodeIndex] != 0)
                 continue;
 
-            int nLen = longestPath(i, nums, dp, parent) + 1;
+            int nLen = longestPath(i, nums, dp, child) + 1;
             if(nLen > maxLen){
                 maxLen = nLen;
-                par = i;
+                ch = i;
             }
         }
         dp[nodeIndex] = maxLen;
-        parent[nodeIndex] = par;
+        child[nodeIndex] = ch;
         return maxLen;
     }
     
-    public void getPath(int nodeIndex, int[] nums, int[] parent, List<Integer> path){
-        path.add(nums[nodeIndex]);
-        if(nodeIndex == parent[nodeIndex])
+    public void getPath(int node, int[] nums, int[] child, List<Integer> path){
+        path.add(nums[node]);
+        if(node == child[node])
             return;
-        getPath(parent[nodeIndex], nums, parent, path);
+        getPath(child[node], nums, child, path);
     }
 
     public List<Integer> largestDivisibleSubset(int[] nums) {
@@ -295,20 +295,20 @@ class Solution5 {
         int[] dp = new int[n];
         Arrays.fill(dp, -1);
         
-        int[] parent = new int[n];
+        int[] child = new int[n];
         for(int i=0; i<n; ++i)
-            parent[i] = i;
+            child[i] = i;
 
         int maxLen = 0;
-        int endIndex = -1;
+        int start = -1;
         for(int i=0; i<n; ++i){
-            int len = longestPath(i, nums, dp, parent);
+            int len = longestPath(i, nums, dp, child);
             if(maxLen < len){
                 maxLen = len;
-                endIndex = i;
+                start = i;
             }
         }
-        getPath(endIndex, nums, parent, path);
+        getPath(start, nums, child, path);
         return path;
     }
 }

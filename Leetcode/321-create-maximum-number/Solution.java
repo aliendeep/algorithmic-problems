@@ -184,9 +184,9 @@ class SolutionStack {
         for(int i=0; i<=k; i++){
             if(len1 < i || len2 < k - i)
                 continue;
-            // removing len1 - i digits from nums1. Length pf t1 = len1 - (len1 - i) = i
+            // removing len1 - i digits from nums1. Length of t1 = len1 - (len1 - i) = i
             int[] t1 = findMaximumNumber(nums1, len1 - i);
-            // removing len2 - (k-i) digits from nums2. Length pf t2 = len2 - (len2 - (k - i)) = k - i
+            // removing len2 - (k-i) digits from nums2. Length of t2 = len2 - (len2 - (k - i)) = k - i
             int[] t2 = findMaximumNumber(nums2, len2 - (k - i));
 
             // mergeTwoArrays : O(m+n)^2

@@ -13,6 +13,12 @@ But can you do it in linear time O(n) /possibly in a single pass?
 Space complexity should be O(n).
 Can you do it like a boss? Do it without using any builtin function like 
 __builtin_popcount in c++ or in any other language.
+
+How to get lowest set bit of an integer n
+int lowestSetBitValue = n & -n;
+
+Or
+int lowestSetBit = n & ~(n-1);
 */
 
 public class Solution {
