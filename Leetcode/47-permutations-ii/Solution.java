@@ -11,25 +11,30 @@ For example,
 */
 
 public class Solution {
-   
+    public void print(int t){
+        while(t-- > 0)
+            System.out.print(" ");
+    } 
+    
     public void permute(int[] nums, int lev, boolean[] taken, List<Integer> cur, List<List<Integer>> result){
         if(lev == nums.length){
+            System.out.println(cur);
             result.add(new ArrayList<>(cur));
             return;
         }
         for(int i=0; i<nums.length; i++){
             if(taken[i] || (i > 0  && nums[i-1] == nums[i] && taken[i-1] == false))
                 continue;
-
-            cur.set(lev, nums[i]);
+            print(lev);
+            System.out.println("Lev " + lev + " i: " + i + " taken " + nums[i]);
+            cur.add(nums[i]);
             taken[i] = true;
             permute(nums, lev+1, taken, cur, result);
-            cur.set(lev, -1);
+            cur.remove(cur.size()-1);
             taken[i] = false;
         }
     }
     public List<List<Integer>> permuteUnique(int[] nums) {
-
         int n = nums.length;
         List<List<Integer>> result = new ArrayList<>();
         if(n == 0)
@@ -38,13 +43,9 @@ public class Solution {
         Arrays.sort(nums);
 
         // initialize
-        List<Integer> cur = new ArrayList<>(n);
-        for(int i=0; i<n; i++)
-            cur.add(-1);
-
-        boolean[] taken = new boolean[nums.length];
-        Arrays.fill(taken, false);
+        List<Integer> cur = new ArrayList<>();
         
+        boolean[] taken = new boolean[nums.length];
         permute(nums, 0, taken, cur, result);
         return result;
     }

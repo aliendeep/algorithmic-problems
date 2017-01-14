@@ -126,6 +126,7 @@ class Solution4 {
         // Add the number 1
         result.add("1");
         // generate all abbreviation from previous set
+        // Running solutions
         for(int i=1; i<n; ++i){
             List<String> newAbbrs = new ArrayList<>();
             for(String abbr : result){

@@ -9,9 +9,8 @@ Given s = "aabb", return ["abba", "baab"].
 Given s = "abc", return [].
 
 Hint:
-
-If a palindromic permutation exists, we just need to generate the first half of the string.
-To generate all distinct permutations of a (half of) string, use a similar approach from: 
+- If a palindromic permutation exists, we just need to generate the first half of the string.
+- To generate all distinct permutations of a (half of) string, use a similar approach from: 
 Permutations II or Next Permutation.
 */
 
@@ -19,7 +18,8 @@ import java.util.*;
 
 public class Solution {
     List<String> result;
-    StringBuilder mid;
+    StringBuilder mid;   
+
     public void permute(String candidates, boolean[] taken, int lev, char[] cur){
         if(lev == candidates.length()){
             StringBuilder x = new StringBuilder(String.valueOf(cur));
@@ -33,6 +33,7 @@ public class Solution {
             // unique
             if(taken[i] || (i > 0 && candidates.charAt(i) == candidates.charAt(i-1) && taken[i-1] == false))
                 continue;
+            System.out.println()
             cur[lev] = candidates.charAt(i);
             taken[i] = true;
             permute(candidates, taken, lev+1, cur);
@@ -70,7 +71,7 @@ public class Solution {
         return result;
     }
     public static void main(String[] args){
-        Solution s = new Solution();
-        List<String> r = s.generatePalindromes("abba");
+        Solution ob = new Solution();
+        System.out.println(generatePalindromes("abba");
     }
 }

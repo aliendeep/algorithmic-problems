@@ -1,7 +1,9 @@
 /*
 Given a 2D board and a list of words from the dictionary, find all words in the board.
 
-Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+Each word must be constructed from letters of sequentially adjacent cell, where 
+"adjacent" cells are those horizontally or vertically neighboring. The same letter 
+cell may not be used more than once in a word.
 
 For example,
 Given words = ["oath","pea","eat","rain"] and board =
@@ -17,7 +19,6 @@ Note:
 You may assume that all inputs are consist of lowercase letters a-z.
 */
 // Trie, Backtracking
-
 public class Solution {
     class TrieNode{
         public char val;
@@ -87,6 +88,7 @@ public class Solution {
             if(curWord.length() > 0)
                 result.add(new String(curWord));
         }
+        
         for(int i=0; i<4; i++){
             int r1 = r + move[i][0];
             int c1 = c + move[i][1];
@@ -128,4 +130,4 @@ public class Solution {
         List<String> t1 = new ArrayList<>(result);
         return t1;
     }
-}}
+}

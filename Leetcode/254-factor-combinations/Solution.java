@@ -3,8 +3,8 @@ Numbers can be regarded as product of its factors. For example,
 
 8 = 2 x 2 x 2;
   = 2 x 4.
-Write a function that takes an integer n and return all possible combinations of its factors.
-
+Write a function that takes an integer n and return all possible combinations of 
+its factors.
 Note: 
 You may assume that n is always positive.
 Factors should be greater than 1 and less than n.
@@ -53,18 +53,22 @@ public class Solution {
   public void bktk(int n, int start, List<Integer> cur, List<List<Integer>> r){
       if(n == 1){
           if(cur.size() > 1){
+            System.out.println(cur);
             r.add(new ArrayList<Integer>(cur));
           }
           return;
       }
 
+      System.out.println("n "+n);
       for(int i=start; i*i<=n; i++){
+          System.out.println(i);
           if(n % i == 0) {
             cur.add(i);
             bktk(n/i, i, cur, r);
             cur.remove(cur.size()-1);
           }
       }
+      System.out.println("Adding "+n);
       cur.add(n);
       bktk(1, -1, cur, r);
       cur.remove(cur.size()-1);

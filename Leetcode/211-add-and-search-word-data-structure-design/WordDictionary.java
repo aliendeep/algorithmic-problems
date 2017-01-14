@@ -3,7 +3,8 @@ Design a data structure that supports the following two operations:
 
 void addWord(word)
 bool search(word)
-search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.
+search(word) can search a literal word or a regular expression string containing 
+only letters a-z or .. A . means it can represent any one letter.
 
 For example:
 
@@ -96,3 +97,34 @@ public class WordDictionary {
 // WordDictionary wordDictionary = new WordDictionary();
 // wordDictionary.addWord("word");
 // wordDictionary.search("pattern");
+
+// Without using substring
+class Solution2{
+    public boolean search(String word, int lev, TrieNode cur) {
+        if(lev == word.length()){
+            return cur.isEnd;
+        }
+        if(word.charAt(lev) == '.'){
+            // try all children
+            for(int i=0; i<26; ++i){
+                if(cur.child[i] == null)
+                    continue;
+                if(search(word, lev+1, cur.child[i]))
+                    return true;
+            }
+        }
+        else{
+            char c = word.charAt(lev);
+            if(cur.child[c - 'a'] == null)
+                return false;
+            if(search(word, lev+1, cur.child[c - 'a']))
+                return true;
+        }
+        // no match found
+        return false;
+    }
+
+    public boolean search(String word){
+        return search(word, 0, root);
+    }
+}

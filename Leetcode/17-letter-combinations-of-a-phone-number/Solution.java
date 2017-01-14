@@ -43,7 +43,8 @@ public class Solution {
 class Solution2 {
     String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     String digits;
-    public void gen(StringBuilder cur, int lev, List<String> r){
+    public void gen(StringBuilder cur, List<String> r){
+        int lev = cur.length();
         if(lev == digits.length()){
             r.add(cur.toString());
             return;
@@ -51,7 +52,7 @@ class Solution2 {
         String map = mapping[digits.charAt(lev) - '0'];
         for(int i=0; i<map.length(); ++i){
             cur.append(map.charAt(i));
-            gen(cur, lev+1, r);
+            gen(cur, r);
             cur.deleteCharAt(cur.length()-1);
         }
     }
@@ -60,7 +61,7 @@ class Solution2 {
         if(d.length() == 0)
             return r;
         digits = d;
-        gen(new StringBuilder(), 0, r);
+        gen(new StringBuilder(), r);
         return r;
     }
 }

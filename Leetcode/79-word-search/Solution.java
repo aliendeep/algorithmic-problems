@@ -65,7 +65,7 @@ public class Solution {
     }
 }
 
-// Without using substring
+// Without using substring and visited array
 class Solution2 {
     int[][] move = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     public boolean isPatternFound(char[][] board, String word, int r, int c, int offset){

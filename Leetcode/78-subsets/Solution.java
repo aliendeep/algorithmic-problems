@@ -88,6 +88,7 @@ class Solution3 {
     }
 }
 
+// Generating binary numbers using queue
 class Solution4 {
     // Alternative
     public List<Integer> convertToSet(String s, int[] nums){

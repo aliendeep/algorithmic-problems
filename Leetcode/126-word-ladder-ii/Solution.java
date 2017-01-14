@@ -25,8 +25,8 @@ import java.util.*;
 // Cleaner Solution
 public class Solution{
     // BFS + DFS
-    // BFS to find the shortest distance to all nodes 
-    // DFS to print the path
+    // BFS to find the shortest distance to all nodes and construct the adjacency list
+    // DFS to print the path using the adjacency list
     Map<String, List<String>> neighbors;
     // distance from begin word
     Map<String, Integer> distance;

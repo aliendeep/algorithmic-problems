@@ -121,7 +121,7 @@ class ValidWordAbbr2{
     }
 }
 
-// Set + Ma-
+// Set + Map
 class ValidWordAbbr3 {
     // abbr, multiple
     Map<String, Boolean> map;

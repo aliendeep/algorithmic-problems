@@ -57,26 +57,29 @@ public class Solution {
 public class Solution {
     public Set<String> bktk(String s, Set<String> dict, Map<String, Set<String>> dp) {
         Set<String> result = new HashSet<>();
-        if(s.length() == 0)
+        if(s.length() == 0){
             return result;
+        }
         
         if(dp.containsKey(s))
             return dp.get(s);
-        
-        // whole word is a word
-        if(dict.contains(s)){
-            result.add(s);
-        }
         
         for(int l=1; l<=s.length(); ++l){
             String start = s.substring(0, l);
             // if the dictionary contains the start
             if(dict.contains(start)){
-                Set<String> rest = bktk(s.substring(l), dict, dp);
-                for(String word : rest){
-                    StringBuilder t = new StringBuilder();
-                    t.append(start).append(" ").append(word);
-                    result.add(t.toString());
+                if(l == s.length()){
+                    result.add(start);
+                }
+                else{
+                    Set<String> rest = bktk(s.substring(l), dict, dp);
+                    if(rest.size() > 0){
+                        for(String word : rest){
+                            StringBuilder t = new StringBuilder();
+                            t.append(start).append(" ").append(word);
+                            result.add(t.toString());
+                        }
+                    }
                 }
             }
         }

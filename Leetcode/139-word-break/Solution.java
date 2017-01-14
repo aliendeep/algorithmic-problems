@@ -37,7 +37,8 @@ public class Solution {
     }
 */  
     // DP
-    public boolean wordBreak(String s, Set<String> wordDict) {
+    // iterative
+    public boolean helper(String s, Set<String> wordDict) {
         int n = s.length();
         
         // initalized to false
@@ -60,25 +61,27 @@ public class Solution {
         }        
         return dp[n-1];
     }
+
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        return helper(s, dict);
+    }
 }
 
 // Memoization
+// No need to check whether the whole string is in dictionary
 class Solution2 {
     public boolean helper(String s, Set<String> dict, Map<String, Boolean> dp){
         if(s.length() == 0)        
             return true;
         
-        // whole word is a dictionary word
-        if(dict.contains(s))
-            return true;
-            
         if(dp.containsKey(s)){
             return dp.get(s);
         }
         
         boolean flag = false;
         int n = s.length();
-        for(int i=1; i<n; i++){
+        for(int i=1; i<=n; i++){
             String first = s.substring(0, i);
             if(dict.contains(first)){
               flag = helper(s.substring(i), dict, dp);
@@ -95,7 +98,7 @@ class Solution2 {
         Map<String, Boolean> dp = new HashMap<>();
         Set<String> dict = new HashSet<>(wordDict);
         return helper(s, dict, dp);
-    }
+     }
 }      
 
 
@@ -107,16 +110,14 @@ class Solution3 {
     Set<String> dict;
     
     public boolean helper(int i, int j){
+        // empty String
+        if(i >= j)   return true;
         if(j > n)   return false;
-        String x = s.substring(i, j);
-        if(dict.contains(x))
-            return true;
-        
         if(dp.get(i).get(j-1) != null)
             return dp.get(i).get(j-1);
         
         boolean flag = false;
-        for(int k=i+1; k<j; ++k){
+        for(int k=i+1; k<=j; ++k){
             String first = s.substring(i, k);
             if(dict.contains(first) && helper(k, j)){
                 flag = true;
@@ -143,3 +144,4 @@ class Solution3 {
         return helper(0, n);
     }
 }
+

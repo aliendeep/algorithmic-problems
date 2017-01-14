@@ -1,5 +1,6 @@
 /*
-Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+Given a collection of candidate numbers (C) and a target number (T), find all unique 
+combinations in C where the candidate numbers sums to T.
 
 Each number in C may only be used once in the combination.
 
@@ -46,6 +47,44 @@ public class Solution {
 
         // Sort
         Arrays.sort(candidates);
+        bktk(candidates, target, 0, 0, cur, result);
+        return result;
+    }
+}
+
+class Solution2 {
+    public void bktk(int[] candidates, int target, int start, int sum, List<Integer> cur, List<List<Integer>> result ){
+        if(sum == target){
+            // add to the result set
+            System.out.println(cur);
+            result.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        if(sum > target)
+            return;
+            
+        for(int i=start; i<candidates.length; i++){
+            // The solution set must not contain duplicate combinations.
+            if(i == start || candidates[i] != candidates[i-1]){
+                sum += candidates[i];
+                cur.add(candidates[i]);
+                // Each number in the array may only be used once in the combination ,hence i+1
+                bktk(candidates, target, i+1, sum, cur, result);
+                
+                // undo
+                sum -= candidates[i];
+                cur.remove(cur.size()-1);
+            }
+        }
+    }
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> cur = new ArrayList<Integer>();
+
+        // Sort
+        Arrays.sort(candidates);
+        
         bktk(candidates, target, 0, 0, cur, result);
         return result;
     }

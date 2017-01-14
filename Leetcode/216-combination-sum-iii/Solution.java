@@ -21,37 +21,35 @@ Output:
 */
 
 public class Solution {
-    public void bktk(int k, int target, int prev_i, int sum, List<Integer> cur, List<List<Integer>> result ){
-        //  k numbers
+    List<List<Integer>> result;
+    int target;
+    int k;
+    public void gen(List<Integer> cur, int start, int curSum){
         if(cur.size() == k){
-            if(sum == target){
-                // add to the result set
-                result.add(new ArrayList<Integer>(cur));
-            }
+            if(curSum == target)
+                result.add(new ArrayList<>(cur));
             return;
-        }        
+        }
         // prune early if sum of the numbers is greater than target
-        if(sum > target)
+        if(curSum > target)
             return;
-            
-        for(int i=prev_i; i<=9; i++){
-            sum += i;
+        
+        // each number can be used only once
+        for(int i=start; i<=9; ++i){
+            curSum += i;
             cur.add(i);
-
-            bktk(k, target, i+1, sum, cur, result);
             
-            // undo
-            sum -= i;
+            gen(cur, i+1, curSum);
+
+            curSum -= i;
             cur.remove(cur.size()-1);
         }
     }
-    
     public List<List<Integer>> combinationSum3(int k, int n) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        List<Integer> cur = new ArrayList<Integer>();
-
-        bktk(k, n, 1, 0, cur, result);
+        this.k = k;
+        target = n;
+        result = new ArrayList<>();
+        gen(new ArrayList<>(), 1, 0);
         return result;
-        
     }
 }

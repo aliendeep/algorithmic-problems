@@ -64,8 +64,6 @@ class Solution2 {
     }
     
     public List<String> readBinaryWatch(int num) {
-        int[] taken = new int[10];
-        Arrays.fill(taken, 0);
         List<Integer> cur = new ArrayList<>();
         List<String> result = new ArrayList<>();
         bktk(num, 0, cur, result);

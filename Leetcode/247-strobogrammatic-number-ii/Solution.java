@@ -15,15 +15,40 @@ Input:
 4
 Output:
 [101, 111, 181, 609, 619, 689, 808, 818, 888, 906, 916, 986]
-[1001, 1111, 1691, 1881, 1961, 6009, 6119, 6699, 6889, 6969, 8008, 8118, 8698, 8888, 8968, 9006, 9116, 9696, 9886, 9966]
+[1001, 1111, 1691, 1881, 1961, 6009, 6119, 6699, 6889, 6969, 8008, 8118, 8698, 
+8888, 8968, 9006, 9116, 9696, 9886, 9966]
 */
 import java.util.*;
 
-public class Solution {
+// Add Prefix & suffix to the result of n-2
+class Solution0 {
+    List<String> helper(int n, int m) {
+        if(n == 0)  return new ArrayList<>(Arrays.asList(""));
+        if(n == 1)  return new ArrayList<>(Arrays.asList("0", "1", "8"));
+        List<String> l = helper(n-2, m);
+        List<String> r = new ArrayList<>();
+        for(String s : l){
+          if(n != m)
+              r.add("0" + s + "0");
+          r.add("1" + s + "1");
+          r.add("6" + s + "9");
+          r.add("8" + s + "8");
+          r.add("9" + s + "6");
+        }
+        return r;
+    }
+
+    public List<String> findStrobogrammatic(int n){
+        return helper(n, n);
+    }    
+}
+
+// StringBuilder
+class Solution1 {
     // 1 Length strobogrammatic strings
     List<String> len1; 
 
-    public Solution(){
+    public Solution1(){
         len1 = new ArrayList<>();
         len1.add("0");
         len1.add("1");
@@ -67,10 +92,6 @@ public class Solution {
         Collections.sort(r);
         return r;
     }
-    public static void main(String[] args){
-        Solution ob = new Solution();
-        System.out.println(ob.findStrobogrammatic(4));
-    }      
 }
 
 // Iterative Solution
