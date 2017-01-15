@@ -74,8 +74,7 @@ class Solution3 {
         int i = 0;
         while(i < n && citations[i] > i){
             ++i;
-        }
-        
+        }   
         // i+1 after the while loop
         return i;
     }

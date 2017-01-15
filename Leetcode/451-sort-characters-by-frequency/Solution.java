@@ -122,3 +122,38 @@ class Solution2 {
         return r.toString();
     }
 }
+
+class Solution3 {
+    // O(n) Solution
+    public String frequencySort(String s) {
+        int n = s.length();
+        if(n <= 1)  return s;
+        // Count, characters of frequency of count
+        Map<Integer, String> map = new HashMap<>();
+        int[] cnt = new int[256];
+        for(int i=0; i<n; ++i){
+            cnt[(int)s.charAt(i)]++;
+        }
+        for(int i=0; i<256; ++i){
+            int freq = cnt[i];
+            if(freq == 0)
+                continue;
+            StringBuilder cur = new StringBuilder();
+            if(map.containsKey(freq)){
+                cur.append(map.get(freq));
+            }
+            char[] fill = new char[freq];
+            Arrays.fill(fill, (char)i);
+            cur.append(fill);
+            map.put(freq, cur.toString()); 
+        }
+        StringBuilder r = new StringBuilder();
+        // max cnt can be n
+        for(int freq=n; freq>0; freq--){
+            if(!map.containsKey(freq))
+                continue;
+            r.append(map.get(freq));
+        }
+        return r.toString();
+    }
+}

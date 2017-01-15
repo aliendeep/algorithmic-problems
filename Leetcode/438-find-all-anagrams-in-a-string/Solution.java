@@ -37,35 +37,35 @@ public class Solution {
         if(s.length() < p.length())
             return r;
             
-        int[] pcnt = new int[26];
-        int[] scnt = new int[26];
+        int[] pcnt = new int[256];
+        int[] scnt = new int[256];
         for(int i=0; i<n; ++i){
-            pcnt[p.charAt(i) - 'a']++;
-            scnt[s.charAt(i) - 'a']++;
+            pcnt[p.charAt(i)]++;
+            scnt[s.charAt(i)]++;
         }
         
         int start = 0;
         for(int end=n; end<s.length(); ++end){
             int i;
-            for(i=0; i<26; i++){
+            for(i=0; i<256; i++){
                 if(pcnt[i] != scnt[i])
                     break;
 
             }
-            if(i == 26){
+            if(i == 256){
                 r.add(start);
             }
-            scnt[s.charAt(start++) - 'a']--;
-            scnt[s.charAt(end) - 'a']++;
+            scnt[s.charAt(start++)]--;
+            scnt[s.charAt(end)]++;
        }
        
         // last window
         int i;
-        for(i=0; i<26; i++){
+        for(i=0; i<256; i++){
             if(pcnt[i] != scnt[i])
                 break;
         }
-        if(i == 26){
+        if(i == 256){
             r.add(start);
         }
        return r;

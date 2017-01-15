@@ -29,6 +29,7 @@ The same letters are at least distance 2 from each other.
 
 import java.util.*;
 // Greedy
+// Try to place the  
 // Keep count and next valid position
 class Solution2 {
     public int getNextValidIndex(int index, int[] cnt, int[] validPosition){

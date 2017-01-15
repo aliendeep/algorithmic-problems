@@ -54,6 +54,7 @@ public class Solution {
 
 class Solution2 {
     // Alternative : One table for B's
+    // Save all columns of the matrix B
     public int[][] multiply(int[][] A, int[][] B) {
         int ra = A.length;
         int ca = A[0].length;
@@ -123,6 +124,7 @@ class Solution3 {
         for(int i=0; i<ra; ++i){
             if(!tableA.containsKey(i))
                 continue;
+            // for all columns of matrix A = Rows of Matrix B
             for(int k : tableA.get(i)){
                 if(!tableB.containsKey(k))
                     continue;
@@ -130,8 +132,7 @@ class Solution3 {
                     C[i][j] += A[i][k] * B[k][j];
                 }
             }
-        }
-        
+        }        
         return C;
     }
 }

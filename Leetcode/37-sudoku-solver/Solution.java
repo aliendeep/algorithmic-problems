@@ -10,7 +10,7 @@ public class Solution {
         }
     }
     boolean bktk(char[][] board, int r, int c, boolean[][] row, boolean[][] col, boolean[][][] box){
-        // if column is out of range, go to the next col
+        // if column is out of range, go to the next row
         if(c == GRID_SIZE){
             c = 0;
             r++;
@@ -115,5 +115,71 @@ class Solution2 {
             }    
         }    
         return true;
+    }
+}
+
+// Less Space
+class Solution3 {
+    public static final int GRID_SIZE = 9;
+    
+    boolean isValid(char[][] board, int number, int r, int c){
+        char num = (char)(number + '0');
+        // check row
+        for(int j=0; j<GRID_SIZE; ++j){
+            if(board[r][j] == num)
+                return false;
+        }
+        // check col
+        for(int i=0; i<GRID_SIZE; ++i){
+            if(board[i][c] == num)
+                return false;
+        }
+        
+        // check grid
+        int sr = 3*(r/3);
+        int sc = 3*(c/3);
+        for(int i=0; i<3; ++i){
+            for(int j=0; j<3; ++j){
+                if(board[sr+i][sc+j] == num)
+                    return false;
+            }
+        }        
+        return true;
+    }
+    
+    boolean bktk(char[][] board, int r, int c){
+        // if column is out of range, go to the next row
+        if(c == GRID_SIZE){
+            c = 0;
+            r++;
+        }
+        // Finished processing all
+        if(r == GRID_SIZE){
+            return true;
+        }
+        
+        if(board[r][c] != '.')
+            return bktk(board, r, c+1);
+        else{
+            // try with all possible numbers
+            for(int number=1; number<=GRID_SIZE; number++){
+                // if not valid
+                if(!isValid(board, number, r, c))
+                    continue;
+                
+                board[r][c] = (char)(number + '0');
+                // if found a solution
+                if(bktk(board, r, c+1)){
+                    return true;
+                }
+                // undo
+                board[r][c] = '.';
+            }
+        }   
+        return false;
+    }
+    
+    public void solveSudoku(char[][] board) {
+       bktk(board, 0, 0);
     }
 }

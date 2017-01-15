@@ -44,12 +44,12 @@ public class Solution {
             // traverse all entries
             // Total number of permutations of size 2 from n different points is 
             // nP2 = n!/(n-2)! = n * (n-1). 
+            // The number of ways of obtaining an ordered subset of k elements from a set of n elements
             for(Map.Entry<Long, Integer> entry : map.entrySet()){
                 int val = entry.getValue();
                 cnt += val*(val-1);
             }
-        }
-        
+        }        
         return cnt;
     }
 }

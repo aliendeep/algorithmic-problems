@@ -69,7 +69,7 @@ public class Solution {
     }
 }
 
-// Solution 2
+// Solution 2: maxHeap
 class Solution2 {
     public List<Integer> topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> cntMap = new HashMap<Integer, Integer>();
@@ -152,7 +152,7 @@ class Solution3 {
     }
 }
 
-// Solution 3
+// Solution 4
 class Solution3.1 {
     public List<Integer> topKFrequent(int[] nums, int k) {
         int n = nums.length;
@@ -183,3 +183,4 @@ class Solution3.1 {
         return r;
    }
 }
+    

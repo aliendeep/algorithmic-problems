@@ -880,8 +880,14 @@
 
 476 Number Complement
 
+480 Sliding Window Median
+
 481 Magical String
 
 482 License Key Formatting
 
-480 Sliding Window Median
+485 Max Consecutive Ones
+
+487 Max Consecutive Ones II
+
+488 Zuma Game

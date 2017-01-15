@@ -92,7 +92,6 @@ public class RandomizedSet {
 // Solution 2
 class RandomizedSet {
     // O(1) time
-    // Reservoir Sampling
     Map<Integer,Integer> location;
     List<Integer> A;
     Random rand;
