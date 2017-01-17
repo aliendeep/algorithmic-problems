@@ -80,7 +80,6 @@ class Solution2 {
 }
 
 class Solution3 {
-
     // O(nlogk) Solution
     // Map + TreeMap to get 
     public int lengthOfLongestSubstringKDistinct(String s, int k) {

@@ -77,3 +77,34 @@ class Solution2 {
         return r;
     }
 }
+
+class Solution3 {
+    void print(int lev){
+        while(lev-- > 0)
+            System.out.print(" ");
+    }
+    public void genSubsets(int[] nums, int lev, List<Integer> cur, List<List<Integer>> r){
+        r.add(new ArrayList<>(cur));
+        
+        List<Integer> candidateIndex = new ArrayList<>();
+        for(int i=lev; i<nums.length; i++){
+            if(candidateIndex.size() > 0 && nums[candidateIndex.get(candidateIndex.size()-1)] == nums[i])
+                continue;
+            candidateIndex.add(i);
+        }
+        
+        for(int i : candidateIndex){
+            cur.add(nums[i]);
+            genSubsets(nums, i+1, cur, r);
+            cur.remove(cur.size()-1);
+        }
+    }
+    
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> r = new ArrayList<>();
+        List<Integer> cur = new ArrayList<>();
+        Arrays.sort(nums);
+        genSubsets(nums, 0, cur, r);
+        return r;
+    }
+}

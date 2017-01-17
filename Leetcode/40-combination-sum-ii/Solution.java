@@ -89,3 +89,45 @@ class Solution2 {
         return result;
     }
 }
+
+class Solution3 {
+    public void bktk(int[] nums, int target, int start, int sum, List<Integer> cur, List<List<Integer>> result ){
+        if(sum == target){
+            // add to the result set
+            System.out.println(cur);
+            result.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        if(sum > target)
+            return;
+
+        List<Integer> candidateIndex = new ArrayList<>();
+        for(int i=start; i<nums.length; i++){
+            if(candidateIndex.size() > 0 && nums[candidateIndex.get(candidateIndex.size()-1)] == nums[i])
+                continue;
+            candidateIndex.add(i);
+        }
+        
+        for(int i : candidateIndex){
+            sum += nums[i];
+            cur.add(nums[i]);
+            // Each number in the array may only be used once in the combination ,hence i+1
+            bktk(nums, target, i+1, sum, cur, result);
+            
+            // undo
+            sum -= nums[i];
+            cur.remove(cur.size()-1);
+        }
+    }
+
+    public List<List<Integer>> combinationSum2(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> cur = new ArrayList<Integer>();
+
+        // Sort
+        Arrays.sort(nums);
+        
+        bktk(nums, target, 0, 0, cur, result);
+        return result;
+    }
+}
