@@ -23,7 +23,6 @@ The first node is considered odd, the second node even and so on ...
  * }
  */
 
-
 // Cleaner
 public class Solution {
     public ListNode oddEvenList(ListNode head) {

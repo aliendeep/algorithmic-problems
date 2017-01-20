@@ -38,3 +38,33 @@ public class Solution {
         return result;
     }
 }
+
+public class Solution {
+    List<List<Integer>> result;
+    int target;
+    
+    public void getPathSum(TreeNode node, int curSum, List<Integer> cur) {
+        if(node == null)    return;
+
+        curSum += node.val;
+        cur.add(node.val);
+        if(node.left == null && node.right == null && curSum == target){
+            result.add(new ArrayList<>(cur));
+        }
+        else{
+            getPathSum(node.left, curSum, cur);
+            getPathSum(node.right, curSum, cur);
+        }
+        curSum -= node.val;
+        cur.remove(cur.size()-1);
+    }
+    
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        result = new ArrayList<>();
+        if(root == null)
+            return result;
+        target = sum;
+        getPathSum(root, 0, new ArrayList<>());
+        return result;
+    }
+}

@@ -6,6 +6,11 @@ A mapping of digit to letters (just like on the telephone buttons) is given belo
 Input:Digit string "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 */
+// Time Complexity: O(n*4^n) where n is the number of digits in the phone number
+// At each level, maximum number of recursive call is 4
+// So, 4^n. 
+// Base Case: Copying the cur array to string taken O(n) time
+// Total time complexity: O(n*4^n)
 public class Solution {
     void bktk(String digits, StringBuilder cur, int lev, List<String> r, HashMap<Character, String> hmap){
         if(lev == digits.length()){
@@ -62,6 +67,32 @@ class Solution2 {
             return r;
         digits = d;
         gen(new StringBuilder(), r);
+        return r;
+    }
+}
+
+class Solution3 {
+    String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    String digits;
+    public void gen(char[] cur, int lev, List<String> r){
+        if(lev == digits.length()){
+            r.add(new String(cur));
+            return;
+        }
+        String map = mapping[digits.charAt(lev) - '0'];
+        for(int i=0; i<map.length(); ++i){
+            cur[lev] = map.charAt(i);
+            gen(cur, lev+1, r);
+            cur[lev] = '0';
+        }
+    }
+    public List<String> letterCombinations(String d) {
+        List<String> r = new ArrayList<>();
+        if(d.length() == 0)
+            return r;
+        digits = d;
+        char[] cur = new char[d.length()];
+        gen(cur, 0, r);
         return r;
     }
 }

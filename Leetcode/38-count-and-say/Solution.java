@@ -10,6 +10,12 @@ Given an integer n, generate the nth sequence.
 Note: The sequence of integers will be represented as a string.
 */
 
+/*
+Each successive number can have at most twice as many digits as the current number.
+This will happen when all the number in the current sequence is different. 
+Number of iterations : n
+Bound: O(n*2^n)
+*/
 public class Solution {
     String getNextNumber(String s){
         StringBuilder result = new StringBuilder();

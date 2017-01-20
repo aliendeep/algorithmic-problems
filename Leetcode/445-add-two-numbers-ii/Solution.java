@@ -21,23 +21,6 @@ Output: 7 -> 8 -> 0 -> 7
  * }
  */
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 // Alternative
 public class Solution {
     // Get the length of the list

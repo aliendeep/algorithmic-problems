@@ -166,3 +166,42 @@ class Solution3 {
         return s.substring(resultStart, resultStart+minLen);
     }
 }
+
+// EPI
+public class Solution {
+    public String minWindow(String s, String t) {
+        int n = t.length();
+        Map<Character, Integer> map = new HashMap<>();
+        int remainingToCover = 0;
+        for(int i=0; i<n; ++i){
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) + 1);
+            remainingToCover++;
+        }
+        int start = 0, end = 0;
+        int rs = -1, len = -1;
+        while(end < s.length()){
+            Integer cnt = map.get(s.charAt(end));
+            if(cnt != null){
+                map.put(s.charAt(end), --cnt);
+                if(cnt >= 0)
+                    remainingToCover--;
+            }
+            while(remainingToCover == 0){
+                if(rs == -1 || len > (end - start + 1)){
+                    rs = start;
+                    len = end - start + 1;
+                }
+                cnt = map.get(s.charAt(start));
+                if(cnt != null){
+                    map.put(s.charAt(start), ++cnt);
+                    if(cnt > 0){
+                        remainingToCover++;    
+                    }
+                }
+                start++;
+            }
+            end++;
+        }
+        return rs == -1 ? "" : s.substring(rs, rs+len);
+     }
+}

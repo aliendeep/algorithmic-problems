@@ -38,3 +38,20 @@ public class Solution {
         return dp[n-1];
     }
 }
+
+public class Solution {
+    // Alternative: Greedy O(n)
+    public int jump(int[] A) {
+        int lastJumpMax = 0;
+        int currentJumpMax = 0;
+        int stepCount = 0;
+        for(int i=0; i<A.length-1; i++){
+            currentJumpMax = Math.max(currentJumpMax, A[i] + i);
+            if(i == lastJumpMax){
+                stepCount++;
+                lastJumpMax = currentJumpMax;
+            }
+        }
+        return stepCount;
+    }
+}
