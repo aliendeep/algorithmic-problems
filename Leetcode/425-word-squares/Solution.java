@@ -100,9 +100,7 @@ public class Solution {
                 return;
             // end of a word (leaf)
             if(node.isEnd){
-                cur.append((char)(node.val + 'a'));
                 result.add(cur.toString());
-                cur.deleteCharAt(cur.length()-1);
                 return;
             }
             // for all child of node
@@ -118,15 +116,16 @@ public class Solution {
         // Returns list of words that starts with the given prefix
         public List<String> startsWith(String prefix){
             Node cur = root;        
-            StringBuilder temp = new StringBuilder();  
             for(int i=0; i<prefix.length(); ++i){
                 int c = prefix.charAt(i) - 'a';
                 // invalid prefix
                 if(cur.child[c] == null)
                     return new ArrayList<>();
-                temp.append((char)(c + 'a'));
                 cur = cur.child[c];
             }
+            StringBuilder temp = new StringBuilder();  
+            temp.append(prefix);
+            
             List<String> prefixList = new ArrayList<>();
             // find all words starting with this prefix
             dfs(cur, temp, prefixList);
@@ -174,6 +173,8 @@ public class Solution {
         gen(new ArrayList<>(), 0);
         return result;
     }
+}   
+
 
     public void print(List<List<String>> a){
         for(List<String> t : a){

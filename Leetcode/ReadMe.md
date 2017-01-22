@@ -311,6 +311,10 @@
 155 Min Stack
 
 156 Binary Tree Upside Down
+* Time Complexity: O(n) where n is the number of nodes in the tree
+* Space Complexity: 
+  --- Recursive: O(h)
+  --- Iterative: O(1) 
 
 157 Read N Characters Given Read4
 
@@ -497,6 +501,8 @@
 265 Paint House II 
 
 266 Palindrome Permutation
+-- Time  : O(n)
+-- Space: O(1)
 
 267 Palindrome Permutation II
 
@@ -685,6 +691,8 @@
 360 Sort Transformed Array
 
 361 Bomb Enemy
+-- Time Complexity: O(mn) where m is the number of rows and n is the number of columns
+-- Space Complexity: O(mn)
 
 362 Design Hit Counter
 
@@ -886,8 +894,15 @@
 
 482 License Key Formatting
 
+484 Find Permutation
+- Time Complexity: O(n^2)
+
 485 Max Consecutive Ones
 
 487 Max Consecutive Ones II
 
 488 Zuma Game
+
+491 Increasing Subsequences  
+
+494 Target Sum  

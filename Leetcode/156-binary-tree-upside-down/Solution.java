@@ -45,3 +45,29 @@ public class Solution {
         return rest;
     }
 }
+
+// Recursive : draw picture
+public class Solution {
+    public TreeNode upsideDownBinaryTree(TreeNode root) {
+        if(root == null)    return root;
+        if(root.left == null && root.right == null)     return root;
+        
+        TreeNode prev = null, next = null, temp = null;
+        TreeNode cur = root;
+        while(cur != null){
+            next = cur.left;
+
+            cur.left = temp;
+            temp = cur.right;
+            cur.right = prev;
+            
+            if(prev != null)     System.out.println("Prev " + prev.val);
+            if(cur != null)      System.out.println("Cur " + cur.val);
+            if(temp != null)     System.out.println("temp " + temp.val);
+            
+            prev = cur;
+            cur = next;            
+        }
+        return prev;
+    }
+}

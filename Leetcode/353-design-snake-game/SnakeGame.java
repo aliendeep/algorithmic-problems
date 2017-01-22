@@ -45,6 +45,16 @@ snake.move("L"); -> Returns 2 (Snake eats the second food)
 | | |S|
 
 snake.move("U"); -> Returns -1 (Game over because snake collides with border)
+
+Sample Input:
+["SnakeGame","move","move","move","move","move","move"]
+[[3,2,[[1,2],[0,1]]],["R"],["D"],["R"],["U"],["L"],["U"]]
+["SnakeGame","move","move"]
+[[2,2,[[0,1]]],["R"],["D"]]
+
+Sample Output:
+[null,0,0,1,1,2,-1]
+[null,1,1]
 */
 
 public class SnakeGame {

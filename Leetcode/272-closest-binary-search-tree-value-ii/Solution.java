@@ -130,6 +130,8 @@ class Solution2 {
 }
 
 // O(n) time && O(k) space
+// Binary Search Tree - inorder traversal : Sorted order
+// Sliding window approach
 class Solution3 {
     // Sorted order
     public void inorder(TreeNode node, double target, int k, LinkedList<Integer> result){
@@ -154,7 +156,42 @@ class Solution3 {
     }
 }
 
+// Queue
+// Inorder traversal : Sliding Window
 class Solution4 {
+    int k;
+    double target;
+    Queue<Integer> window;
+    int head;
+    int end;
+    
+    public void inorder(TreeNode node){
+        if(node == null)    return;
+        inorder(node.left);
+        if(window.size() == k){
+            if(Math.abs(target - window.peek()) < Math.abs(target - node.val))
+                return;
+            else{
+                // remove the first item of the window
+                window.remove();
+            }
+        }
+        
+        // add to the end
+        window.add(node.val);
+        inorder(node.right);
+    }
+    
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        window = new LinkedList<>();
+        this.target = target;
+        this.k = k;
+        inorder(root);
+        return new ArrayList<>(window);
+    }
+}
+
+class Solution5 {
     public int getPred(Deque<TreeNode> pred){
         TreeNode r = pred.pop();
         TreeNode cur = r.left;
@@ -164,6 +201,7 @@ class Solution4 {
         }
         return r.val;
     }
+    
     public int getSucc(Deque<TreeNode> succ){
         TreeNode r = succ.pop();
         TreeNode cur = r.right;

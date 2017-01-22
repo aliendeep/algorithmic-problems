@@ -35,3 +35,22 @@ public class Solution {
       return (odd == 1);        
     }
 }
+
+class Solution2 {
+    public boolean canPermutePalindrome(String s) {
+        int[] cnt = new int[256];
+        for(int i=0; i<s.length(); ++i){
+            cnt[s.charAt(i)]++;
+        }
+        boolean oddFound = false;
+        for(int i=0; i<256; ++i){
+            if(cnt[i] % 2 == 0)
+                continue;
+            
+            if(oddFound == true)
+                return false;
+            oddFound = true;
+        }
+        return true;
+    }
+}
