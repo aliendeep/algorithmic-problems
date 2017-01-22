@@ -1,4 +1,4 @@
-## Solved Leetcode problems
+## Solved Leetcode problems (455)
 
 1   Two Sum
 
@@ -894,15 +894,25 @@
 
 482 License Key Formatting
 
+483 Smallest Good Base
+
 484 Find Permutation
 - Time Complexity: O(n^2)
 
 485 Max Consecutive Ones
+
+486 Predict the Winner
+- Dynamic Programming
+- Time Complexity: O(n^2)
+- Space Complexity: O(n^2)
 
 487 Max Consecutive Ones II
 
 488 Zuma Game
 
 491 Increasing Subsequences  
+
+492 Construct the rectangle
+- Time Complexity: O(sqrt(n))
 
 494 Target Sum  
