@@ -379,3 +379,149 @@ public class AllOne {
  * String param_3 = obj.getMaxKey();
  * String param_4 = obj.getMinKey();
  */
+
+// Alternative: Using HashSet
+public class AllOne {
+    class Node {
+        public Node prev, next;
+        public final int freq;
+        public Set<String> keys;
+    
+        public Node(String key, int freq) {
+            this.freq = freq;
+            keys = new HashSet<>();
+            keys.add(key);
+            this.prev = null;
+            this.next = null;
+        }
+    }
+    // Key, Node
+    Map<String, Node> cache;
+    Node dummyHead, dummyTail;
+
+    /** Initialize your data structure here. */
+    public AllOne() {
+        cache = new HashMap<>();
+        dummyHead = new Node("-1", -10);
+        dummyTail = new Node("-1", -10);
+        dummyHead.next = dummyTail;
+        dummyTail.prev = dummyHead;
+    }
+    
+    /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
+    public void inc(String key) {
+        if(cache.containsKey(key))
+            incrementFrequncy(key);
+        else{
+            // Add this new item to the head
+            addFirst(key);
+        }
+    }
+    
+    /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
+    public void dec(String key) {
+        if(!cache.containsKey(key))
+            return;
+        decrementFrequncy(key);
+    }
+    
+    /** Returns one of the keys with maximal value. */
+    public String getMaxKey() {
+        if(dummyHead.next == dummyTail)
+            return "";
+        Node maxNode = dummyTail.prev;
+        return maxNode.keys.iterator().next();
+    }
+    
+    /** Returns one of the keys with Minimal value. */
+    public String getMinKey() {
+        if(dummyHead.next == dummyTail)
+            return "";
+        Node minNode = dummyHead.next;
+        return minNode.keys.iterator().next();
+    }
+    
+    void decrementFrequncy(String key) {
+        Node node = cache.get(key);
+        // Remove the node from the keyset
+        node.keys.remove(key);
+        
+        if(node.freq - 1 > 0){
+            // No need to create new node. 
+            if(node.prev.freq == node.freq - 1)
+                node.prev.keys.add(key);
+            else{
+                // insert this node before node
+                Node newNode = new Node(key, node.freq - 1);
+                newNode.prev = node.prev;
+                node.prev.next = newNode;
+                node.prev = newNode;
+                newNode.next = node;
+            }
+            cache.put(key, node.prev);
+        }
+        else{
+            cache.remove(key);
+        }
+        // Delete the node, if the keyset of this node contains only this key
+        if(node.keys.isEmpty()){
+            removeNode(node);
+        }
+    }
+    
+    void incrementFrequncy(String key) {
+        Node node = cache.get(key);
+        // Remove the node from the keyset
+        node.keys.remove(key);
+        
+        // No need to create new node. 
+        if(node.next.freq == node.freq + 1)
+            node.next.keys.add(key);
+        else{
+            // insert this node before next node
+            Node newNode = new Node(key, node.freq + 1);
+            node.next.prev = newNode; 
+            newNode.next = node.next;
+            newNode.prev = node;
+            node.next = newNode;
+        }
+        cache.put(key, node.next);
+        
+        // Delete the node, if the keyset of this node contains only this key
+        if(node.keys.isEmpty()) 
+            removeNode(node);
+    }
+    
+    void addFirst(String key) {
+        Node next = dummyHead.next;
+        if(next.freq == 1){
+            // No need to create a new node. Just add the key to the keyset of the current head
+            next.keys.add(key);
+        }
+        else{
+            // insert at the head
+            Node node = new Node(key, 1);
+            node.next = dummyHead.next;
+            dummyHead.next.prev = node;
+            dummyHead.next = node;
+            node.prev = dummyHead;
+        }
+        // Update cache
+        cache.put(key, dummyHead.next);
+    }
+    
+    void removeNode(Node node) {
+        // delete node
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+}
+
+/**
+ * Your AllOne object will be instantiated and called as such:
+ * AllOne obj = new AllOne();
+ * obj.inc(key);
+ * obj.dec(key);
+ * String param_3 = obj.getMaxKey();
+ * String param_4 = obj.getMinKey();
+ */
