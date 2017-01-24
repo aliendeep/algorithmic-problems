@@ -55,11 +55,6 @@ public class MedianFinder {
     }
 };
 
-// Your MedianFinder object will be instantiated and called as such:
-// MedianFinder mf = new MedianFinder();
-// mf.addNum(1);
-// mf.findMedian();
-
 // Alternative: Using minHeap for both parts
 class MedianFinder2 {
     private PriorityQueue<Long> small; 
@@ -125,7 +120,73 @@ class MedianFinder3 {
     }
 };
 
-// Your MedianFinder object will be instantiated and called as such:
-// MedianFinder mf = new MedianFinder();
-// mf.addNum(1);
-// mf.findMedian();
+// Alternative: using TreeMap (Multi-TreeSet)
+public class MedianFinder {
+    TreeMap<Integer, Integer> large;
+    TreeMap<Integer, Integer> small;
+    int lcnt;
+    int scnt;
+    
+    /** initialize your data structure here. */
+    public MedianFinder() {
+        large = new TreeMap<>();
+        small = new TreeMap<>();
+        lcnt = 0;
+        scnt = 0;
+    }
+    public void decrement(int key, TreeMap<Integer, Integer> map){
+        int newCnt = map.get(key) - 1;
+        if(newCnt == 0)
+            map.remove(key);
+        else
+            map.put(key, newCnt);
+    }
+    
+    public void addNum(int num) {
+        if(large.isEmpty()){
+            large.put(num, 1);
+            lcnt++;
+        }
+        else{
+            if(num >= large.firstKey()){
+                large.put(num, large.getOrDefault(num, 0) + 1);
+                lcnt++;
+            }
+            else{
+                small.put(num, small.getOrDefault(num, 0) + 1);                
+                scnt++;
+            }
+        }
+        
+        if(lcnt > scnt + 1){
+            // remove the smallest key from the large treeset
+            int sm = large.firstKey();
+            decrement(sm, large);
+            lcnt--;
+            small.put(sm, small.getOrDefault(sm, 0) + 1);
+            scnt++;
+        }
+        else if(lcnt < scnt){
+            // remove the largest key from the small treeset
+            int lg = small.lastKey();
+            decrement(lg, small);
+            scnt--;
+            large.put(lg, large.getOrDefault(lg, 0) + 1);
+            lcnt++;
+        }
+    }
+    
+    public double findMedian() {
+        if(lcnt > scnt)
+            return large.firstKey();
+        else
+            return (large.firstKey() + small.lastKey())*0.5;
+    }
+}
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.addNum(num);
+ * double param_2 = obj.findMedian();
+ */
