@@ -76,3 +76,4 @@ class Solution2 {
         return longest;
     }
 }
+

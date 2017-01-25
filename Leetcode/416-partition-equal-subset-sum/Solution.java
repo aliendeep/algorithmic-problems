@@ -33,22 +33,20 @@ false
 true
 */
 // Memoization
-public class Solution {
-    boolean[][] dp;
+public class Solution{
+    int[][] dp;
     
-    public boolean isSubsetSum(int[] nums, int n, int sum){
-        if(sum == 0)             return true;
-        if(n < 0)                return (sum == 0);
-        if(dp[n][sum] == true)   return dp[n][sum];
+    public boolean isSubsetSum(int[] nums, int i, int target){
+        if(target == 0)             return true;
+        if(i < 0)                   return (target == 0);
+        if(dp[i][target] != -1)     return dp[i][target] == 1 ? true : false;
         
-        if(nums[n] > sum){
-             dp[n][sum] = isSubsetSum(nums, n-1, sum);    
+        boolean hasFoundSum = isSubsetSum(nums, i-1, target);
+        if(nums[i] <= target){
+             hasFoundSum |= isSubsetSum(nums, i-1, target - nums[i]);    
         }
-        else{
-            // Including nth number or not
-            dp[n][sum] = isSubsetSum(nums, n-1, sum - nums[n]) || isSubsetSum(nums, n-1, sum);
-        }
-        return dp[n][sum];
+        dp[i][target] = hasFoundSum ? 1 : 0;
+        return hasFoundSum;
     }
     
     public boolean canPartition(int[] nums) {
@@ -62,10 +60,9 @@ public class Solution {
         
         int n = nums.length;
         // Both the array size and each of the array element will not exceed 100.
-        dp = new boolean[n][10001];
-        for(int i=0; i<n; i++)
-            Arrays.fill(dp[i], false);
-        
+        dp = new int[n][10001];
+        for(int[] t : dp)
+            Arrays.fill(t, -1);
         // Calculate sum/2 and find a subset of array with sum equal to sum/2
         return isSubsetSum(nums, n-1, sum/2);
     }
