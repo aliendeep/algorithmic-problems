@@ -45,6 +45,39 @@ public class MinStack {
     }
 }
 
+public class MinStack {
+    class Info{
+        int x;
+        int min;
+        public Info(int a, int m){
+            x = a;
+            min = m;
+        }
+    }
+    Deque<Info> stk;
+    
+    /** initialize your data structure here. */
+    public MinStack() {
+        stk = new LinkedList<>();
+    }
+        
+    public void push(int x) {
+        int min = stk.isEmpty() ? x : Math.min(stk.peekFirst().min, x);
+        stk.push(new Info(x, min));
+    }
+    
+    public void pop() {
+        stk.pop();
+    }
+    
+    public int top() {
+        return stk.peek().x;
+    }
+    
+    public int getMin() {
+        return stk.peek().min;
+    }
+}
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack obj = new MinStack();

@@ -146,6 +146,91 @@ public class Solution {
     }
 }
 
+// Line Sweep O(nlogn) Solution
+class Solution {
+    class Event{
+        int time;
+        Rectangle rect; 
+        public Event(int t, Rectangle r){
+            time  = t;
+            rect = r;
+        }
+    }
+    class Rectangle{
+        int x1, y1, x2, y2;
+        public Rectangle(int x1, int y1, int x2, int y2){
+            this.x1 = x1;      
+            this.y1 = y1;      
+            this.x2 = x2;      
+            this.y2 = y2;      
+        }
+    }
+    
+    public boolean isRectangleCover(int[][] rectangles) {
+        int n = rectangles.length;
+        Event[] events = new Event[2*n];
+        
+        int ymin = Integer.MAX_VALUE, ymax = Integer.MIN_VALUE;
+        int i = 0;
+        for(int[] rect : rectangles){
+            events[i++] = new Event(rect[0], new Rectangle(rect[0], rect[1], rect[2], rect[3]));
+            events[i++] = new Event(rect[2], new Rectangle(rect[0], rect[1], rect[2], rect[3]));
+            ymin = Math.min(ymin, rect[1]);
+            ymax = Math.max(ymax, rect[3]);
+        }
+        
+        Arrays.sort(events, new Comparator<Event>(){
+            @Override
+            public int compare(Event a, Event b){
+                if(a.time != b.time)
+                    return Integer.compare(a.time, b.time);
+                // Same time
+                return Integer.compare(a.rect.x1, b.rect.x1);
+            } 
+        });   
+
+        TreeSet<Rectangle> active = new TreeSet<Rectangle>(new Comparator<Rectangle>(){
+            @Override
+            // if intersects, return 0
+            public int compare(Rectangle a, Rectangle b){
+                // No overlap
+                // upper right y of a <= lower left y of b
+                if(a.y2 <= b.y1)    return -1;
+                // lower left y of a >= upper left y of b
+                if(a.y1 >= b.y2)    return  1;
+                // overlaps
+                return 0;
+            }
+        });
+
+        int yRange = ymax - ymin;
+        int curYRange = 0;
+        i = 0;
+        while(i < events.length){
+            Event prev = events[i];
+            while(i < events.length && prev.time == events[i].time){
+                Event e = events[i];
+                // left edge
+                if(e.time == e.rect.x1){
+                    if(!active.add(e.rect)){
+                        return false;
+                    }
+                    curYRange += (e.rect.y2 - e.rect.y1); 
+                }
+                else{
+                    active.remove(e.rect);
+                    curYRange -= (e.rect.y2 - e.rect.y1); 
+                }
+                ++i;
+            }
+            if(i<events.length && curYRange != yRange){
+                return false;
+            }
+        }
+        return curYRange == 0;
+    }
+}
+
 // O(n) Solution (Point counting)
 class Solution2 {
     // Observations:

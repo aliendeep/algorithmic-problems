@@ -20,7 +20,6 @@ Output:
  *     ListNode(int x) { val = x; }
  * }
  */
-// Alternative: Recursion
 public class Solution {
     public int carry(ListNode node) {
         if(node == null)
@@ -51,6 +50,65 @@ public class Solution {
         int c = carry(node);
         if(c == 0)
             return node;
+        // insert new node at the head
+        ListNode nh =  new ListNode(1);
+        nh.next = node;
+        return nh;
+    }
+    
+}
+
+// Iterative
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
+        while(cur != null){
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+    public ListNode plusOne(ListNode head) {
+        if(head == null)
+            return head;
+        ListNode rh = reverse(head);
+        ListNode cur = rh;
+        // Add 1 to the node
+        cur.val = cur.val + 1;
+        while(cur.next != null && cur.val == 10){
+            cur.val = 0;
+            cur.next.val = cur.next.val + 1;
+            cur = cur.next;
+        }
+        if(cur.val == 10){
+            cur.val = 0;
+            // insert 1 new one
+            cur.next = new ListNode(1);
+        }
+        return reverse(rh);
+    }
+}
+
+// Alternative: Recursion
+class Solution {
+    public int getCarry(ListNode node) {
+        if(node == null)
+            return 1;
+        int c = getCarry(node.next);
+        if(c == 0)      return 0;
+        // carry
+        node.val += 1;
+        int sum = node.val;
+        node.val = sum%10;
+        return sum/10;
+    }
+    public ListNode plusOne(ListNode node) {
+        if(node == null)        return node;
+        int c = getCarry(node);
+        if(c == 0)              return node;
         // insert new node at the head
         ListNode nh =  new ListNode(1);
         nh.next = node;

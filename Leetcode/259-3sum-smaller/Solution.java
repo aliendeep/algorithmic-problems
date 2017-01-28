@@ -1,5 +1,6 @@
 /*
-Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
+Given an array of n integers nums and a target, find the number of index triplets 
+i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
 
 For example, given nums = [-2, 0, 1, 3], and target = 2.
 
@@ -60,6 +61,53 @@ class Solution2 {
                     end--;    
                 }
             }
+        }
+        return cnt;
+    }
+}
+
+// O(n^2logn) Solution
+class Solution3 {
+    int twoSumSmaller(int[] nums, int start, int target) {
+        int n = nums.length;
+        int cnt = 0;
+        for(int i = start; i<n-1; i++){
+            // Find the largest index for which nums[i] + nums[j] < target
+            int j = binarySearch(nums, i, target - nums[i]);
+            if(j != -1)
+                cnt += j - i;
+        }
+        return cnt;
+    }
+    
+    // Find the largest index whose value is less than target
+    int binarySearch(int[] nums, int start, int target) {
+        int n = nums.length;
+        int l = start;
+        int h = n - 1;
+        while(h - l > 3){
+            int mid = l + (h-l)/2;
+            if(nums[mid] < target){
+                l = mid;
+            }
+            // a[mid] > target
+            else
+                h = mid - 1;
+        }
+        for(int i=h; i>=l; i--){
+            if(nums[i] < target){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public int threeSumSmaller(int[] nums, int target) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int cnt = 0;
+        for(int i=0; i<n-2; i++){
+            cnt += twoSumSmaller(nums, i+1, target - nums[i]);
         }
         return cnt;
     }

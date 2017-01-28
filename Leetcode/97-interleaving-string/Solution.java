@@ -68,58 +68,71 @@ public class Solution {
 }
 
 class Solution2 {
-    public int check(String s1, String s2, String s3, int i, int j, int[][] dp) {
-        if(i <= 0 && j <= 0)          return 1;
+    String s1;
+    String s2;
+    String s3;
+    int[][] dp;
+    public int check(int i, int j) {
+        if(i == 0 && j == 0)          return 1;
         if(dp[i][j] != -1)            return dp[i][j];
         
         dp[i][j] = 0;
+        // both non empty
         if(i > 0 && j > 0){
+            // both matches
             if(s1.charAt(i-1) == s3.charAt(i+j-1) && s2.charAt(j-1) == s3.charAt(i+j-1)){
-                int x = check(s1, s2, s3, i-1, j, dp);
-                if(x == 1){
-                    dp[i][j] = x;
-                    return x;
+                if(check(i-1, j) == 1){
+                    dp[i][j] = 1;
+                    return 1;
                 }
                 // consume jth of s2
-                int y = check(s1, s2, s3, i, j-1, dp);
-                dp[i][j] = y;
+                dp[i][j] = check(i, j-1);
             }
+            // only s1 matches
             else if(s1.charAt(i-1) == s3.charAt(i+j-1)){
-                dp[i][j] = check(s1, s2, s3, i-1, j, dp);
+                dp[i][j] = check(i-1, j);
             }
             else if(s2.charAt(j-1) == s3.charAt(i+j-1)){
-                dp[i][j] = check(s1, s2, s3, i, j-1, dp);
+                dp[i][j] = check(i, j-1);
             }
             return dp[i][j];
         }
         // s2 empty
         else if(i > 0){
-            if(s1.charAt(i-1) != s3.charAt(i+j-1))
+            if(s1.charAt(i-1) != s3.charAt(i+j-1)){
+                dp[i][j] = 0;
                 return 0;
-            dp[i][j] = check(s1, s2, s3, i-1, j, dp);
+            }
+            dp[i][j] = check(i-1, j);
         }
         // s1 empty
         else if(j > 0){
-            if(s2.charAt(j-1) != s3.charAt(i+j-1))
+            if(s2.charAt(j-1) != s3.charAt(i+j-1)){
+                dp[i][j] = 0;
                 return 0;
-             dp[i][j] = check(s1, s2, s3, i, j-1, dp);
+            }
+             dp[i][j] = check(i, j-1);
             
         }
         return dp[i][j];
     }
 
     public boolean isInterleave(String s1, String s2, String s3) {
+        this.s1 = s1;
+        this.s2 = s2;
+        this.s3 = s3;
         int a = s1.length();
         int b = s2.length();
         int c = s3.length();
         if(c !=  a + b)
             return false;
         
-        int[][] dp = new int[a+1][b+1];
+        dp = new int[a+1][b+1];
         for(int[] t : dp)
             Arrays.fill(t, -1);
-        return check(s1, s2, s3, a, b, dp) == 1 ? true : false;                
+        return check(a, b) == 1;            
     }
+}
 }
 
 // Backtracking (TLE)

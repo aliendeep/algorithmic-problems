@@ -145,3 +145,69 @@ class Solution3 {
     }
 }
 
+// BFS 
+// O(n^2)
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int n = s.length();
+        Queue<Integer> Q = new LinkedList<>();
+        Set<String> dict = new HashSet<>(wordDict);
+        Q.add(0);
+        boolean[] visited = new boolean[n];
+        while(!Q.isEmpty()){
+            int start = Q.remove();
+            if(!visited[start]){
+                for(int i=start; i<=n; ++i){
+                    if(dict.contains(s.substring(start, i))){
+                        if(i == n)
+                            return true;
+                        Q.add(i);
+                    }
+                }
+                visited[start] = true;
+            }
+        }
+        return false;
+    }
+}
+
+// BFS 
+// O(n^2)
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int n = s.length();
+        Queue<Integer> Q = new LinkedList<>();
+        Set<String> dict = new HashSet<>(wordDict);
+        
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=0; i<n; ++i){
+            graph.add(new ArrayList<>());
+        }
+        // Construct Graph
+        for(int start=0; start<n; ++start){
+            for(int end=start+1; end<=n; ++end){
+                if(dict.contains(s.substring(start, end))){
+                    graph.get(start).add(end);                    
+                }
+            }
+        }
+        Q.add(0);
+        boolean[] visited = new boolean[n];
+        while(!Q.isEmpty()){
+            int front = Q.remove();
+            if(front == n)      return true;
+            if(!visited[front]){
+                visited[front] = true;
+                List<Integer> adj = graph.get(front);
+                if(adj != null){
+                    for(int neighbor : adj){
+                        if(neighbor == n)       return true;
+                        if(!visited[neighbor])
+                            Q.add(neighbor);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
