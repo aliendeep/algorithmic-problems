@@ -34,7 +34,7 @@ public class BoxUnion{
       if(!events.containsKey(x1))
         events.put(x1, new Events());
       if(!events.containsKey(x2))
-        events.put(x1, new Events());
+        events.put(x2, new Events());
 
       events.get(x1).in.add(new YRange(y1, y2, tag));
       events.get(x2).out.add(new YRange(y1, y2, tag));
@@ -93,3 +93,90 @@ public class BoxUnion{
   }  
 }
 
+class Pair{
+  int y;
+  int tag;
+  public Pair(int y1, int t){
+    y = y1;
+    tag = t;
+  }
+}
+
+class BoxUnion2{
+  public int area(String[] rectangles){
+    // Sorted. unique x, all events at that particular x
+    TreeMap<Integer, Events> events = new TreeMap<>();
+
+    int tag = 0;
+    for(String r : rectangles){
+      tag++;
+      Scanner sc = new Scanner(r);
+      int x1 = sc.nextInt();
+      int y1 = sc.nextInt();
+      int x2 = sc.nextInt();
+      int y2 = sc.nextInt();
+      if(!events.containsKey(x1))
+        events.put(x1, new Events());
+      if(!events.containsKey(x2))
+        events.put(x1, new Events());
+
+      events.get(x1).in.add(new YRange(y1, y2, tag));
+      events.get(x2).out.add(new YRange(y1, y2, tag));
+    }
+
+    // Active set of tags for each unique y
+    // we need to identify where each each rectangle starts & end
+    // positve tag - start 
+    // negative tag - end
+    // We need all of them sorted
+    TreeSet<Pair> active = new TreeSet<Pair>(new Comparator<Pair>(){
+      @Override
+      public int compare(Pair a, Pair b){
+        if(a.y == b.y)
+          return Integer.compare(a.tag, b.tag);
+        return Integer.compare(a.y, b.y);
+      }
+    });
+
+    int area = 0;
+    for(Map.Entry<Integer, Events> entry : events.entrySet()){
+      int x = entry.getKey();
+      Integer next_x = events.higherKey(x);
+      // processed last unique x
+      if(next_x == null)    break;
+      Events e = entry.getValue();
+
+      // Construct the current active set
+      for(YRange y : e.in){
+        active.add(new Pair(y.y1, y.tag));
+        active.add(new Pair(y.y2, -y.tag));
+      }
+
+      for(YRange y : e.out){
+        active.remove(new Pair(y.y1, y.tag));
+        active.remove(new Pair(y.y2, -y.tag));
+      }
+      // Compute union of y segments
+      Integer lasty = null;
+      int ySum = 0;
+      int cnt = 0;
+      for(Pair p : active){
+        int y = p.y;
+        if(cnt == 0){
+          lasty = y;
+        }
+        // closing
+        if(p.tag < 0)   cnt--;
+        else            cnt++;
+
+        if(cnt == 0){
+          ySum += y - lasty;
+          // reset lasty
+          lasty = null;
+        }
+      }
+      area += (next_x - x)*ySum;
+    }
+    return area;
+  }  
+}
