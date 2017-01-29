@@ -916,3 +916,10 @@
 - Time Complexity: O(sqrt(n))
 
 494 Target Sum  
+
+495 Teemo Attacking
+
+499 The Maze II
+
+501 Find Mode in Binary Tree
+
