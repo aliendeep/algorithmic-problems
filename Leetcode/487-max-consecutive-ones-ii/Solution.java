@@ -164,3 +164,43 @@ class Solution4 {
         return maxLength;
     }
 }
+
+// Two pointer approach
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int maxLen = 0, k = 1;
+        int start = 0, end;
+        int zero = 0;
+        for(end=0; end<nums.length; ++end){
+            if(nums[end] == 0)
+                zero++;
+            while(zero > k){
+                if(nums[start] == 0){
+                    zero--;
+                }
+                start++;
+            }
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+        return maxLen;
+    }
+}
+
+public class Solution {
+    // Followup : Two pointer
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int maxLen = 0, k = 1;
+        int start = 0, end;
+        Queue<Integer> qIndices = new LinkedList<>();
+        // Store indices of zero within window [l, h]
+        for(end=0; end<nums.length; ++end){
+            if(nums[end] == 0)
+                qIndices.add(end);
+            while(qIndices.size() > k){
+                start = qIndices.remove() + 1;
+            }
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+        return maxLen;
+    }
+}

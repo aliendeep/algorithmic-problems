@@ -44,3 +44,31 @@ public class Solution {
         return dummy.next;
    }
 }
+
+// Recursive
+public class Solution {
+    int n;
+    int cur;
+    ListNode prev;
+    
+    public void findnthPrevNode(ListNode head){
+        if(head == null)    return;
+        findnthPrevNode(head.next);
+        cur++;
+        if(cur == n + 1){
+            prev = head;
+        }
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        this.n = n;         
+        cur = 0;
+        prev = null;
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        
+        findnthPrevNode(dummy);
+        prev.next = prev.next.next;
+        return dummy.next;
+    }
+}

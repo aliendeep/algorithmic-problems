@@ -30,8 +30,10 @@ public class Solution {
 
     public long findKthNumber(int n, long skipBlock, long prefix) {
         if(prefix > 0){
+            // prefix itself is the result
             if(skipBlock == 0)
                 return prefix;
+            // prefix is not the answer, so skip the prefix
             skipBlock--;
         }
         
