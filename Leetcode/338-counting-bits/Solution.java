@@ -107,3 +107,24 @@ class Solution3 {
         return cnt;
     }
 }
+
+class Solution {
+    // DP
+    public static int[] dp;
+    
+    public int[] countBits(int num) {
+        dp = new int[num+1];
+        Arrays.fill(dp, -1);
+        
+        dp[0] = 0;
+        if(num == 0)
+            return dp;
+        dp[1] = 1;
+
+        for (int n = 2; n <= num; ++n) {
+            int lowestSetBitValue = n & -n;
+            dp[n] = dp[n - lowestSetBitValue] + 1;
+        }
+        return dp;
+    }
+}

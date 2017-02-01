@@ -37,109 +37,69 @@ these balls is called "board" in the input.
 these balls is called "hand" in the input.
 - Both input strings will be non-empty and only contain characters 'R','Y','B','G','W'.
 */
-// Bruteforce
 public class Solution {
-    int minCnt;
-    int countLeft(String board, int index){
-        char c = board.charAt(index);
-        int cnt = 0;
-        while(index >= 0 && board.charAt(index) == c){
-            index--;
-            cnt++;
+    public int findMinStep(String board, String hand) {
+        if (hand == null || hand.length() == 0) {
+            return -1;
         }
-        return cnt;
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        for (int i = 0; i < hand.length(); i++) {
+            char c = hand.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        List<Integer> res = new ArrayList<>();
+        res.add(Integer.MAX_VALUE);
+        backTrack(board, map, res, 0);
+        if (res.get(0) == Integer.MAX_VALUE) {
+            return -1;
+        }
+        return res.get(0);
     }
-    
-    int countRight(String board, int index){
-        int n = board.length(); 
-        int cnt = 0;
-        char c = board.charAt(index);
-        while(index < n && board.charAt(index) == c){
-            index++;
-            cnt++;
+    void backTrack(String board, Map<Character, Integer> map, List<Integer> res, int val) {
+        if (board.length() == 0) {
+            res.set(0, Math.min(res.get(0), val));
         }
-        return cnt;
-    }
-    
-    public void bktk(String board, int[] cnt, int steps){
-        int n = board.length(); 
-        if(n == 0){
-            minCnt = Math.min(minCnt, steps);
-            return;
-        }
-        for(int i=0; i<n; ++i){
-            // if remaining count is > 1
+        for (int i = 0; i < board.length(); i++) {
             char c = board.charAt(i);
-            // You may assume that the initial row of balls on the table won’t have any 3 or 
-            // more consecutive balls with the same color.
-            // remaining count > 0
-            if(cnt[c-'A'] > 0){
-                // add one ball
-                if(i < n-1 && c == board.charAt(i+1)){
-                    // Count which other same colored balls become adjacent and get removed if we add this c colored ball
-                    int left = i - 1;
-                    int right = i + 2;
-                    while(left>=0 && right<n && board.charAt(left) == board.charAt(right)){
-                        int c1 = countLeft(board, left);
-                        int c2 = countRight(board, right);
-                        if(c1 + c2 < 3)
-                            break;
-                        left -= c1;
-                        right += c2;
-                    }
-                    StringBuilder rest = new StringBuilder();
-                    if(left >= 0)
-                        rest.append(board.substring(0, left+1));
-                    if(right < n)
-                        rest.append(board.substring(right));
-                    cnt[c - 'A']--;
-                    bktk(rest.toString(), cnt, steps + 1);
-                    cnt[c - 'A']++;
+            if (i < board.length() - 1 && c == board.charAt(i + 1) && map.getOrDefault(c, 0) > 0) {
+                int l = i - 1;
+                int r = i + 2;
+                while (l >=0 && r < board.length() && board.charAt(l) == board.charAt(r) && count(board, l) + count(board, r) >= 3) {
+                    l -= count(board, l);
+                    r += count(board, r);
                 }
-                // add two balls
-                else if(cnt[c-'A'] >= 2){
-                    int left = i - 1;
-                    int right = i + 1;
-                    while(left>=0 && right<n && board.charAt(left) == board.charAt(right)){
-                        int c1 = countLeft(board, left);
-                        int c2 = countRight(board, right);
-                        if(c1 + c2 < 3)
-                            break;
-                        left -= c1;
-                        right += c2;
-                    }
-                    StringBuilder rest = new StringBuilder();
-                    if(left >= 0)
-                        rest.append(board.substring(0, left+1));
-                    if(right < n)
-                        rest.append(board.substring(right));
-                    cnt[c - 'A'] -= 2;
-                    bktk(rest.toString(), cnt, steps + 2);
-                    cnt[c - 'A'] += 2;
+                String left = l >= 0 ? board.substring(0, l + 1) : "";
+                String right = r < board.length() ? board.substring(r) : "";
+                map.put(c, map.getOrDefault(c, 0) - 1);
+                backTrack(left + right, map, res, val + 1);
+                map.put(c, map.getOrDefault(c, 0) + 1);
+            } else if (map.getOrDefault(c, 0) > 1) {
+                int l = i - 1;
+                int r = i + 1;
+                while (l >=0 && r < board.length() && board.charAt(l) == board.charAt(r) && count(board, l) + count(board, r) >= 3) {
+                    l -= count(board, l);
+                    r += count(board, r);
                 }
+                String left = l >= 0 ? board.substring(0, l + 1) : "";
+                String right = r < board.length() ? board.substring(r) : "";
+                map.put(c, map.getOrDefault(c, 0) - 2);
+                backTrack(left + right, map, res, val + 2);
+                map.put(c, map.getOrDefault(c, 0) + 2);
             }
         }
     }
-    public int findMinStep(String board, String hand) {
-        int m = board.length();
-        int[] cnt = new int[26];
-        int[] total = new int[26];
-        for(int i=0; i<hand.length(); ++i){
-            int c = hand.charAt(i) - 'A';
-            cnt[c]++;
-            total[c]++;
+    int count(String board, int idx) {
+        int l = idx - 1;
+        int res = 1;
+        while (l >= 0 && board.charAt(l) == board.charAt(idx)) {
+            l--;
+            res++;
         }
-        for(int i=0; i<board.length(); ++i){
-            int c = board.charAt(i) - 'A';
-            total[c]++;
+        int r = idx + 1;
+        while (r < board.length() && board.charAt(r) == board.charAt(idx)) {
+            r++;
+            res++;
         }
-        for(int i=0; i<board.length(); ++i){
-            int c = board.charAt(i) - 'A';
-            if(total[c] < 3)
-                return -1;
-        }
-        minCnt = Integer.MAX_VALUE;
-        bktk(board, cnt, 0);
-        return minCnt == Integer.MAX_VALUE ? -1 : minCnt;  
+        return res;
     }
 }

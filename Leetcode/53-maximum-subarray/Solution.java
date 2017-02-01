@@ -103,9 +103,13 @@ class Solution4 {
         int mid = (l+h)/2;
         Info left = helper(nums, l, mid);
         Info right = helper(nums, mid+1, h);
+        // best sum starting from left endpoint
         int ss = Math.max(left.startSum, left.sum + right.startSum);
+        // best sum starting from right endpoint
         int es = Math.max(right.endSum, right.sum + left.endSum);
+        // sum of full array
         int sum = left.sum + right.sum;
+        // maximum sum of individual part
         int ms = Math.max(left.maxSum, right.maxSum);
         ms = Math.max(ms, sum);
         ms = Math.max(ms, ss);

@@ -37,20 +37,7 @@ Returns [4, 5, 3], [2], [1].
  */
 
 
-// Time: O(n)
-// Space: O(n)
 import java.util.*;
-
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-
 // Time: O(n)
 // Extra: Space: O(h)
 public class Solution {
@@ -95,7 +82,6 @@ public class Solution {
         return r;
     }
 }
-
 
 // Time: O(nlogn)
 // Space: O(n)

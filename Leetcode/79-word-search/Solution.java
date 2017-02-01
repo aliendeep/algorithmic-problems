@@ -7,7 +7,6 @@ cell may not be used more than once.
 
 For example,
 Given board =
-
 [
   ['A','B','C','E'],
   ['S','F','C','S'],

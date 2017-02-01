@@ -33,7 +33,6 @@ public class Solution {
             // unique
             if(taken[i] || (i > 0 && candidates.charAt(i) == candidates.charAt(i-1) && taken[i-1] == false))
                 continue;
-            System.out.println()
             cur[lev] = candidates.charAt(i);
             taken[i] = true;
             permute(candidates, taken, lev+1, cur);

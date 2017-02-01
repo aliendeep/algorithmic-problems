@@ -58,7 +58,7 @@ class SegmentTree{
       addRecursive(2*nodeIndex, lower, mid, arrIndex, diff);
 
     // Merge (Sum Operation)
-    node[nodeIndex] = node[2*nodeIndex] +  node[2*nodeIndex + 1];  
+    node[nodeIndex] = node[2*nodeIndex] + node[2*nodeIndex + 1];  
   }
 
   public void addDiff(int i, int diff){

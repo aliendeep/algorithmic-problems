@@ -101,6 +101,7 @@ class Solution3 {
         if(sum > target)
             return;
 
+        // Create a index list by taking the indices of only unique numbers
         List<Integer> candidateIndex = new ArrayList<>();
         for(int i=start; i<nums.length; i++){
             if(candidateIndex.size() > 0 && nums[candidateIndex.get(candidateIndex.size()-1)] == nums[i])

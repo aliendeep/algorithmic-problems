@@ -78,3 +78,40 @@ class Solution2 {
         return r.toString();
     }
 }
+
+// Recursive
+class Solution {
+    int[] fact;
+    // Given n will be between 1 and 9 inclusive.
+    public Solution(){
+        // calculate factorial
+        fact = new int[10];
+        fact[0] = 1;
+        for(int i=1; i<10; i++)
+            fact[i] = fact[i-1]*i;
+    }
+    
+    
+    
+    public void kthPermutation(int k, List<Integer> nums, StringBuilder result) {
+        if(nums.size() == 0)     return;
+        int n = nums.size();
+        int cnt = fact[n-1];
+        int index = (k-1) / cnt;
+        result.append(nums.get(index));
+        nums.remove(index);
+        k = k - cnt*index;
+        kthPermutation(k, nums, result);
+    }
+    
+    public String getPermutation(int n, int k) {
+        // Create the list of the number
+        List<Integer> nums = new LinkedList<>();
+        for(int i=1; i<=n; i++){
+            nums.add(i);
+        }        
+        StringBuilder result = new StringBuilder();
+        kthPermutation(k, nums, result);
+        return result.toString();
+   }
+}

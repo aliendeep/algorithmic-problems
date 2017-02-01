@@ -49,7 +49,8 @@ class Solution2 {
             else{            
                 // pop index of the last matching (
                 stk.removeFirst();
-                // When we process the right parenthesis for a given prefix, and if its matches (popped), then we can use the index of the top of the stack, as the starting index 
+                // When we process the right parenthesis for a given prefix, and 
+                // if its matches (popped), then we can use the index of the top of the stack, as the starting index 
                 // if the stack is empty then use the index when the stack was clear.
                 int start = stk.isEmpty() ? end : stk.peekFirst();
                 maxLength = Math.max(maxLength, i - start);

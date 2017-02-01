@@ -173,9 +173,6 @@ public class Solution {
         gen(new ArrayList<>(), 0);
         return result;
     }
-}   
-
-
     public void print(List<List<String>> a){
         for(List<String> t : a){
           System.out.println("[");

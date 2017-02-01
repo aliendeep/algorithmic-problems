@@ -10,52 +10,50 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 */
 // Quick Select O(n) implementation
 public class Solution {
+    Random rand;
     void swap(int[] nums, int i, int j){
         int t = nums[i];
         nums[i] = nums[j];
         nums[j] = t;
     }
-    int Partition(int[] nums, int left, int right, int pivotId, Comparator<Integer> comp){
-        int pivot = nums[pivotId];
-        int newPivotId = left;
+    
+    int quickSelect(int[] nums, int left, int right, int pivotIndex){
+        int n = nums.length;
+        int pivot = nums[pivotIndex];
+        // Move the pivot to the rightmost position
+        swap(nums, pivotIndex, right);
         
-        swap(nums, pivotId, right);
+        int newPivot = left;
         for(int i=left; i<right; i++){
-            if(comp.compare(nums[i], pivot) < 0){
-                swap(nums, i, newPivotId);
-                newPivotId++;
+            // Kth Largest Element in an Array, if was kth smallest element that it would be nums[i] < pivot
+            if(nums[i] > pivot){
+                swap(nums, i, newPivot);
+                newPivot++;
             }
-        }
-        swap(nums, right, newPivotId);
-        return newPivotId;
-    }
-
-    // Selection Algorithm
-    // Average time complexity: O(n)
-    public int findKthLargest(int[] nums, int k) {
-        Comparator<Integer> comp = new Comparator<Integer>(){
-            @Override
-            public int compare(Integer a, Integer b){
-                if(a > b)
-                    return -1;
-                if(a < b)
-                    return 1;
-                return 0;
-            }
-        };
+        }       
         
-        int left = 0, right = nums.length - 1;
-        Random rand = new Random();
+        // Pivot was in the rightmost position. Swap so that pivot lies between the two paritions
+        swap(nums, right, newPivot);
+        return newPivot;
+    }
+    
+    public int findKthLargest(int[] nums, int k) {
+        rand =  new Random();
+        int n = nums.length;
+        int left = 0, right = n-1;
         while(left <= right){
-            // Generate a random number between left & right to be the pivot
-            int pivotId = left + rand.nextInt(right - left + 1);
-            int newPivot = Partition(nums, left, right, pivotId, comp);
-            if(newPivot == k-1)
-                return nums[newPivot];
-            else if(newPivot > k - 1)
-                right = newPivot - 1;
-            else 
-                left = newPivot + 1;
+            // Pick a random number between [left .. right]
+            int pivot = left + rand.nextInt(right - left + 1);
+            int nPivot = quickSelect(nums, left, right, pivot);
+            // 0 indexing
+            if(nPivot == k-1)             
+                return nums[nPivot];
+            else if(nPivot < k - 1)
+                left = nPivot + 1;    
+            // nPivot > k
+            else{
+                right = nPivot - 1;
+            }
         }
         return -1;
     }

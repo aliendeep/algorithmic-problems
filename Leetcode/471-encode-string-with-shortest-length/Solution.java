@@ -47,15 +47,22 @@ public class Solution {
         String[][] dp = new String[n][n];
 
         // init
+        // try with all possible length
         for(int len=1; len<=n; ++len){
             for(int start=0; start+len<=n; ++start){
                 int end = start + len - 1;
+                // init
                 dp[start][end] = s.substring(start, end+1);
+
+                // See if it's possible to reduce the length of dp[start][end]
+                // by splitting
                 for(int k=start; k<end; ++k){
                     String str = dp[start][k] + dp[k+1][end];
                     if(str.length() < dp[start][end].length())
                         dp[start][end] = str;
                 }
+
+                // for all factors of len
                 for(int f=1; f*f<=len; ++f){
                     if(len % f != 0)
                         continue;
@@ -70,8 +77,7 @@ public class Solution {
                         if(x.length() < dp[start][end].length())
                             dp[start][end] = x;
                     }
-                    
-                    
+                                        
                     int x = len/f;
                     for(k=start; k+x-1<=end; k+=x){
                         if(!dp[start][start+x-1].equals(dp[k][k+x-1])){

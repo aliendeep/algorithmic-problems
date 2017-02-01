@@ -135,7 +135,7 @@ class Solution4 {
     }
 }
 
-// O(1) Solution
+// O(1) space Solution
 class Solution5 {
     public int minCost(int[][] costs) {
         int n = costs.length;
