@@ -20,10 +20,10 @@ Explanation:
 
 The above arrows point to positions where the corresponding bits are different.
 */
-
 public class Solution {
     public int hammingDistance(int x, int y) {
         int cnt = 0;
+        // Count the number of different bit in the xor
         long xor = x ^ y;
         for(int i=31; i>=0; i--){
             if((xor & (1<<i)) != 0)

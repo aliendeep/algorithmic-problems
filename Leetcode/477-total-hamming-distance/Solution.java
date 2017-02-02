@@ -23,12 +23,16 @@ public class Solution {
         int n = nums.length;
         int[] cnt = new int[32];
         
+        // For each bit position, count the number of the set bits
         for(int i=31; i>=0; i--){
             for(int num : nums){
                 if((num & (1<<i)) != 0)
                     cnt[i]++;
             }
         }
+        // Number of integers = n
+        // For each bit i, if number of set bits = k, then number of 0 bit = n - k
+        // then ith bit contributes n*(n-k) to the total result
         int result = 0;
         for(int i=31; i>=0; i--){
             result += (n-cnt[i])*cnt[i];

@@ -1,4 +1,4 @@
-## Solved Leetcode problems (455)
+## Solved Leetcode problems (465)
 
 1   Two Sum
 
@@ -910,6 +910,8 @@
 
 488 Zuma Game
 
+490 The Maze
+
 491 Increasing Subsequences  
 
 492 Construct the rectangle
@@ -923,3 +925,4 @@
 
 501 Find Mode in Binary Tree
 
+505 The Maze II

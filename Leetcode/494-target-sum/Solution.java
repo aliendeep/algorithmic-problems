@@ -52,3 +52,26 @@ public class Solution {
         return getCount(n-1, S);
     }
 }
+
+// Iterative
+public class Solution {
+    public int findTargetSumWays(int[] nums, int targetSum) {
+        if(targetSum < -1000 || targetSum > 1000)   return 0;
+        int[][] dp = new int[30][2010];
+        int offset = 1000;
+        int n = nums.length;
+        // number of ways to make 0 targetsum using 0 elements = 1
+        dp[0][offset] = 1;
+        // for all numbers
+        for(int i=1; i<=n; ++i){
+            int num = nums[i-1];
+            for(int sum = -1000; sum <= 1000; ++sum){
+                if(sum - num >= -1000)
+                    dp[i][sum + offset] += dp[i-1][sum - num + offset];  
+                if(sum + num <= 1000)
+                    dp[i][sum + offset] += dp[i-1][sum + num + offset];  
+            }
+        }
+        return dp[n][targetSum + offset];
+    }
+}
