@@ -99,9 +99,9 @@ class Solution3 {
 class Solution4 {
     // Alternative: Iterative Version
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // Construct node to parent mapping
         Map<TreeNode, TreeNode> parent = new HashMap<>();
-        parent.put(root, null);
-        
+        parent.put(root, null);        
         Queue<TreeNode> Q = new LinkedList<>();
         Q.add(root);
         while(!parent.containsKey(p) || !parent.containsKey(q)){
@@ -117,6 +117,7 @@ class Solution4 {
         }
         
         Set<TreeNode> ancestors = new HashSet<>();
+        // Construct the path from p to q
         while(p != null){
             ancestors.add(p);
             p = parent.get(p);
@@ -127,7 +128,7 @@ class Solution4 {
     }
 }
 
-public class Solution4 {
+public class Solution5 {
     boolean getPath(TreeNode node, TreeNode v, List<TreeNode> path){
       if(node == null)
         return false;

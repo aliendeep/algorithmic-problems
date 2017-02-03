@@ -95,3 +95,39 @@ class Solution2 {
         return minCost;
     }
 }
+
+// O(nk) solution
+public class Solution {
+    // Keep track of the lowest two min cost options
+    public int minCostII(int[][] costs) {
+        int n = costs.length;
+        if(n == 0)      return 0;
+        int k = costs[0].length;
+        int[][] dp = new int[n][k];
+        
+        int minIndex1 = -1, minIndex2 = -1;
+        for(int i=0; i<n; ++i){
+            int prev1 = minIndex1, prev2 = minIndex2;
+            minIndex1 = -1;
+            minIndex1 = -1;
+            for(int j=0; j<k; ++j){
+                if(j != prev1){
+                    dp[i][j] = (prev1 == -1 ? 0 : dp[i-1][prev1]) + costs[i][j]; 
+                }
+                // use the second lowest color
+                else{
+                    dp[i][j] = (prev2 == -1 ? 0 : dp[i-1][prev2]) + costs[i][j]; 
+                }
+                
+                if(minIndex1 == -1 || dp[i][j] < dp[i][minIndex1]){
+                    minIndex2 = minIndex1;
+                    minIndex1 = j;
+                }
+                else if(minIndex2 == -1 || dp[i][j] < dp[i][minIndex2]){
+                    minIndex2 = j;
+                }
+            }
+        }
+        return dp[n-1][minIndex1];
+    }
+}

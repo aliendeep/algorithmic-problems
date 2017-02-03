@@ -128,6 +128,7 @@ class Solution3 {
         
         // init
         dp[r-1][c-1] = matrix[r-1][c-1] == '0' ? new HeightWidth(0, 0) : new HeightWidth(1, 1);
+        // last column
         for(int i=r-2; i>=0; i--){
             int h = 0, w = 0;
             if(matrix[i][c-1] == '1'){
@@ -137,6 +138,7 @@ class Solution3 {
             dp[i][c-1] = new HeightWidth(h, w);
         }
         
+        // last row
         for(int j=c-2; j>=0; j--){
             int h = 0, w = 0;
             if(matrix[r-1][j] == '1'){

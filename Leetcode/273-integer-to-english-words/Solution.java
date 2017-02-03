@@ -24,30 +24,24 @@ public class Solution {
     public String[] tens = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
     public String[] bigs = {"Hundred", "Thousand", "Million", "Billion"};
     public int[] numbers = {100, 1000, 1000000, 1000000000};
-    
-    // Recursive
+
     public String numberToWords(int num) {
         if(num == 0)    return "Zero";
+
         StringBuilder r = new StringBuilder();
-        
-        for(int i=numbers.length-1; i>=0; --i){
-            int div = num / numbers[i];
-            if(div == 0)
+        for(int i=numbers.length - 1; i >= 0; --i){
+            if(num < numbers[i])
                 continue;
-            r.append(numberToWords(div));
-            r.append(" ");
-            r.append(bigs[i]);
-            r.append(" ");
-            num = num % numbers[i];
+            int div = num/numbers[i];
+            r.append(numberToWords(div)).append(" ").append(bigs[i]).append(" ");
+            num = num % numbers[i];            
         }
         
         if(num < 20){
             r.append(lessThan20[num]);
-        }  
+        }
         else{
-            r.append(tens[num/10]);
-            r.append(" ");
-            r.append(lessThan20[num%10]);
+            r.append(tens[num/10]).append(" ").append(lessThan20[num%10]);
         }
         return r.toString().trim();
     }

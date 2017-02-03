@@ -10,15 +10,19 @@
 
 public class BSTIterator {
     public Deque<TreeNode> stk;
+    
+    public void pushLeftSubTreeNodes(TreeNode node){
+        while(node != null){
+            stk.push(node);
+            node = node.left;
+        }
+    }
+
     public BSTIterator(TreeNode root) {
         stk = new LinkedList<TreeNode>();
         if(root != null){
             // Push the leftmost path of the tree in the stack
-            stk.addFirst(root);
-            while(root.left != null){
-                stk.addFirst(root.left);
-                root = root.left;
-            }
+            pushLeftSubTreeNodes(root);
         }
     }
 
@@ -29,17 +33,12 @@ public class BSTIterator {
 
     /** @return the next smallest number */
     public int next() {
-        TreeNode t = stk.removeFirst();
+        TreeNode t = stk.pop();
         // push the leftmost sub path of the right child        
-        TreeNode cur = t.right;
-        while(cur != null){
-            stk.addFirst(cur);
-            cur = cur.left;
-        }
+        pushLeftSubTreeNodes(t.right);
         return t.val;
     }
 }
-
 /**
  * Your BSTIterator will be called like this:
  * BSTIterator i = new BSTIterator(root);

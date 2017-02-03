@@ -127,7 +127,78 @@ class Solution2 {
 }
 
 // DP
-class Solution3 {
+public class Solution {
+    int n;
+    String s;
+    // String, set of all optimal valid parenthesis
+    Map<String, Set<String>> dp;
+    
+    public Set<String> compute(int i, int j){
+        Set<String> result = new HashSet<>();
+        if(i > j){
+            result.add("");
+            return result;
+        }
+        // one char
+        if(i == j){
+            char c = s.charAt(i);
+            // if letter
+            if(c != '(' && c != ')'){
+                StringBuilder t = new StringBuilder();
+                t.append(c);
+                result.add(t.toString());
+            }
+            else
+                result.add("");
+            return result;
+        }
+        
+        String sub = s.substring(i, j+1);
+        if(dp.containsKey(sub))
+            return dp.get(sub);
+        
+        result.add("");
+        if(s.charAt(i) == '(' && s.charAt(j) == ')'){
+            result.clear();
+            Set<String> set = compute(i+1, j-1);
+            for(String mid : set){
+                StringBuilder t = new StringBuilder();
+                t.append("(").append(mid).append(")");
+                result.add(t.toString());
+            }
+        }
+        for(int k = i; k < j; ++k){
+            Set<String> left = compute(i, k);
+            Set<String> right = compute(k+1, j);
+            int curLen = result.iterator().next().length();
+            int newLen = left.iterator().next().length() + right.iterator().next().length(); 
+            if(curLen > newLen)
+                continue;
+            if(curLen < newLen)
+                result.clear();
+
+            for(String l : left){
+                for(String r : right){
+                    StringBuilder t = new StringBuilder();
+                    t.append(l).append(r);
+                    result.add(t.toString());
+                }
+            }
+        }
+        dp.put(sub, result);
+        return result;
+    }
+    
+    public List<String> removeInvalidParentheses(String str) {
+        s = str;
+        n = s.length();
+        dp = new HashMap<>();
+        return new ArrayList<>(compute(0, n-1));
+    }
+}
+
+// Using List<List<>> instead of hashmap
+class Solution4 {
     int n;
     String s;
     // Set of optimal strings [i..j]

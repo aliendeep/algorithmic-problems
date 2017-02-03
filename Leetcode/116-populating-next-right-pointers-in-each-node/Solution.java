@@ -60,6 +60,7 @@ public class Solution {
         }
     }
 }
+
 class Solution2 {
     public void connectNextLevel(TreeLinkNode node) {
         TreeLinkNode cur = node;

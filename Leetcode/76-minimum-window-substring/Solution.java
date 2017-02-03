@@ -30,8 +30,7 @@ public class Solution {
         int[] cur = new int[256];
         int start = 0, end;
         int minLen = Integer.MAX_VALUE;
-        int resultStart = 0;
-        
+        int resultStart = 0;        
         for(end = 0; end < n; end++){
             cur[s.charAt(end)]++;
             if(cur[s.charAt(end)] >= target[s.charAt(end)]){

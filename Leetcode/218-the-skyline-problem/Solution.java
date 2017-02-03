@@ -20,7 +20,8 @@ where the rightmost building ends, is merely used to mark the termination of the
 skyline, and always has zero height. Also, the ground in between any two adjacent 
 buildings should be considered part of the skyline contour.
 
-For instance, the skyline in Figure B should be represented as:[ [2 10], [3 15], [7 12], [12 0], [15 10], [20 8], [24, 0] ].
+For instance, the skyline in Figure B should be represented as:[ [2 10], [3 15], 
+[7 12], [12 0], [15 10], [20 8], [24, 0] ].
 
 Notes:
 
@@ -49,6 +50,7 @@ public class Solution {
             heights.add(new int[]{building[1],  building[2]});
         }
         
+        // Sort by x coordinate
         Collections.sort(heights, new Comparator<int[]>(){
             @Override
             public int compare(int[] a, int[] b){
@@ -61,7 +63,7 @@ public class Solution {
         List<int[]> result = new ArrayList<>();
         
         // Java doesn't have multimap!! this is just poor man's multimap.
-        TreeMap<Integer /* height */, Integer /* count */> heightMap = new TreeMap<>(Collections.reverseOrder());
+        TreeMap<Integer /* height */, Integer /* count */> heightMap = new TreeMap<>();
         heightMap.put(0, 1);
         
         int prevHeight = 0;
@@ -76,20 +78,19 @@ public class Solution {
 
             // if left edge
             if(left){
-                if(!heightMap.containsKey(height))
-                    heightMap.put(height, 1);
-                else    
-                    heightMap.put(height, heightMap.get(height) + 1);
+                heightMap.put(height, heightMap.getOrDefault(height, 0) + 1);
             }
             else{  // right
-                int cnt = heightMap.get(height);
-                if(cnt == 1){
-                    heightMap.remove(height);  // 0
+                int newCnt = heightMap.get(height) - 1;
+                if(newCnt == 0){
+                    heightMap.remove(height); 
                 }
                 else
-                    heightMap.put(height, cnt-1);
+                    heightMap.put(height, newCnt);
             }
-            int curHeight = heightMap.firstKey();
+            // Find the largest height
+            int curHeight = heightMap.lastKey();
+            // if different than previous height
             if(prevHeight != curHeight){
                 result.add(new int[]{h[0], curHeight});
                 prevHeight = curHeight;
@@ -98,7 +99,6 @@ public class Solution {
         return result;
     }
 }
-
 // Max Heap Solution
 class Solution2 {
     public List<int[]> getSkyline(int[][] buildings) {
@@ -109,6 +109,7 @@ class Solution2 {
             heights.add(new int[]{building[1],  building[2]});
         }
         
+        // sort by x coordinate
         Collections.sort(heights, new Comparator<int[]>(){
             @Override
             public int compare(int[] a, int[] b){

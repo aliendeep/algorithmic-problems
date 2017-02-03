@@ -29,6 +29,7 @@ public class Solution {
                 break;
             int slen = curExpr.length();
             val = val*10 + num[i] - '0';
+            // Binary Operator (Not unary)
             if(lev == 0){
                 curExpr.append(val);
                 addOperatorHelper(num, target, i+1, curExpr, val, val, result);

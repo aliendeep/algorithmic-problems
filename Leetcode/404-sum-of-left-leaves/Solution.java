@@ -20,7 +20,6 @@ There are two left leaves in the binary tree, with values 9 and 15 respectively.
  *     TreeNode(int x) { val = x; }
  * }
  */
-// Queue
 public class Solution {
     public int sumOfLeftLeaves(TreeNode root, int dir) {
         if(root == null)

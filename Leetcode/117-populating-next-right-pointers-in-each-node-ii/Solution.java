@@ -31,6 +31,7 @@ After calling your function, the tree should look like:
  * }
  */
 public class Solution {
+    // Get the leftmost non-empty child node of the root 
     public TreeLinkNode getNext(TreeLinkNode root){
         TreeLinkNode cur = root;
         while(cur != null){

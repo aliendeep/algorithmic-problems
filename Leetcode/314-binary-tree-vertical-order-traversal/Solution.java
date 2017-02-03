@@ -89,18 +89,13 @@ public class Solution {
         TreeMap<Integer, List<Integer>> map = new TreeMap<>();
         Queue<Info> Q = new LinkedList<>();
         Q.add(new Info(root, 0));
+        
         while(!Q.isEmpty()){
             Info front = Q.remove();
             if(!map.containsKey(front.dir)){
-                List<Integer> l = new ArrayList<>();
-                l.add(front.n.val);
-                map.put(front.dir, l);
+                map.put(front.dir, new ArrayList<>());
             }
-            else{
-                List<Integer> l = map.get(front.dir);
-                l.add(front.n.val);
-                map.put(front.dir, l);
-            }
+            map.get(front.dir).add(front.n.val);
             if(front.n.left != null)    
                 Q.add(new Info(front.n.left, front.dir - 1));
             if(front.n.right != null)    

@@ -73,7 +73,8 @@ class Solution2 {
 }
 
 // Max Heap
-// O(nlog26)
+// O(nlg(26))
+
 public class Solution{
     class Pair{
         char c;

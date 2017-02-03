@@ -13,7 +13,6 @@ Analyze and describe its complexity.
 
 // Heap
 // Time complexity: O(nlogK)
-
 public class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists == null || lists.length == 0)
