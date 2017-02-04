@@ -28,11 +28,13 @@ Sample Input:
 ["wrt","wrf","er","ett","rftt"]
 ["baa", "abcd", "abca", "cab", "cad"]
 ["caa", "aaa", "aab"]
+["wrtkj","wrt"]
 
 Sample Output:
 "wertf"
 "bdac"
 "cab"
+""
 */
 
 public class Solution {
@@ -41,11 +43,10 @@ public class Solution {
         int n = words.length;
         // Create the graph
         List<List<Integer>> graph = new ArrayList<>();
-        for(int i=0; i<27; ++i){
+        for(int i=0; i<26; ++i){
             graph.add(new ArrayList<>());
         }
 
-        int[] visited = new int[27];
         Set<Integer> nodes = new HashSet<>();
         // All nodes
         for(int k=0; k<n; k++){
@@ -67,33 +68,29 @@ public class Solution {
                 // Different char
                 if(p != q){                
                     // Directed
-                    List<Integer> edge = graph.get(p);
-                    edge.add(q);
+                    graph.get(p).add(q);
                     break;
                 }
                 i++;
             }
             // handle invalid case (Add a cycle)
             if(i < x.length() && i == y.length()){
-                int p = x.charAt(i) - 'a';
-                List<Integer> edge = graph.get(p);
-                edge.add(26);
+                return "";
             }
         }
         
-        List<Integer> allNodes = new ArrayList<>();
-        allNodes.addAll(nodes);
-        // To handle special case like ["wrtkj","wrt"]. Create a dummy node 27
-        graph.set(26, allNodes);
-
         List<Integer> result = new ArrayList<>();
-        // Start from the super node
-        if(!dfs(26, visited, graph, result))
-            return "";
+        int[] visited = new int[26];
+        for(int node : nodes){
+            if(visited[node] == 0){
+                if(!dfs(node, visited, graph, result))
+                    return "";
+            }            
+        }
 
         StringBuilder str = new StringBuilder();
         // Skip the dummy node
-        for(int i=result.size()-2; i>=0; --i){
+        for(int i=result.size()-1; i>=0; --i){
             str.append((char)(result.get(i) + 'a'));
         }
         return str.toString();
@@ -113,13 +110,11 @@ public class Solution {
                     return false;
             }
         }
-        
         visited[node] = 2;
         result.add(node);
         return true;
     }    
 }
-
 
 class Solution2 {
     public final static int White = 0;
@@ -243,4 +238,80 @@ class Solution2 {
             r.add(node);
         return true;
     }    
+}
+
+// Topological sort using bfs
+public class Solution {
+    // BFS
+    public String alienOrder(String[] words) {
+        int n = words.length;
+        if(n == 0)      return "";
+        Map<Character, Set<Character>> graph = new HashMap<>();
+        Map<Character, Integer> indegree = new HashMap<>();
+        
+        for(String word : words){
+            for(char c : word.toCharArray()){
+                indegree.put(c, 0);
+            }
+        }
+        for(int i=0; i<n-1; ++i){
+            String x = words[i];
+            String y = words[i+1];
+            int j = 0;
+            for(j=0; j<Math.min(x.length(), y.length()); ++j){
+                char c1 = x.charAt(j);
+                char c2 = y.charAt(j);
+                // Find first mismatched character
+                if(c1 != c2){
+                    if(!graph.containsKey(c1))
+                        graph.put(c1, new HashSet<>());
+                    
+                    // Adding this for the first time
+                    if(graph.get(c1).add(c2)){
+                        indegree.put(c2, indegree.get(c2) + 1);
+                    }
+                    break;
+                }
+            }
+            // handle invalid case 
+            if(j < x.length() && j == y.length()){
+                return "";
+            }
+        }
+        
+        Queue<Character> Q = new LinkedList<>();
+        Set<Character> visited = new HashSet<>();
+        // Add all indegree node 0 to the queue
+        for(Map.Entry<Character, Integer> entry : indegree.entrySet()){
+            int in = entry.getValue();
+            if(in == 0){
+                char c = entry.getKey();
+                Q.add(c);
+                visited.add(c);
+            }
+        }
+        
+        StringBuilder r = new StringBuilder();
+        while(!Q.isEmpty()){
+            char f = Q.remove();
+            r.append(f);
+            if(!graph.containsKey(f))
+                continue;
+
+            for(char neighbor : graph.get(f)){
+                if(visited.contains(neighbor))
+                    continue;
+                
+                int newCnt = indegree.get(neighbor) - 1;
+                indegree.put(neighbor, newCnt);
+                if(newCnt == 0){
+                    Q.add(neighbor);
+                    visited.add(neighbor);
+                }
+            }
+        }
+        if(r.length() != indegree.size())
+            return "";
+        return r.toString();
+    }
 }

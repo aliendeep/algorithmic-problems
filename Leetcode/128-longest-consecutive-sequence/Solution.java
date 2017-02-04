@@ -40,3 +40,30 @@ public class Solution {
         return maxLen;
     }
 }
+
+public class Solution {
+    public int longestConsecutive(int[] nums) {
+        int n = nums.length;
+        if(n <= 1)      return n;
+        // number, length
+        Map<Integer, Integer> map = new HashMap<>();
+        int maxLen = 1;    
+        for(int num : nums){
+            if(!map.containsKey(num)){
+                int left = map.containsKey(num - 1) ? map.get(num - 1) : 0;
+                int right = map.containsKey(num + 1) ? map.get(num + 1) : 0;
+                
+                int length = left + 1 + right;
+                maxLen = Math.max(maxLen, length);
+                // update len
+                map.put(num, length);
+                map.put(num - left, length);
+                map.put(num + right, length);
+            }
+            // else
+            // we have visited this number before
+        }        
+        return maxLen;
+    }
+}
+
