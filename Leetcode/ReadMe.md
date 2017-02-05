@@ -1,4 +1,4 @@
-## Solved Leetcode problems (468)
+## Solved Leetcode problems (472)
 
 1   Two Sum
 
@@ -921,6 +921,8 @@
 
 495 Teemo Attacking
 
+496 Next Greater Element I
+
 499 The Maze II
 
 500 Keyboard Row
@@ -929,6 +931,10 @@
 
 502 IPO
 
+503 Next Greater Element II
+
 505 The Maze II
+
+506 Relative Ranks
 
 508 Most Frequent Subtree Sum

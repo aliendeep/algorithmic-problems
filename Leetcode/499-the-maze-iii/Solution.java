@@ -151,3 +151,108 @@ public class Solution {
         return result == null ? "impossible" : result;
     }
 }
+
+// Alternative: Dijkstra
+public class Solution {
+    class Node implements Comparable<Node> {
+        int r, c;
+        int distance;
+        public Node(int r1, int c1, int d){
+            distance = d;
+            this.r = r1;
+            this.c = c1;
+        }
+        @Override
+        public int compareTo(Node n){
+            if (distance != n.distance) return Integer.compare(distance, n.distance);
+            if (r != n.r) return Integer.compare(r, n.r);
+            return Integer.compare(c, n.c);
+        }
+    }
+    int row, col;
+    int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    int[][] maze;
+    int[] hole;
+    String[][] path;
+
+    String direction(int dir){
+        if(dir == 0)    return "r";        
+        if(dir == 1)    return "l";        
+        if(dir == 2)    return "d";        
+        if(dir == 3)    return "u"; 
+        return "";
+    }
+    
+    boolean isValid(int r, int c){
+        if(r < 0 || r >= row || c < 0 || c >= col || maze[r][c] == 1)     
+            return false;
+        return true;        
+    }
+    
+    public Node roll(int r, int c, int dir, int distance){
+        int dist = distance;
+        int r1, c1;
+        while(true){
+            r1 = r + move[dir][0];
+            c1 = c + move[dir][1];
+            if(!isValid(r1, c1))
+                break;
+            dist++;
+            r = r1;
+            c = c1;
+            if(r == hole[0] && c == hole[1])    break;
+        }            
+        return new Node(r, c, dist);
+    }
+    
+    public String findShortestWay(int[][] maze, int[] ball, int[] hole) {
+        this.maze = maze;
+        this.hole = hole;
+        row = maze.length;
+        col = maze[0].length;
+
+        int[][] distance = new int[row][col];
+        for(int[] d : distance)
+            Arrays.fill(d, Integer.MAX_VALUE);
+        
+        path = new String[row][col];
+        
+        TreeSet<Node> nodeSet = new TreeSet<>();
+        nodeSet.add(new Node(ball[0], ball[1], 0));
+        distance[ball[0]][ball[1]] = 0;
+        path[ball[0]][ball[1]] = "";
+        
+        while(!nodeSet.isEmpty()){
+            Node t = nodeSet.first();
+            nodeSet.remove(t);
+            for(int i=0; i<4; ++i){
+                Node adj = roll(t.r, t.c, i, t.distance);
+                if(adj.r == t.r && adj.c == t.c)
+                    continue;
+
+                if(distance[adj.r][adj.c] > adj.distance){
+                    Node prev = new Node(adj.r, adj.c, distance[adj.r][adj.c]);
+                    if(nodeSet.contains(prev)){
+                        nodeSet.remove(prev);                    
+                    }
+                    
+                    nodeSet.add(adj);
+                    // update distance
+                    distance[adj.r][adj.c] = adj.distance;
+                    path[adj.r][adj.c] = path[t.r][t.c] + direction(i);
+                }
+                // update shortest path string
+                else if(distance[adj.r][adj.c] == adj.distance){
+                    // lexicographicall smallest
+                    String nr = path[t.r][t.c] + direction(i);
+                    if(path[adj.r][adj.c].compareTo(nr) > 0){
+                        path[adj.r][adj.c] = nr;
+                    }
+                }
+            }
+        } 
+        if(distance[hole[0]][hole[1]] == Integer.MAX_VALUE)
+            return "impossible";
+        return path[hole[0]][hole[1]];
+    }
+}

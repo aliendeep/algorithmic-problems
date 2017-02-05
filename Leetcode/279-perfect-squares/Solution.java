@@ -24,8 +24,32 @@ public class Solution {
     }
 }
 
-// BFS
+// Memoization
 class Solution2 {
+    int[] dp;
+    public int minSqr(int n) {
+        if(n <= 3)          return n;
+        if(dp[n] != -1)     return dp[n];
+        
+        dp[n] = Integer.MAX_VALUE;
+        for(int x=1; x<=n; ++x){
+            int sqr = x*x;
+            if(sqr > n)
+                break;
+            dp[n] = Math.min(dp[n], minSqr(n-sqr) + 1);
+        }
+        return dp[n];
+    }
+
+    public int numSquares(int n) {
+        dp = new int[n+1];
+        Arrays.fill(dp, -1);
+        return minSqr(n);
+    }
+}
+
+// BFS
+class Solution3 {
     // Alternative: BFS
     public int numSquares(int n) {
         Queue<Integer> Q = new LinkedList<>();
