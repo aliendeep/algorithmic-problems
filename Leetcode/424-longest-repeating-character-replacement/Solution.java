@@ -81,6 +81,7 @@ class Solution2 {
             // k replacement done (Maximum allowable length)
             // the following while loop is not necessary as the condition will violate
             // only for the new character
+            // length of the substring = end - start + 1
             while(k < end - start + 1 - maxCnt){
                 // remove the first character of the window
                 cnt[s.charAt(start) - 'A']--;

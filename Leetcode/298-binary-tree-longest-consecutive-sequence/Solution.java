@@ -33,6 +33,44 @@ Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
  * }
  */
 
+// Cleaner
+public class Solution {
+    class Info{
+        // best result in the subtree
+        int subtreeBest;
+        // best path including current node
+        int ibest;
+        public Info(int sb, int i){
+            subtreeBest = sb;
+            ibest = i;
+        }
+    }
+    
+    public Info lcs(TreeNode root) {
+        if(root == null)    return new Info(0, 0);
+
+        Info left = lcs(root.left);
+        Info right = lcs(root.right);
+        
+        int includingRoot = 1;
+        if (root.left != null && root.left.val == root.val + 1)
+            includingRoot = Math.max(includingRoot, left.ibest + 1);
+        if (root.right != null && root.right.val == root.val + 1)
+            includingRoot = Math.max(includingRoot, right.ibest + 1);
+        
+        int best = Math.max(left.subtreeBest, right.subtreeBest);
+        best = Math.max(best, includingRoot);
+        
+        return new Info(best, includingRoot);
+    }
+    
+    public int longestConsecutive(TreeNode root) {
+        if (root == null) 
+            return 0;
+        return lcs(root).subtreeBest;
+    }
+}
+
 // Time: O(n)
 // Space: O(n)
 public class Solution {

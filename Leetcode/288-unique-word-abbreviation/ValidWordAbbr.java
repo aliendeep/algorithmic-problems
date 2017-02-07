@@ -161,3 +161,49 @@ class ValidWordAbbr3 {
         return false;
     }
 }
+
+// cleaner
+public class ValidWordAbbr {
+    class Pair{
+        boolean unique;
+        String s;
+        public Pair(boolean b, String x){
+            unique = b;
+            s = x;
+        }
+    }
+     // Abbr, <Unique, dictionary word)
+    Map<String, Pair> map;
+    public String getAbbr(String s){
+        int n = s.length();
+        if(n <= 2)
+            return s;
+        return s.charAt(0) + Integer.toString(n-2) + s.charAt(n-1);
+    }
+    public ValidWordAbbr(String[] dictionary) {
+        map = new HashMap<>();
+        for(String word : dictionary){
+            String abbr = getAbbr(word);
+            if(!map.containsKey(abbr))
+                map.put(abbr, new Pair(true, word));
+            else{
+                // if is the same word then continue
+                if(word.equals(map.get(abbr).s)){
+                    continue;
+                }
+                map.put(abbr, new Pair(false, ""));
+            }
+        }
+    }
+
+    public boolean isUnique(String word) {
+        String a = getAbbr(word);
+        if(!map.containsKey(a))
+            return true;
+            
+        // map contains the abbr
+        Pair p = map.get(a);
+        if(!p.unique)   return false;
+        return word.equals(p.s);
+    }
+}

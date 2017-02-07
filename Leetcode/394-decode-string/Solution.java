@@ -132,39 +132,42 @@ class Solution2{
     }
 }   
 
-class Solution3 {
-    // Recursive
-    int i;
-    public String decode(String s) {
-        StringBuilder r = new StringBuilder();
-        int n = s.length();
-        while(i < n && s.charAt(i) != ']'){
-            char c = s.charAt(i);
-            if(!Character.isDigit(c)){
-                r.append(c);
-                ++i;
+// Recursive
+public class Solution {
+    String s;
+    int n;
+    int index;
+    
+    public String decode(){
+        StringBuilder result = new StringBuilder();
+        while(index < n && s.charAt(index) != ']'){
+            int num = 0;
+            if(Character.isDigit(s.charAt(index))){
+                while(Character.isDigit(s.charAt(index))){
+                    num = num*10 + (s.charAt(index) - '0');
+                    index++;
+                }
+                
+                // skip [
+                index++;
+                // decode the string starting at index
+                String t = decode();
+                // skip ]
+                index++;
+                
+                while(num-- > 0)
+                    result.append(t);
             }
             else{
-                int num = 0;
-                while(i < n && Character.isDigit(s.charAt(i))){
-                    num = num*10 + (s.charAt(i) - '0');
-                    ++i;
-                }
-                // skip the [
-                ++i;
-                String temp = decode(s);
-                // skip the ]
-                ++i;
-                while(num-- > 0){
-                    r.append(temp);
-                }
+                result.append(s.charAt(index++));
             }
-        }
-        return r.toString();
+        }   
+        return result.toString();
     }
-
     public String decodeString(String s) {
-        int i = 0;
-        return decode(s);
+        this.s = s;
+        index = 0;
+        n = s.length();
+        return decode();
     }
 }

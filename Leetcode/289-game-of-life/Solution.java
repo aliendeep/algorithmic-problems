@@ -35,7 +35,7 @@ Sample Output:
 // Bit Manipulation
 public class Solution {
     boolean isValid(int i, int j, int r, int c){
-        if(i >= 0  && i<r && j >= 0  && j<c)
+        if(i >= 0  && i<r && j >= 0 && j<c)
             return true;
         return false;
     }
@@ -65,6 +65,7 @@ public class Solution {
                     board[i][j] = 0b11;
             }
         }
+        // Update the board before returning
         for(int i=0;i<r; i++){
             for(int j=0;j<c; j++){
                   board[i][j] >>= 1;
@@ -76,7 +77,7 @@ public class Solution {
 // Follow up : Infinite board
 class Solution2 {
     int row, col;
-    public static final int largePrime = 86028157;
+
     class Coord{
         int r, c;
         public Coord(int r1, int c1){
@@ -93,19 +94,19 @@ class Solution2 {
         }
         @Override
         public int hashCode(){
-            return r*largePrime + c;
+            return Objects.hash(r, c);
         }        
     }
     boolean isValid(int i, int j){
-        if(i >= 0  && i<row && j >= 0  && j<col)
-            return true;
-        return false;
+        return (i >= 0  && i<row && j >= 0 && j<col);
     }
     
     int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}, {-1, -1}, {1, 1}, {1,-1}, {-1, 1}};
+
+    // Return the new set of live cells
     public Set<Coord> gameOfLiveInfinite(Set<Coord> liveCells){
         // Keep the count in a map
-        // Coord, Cnt
+        // Coord, Cnt of live cells
         Map<Coord, Integer> map = new HashMap<>();
         for(Coord coord : liveCells){
             for(int k=0; k<8; k++){
@@ -114,9 +115,7 @@ class Solution2 {
                 if(!isValid(r, c))
                     continue;
                 Coord t = new Coord(r, c);
-                if(!map.containsKey(t))
-                    map.put(t, 0);
-                map.put(t, map.get(t)+1);
+                map.put(t, map.getOrDefault(t, 0) + 1);
             }
         }        
         
@@ -132,7 +131,10 @@ class Solution2 {
     
     public void gameOfLife(int[][] board) {
         row = board.length;
+        if(row == 0)    return;
         col = board[0].length;
+        
+        // Create a set of live cells
         Set<Coord> liveCells = new HashSet<>();
         for(int i=0;i<row; i++){
             for(int j=0;j<col; j++){
@@ -141,10 +143,12 @@ class Solution2 {
                 }
             }
         }
+        
         Set<Coord> newLiveCells = gameOfLiveInfinite(liveCells);
         // Reset board
         for(int[] t : board)
             Arrays.fill(t, 0);
+
         for(int i=0;i<row; i++){
             for(int j=0;j<col; j++){
                 if(newLiveCells.contains(new Coord(i, j))){
@@ -154,3 +158,4 @@ class Solution2 {
         }
     }
 }
+

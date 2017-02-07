@@ -21,6 +21,42 @@ For example, given the following input:
 It should return [1,4,8,2,5,9,3,6,7].
 */
 
+// Cleaner: Follow up
+public class ZigzagIterator {
+    // list of iterator
+    List<Iterator<Integer>> list;
+    int turn;
+    // number of vectors
+    int k;
+    
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
+        k = 2;
+        list = new ArrayList<>();
+        list.add(v1.iterator());
+        list.add(v2.iterator());
+        turn = 0;     
+    }
+
+    public int next() {
+        // check if the current vector has sum elements
+        while(!list.get(turn).hasNext()){
+            turn = (turn + 1) % k;   
+        }
+        int ret = list.get(turn).next();
+        // update turn
+        turn = (turn + 1) % k;
+        return ret;
+    }
+
+    public boolean hasNext() {
+        for(Iterator it : list){
+            if(it.hasNext())
+                return true;
+        }
+        return false;
+    }
+}
+
 public class ZigzagIterator {
     Iterator<Integer> it1, it2;
     boolean first;

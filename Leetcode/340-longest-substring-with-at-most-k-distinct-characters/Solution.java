@@ -120,3 +120,31 @@ class Solution3 {
          
     }
 }
+
+// O(n) Solution
+// Cleaner
+public class Solution {
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        int n = s.length();
+        if(n == 0 || k == 0)    return 0;
+        int start = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int maxLen = 0;
+        for(int end = 0; end < n; ++end){
+            char c = s.charAt(end);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            
+            while(start < end && map.size() > k){
+                char sc = s.charAt(start);
+                int nc = map.get(sc) - 1;
+                if(nc == 0)
+                    map.remove(sc);
+                else
+                    map.put(sc, nc);
+                start++;
+            }
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+        return maxLen;
+    }
+}

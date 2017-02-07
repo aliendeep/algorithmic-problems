@@ -75,3 +75,37 @@ public class Solution {
         return r.toString();
     }
 }
+
+class Solution2 {
+    public String licenseKeyFormatting(String s, int k) {
+        int n = s.length();
+        StringBuilder r = new StringBuilder();
+        int cnt = 0;
+        for(int i=n-1; i>=0; i--){
+            char c = s.charAt(i);
+            if(c == '-')    continue;
+            if(cnt > 0 && cnt % k == 0)
+                r.append("-");
+            r.append(c);
+            cnt++;
+        }
+        return r.reverse().toString().toUpperCase();
+    }
+}
+
+// shorter
+public class Solution {
+    public String licenseKeyFormatting(String s, int k) {
+        int n = s.length();
+        StringBuilder r = new StringBuilder();
+        for(int i=n-1; i>=0; i--){
+            char c = s.charAt(i);
+            if(c == '-')    continue;
+            if(r.length() % (k+1) == k){
+                r.append('-');
+            }
+            r.append(c);
+        }
+        return r.reverse().toString().toUpperCase();
+    }
+}

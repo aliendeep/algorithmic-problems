@@ -30,6 +30,8 @@ public class Solution {
         int start = startIndex;
         int end = nums.length - 1;
         while(start < end){
+            // Fixing one end
+            // How many pairs with one of the index = start that will satisfy the condition
             if(nums[start] + nums[end] < target){
                 cnt += end - start;
                 start++;

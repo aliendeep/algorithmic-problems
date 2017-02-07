@@ -79,40 +79,33 @@ public class Solution {
             }
         }
     }
-    
-    // Worst Case: O(n^2): Balanced: O(nlogn
-    /*
-            https://docs.google.com/viewer?url=https%3A%2F%2Fwww.cs.princeton.edu%2F~rs%2FAlgsDS07%2F01UnionFind.pdf
-            With Weighting and Path compression, The algorithm runs in O((M+N) log* N) 
-            where M is the number of operations (link and find )
-            and N is the number of positions
-    */
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
         this.n = n;
         List<Integer> result =  new ArrayList<>();
         parent = new int[m*n];
         rank = new int[m*n];
         
-        Arrays.fill(parent, -1);        
-        Arrays.fill(rank, 0);        
+        // parent of all water node is -1
+        Arrays.fill(parent, -1);
         
         int landCnt = 0;
         int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        
         for(int[] pos : positions){
             int u = getID(pos[0], pos[1]);
-            // Add new land
             parent[u] = u;
             landCnt++;
 
             for(int i=0; i<4; i++){
                 int x = pos[0] + move[i][0];
                 int y = pos[1] + move[i][1];
-                int v = getID(x, y);
-                // invalid or water
-                if(x < 0 || x >= m || y < 0 || y >= n || parent[v] == -1)
+                // invalid
+                if(x < 0 || x >= m || y < 0 || y >= n)
                     continue;
                 
+                int v = getID(x, y);
+                if(parent[v] == -1)     
+                    continue;
+                    
                 // If neighbor is another island, then connect them and 
                 // decrease land cnt
                 if(findSet(u) != findSet(v)){
@@ -125,3 +118,4 @@ public class Solution {
         return result;
     }
 }
+

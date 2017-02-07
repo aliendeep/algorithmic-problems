@@ -113,3 +113,69 @@ public class NumMatrix {
 // numMatrix.sumRegion(0, 1, 2, 3);
 // numMatrix.update(1, 1, 10);
 // numMatrix.sumRegion(1, 2, 3, 4);
+
+// 2d bit
+class Bit2d{
+    int[][] bit;
+    int[][] matrix;
+    int r, c;
+    
+    public Bit2d(int[][] m){
+        matrix = m;
+        r = matrix.length;
+        c = matrix[0].length;
+        bit = new int[r+1][c+1];
+        for(int i=1; i<=r; ++i){
+            for(int j=1; j<=c; ++j){
+                addDifference(i, j, matrix[i-1][j-1]);
+            }
+        }
+    }
+    
+    public void addDifference(int row, int col, int diff){
+        for(int i=row; i<=r; i += lsb(i)){
+            for(int j=col; j<=c; j += lsb(j)){
+                bit[i][j] += diff;
+            }
+        }
+    }
+    
+    public int lsb(int n){
+        return n & -n;
+    }
+    
+    // 1 indexing
+    public void update(int i, int j, int val){
+        int diff = val - matrix[i-1][j-1];
+        matrix[i-1][j-1] = val;
+        addDifference(i, j, diff);
+    }
+    
+    // Sum from [1, 1] to [row, col]
+    public int getSum(int row, int col){
+        int sum = 0;    
+        for(int i=row; i>0; i -= lsb(i)){
+            for(int j=col; j>0; j -= lsb(j)){
+                sum += bit[i][j];
+            }
+        }
+        return sum;
+    }
+    
+}
+public class NumMatrix {
+    Bit2d bit;
+    
+    public NumMatrix(int[][] matrix) {
+        if(matrix.length == 0)  return;
+        bit = new Bit2d(matrix);    
+    }
+    
+    public void update(int row, int col, int val) {
+        bit.update(row+1, col+1, val);
+    }
+    
+    public int sumRegion(int r1, int c1, int r2, int c2) {
+        return bit.getSum(r2+1, c2+1) - bit.getSum(r1, c2+1) - bit.getSum(r2+1, c1) + bit.getSum(r1, c1);
+    }
+}

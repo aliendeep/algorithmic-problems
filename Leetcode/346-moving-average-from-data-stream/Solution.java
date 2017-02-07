@@ -39,7 +39,6 @@ public class MovingAverage {
  * MovingAverage obj = new MovingAverage(size);
  * double param_1 = obj.next(val);
  */
-
 class MovingAverage2 {
     int size;
     Queue<Integer> Q;
@@ -60,5 +59,33 @@ class MovingAverage2 {
             curSum -= Q.remove();
         }
         return curSum*1.0 / Q.size();
+    }
+}
+
+// Using array instead of queue
+public class MovingAverage {
+    int[] window;
+    long sum;
+    int i;
+    // length of the window
+    int n;
+    
+    /** Initialize your data structure here. */
+    public MovingAverage(int size) {
+        window = new int[size];    
+        sum = 0;
+        i = 0;
+        n = 0;
+    }
+    
+    public double next(int val) {
+        if(n < window.length)   ++n;
+
+        sum -= window[i];
+        // update sum and window
+        sum += val;
+        window[i] = val;
+        i = (i + 1) % window.length;
+        return (sum*1.0)/n;
     }
 }

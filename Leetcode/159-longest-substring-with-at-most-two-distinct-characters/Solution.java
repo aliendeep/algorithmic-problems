@@ -129,3 +129,30 @@ public class Solution {
         return maxLength;
     }
 }
+
+// Cleaner
+public class Solution {
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int n = s.length();
+        if(n <= 2)    return n;
+        int start = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int maxLen = 0;
+        for(int end = 0; end < n; ++end){
+            char c = s.charAt(end);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            
+            while(start < end && map.size() > 2){
+                char sc = s.charAt(start);
+                int nc = map.get(sc) - 1;
+                if(nc == 0)
+                    map.remove(sc);
+                else
+                    map.put(sc, nc);
+                start++;
+            }
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+        return maxLen;        
+    }
+}

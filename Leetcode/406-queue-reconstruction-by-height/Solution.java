@@ -302,3 +302,47 @@ class Solution5{
         return result;
     }
 }
+
+// Bruteforce
+public class Solution {
+    // O(n^2)
+    int findKthPositionRemainingIndex(int k, int[][] result){
+        int n = result.length;
+        int cntEmpty = 0;
+        int i;
+        for(i=0; i<n; ++i){
+            // if not empty
+            if(result[i][0] != -1)
+                continue;
+            
+            if(cntEmpty == k)
+                break;
+            cntEmpty++;
+        }
+        return i;
+    }
+    
+    public int[][] reconstructQueue(int[][] people) {
+        int n = people.length;
+        // Sort by height increasing. (tie: sort by number of people decreasing)
+        Arrays.sort(people, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                // k
+                if(a[0] == b[0])
+                    return Integer.compare(b[1], a[1]);
+                return Integer.compare(a[0], b[0]);
+            }
+        });
+        
+        int[][] result = new int[n][2];
+        for(int[] t : result)
+            Arrays.fill(t, -1);
+            
+        for(int i=0; i<n; ++i){
+            int index = findKthPositionRemainingIndex(people[i][1], result);
+            result[index] = people[i];
+        }
+        return result;
+    }
+}

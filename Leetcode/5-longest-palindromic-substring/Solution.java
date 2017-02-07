@@ -110,3 +110,45 @@ class Solution2 {
     }
 }
 
+// Memoization: O(n^2)
+// TLE
+// Run this by increasing stack size                                                                                                                        
+/*
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+*/
+public class Solution {
+    String s;
+    int[][] dp;
+
+    public int isPalindrome(int i, int j){
+        if(i > j)               return 1;
+        if(i == j)              return 1;
+        if(dp[i][j] != -1)      return dp[i][j];
+        
+        dp[i][j] = (s.charAt(i) == s.charAt(j) && isPalindrome(i+1, j-1) == 1) ? 1 : 0;
+        return dp[i][j];
+    }
+    
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        if(n <= 1)  return s;
+        this.s = s;
+        dp = new int[n][n];
+        for(int[] t : dp)
+            Arrays.fill(t, -1);
+
+        int maxLen = 1;
+        int start = 0;
+        for(int i=0; i<n; ++i){
+            for(int j=0; j<n; ++j){
+                isPalindrome(i, j);
+                if(dp[i][j] != 1)   continue;
+                if(maxLen < (j- i + 1)){
+                    maxLen = j- i + 1;
+                    start = i;
+                }
+            }
+        }
+        return s.substring(start, start+maxLen);
+    }
+}

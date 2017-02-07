@@ -55,8 +55,14 @@ public class Solution {
         
         int maxZeroGroups = Integer.MIN_VALUE;
         for(int subMask = 1; subMask <= state; ++subMask){
+            // check if the submask has 1 in any other different place than state
             if((subMask & ~state) != 0)     continue;
+
+            // if the balance in this submask is not 0, then continue
             if(balance[subMask] != 0)       continue;
+
+            // the balance of this submask is 0
+            // find the 0 subgroup for the rest of the submask
             int cnt = getMaxZeroGroup(state ^ subMask);
             if(cnt < 0)     continue;
             maxZeroGroups = Math.max(maxZeroGroups, cnt + 1);

@@ -256,7 +256,7 @@ class Solution2 {
             
             area += (rect[2] - rect[0])*(rect[3] - rect[1]);
             String[] cornerPoints = new String[4];
-            cornerPoints[0]  = rect[0] + "#" + rect[1]; 
+            cornerPoints[0] = rect[0] + "#" + rect[1]; 
             cornerPoints[1] = rect[0] + "#" + rect[3]; 
             cornerPoints[2] = rect[2] + "#" + rect[1]; 
             cornerPoints[3] = rect[2] + "#" + rect[3]; 

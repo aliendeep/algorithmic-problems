@@ -93,3 +93,21 @@ public class Solution {
         return r;
     }
 }
+
+public class Solution {
+    // https://discuss.leetcode.com/topic/62455/21ms-18-lines-java-solution/
+    public int wordsTyping(String[] sentence, int rows, int cols) {
+        String s = String.join(" ", sentence) + " ";
+        int length = s.length();    
+        int[] map = new int[length];
+        for(int i=1; i<length; ++i){
+            map[i] = (s.charAt(i) == ' ') ? 1 : map[i-1] - 1;
+        }
+        int cnt = 0;
+        for(int i=0; i<rows; ++i){
+            cnt += cols;
+            cnt += map[cnt % length];
+        }
+        return cnt / length;
+    }
+}

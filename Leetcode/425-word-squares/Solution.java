@@ -115,7 +115,8 @@ public class Solution {
 
         // Returns list of words that starts with the given prefix
         public List<String> startsWith(String prefix){
-            Node cur = root;        
+            Node cur = root;    
+            // check whether it's a valid prefix    
             for(int i=0; i<prefix.length(); ++i){
                 int c = prefix.charAt(i) - 'a';
                 // invalid prefix
@@ -157,7 +158,6 @@ public class Solution {
             cur.remove(cur.size()-1);
         }
     }
-
     public List<List<String>> wordSquares(String[] w) {
         this.result = new ArrayList<>();
         if(w.length == 0)

@@ -68,3 +68,26 @@ public class Solution2 {
         return r;
     }
 }
+
+public class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> r = new ArrayList<>();
+        int n = nums.length; 
+        for(int start = 0, end = 0; end < n; ++end){
+             // try to extend the range [nums[i], nums[j]]
+            while(end+1 < n && nums[end+1] == nums[end] + 1){
+                end++;
+            }
+            // only one element
+            if(start == end){
+                r.add(nums[start] + "");
+            }
+            else{
+                r.add(nums[start] + "->" + nums[end]);
+            }
+            // start the next range
+            start = end + 1;
+        }
+        return r;
+    }
+}
