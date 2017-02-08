@@ -36,7 +36,6 @@ Sample Output:
 "cab"
 ""
 */
-
 public class Solution {
     // Topological Sort
     public String alienOrder(String[] words) {
@@ -73,7 +72,7 @@ public class Solution {
                 }
                 i++;
             }
-            // handle invalid case (Add a cycle)
+            // handle invalid case 
             if(i < x.length() && i == y.length()){
                 return "";
             }
@@ -89,7 +88,6 @@ public class Solution {
         }
 
         StringBuilder str = new StringBuilder();
-        // Skip the dummy node
         for(int i=result.size()-1; i>=0; --i){
             str.append((char)(result.get(i) + 'a'));
         }

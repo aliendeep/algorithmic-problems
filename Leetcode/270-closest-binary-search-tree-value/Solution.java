@@ -1,5 +1,6 @@
 /*
-Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+Given a non-empty binary search tree and a target value, find the value in the BST 
+that is closest to the target.
 
 Note:
 Given target value is a floating point.
@@ -41,7 +42,6 @@ public class Solution {
         return r;
     }
 }
-
 
 class Solution2 {
     // Time: O(logn)

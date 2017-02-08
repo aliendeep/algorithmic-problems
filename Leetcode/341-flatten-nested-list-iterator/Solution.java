@@ -33,18 +33,26 @@ returned by next should be: [1,4,6].
  *     public List<NestedInteger> getList();
  * }
  */
+/*
+Sample Input: 
+[[1,1],2,[1,1]]
+[1,[4,[6]]]
+Sample Output:
+[1,1,2,1,1]
+[1,4,6]
+*/
 public class NestedIterator implements Iterator<Integer> {
     Deque<NestedInteger> stk;
 
     public NestedIterator(List<NestedInteger> nestedList) {
         stk = new LinkedList<>();
         for(int i=nestedList.size()-1; i>=0; i--)
-            stk.addFirst(nestedList.get(i));
+            stk.push(nestedList.get(i));
     }
-
+    
     @Override
     public Integer next() {
-        return stk.removeFirst().getInteger();
+        return stk.pop().getInteger();
     }
 
     @Override
@@ -55,15 +63,14 @@ public class NestedIterator implements Iterator<Integer> {
                 return true;
             
             // Otherwise it's a list
-            stk.removeFirst();
+            stk.pop();
             List<NestedInteger> subList = top.getList();
             for(int i=subList.size()-1; i>=0; i--)
-                stk.addFirst(subList.get(i));
+                stk.push(subList.get(i));
         } 
         return false;
     }
 }
-
 /**
  * Your NestedIterator object will be instantiated and called as such:
  * NestedIterator i = new NestedIterator(nestedList);
@@ -71,13 +78,12 @@ public class NestedIterator implements Iterator<Integer> {
  */
 
 // Alternative: Using Iterator
-class NestedIterator implements Iterator<Integer> {
+public class NestedIterator implements Iterator<Integer> {
     Deque<Iterator<NestedInteger>> stk;
     NestedInteger nextNI;
-    
     public NestedIterator(List<NestedInteger> nestedList) {
         stk = new LinkedList<>();
-        stk.addFirst(nestedList.iterator());
+        stk.push(nestedList.iterator());
     }
 
     @Override
@@ -90,16 +96,15 @@ class NestedIterator implements Iterator<Integer> {
         while(!stk.isEmpty()){
             // Empty list
             if(!stk.peekFirst().hasNext())
-                stk.removeFirst();
+                stk.pop();
             else{
-                nextNI = stk.removeFirst().next(); 
+                nextNI = stk.peekFirst().next(); 
                 // Next element is an integer
-                if(nextNI.isInteger()){
+                if(nextNI.isInteger())
                     return true;
-                }
                 else{
                     // sublist
-                    stk.addFirst(nextNI.getList().iterator());
+                    stk.push(nextNI.getList().iterator());
                 }
             }
         }

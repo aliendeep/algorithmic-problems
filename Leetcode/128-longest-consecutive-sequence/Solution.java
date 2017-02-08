@@ -66,4 +66,3 @@ public class Solution {
         return maxLen;
     }
 }
-

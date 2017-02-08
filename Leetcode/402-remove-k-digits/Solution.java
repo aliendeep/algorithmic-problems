@@ -22,7 +22,7 @@ Explanation: Remove all the digits from the number and it is left with nothing w
 */
 
 public class Solution {
-    // Stack O(n)
+    // Stack
     public String removeKdigits(String num, int k) {
         if(num.length() == 0 || k == 0)
             return num;
@@ -34,21 +34,21 @@ public class Solution {
             char c = num.charAt(i);
             // if previous number is larger than current, pop it
             while(k > 0 && !stk.isEmpty() && stk.peekFirst() > c){
-                stk.removeFirst();
+                stk.pop();
                 k--;
             }
-            stk.addFirst(c);    
+            stk.push(c);    
         }
         
         // For cases like: 111, 2222 etc
         while(k > 0){
-            stk.removeFirst();
+            stk.pop();
             k--;
         }
         
         StringBuffer result = new StringBuffer();
         while(!stk.isEmpty())
-            result.append(stk.removeFirst());
+            result.append(stk.pop());
         
         // remove extra 0s from the start before reverse
         int i = result.length()-1;
@@ -61,4 +61,6 @@ public class Solution {
         result.reverse();
         return result.toString();
     }
+}
+
 }

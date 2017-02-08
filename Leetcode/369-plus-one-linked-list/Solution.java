@@ -20,7 +20,31 @@ Output:
  *     ListNode(int x) { val = x; }
  * }
  */
+
+// Iterative
 public class Solution {
+    public ListNode plusOne(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        // Find the last value that is less than 9
+        ListNode lastLessThanNine = dummy;
+        ListNode cur = head;
+        while(cur != null){
+            if(cur.val != 9)
+                lastLessThanNine = cur;
+            cur = cur.next;
+        }
+        lastLessThanNine.val = lastLessThanNine.val + 1;
+        cur = lastLessThanNine.next;
+        while(cur != null){
+            cur.val = 0;
+            cur = cur.next;
+        }
+        return dummy.val == 1 ? dummy : dummy.next;
+    }
+}
+
+class Solution {
     public int carry(ListNode node) {
         if(node == null)
             return 0;

@@ -14,7 +14,8 @@ public class Solution {
     /* Two cases:
         Case 1: If we use same color as the previous post, 
         [color of ith post == color of (i-1)], then color of i-1th post should be 
-        different than i-2th post. Number of ways to color ith post = dp[i-2]*(k-1)
+        different than i-2th post. Number of ways to color ith post = 
+        dp[i-2]*(k-1)
         Case 2: If we use different color than the previous post, 
         [color of ith post != color of (i-1)]. 
         Number of ways to color ith post = dp[i-1]*(k-1)
@@ -35,7 +36,7 @@ public class Solution {
 }
 
 // Memoization
-class Solution {
+class Solution2 {
     int[] dp;
     int k;
     public int ways(int n) {
@@ -53,5 +54,21 @@ class Solution {
         dp = new int[n+1];
         Arrays.fill(dp, -1);
         return ways(n);
+    }
+}
+
+class Solution3 {
+    public int numWays(int n, int k) {
+        if(n == 0)      return 0;    
+        if(n == 1)      return k;
+        int sameColorWays = k;
+        int diffColorWays = k*(k-1);
+        
+        for(int i=2; i<n; ++i){
+            int t = diffColorWays;
+            diffColorWays = (sameColorWays + diffColorWays)*(k-1);
+            sameColorWays = t;
+        }
+        return sameColorWays + diffColorWays;
     }
 }

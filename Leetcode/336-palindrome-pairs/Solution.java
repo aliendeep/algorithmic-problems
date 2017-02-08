@@ -18,7 +18,7 @@ import java.util.*;
 // Cleaner Solution
 // O(n*k^2)
 // n - number of words
-// k = number of length of the string
+// k = length of the string
 public class Solution {
     public boolean isPalindrome(String word){
         for(int i=0, j=word.length()-1; i<j; i++, j--)

@@ -127,7 +127,6 @@ class Solution2 {
             }
             prev = new ArrayList<>(cur);
         }     
-        Collections.sort(prev);
         return prev;
     }
 }
@@ -151,24 +150,20 @@ class Solution3 {
             result.add(new String(cur));
             return;
         }
-        for(int i=0; i<map.length; ++i){
-            char[] pair = map[i];
-            // can't start with 0
-            if(l == 0 && i == 0)
-                continue;
-
-            // 1 length 
-            // need to be the same
+        
+        for(char[] pair : map){
+            // 1 length
             if(l == r && pair[0] != pair[1])
+                continue;
+            // Can't start with 0 if number of digits is greater than 1
+            if(cur.length != 1 && r == cur.length-1 && pair[0] == '0')
                 continue;
 
             cur[l] = pair[0];
             cur[r] = pair[1];
+
             findStrobogrammaticHelper(cur, l+1, r-1);                       
         }
     }
-    public static void main(String[] args){
-        Solution ob = new Solution();
-        System.out.println(ob.findStrobogrammatic(4));
-    }      
+}
 }

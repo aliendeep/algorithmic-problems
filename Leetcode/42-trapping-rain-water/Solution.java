@@ -11,13 +11,12 @@ public class Solution {
     public int trap(int[] height) {
         if(height.length <= 2)
             return 0;
-
         int sum = 0;
         int maxLeft = 0;
         int maxRight = 0; 
         int left = 0, right = height.length - 1;
         while(left < right){
-            if(height[left] <=  height[right]){
+            if(height[left] <= height[right]){
                 // left to right pass
                 if(height[left] >= maxLeft)
                     maxLeft = height[left];        
@@ -35,5 +34,40 @@ public class Solution {
             }
         }
         return sum;
+    }
+}
+
+class Solution2 {
+    public int trap(int[] height) {
+        int n = height.length;
+        if(n == 0)  return 0;
+        int maxHeight = 0;
+        int h = 0;
+        for(int i=0; i<n; ++i){
+            if(maxHeight < height[i]){
+                maxHeight = height[i];
+                h = i;
+            }
+        }
+        int r = 0;
+        int maxLeft = height[0];
+        for(int i=1; i<h; ++i){
+            if(height[i] > maxLeft){
+                maxLeft = height[i];
+            }
+            else{
+                r += maxLeft - height[i];
+            }
+        }
+        int maxRight = height[n-1];
+        for(int i=n-2; i>h; --i){
+            if(height[i] > maxRight){
+                maxRight = height[i];
+            }
+            else{
+                r += maxRight - height[i];
+            }
+        }
+        return r;
     }
 }

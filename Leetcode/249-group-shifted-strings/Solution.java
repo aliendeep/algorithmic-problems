@@ -81,3 +81,26 @@ class Solution2 {
         return new ArrayList<>(map.values());
     }
 }
+
+class Solution3 {
+    public String getValue(String s){
+        StringBuilder hash = new StringBuilder();
+        for(int i=1; i<s.length(); i++){
+            int key = (s.charAt(i) - s.charAt(i-1) + 26) % 26;
+            hash.append(key);
+            hash.append("#");
+        }
+        return hash.toString();
+    }
+    public List<List<String>> groupStrings(String[] strings) {
+        Map<String, List<String>> map = new HashMap<>();
+        for(String s : strings){
+            String key = getValue(s);
+            if(!map.containsKey(key)){
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+}

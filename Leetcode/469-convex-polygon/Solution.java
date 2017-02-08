@@ -39,6 +39,9 @@ public class Solution {
     
     public boolean isConvex(List<List<Integer>> points) {
         int n = points.size();
+        // the area of a convex polygon is defined to be positive if the points 
+        // are arranged in a counterclockwise order, and negative if they are in 
+        // clockwise order 
         if(getArea(points) < 0){
             Collections.reverse(points);
         }

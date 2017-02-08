@@ -73,6 +73,15 @@ public class Solution {
                                                  // adjust height
                 minHeap.add(new CellInfo(x1, y1, Math.max(t.h, heightMap[x1][y1])));
                 visited[x1][y1] = true;
+                /*
+                if(heightMap[x1][y1] < t.h){
+                    vol += t.h - heightMap[x1][y1];
+                    // increase the height
+                    heightMap[x1][y1] = t.h;
+                }
+                minHeap.add(new CellInfo(x1, y1, heightMap[x1][y1]));
+                visited[x1][y1] = true;
+                */
             }
         }
         return vol;

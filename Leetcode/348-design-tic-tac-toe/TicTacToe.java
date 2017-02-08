@@ -129,8 +129,10 @@ public class TicTacToe {
         int val = (player == 1) ? 1 : -1;
         rowCnt[row] += val;
         colCnt[col] += val;
+        // diagonal 1
         if(row == col)     
             d1 += val;
+        // diagonal 2
         if(row + col == n-1)      
             d2 += val;
         // check if this is a winning state

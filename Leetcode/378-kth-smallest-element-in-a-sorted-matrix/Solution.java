@@ -36,8 +36,6 @@ public class Solution {
         if(n == 0)
             return -1;
         int[][] visited = new int[n][n];
-        for(int[] row : visited)
-            Arrays.fill(row, 0);
         
         PriorityQueue<ArrayEntry> minHeap = new PriorityQueue<ArrayEntry>(k, new Comparator<ArrayEntry>(){
             @Override

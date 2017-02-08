@@ -1,7 +1,9 @@
 /*
-Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', 
+determine if the input string is valid.
 
-The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+The brackets must close in the correct order, "()" and "()[]{}" are all valid but 
+"(]" and "([)]" are not.
 */
 // Stack
 public class Solution {
@@ -25,6 +27,30 @@ public class Solution {
                     return false;
             }
             i++;
+        }
+        return stk.isEmpty() == true;
+    }
+}
+
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length() == 0)
+            return true;
+        Map<Character, Character> map = new HashMap<Character, Character>();
+        map.put('(', ')');
+        map.put('{', '}');
+        map.put('[', ']');
+        Deque<Character> stk = new LinkedList<Character>();
+        for(char c : s.toCharArray()){
+            if(c == '(' || c == '[' || c == '{')
+                stk.push(c);
+            else{
+                if(stk.isEmpty())
+                    return false;
+                char t = stk.pop();
+                if(map.get(t) != c)
+                    return false;
+            }
         }
         return stk.isEmpty() == true;
     }

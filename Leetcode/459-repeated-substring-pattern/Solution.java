@@ -24,7 +24,6 @@ Explanation: It's the substring "abc" four times. (And the substring "abcabc" tw
 import java.util.*;
 
 // divisor
-
 public class Solution {
     public boolean repeatedSubstringPattern(String str) {
         int n = str.length();

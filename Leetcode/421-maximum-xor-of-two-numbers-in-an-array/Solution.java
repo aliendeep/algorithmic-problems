@@ -33,3 +33,46 @@ public class Solution {
         return maxXor;
     }
 }
+
+// Trie Solution
+public class Solution {
+    class TrieNode{
+        TrieNode[] children;
+        public TrieNode(){
+            children = new TrieNode[2];
+        }
+    }
+    public int findMaximumXOR(int[] nums) {
+        int n = nums.length;
+        if(n == 0)      return 0;
+        TrieNode root = new TrieNode();
+        // build tree
+        for(int num : nums){
+            TrieNode cur = root;
+            for(int i=31; i>=0; --i){
+                int bit = (num & (1<<i)) != 0 ? 1 :  0;
+                if(cur.children[bit] == null){
+                    cur.children[bit] = new TrieNode();
+                }
+                cur = cur.children[bit];
+            }
+        }
+        // find result
+        int max = 0;
+        for(int num : nums){
+            TrieNode cur = root;
+            int curSum = 0;
+            for(int i=31; i>=0; --i){
+                int bit = (num & (1<<i)) != 0 ? 1 :  0;
+                if(cur.children[bit^1] != null){
+                    curSum += (1<<i);
+                    cur = cur.children[bit^1];
+                }
+                else
+                    cur = cur.children[bit];
+            }
+            max = Math.max(max, curSum);
+        }
+        return max;
+    }
+}

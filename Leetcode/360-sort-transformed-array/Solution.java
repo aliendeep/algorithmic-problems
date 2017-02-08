@@ -25,7 +25,7 @@ Result: [-23, -5, 1, 7]
 public class Solution {
     public int f(int x, int a, int b, int c){
         return a*x*x + b*x + c;
-    }
+    }    
     public int[] sortTransformedArray(int[] nums, int a, int b, int c) {
         int n = nums.length;
         int[] result = new int[n];

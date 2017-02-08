@@ -18,7 +18,6 @@ isMatch("aa", "a*") → true
 isMatch("ab", "?*") → true
 isMatch("aab", "c*a*b") → false
 */
-
 public class Solution {
     boolean isCharMatch(char s, char p){
         return s == p || p == '?';
@@ -253,6 +252,7 @@ class Solution7 {
             }
         }
         else{
+            // pi is the * character
             flag = cmatch(i-1, j);
         }
         dp[i][j] = flag;

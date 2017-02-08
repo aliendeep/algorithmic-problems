@@ -64,27 +64,29 @@ public class Solution {
     // DFS using stack
     public boolean dfs(int source){
         Deque<Pair> stk = new LinkedList<>();
-        stk.addFirst(new Pair(source, 0));
+        stk.push(new Pair(source, 0));
         
+        // Already explored the neighbors of the nodes in the pushed set
         Set<Integer> pushed = new HashSet<>();
         while(!stk.isEmpty()){
-            Pair top = stk.removeFirst();
+            Pair top = stk.pop();
             if(top.state == 0){
                 if(pushed.contains(top.node))
                     continue;
                 pushed.add(top.node);
                 
                 visited[top.node] = 1;
-                stk.addFirst(new Pair(top.node, 1));
+                stk.push(new Pair(top.node, 1));
 
                 if(graph.containsKey(top.node)){
                     List<Integer> adj = graph.get(top.node);
                     for(int neighbor : adj){
                         if(visited[neighbor] == 2)
                             continue;
+                        // gray cells
                         if(visited[neighbor] == 1)
                             return false;
-                        stk.addFirst(new Pair(neighbor, 0));
+                        stk.push(new Pair(neighbor, 0));
                     }
                 }
             }            
@@ -94,18 +96,15 @@ public class Solution {
             }    
         }
         return true;
-    }}
+    }
     
     public boolean checkSeq(int n, int source, int[] org){
         visited = new int[n+1];
-        Arrays.fill(visited, 0);
-        
-        result = new ArrayList<>();
-        if(!dfs(source))
-            return false;
 
-        if(result.size() != org.length)
-            return false;
+        result = new ArrayList<>();
+        if(!dfs(source))                    return false;
+
+        if(result.size() != org.length)     return false;
 
         Collections.reverse(result);
         // Compare two sequences
@@ -117,7 +116,7 @@ public class Solution {
         return true;
     }
     
-    public boolean sequenceReconstruction(int[] org, int[][] seqs) {
+    public boolean sequenceReconstruction(int[] org, List<List<Integer>> seqs) {
         int n = org.length;
         // Check if all the numbers of the original sequeunce is found in the
         // sequence array
@@ -125,10 +124,9 @@ public class Solution {
         for(int i=0; i<org.length; ++i)
             copy[i] = org[i];
 
-        for(int[] seq: seqs){
+        for(List<Integer> seq: seqs){
             for(int t : seq){
-                if(t <= 0 || t > n)
-                    return false;
+                if(t <= 0 || t > n)         return false;
                 copy[t-1] = 0;
             }
         }
@@ -143,20 +141,16 @@ public class Solution {
         graph = new HashMap<>();
         // Compute inDegree
         int[] inDegree = new int[n+1];
-        for(int[] seq: seqs){
-            for(int i=0; i<seq.length-1; ++i){
+        for(List<Integer> seq: seqs){
+            for(int i=0; i<seq.size()-1; ++i){
                 // Directed
-                int x = seq[i];
-                int y = seq[i+1];
+                int x = seq.get(i);
+                int y = seq.get(i+1);
                 List<Integer> edges;
                 if(!graph.containsKey(x)){
-                    edges = new ArrayList<>();
+                    graph.put(x, new ArrayList<>());
                 }
-                else{
-                    edges = graph.get(x);
-                }
-                edges.add(y);
-                graph.put(x, edges);
+                graph.get(x).add(y);
                 inDegree[y]++;
             }
         }
@@ -173,10 +167,9 @@ public class Solution {
             }
         }
         
-        if(nRoot > 1 || nRoot == 0){
+        if(nRoot > 1 || nRoot == 0)
             return false;
-        }
-        
+
         if(!checkSeq(n, source, org)){
             return false;
         }
@@ -193,3 +186,4 @@ public class Solution {
         return true;
     }
 }
+

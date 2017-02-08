@@ -28,8 +28,6 @@ public class Solution {
             return 0;
 
         int[] map = new int[n];
-        Arrays.fill(map, 0);
-        
         for(int i=0; i<n; i++){
             for(int j=0; j<words[i].length(); j++){
                 // Set jth bit to 1 if ith letter exists

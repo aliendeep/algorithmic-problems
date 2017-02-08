@@ -13,6 +13,19 @@ Follow up:
 Derive your algorithm's runtime complexity.
 */
 
+/*
+Sample Input:
+"++++"
+"+++++------+++--"
+"+++++------+++--+++++---+++++------+++--"
+"+++++------+++--+++++---+++++------+++--+++++------+++--"
+
+Sample Output:
+true
+true
+false
+true
+*/
 import java.util.*;
 // Time complexity: Double factorial
 // (n - 1) x (n - 3) x (n - 5) x ...
@@ -58,7 +71,8 @@ class Solution2 {
 }
 
 
-// Memoization (Exponential)
+// Memoization
+// Game theory
 class Solution3 {
     public boolean canWin(String s, Map<String, Boolean> map) {
         int n = s.length();

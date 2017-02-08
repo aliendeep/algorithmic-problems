@@ -75,11 +75,13 @@ public class Solution {
     }
 
     boolean isValid(int x, int y, int r, int c){
-        if(x >= 0 && x < r && y >= 0 && y < c )
+        if(x >= 0 && x < r && y >= 0 && y < c)
             return true;
         return false;
     }
+
     int[][] move = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+
     void bktk(char[][] board, int r, int c, boolean[][] visited, StringBuffer curWord, Trie trie, Set<String> result){
         if(!trie.prefix(curWord.toString()))
             return;

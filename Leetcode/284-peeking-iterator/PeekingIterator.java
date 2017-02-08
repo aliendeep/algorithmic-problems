@@ -47,6 +47,7 @@ class PeekingIterator implements Iterator<Integer> {
       if(nextElement == null)
         throw new NoSuchElementException();
 
+      // update next element
       nextElement = this.iterator.hasNext() ? this.iterator.next() : null;    
       return r;
     }

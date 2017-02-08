@@ -1,7 +1,8 @@
 /*
 A string such as "word" contains the following abbreviations:
 
-["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
+["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", 
+"w1r1", "1o2", "2r1", "3d", "w3", "4"]
 Given a target string and a set of strings in a dictionary, find an abbreviation 
 of this target string with the smallest possible length such that it does not 
 conflict with abbreviations of the strings in the dictionary.
@@ -137,7 +138,7 @@ public class Solution {
         Collections.sort(validAbbrs, new Comparator<String>(){
             @Override
             public int compare(String x, String y){
-                if(x.length() == y.length())
+                if(x.length() == y.length())    
                     return x.compareTo(y);
                 return Integer.compare(x.length(), y.length());
             }

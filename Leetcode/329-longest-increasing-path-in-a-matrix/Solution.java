@@ -92,6 +92,7 @@ public class Solution {
 
 // Time complexity: O(rc)
 // longest path (No need to construct the graph before)
+// longest path DP
 class Solution2 {
     int[][] move = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
     public int longestPath(int[][] matrix, int r, int c, int[][] d){

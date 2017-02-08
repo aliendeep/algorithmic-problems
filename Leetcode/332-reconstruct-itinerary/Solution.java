@@ -52,3 +52,37 @@ public class Solution {
         return it;
     }
 }
+// Use Linked List
+class Solution2 {
+    // At least one itinerary feasible
+    void dfs(String node, Map<String, PriorityQueue<String>> graph, LinkedList<String> it){
+        if(graph.containsKey(node)){
+            PriorityQueue<String> adjacency = graph.get(node);
+            while(!adjacency.isEmpty()){
+                dfs(adjacency.poll(), graph, it);
+            }
+        }
+        it.addFirst(node);
+    }
+    
+    public List<String> findItinerary(String[][] tickets) {
+        // Use hashmap to build the graph (priority queue to maintain lexical order)
+        Map<String, PriorityQueue<String>> graph = new HashMap<>();
+        for(int i=0; i<tickets.length; i++){
+            String x = tickets[i][0];
+            String y = tickets[i][1];
+            PriorityQueue<String> adjacency = graph.get(x);
+            if(adjacency == null){
+                adjacency = new PriorityQueue<>();
+            }
+            adjacency.add(y);
+            graph.put(x, adjacency);
+        }
+        
+        String start = new String("JFK");   
+        // use the it as stack
+        LinkedList<String> it = new LinkedList<>();
+        dfs(start, graph, it);
+        return it;
+    }
+}

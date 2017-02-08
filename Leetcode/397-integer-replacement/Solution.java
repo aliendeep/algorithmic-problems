@@ -50,3 +50,30 @@ public class Solution {
         return cnt;
     }
 }
+
+public class Solution {
+    // Greedy
+    public int integerReplacement(int a) {
+        int cnt = 0;
+        long n = a;
+        while(n != 1){
+            if(n % 2 == 0){
+                n = n/2;
+            }
+            else{
+                // odd bit
+                // Check out the last two bits
+                // If a number ends with 01, then certainly decrementing is the way to go. 
+                // 11 - increment
+                if(n == 3 || ((n >> 1) & 1) == 0){
+                    n = n - 1;
+                }
+                else{
+                    n = n + 1;
+                }
+            }
+            cnt++;
+        }
+        return cnt;
+    }
+}
