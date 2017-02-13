@@ -52,3 +52,31 @@ public class Solution {
         return result;
     }
 }
+
+public class Solution {
+    public int[] findDiagonalOrder(int[][] matrix) {
+        int r = matrix.length;
+        if(r == 0)  return new int[0];
+        int c = matrix[0].length;
+        int nd = (r+c)-1;
+        int[] result = new int[r*c];
+        int i = 0;
+        for(int d=0; d<nd; ++d){
+            if(d % 2 == 1){
+                for(int r1=0; r1<=d; ++r1){
+                    int c1 = d - r1; 
+                    if(r1 >= 0 && r1 < r && c1 >= 0 && c1 < c)
+                        result[i++] = matrix[r1][c1];
+                }
+            }
+            else{
+                for(int c1=0; c1<=d; ++c1){
+                    int r1 = d - c1;
+                    if(r1 >= 0 && r1 < r && c1 >= 0 && c1 < c)
+                        result[i++] = matrix[r1][c1];
+                }
+            }
+        }
+        return result;
+    }
+}

@@ -116,3 +116,30 @@ class Solution3 {
         return result;
     }
 }
+
+// Cleaner O(n) Solution
+public class Solution {
+    public void getPaths(TreeNode node, StringBuilder cur, List<String> result){
+        if(node == null){
+            return;
+        }
+        int sl = cur.length();
+        cur.append(node.val);
+        if(node.left == null && node.right == null){
+            result.add(cur.toString());
+        }
+        else{
+            cur.append("->");
+            getPaths(node.left, cur, result);
+            getPaths(node.right, cur, result);
+        }
+        cur.setLength(sl);
+    }
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList<>();
+        if(root == null)
+            return result;
+        getPaths(root, new StringBuilder(), result);
+        return result;
+    }
+}

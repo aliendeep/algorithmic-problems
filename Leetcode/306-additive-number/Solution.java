@@ -182,13 +182,12 @@ class Solution3 {
 class Solution4 {
     public boolean isAdditiveNumber(String num) {
         int n = num.length();
-        
         // length
         for(int l1=1; l1<=n/2; ++l1){
             if(l1 > 1 && num.charAt(0) == '0')
                 return false;
             // length of sum should be atleast the maximum length of l1 and l2
-            for(int l2=1; Math.max(l1, l2) <= n-l1-l2; ++l2){
+            for(int l2=1; Math.max(l1, l2)+l1+l2<=n; ++l2){
                 // > 1 length and starts with 0
                 if(l2 > 1 && num.charAt(l1) == '0')
                     break;
@@ -247,3 +246,4 @@ class Solution4 {
         return r.toString();
     }
 }
+

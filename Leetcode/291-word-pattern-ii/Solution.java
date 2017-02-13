@@ -14,7 +14,6 @@ You may assume both pattern and str contains only lowercase letters.
 
 import java.util.*;
 
-
 public class Solution {
 
     public boolean wordPatternMatch(String pattern, String str) {
