@@ -74,6 +74,7 @@ class Solution2 {
 }
 
 // Recursive : Without reversing
+// Cleaner
 class Solution {
     public int getLength(ListNode node){
         int len = 0;

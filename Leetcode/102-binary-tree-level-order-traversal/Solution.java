@@ -27,13 +27,10 @@ return its level order traversal as:
 public class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> r = new ArrayList<>();
-
         if(root == null)    return r;
-
         Queue<TreeNode> q = new LinkedList<TreeNode>();
         q.add(root);
-        int cntLevel = q.size();
-        
+        int cntLevel = q.size();        
         List<Integer> t = new ArrayList<Integer>();        
         while(!q.isEmpty()){
             TreeNode n = q.remove();

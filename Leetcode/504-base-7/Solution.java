@@ -11,7 +11,7 @@ Note: The input will be in range of [-1e7, 1e7].
 */
 
 public class Solution {
-    public String convertTo7(int num) {
+    public String convertToBase7(int num) {
         if(num == 0)    return "0";
         StringBuilder r = new StringBuilder();
         boolean neg = false;
@@ -26,6 +26,6 @@ public class Solution {
         if(neg)
             r.append("-");
         r.reverse();
-        return r.toString();
+        return r.toString();        
     }
 }

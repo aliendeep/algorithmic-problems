@@ -19,58 +19,45 @@ Return 0 if there is no such transformation sequence.
 All words have the same length.
 All words contain only lowercase alphabetic characters.
 */
+import java.util.*;
 
 import java.util.*;
 
 public class Solution {
     // BFS
-    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-        Queue<String> q = new LinkedList<>();
-        q.add(beginWord);
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> dict = new HashSet<>(wordList);
+        Queue<String> Q = new LinkedList<>();
+        Q.add(beginWord);
         
-        int resultCnt = 0;
-        int levCnt = 1;
-        while(!q.isEmpty()){
-            String t = q.remove();
-            levCnt--;
-            for(int pos=0; pos<t.length(); pos++){
-                for(int i=0; i<26; i++){
-                    // same character
-                    if(t.charAt(pos) == i + 'a')
-                        continue;
+        int resultLev = 0;
+        while(!Q.isEmpty()){
+            int size = Q.size();
+            for(int f=0; f<size; ++f){
+                String t = Q.remove();
+                if(t.equals(endWord))
+                    return resultLev + 1;
+                for(int pos=0; pos<t.length(); pos++){
+                    for(int i=0; i<26; i++){
+                        // same character
+                        if(t.charAt(pos) == i + 'a')
+                            continue;
                         
-                    // Change one character
-                    StringBuilder str = new StringBuilder(t);
-                    str.setCharAt(pos, (char)(i + 'a'));
-                    String newWord = str.toString();
-                    // Reached the end word (+2 for start and end word)
-                    if(newWord.compareTo(endWord) == 0)
-                        return resultCnt + 2;
-                        
-                    if(wordList.contains(newWord)){
-                        q.add(newWord);
-                        // remove it from the dictionary
-                        wordList.remove(newWord);
-                    }
-                }                
+                        // Change one character
+                        StringBuilder str = new StringBuilder(t);
+                        str.setCharAt(pos, (char)(i + 'a'));
+                        String newWord = str.toString();
+                        if(dict.contains(newWord)){
+                            Q.add(newWord);
+                            // remove it from the dictionary
+                            dict.remove(newWord);
+                        }
+                    }                
+                }
             }
-            
-            if(levCnt == 0){
-                levCnt = q.size();
-                resultCnt++;
-            }
+            resultLev++;
         }
         return 0;
     }
-
-    public static void main(String[] args) {
-      Solution s = new Solution();
-      Set<String> wordList = new HashSet<>();
-      wordList.add("hot");
-      wordList.add("dot");
-      wordList.add("dog");
-      wordList.add("lot");
-      wordList.add("log");
-      System.out.println(s.ladderLength("hit", "cog", wordList));
-    } 
 }
+

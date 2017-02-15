@@ -116,7 +116,7 @@ class Solution2 {
             if(lineLen == maxWidth){
                 result.add(getLineWithSpace(words, startIndex, i, i-startIndex));
                 // reset the start index of next line, line length of the next line, number of words
-                startIndex = i+1;
+                startIndex = i + 1;
                 curLineLen = 0;
                 numWords = 0;
             }

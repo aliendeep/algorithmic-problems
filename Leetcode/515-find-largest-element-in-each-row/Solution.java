@@ -22,10 +22,9 @@ Output: [1, 3, 9]
  * }
  */
 public class Solution {
-    public int[] findValueMostElement(TreeNode root) {
-        if(root == null)    return new int[0];
-        
+    public List<Integer> largestValues(TreeNode root) {
         List<Integer> result = new ArrayList<>();
+        if(root == null)    return result;
         Queue<TreeNode> Q = new LinkedList<>();
         Q.add(root);
         while(!Q.isEmpty()){
@@ -41,11 +40,6 @@ public class Solution {
             }
             result.add(max);
         }
-        
-        int[] r =  new int[result.size()];
-        int i = 0;
-        for(int t : result)
-            r[i++] = t;
-        return r;
+        return result;        
     }
 }

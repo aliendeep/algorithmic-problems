@@ -39,7 +39,6 @@ Sample Output:
 */
 
 import java.util.*;
-
 public class Solution {
     // the sum from i to j is cumsum[j] - cumsum[i - 1] except that from 0 to j is sum[j].   
     // O(n) Solution

@@ -1,3 +1,16 @@
+/*
+Given an array of strings, group anagrams together.
+
+For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"], 
+Return:
+
+[
+  ["ate", "eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+Note: All inputs will be in lower-case.
+*/
 public class Solution {
     // Hashtable
     public String sortString(String a){
@@ -12,15 +25,9 @@ public class Solution {
         for(String s : strs){
             String key = sortString(s);
             if(!mapping.containsKey(key)){
-                List<String> l = new ArrayList<>();
-                l.add(s);
-                mapping.put(key, l);
+                mapping.put(key, new ArrayList<>());
             }
-            else{
-                List<String> l = mapping.get(key);
-                l.add(s);
-                mapping.put(key, l);
-            }
+            mapping.get(key).add(s);
         }
         List<List<String>> r = new ArrayList<>();
         // Iterate the hashmap
