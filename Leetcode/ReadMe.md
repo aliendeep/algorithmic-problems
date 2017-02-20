@@ -941,4 +941,12 @@
 
 516 Longest Palindromic Subsequence  
 
+517 Super Washing Machines
+
 518 Coin Change 2
+
+520 Detect Capital
+
+525 Contiguous Array
+
+526 Beautiful Arrangement
