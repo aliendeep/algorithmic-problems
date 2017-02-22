@@ -26,6 +26,65 @@ Number at the 2nd position (i=2) is 1, and i (i=2) is divisible by 1.
 Note:
 N is a positive integer and will not exceed 15.
 */
+// Bitmask DP
+public class Solution {
+    int N;
+    // Number of 1's in the mask
+    // Mask - which numbers have been used so far
+    int count(int k, int mask, int[] dp){
+        // mask = 0
+        if(k == 0)              return 1;    
+        if(dp[mask] != -1)      return dp[mask];
+        dp[mask] = 0;
+        for(int i=0; i<N; ++i){
+            if((mask & (1<<i)) == 0) 
+                continue;
+            if((i+1) % k == 0 || k % (i+1) == 0)
+                dp[mask] += count(k-1, mask ^ (1<<i), dp);
+        }
+        return dp[mask];
+    }
+    
+    public int countArrangement(int N) {
+        this.N = N;
+        int[] dp = new int[1<<N];
+        Arrays.fill(dp, -1);
+        return count(N, (1<<N) - 1, dp);
+    }
+}
+
+// Bitmask DP - Solution 2
+public class Solution {
+    int N;
+    // Mask - which numbers have been used so far
+    int count(int mask, int[] dp){
+        if(mask == 0)              return 1;    
+        if(dp[mask] != -1)      return dp[mask];
+        int k = 0;
+        // Count number of 1's
+        for(int i=0; i<N; ++i){
+            if((mask & (1<<i)) == 0) 
+                continue;
+            k++;
+        }
+        
+        dp[mask] = 0;
+        for(int i=0; i<N; ++i){
+            if((mask & (1<<i)) == 0) 
+                continue;
+            if((i+1) % k == 0 || k % (i+1) == 0)
+                dp[mask] += count(mask ^ (1<<i), dp);
+        }
+        return dp[mask];
+    }
+    
+    public int countArrangement(int N) {
+        this.N = N;
+        int[] dp = new int[1<<N];
+        Arrays.fill(dp, -1);
+        return count((1<<N) - 1, dp);
+    }
+}
 
 // Backtracking
 public class Solution {
@@ -38,7 +97,7 @@ public class Solution {
             return;
         }
         for(int i=1; i<=N; ++i){
-            if(taken[i])                    continue;
+            if(taken[i])                        continue;
             if(i % lev != 0 && lev % i != 0)    continue;
             taken[i] = true;
             bktk(lev+1, taken);

@@ -2,15 +2,13 @@ import java.util.*;
 
 class KnapsackMemoization{
   public int getValue(int[] values, int weights[], int capacity, int i, int[][] dp){
-    if(values.length == 0 || capacity == 0 || i < 0)
+    if(capacity == 0 || i < 0)
         return 0;
     if(dp[i][capacity] != -1)
         return dp[i][capacity];
 
-    int r = Integer.MIN_VALUE;
     // Don't take the item
     int a = getValue(values, weights, capacity, i-1, dp);
-
     int b = Integer.MIN_VALUE;
     if(weights[i] <= capacity){
         // take the item

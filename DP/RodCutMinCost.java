@@ -48,8 +48,7 @@ public class Solution {
     public long getCost(int left, int right, ArrayList<Integer> B, long[][] dp, int[][] taken){
         if(right - left <= 1){
             return 0;
-        }
-            
+        }            
         if(dp[left][right] != -1)
             return dp[left][right];
             

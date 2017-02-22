@@ -73,6 +73,7 @@ class Solution2{
         if(dp[i][j] != -1)
             return dp[i][j];
         
+        // Get values return the optimal coin to be picked up in range[i..j]
         // Take ith item        
         int x = sum(i, j) - getValue(i+1, j);
         // Take jth item        

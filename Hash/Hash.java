@@ -29,7 +29,7 @@ public class Hash<K, V> {
   boolean[] hash2Entries;
 
   public Hash(){
-    hashEntries = (LinkedList<Entry<K, V>>[])new LinkedList[prime1];
+    hashEntries = new LinkedList[prime1];
     hash2Entries = new boolean[prime2];
   }
   

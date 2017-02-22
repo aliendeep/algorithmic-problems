@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class MyHashMap<K, V> {
   private final static int prime = 1000003;
   public int hashCodeOfKey(K k){ 
@@ -24,7 +23,7 @@ public class MyHashMap<K, V> {
   LinkedList<Entry<K, V>>[] hashEntries;
 
   public MyHashMap(){
-    hashEntries = (LinkedList<Entry<K, V>>[])new LinkedList[prime];
+    hashEntries = new LinkedList[prime];
   }
   
   public int hash(K key){
