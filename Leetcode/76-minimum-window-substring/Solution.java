@@ -14,6 +14,7 @@ empty string "".
 If there are multiple such windows, you are guaranteed that there will always 
 be only one unique minimum window in S.
 */
+// O(n)
 public class Solution {
     public String minWindow(String s, String t) {
         int[] target = new int[256];
@@ -38,7 +39,8 @@ public class Solution {
             }
             
             if(charsToCheck.size() == 0){
-                // Check if we can remove the starting character (if the starting character does not exist or cur count contains more characters than required)                
+                // Check if we can remove the starting character (if the starting 
+                // character does not exist or cur count contains more characters than required)                
                 while(start < end && target[s.charAt(start)] < cur[s.charAt(start)]){
                     cur[s.charAt(start)]--;
                     start++;
@@ -57,6 +59,7 @@ public class Solution {
     }
 }
 
+// O(n^2)
 class Solution2 {
     public boolean isValid(int[] cur, int[] target){
         for(int i = 0; i<target.length; i++){
@@ -167,23 +170,25 @@ class Solution3 {
 }
 
 // EPI
+// Cleaner and robust
+// Can handle the cases when T contains the multiple count of same character
 public class Solution {
     public String minWindow(String s, String t) {
         int n = t.length();
         Map<Character, Integer> map = new HashMap<>();
         int remainingToCover = 0;
-        for(int i=0; i<n; ++i){
-            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) + 1);
+        for(char c : t.toCharArray()){
+            map.put(c, map.getOrDefault(c, 0) + 1);
             remainingToCover++;
         }
-        int start = 0, end = 0;
+        int start = 0;
         int rs = -1, len = -1;
-        while(end < s.length()){
-            Integer cnt = map.get(s.charAt(end));
+        for(int end=0; end<s.length(); ++end){
+            char c = s.charAt(end);
+            Integer cnt = map.get(c);
             if(cnt != null){
-                map.put(s.charAt(end), --cnt);
-                if(cnt >= 0)
-                    remainingToCover--;
+                map.put(c, --cnt);
+                if(cnt >= 0)    remainingToCover--;
             }
             while(remainingToCover == 0){
                 if(rs == -1 || len > (end - start + 1)){
@@ -199,7 +204,6 @@ public class Solution {
                 }
                 start++;
             }
-            end++;
         }
         return rs == -1 ? "" : s.substring(rs, rs+len);
      }

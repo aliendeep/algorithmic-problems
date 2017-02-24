@@ -42,21 +42,26 @@ it is read/evaluated as:
           -> "(T ? F : 3)"                 or       -> "(T ? F : 5)"
           -> "F"                                    -> "F"
 */
-          
+  
+// Recursive        
 public class Solution {
     int start;
     int n;
     public String parse(String expression) {
         if(start + 1 < n && expression.charAt(start + 1) == '?'){
+            // T or F
             char c = expression.charAt(start);
+            // skip the T/F and ?
             start += 2;
             String trueResult = parse(expression);
+            // skip :
             start++;
             String falseResult = parse(expression);
             return c == 'T' ? trueResult : falseResult;
         }
         else{
             start += 1;
+            // return the 1 char letter
             return expression.substring(start-1, start);
         }
     }
@@ -76,12 +81,15 @@ class Solution2 {
         for(int i=expression.length()-1; i>=0; i--){
             char c = expression.charAt(i);
             // If this character is either T or F 
+            // evaluate
             if(!stk.isEmpty() && stk.peekFirst() == '?'){
                 // pop ?
                 stk.pop();
+                // true value
                 char a = stk.pop();
                 // pop :
                 stk.pop();
+                // false value
                 char b = stk.pop();
                 
                 if(c == 'T')

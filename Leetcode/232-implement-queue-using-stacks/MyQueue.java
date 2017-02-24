@@ -18,24 +18,25 @@ class MyQueue {
     Deque<Integer> s1, s2;
     
     public MyQueue(){
-        s1 = new LinkedList<>();
-        s2 = new LinkedList<>();
+      s1 = new LinkedList<>();
+      s2 = new LinkedList<>();
     }    
     // Push element x to the back of queue.
     public void push(int x) {
-        s1.addFirst(x);
+      s1.push(x);
     }
     
     public void transfer(){
-        while(!s1.isEmpty()){
-            s2.addFirst(s1.removeFirst());
-        }
+      while(!s1.isEmpty()){
+        s2.push(s1.pop());
+      }
     }
+
     // Removes the element from queue
     public void pop() {
         if(s2.isEmpty())
-            transfer();
-        s2.removeFirst();
+          transfer();
+        s2.pop();
     }
 
     // Get the front element.

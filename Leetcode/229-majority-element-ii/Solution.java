@@ -53,6 +53,7 @@ class Solution2 {
         for(int n : nums){
             hash.put(n, hash.containsKey(n) ? hash.get(n) + 1 : 1);
             if(hash.size() == k){
+                // this arraylist is needed to avoid java.util.ConcurrentModificationException
                 List<Integer> del = new ArrayList<>();
                 // decrement k unique items
                 for(Map.Entry<Integer, Integer> entry : hash.entrySet()){

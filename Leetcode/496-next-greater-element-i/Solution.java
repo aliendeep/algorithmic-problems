@@ -30,6 +30,48 @@ The length of both nums1 and nums2 would not exceed 1000.
 */
 
 public class Solution {
+    // O(n)
+    public int[] nextGreaterElement(int[] findNums, int[] nums) {
+        int n = nums.length;
+        int m = findNums.length;
+        if(n == 0 || m == 0)      return new int[0];
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        // store indices
+        Deque<Integer> stk = new LinkedList<>();
+        stk.push(0);
+        for(int i=1; i<nums.length; ++i){
+            int num = nums[i];
+            if(!stk.isEmpty()){
+                int index = stk.peekFirst();
+                // current number is greater than stack top
+                while(nums[index] < num){
+                    stk.pop();
+                    map.put(nums[index], num);
+                    if(stk.isEmpty())   break;
+                    index = stk.peekFirst();
+                }
+            }
+            stk.push(i);
+        }
+        
+        // Construct result
+        int[] r = new int[m];
+        int i = 0;
+        for(int num : findNums){
+            if(!map.containsKey(num)){
+                r[i++] = -1;
+            }
+            else{
+                r[i++] = map.get(num);
+            }
+        }
+        return r;    
+    }        
+}
+
+// O(n^2)
+public class Solution {
     public int[] nextGreaterElement(int[] findNums, int[] nums) {
         int n = nums.length;
         int m = findNums.length;

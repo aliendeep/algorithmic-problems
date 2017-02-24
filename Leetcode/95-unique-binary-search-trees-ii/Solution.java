@@ -24,22 +24,23 @@ Given n = 3, your program should return all 5 unique BST's shown below.
 public class Solution {
     // Time complexity: Catalan Number (2n)! / (n! (n+1)!)
     // C(n) = /sum_{i=1_n} C(i)*C(n-1)
-    public List<TreeNode> generateTrees(int start, int end) {
+    // inclusive
+    public List<TreeNode> gen(int min, int max) {
         List<TreeNode> result = new ArrayList<>();
-        if(start > end){
+        if(min > max){
             result.add(null);
             return result;
         }
-        for(int i=start; i<=end; i++){
-            List<TreeNode> leftSubtrees = generateTrees(start, i-1);
-            List<TreeNode> rightSubtrees = generateTrees(i+1, end);
+        for(int root=min; root<=max; ++root){
+            List<TreeNode> leftSubtrees = gen(min, root-1);
+            List<TreeNode> rightSubtrees = gen(root+1, max);
             // Generate all combinations of left and right subtrees
             for(TreeNode left : leftSubtrees){
                 for(TreeNode right : rightSubtrees){
-                    TreeNode root = new TreeNode(i);
-                    root.left = left;
-                    root.right = right;
-                    result.add(root);
+                    TreeNode r = new TreeNode(root);
+                    r.left = left;
+                    r.right = right;
+                    result.add(r);
                 }
             }
         }
@@ -47,6 +48,6 @@ public class Solution {
     }
     public List<TreeNode> generateTrees(int n){
         if(n == 0)      return Collections.EMPTY_LIST;
-        return generateTrees(1, n);
+        return gen(1, n);
     }
 }

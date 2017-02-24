@@ -1,5 +1,4 @@
 /*
-
 Given a string, find the length of the longest substring without repeating characters.
 
 Examples:
@@ -101,7 +100,6 @@ class Solution4 {
             // Extend the range
             if(set.add(c)){
                 end++;
-                r = Math.max(r, end - start);
             }
             // repeat
             else{
@@ -111,6 +109,7 @@ class Solution4 {
                     start++;
                 }
             }
+            r = Math.max(r, end - start);
         }
         return r;
     }

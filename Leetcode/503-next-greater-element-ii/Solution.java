@@ -13,6 +13,43 @@ The number 2 can't find next greater number;
 The second 1's next greater number needs to search circularly, which is also 2.
 Note: The length of given array won't exceed 10000.
 */
+// Cleaner
+public class Solution {
+    public int[] nextGreaterElements(int[] a) {
+        int n = a.length;
+        if(n == 0)      return new int[0];
+        
+        // Handle circular constraint
+        int[] nums = new int[2*n];
+        for(int i=0; i<n; ++i){
+            nums[i] = a[i];
+            nums[n+i] = a[i];
+        }
+        
+        int[] result = new int[n];
+        Arrays.fill(result, -1);
+        
+        // store indices
+        Deque<Integer> stk = new LinkedList<>();
+        stk.push(0);
+        for(int i=1; i<nums.length; ++i){
+            int num = nums[i];
+            if(!stk.isEmpty()){
+                int index = stk.peekFirst();
+                // current number is greater than stack top
+                while(nums[index] < num){
+                    stk.pop();
+                    if(index < n)
+                        result[index] = num;
+                    if(stk.isEmpty())   break;
+                    index = stk.peekFirst();
+                }
+            }
+            stk.push(i);
+        }
+        return result;
+    }
+}
 
 public class Solution {
     class Pair{

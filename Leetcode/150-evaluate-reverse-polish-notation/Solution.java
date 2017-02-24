@@ -13,6 +13,7 @@ public class Solution {
         String op = new String("+-*/");
         for(String s : tokens){
             int index = op.indexOf(s);
+            // if the current character is a number, insert it
             if(index == -1){
                 stk.push(Integer.parseInt(s));
             }

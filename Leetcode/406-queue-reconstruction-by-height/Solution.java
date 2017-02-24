@@ -174,7 +174,6 @@ public class Solution2{
             // empty kth spot (out of remaining position)
             // Sum - 1 indexing
             int index = st.getIndex(people[i][1] + 1);
-            System.out.println(" " + index);
             result[index][0] = people[i][0];
             result[index][1] = people[i][1];            
             // mark that position as occupied

@@ -11,19 +11,20 @@ You should return the indices: [0,9].
 (order does not matter).
 */
 public class Solution {
-    boolean match(String s, int start, Map<String, Integer> dict , int wordSize, int numWords){
+    Map<String, Integer> dict;
+    int wordSize, numWords;
+    String s;
+    
+    boolean match(int start){
         Map<String, Integer> cnt = new HashMap<String, Integer>();
-        for(int i=0; i<numWords; i++){
-            String word = s.substring(start+i*wordSize, start+i*wordSize+wordSize);
-            if(!dict.containsKey(word))
-                return false;
-                
-            if(cnt.containsKey(word))
-                cnt.put(word, cnt.get(word)+1);
-            else
-                cnt.put(word, 1);
-                
-            if(cnt.get(word) > dict.get(word))
+        int offset = start;
+        for(int i=0; i<numWords; i++) {
+            String nextWord = s.substring(offset, offset + wordSize);
+            offset += wordSize;
+
+            if(!dict.containsKey(nextWord))     return false;
+            cnt.put(nextWord, cnt.getOrDefault(nextWord, 0) + 1);
+            if(cnt.get(nextWord) > dict.get(nextWord))
                 return false;
         }
         return true;
@@ -32,21 +33,21 @@ public class Solution {
     public List<Integer> findSubstring(String s, String[] words) {
         // List of words, words, that are all of the same length. 
         // One word can contain multiple times
-        Map<String, Integer> dict = new HashMap<String, Integer>();
-        for(String word : words){
-            if(dict.containsKey(word)){
-                dict.put(word, dict.get(word)+1);
-            }
-            else
-                dict.put(word, 1);
+        dict = new HashMap<String, Integer>();
+        for(String word : words) {
+            dict.put(word, dict.getOrDefault(word, 0) + 1);
         }
         
-        int wordSize = words[0].length();
-        List<Integer> r = new ArrayList<>();
+        int n = s.length();
+        wordSize = words[0].length();
+        numWords = words.length;
+        this.s = s;
+        int windowLength = wordSize*numWords;
         // for all starting index
-        for(int i=0;  i+wordSize*words.length <= s.length(); i++){
-            if(match(s, i, dict, wordSize, words.length)){
-                r.add(i);    
+        List<Integer> r = new ArrayList<>();
+        for(int i=0;  i + windowLength <= n; i++) {
+            if(match(i)) {
+                r.add(i);   
             }
         }
         return r;

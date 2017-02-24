@@ -57,6 +57,7 @@ class Solution2 {
     public boolean find132pattern(int[] nums) {
         int n = nums.length;
         if(n <= 2)   return false;
+        // Construct so far min
         int[] min = new int[n];
         min[0] = nums[0];
         for(int i=1; i<n; ++i){
@@ -76,6 +77,34 @@ class Solution2 {
                     return true;
             }
             set.add(nums[i]);
+        }
+        return false;
+    }
+}
+
+// Stack
+public class Solution {
+    // O(n)
+    // Find a1 < a2 > a3
+    public boolean find132pattern(int[] nums) {
+        int n = nums.length;
+        if(n < 3)
+            return false;
+        // numbers stored in the stack are a2
+        Deque<Integer> stk = new LinkedList<>();
+        // Keep track of the largest candidate of a3
+        int a3 = Integer.MIN_VALUE;
+        // Start from the end
+        for(int i=n-1; i>=0; i--){
+            // when we encounter a number smaller than a3, then we have found a 
+            // sequence a1 < a3
+            if(nums[i] < a3)
+                return true;
+            // Candidate a3 if there is any number nums[i] (on the left) is greater than a3
+            while(!stk.isEmpty() && nums[i] > stk.peekFirst()){
+                a3 = stk.pop();
+            }
+            stk.push(nums[i]);
         }
         return false;
     }

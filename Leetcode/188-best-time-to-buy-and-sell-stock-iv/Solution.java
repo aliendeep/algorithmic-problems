@@ -25,7 +25,7 @@ public class Solution {
         // Balance - Current Balance with at most j transactions (stock 0 .. i)
         int[] bal = new int[k+1];
         Arrays.fill(bal, Integer.MIN_VALUE);
-        // Current Profit - Current Profit with  at most j transactions (stock 0 .. i)
+        // Current Profit - Current Profit with at most j transactions (stock 0 .. i)
         int[] profit = new int[k+1];
         
         for(int i=0; i<n; i++){
@@ -52,7 +52,7 @@ public class Solution {
 
 class Solution2 {
     // Time: O(kn)
-    // Space: O(k)
+    // Space: O(kn)
     // dp[i][j] is the max profit using i transactions at time j
     public int maxProfit(int k, int[] prices) {
         int n = prices.length;

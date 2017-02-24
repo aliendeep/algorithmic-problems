@@ -29,7 +29,7 @@ public class Solution {
         int maxSellingPrice = Integer.MIN_VALUE;
         for(int i=n-1; i>0; i--){
             maxSellingPrice = Math.max(maxSellingPrice, prices[i]);
-            //  At most two transactions, you must sell the stock before you buy again
+            // At most two transactions, you must sell the stock before you buy again
             profit = Math.max(profit, maxSellingPrice - prices[i] + firstBuySell[i-1]);
         }
         return profit;

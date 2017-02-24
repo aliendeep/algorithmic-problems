@@ -122,11 +122,10 @@ class Solution3 {
 // Time: O(26*n)
 class Solution4 {
     // O(n)
-    public void updateCount(String s, int start, int[] cnt, Set<Character> taken){
+    public void resetCount(String s, int start, int[] cnt){
         Arrays.fill(cnt, 0);
         for(int i=start; i<s.length(); i++){
-            int c = s.charAt(i) - 'a';
-            cnt[c]++;
+            cnt[s.charAt(i) - 'a']++;
         }   
     }
     
@@ -169,8 +168,9 @@ class Solution4 {
             result.append(c);
             taken.add(c);
             start = index + 1;
-            updateCount(s, start, cnt, taken);
+            resetCount(s, start, cnt);
         }
         return result.toString();
     }
 }
+

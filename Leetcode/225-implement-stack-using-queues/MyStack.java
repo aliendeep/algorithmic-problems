@@ -41,7 +41,7 @@ public class MyStack {
         Q1 = Q2;
         Q2 = t;
     }
-    // Removes the element on top of the stack.
+    // Removes the element from the top of the stack.
     public void pop() {
       // transfer everything from q1 to q2 and return the last element
         while(Q1.size() > 1){

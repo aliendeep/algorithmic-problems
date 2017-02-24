@@ -64,43 +64,45 @@ public class Solution {
     }
 }
 
-// String
 class Solution2 {
-    // StringBuilder
     public void addOperatorHelper(String num, int target, 
-                                  int lev, StringBuilder curExpr, long prev, long mult, 
-                                  List<String> result){
+                                    int lev, StringBuilder runExpr, long cur, long prev, 
+                                    List<String> result){
         if(lev == num.length()){
-            if(prev == target){
-                result.add(curExpr.toString());
+            if(cur == target){
+                result.add(runExpr.toString());
                 return;
             }
         }
-        for(int i=lev; i<num.length(); i++){
+        long val = 0;
+        for(int i=lev; i<num.length(); ++i){
+            // Can't start with 0 if length > 1
             if(i > lev && num.charAt(lev) == '0')    
-                break;
-            int slen = curExpr.length();
-            long val = Long.parseLong(num.substring(lev, i+1));
+                return;
+
+            int slen = runExpr.length();
+            val = val*10 + num.charAt(i) - '0';
+            
             if(lev == 0){
-                curExpr.append(val);
-                addOperatorHelper(num, target, i+1, curExpr, val, val, result);
-                curExpr.setLength(slen);
+                runExpr.append(val);
+                addOperatorHelper(num, target, i+1, runExpr, val, val, result);
+                runExpr.setLength(slen);
             }
             else{
-                curExpr.append('+');
-                curExpr.append(val);
-                addOperatorHelper(num, target, i+1, curExpr, prev + val, val, result);
-                curExpr.setLength(slen);
+                runExpr.append('+');
+                runExpr.append(val);
+                addOperatorHelper(num, target, i+1, runExpr, cur + val, val, result);
+                runExpr.setLength(slen);
 
-                curExpr.append('-');
-                curExpr.append(val);
-                addOperatorHelper(num, target, i+1, curExpr, prev - val, -val, result);
-                curExpr.setLength(slen);
+                runExpr.append('-');
+                runExpr.append(val);
+                addOperatorHelper(num, target, i+1, runExpr, cur - val, -val, result);
+                runExpr.setLength(slen);
 
-                curExpr.append('*');
-                curExpr.append(val);
-                addOperatorHelper(num, target, i+1, curExpr, prev - mult + mult*val, mult*val, result);
-                curExpr.setLength(slen);
+                runExpr.append('*');
+                runExpr.append(val);
+                addOperatorHelper(num, target, i+1, runExpr, cur - prev + prev*val, prev*val, result);
+                runExpr.setLength(slen);
             }
         }
     }

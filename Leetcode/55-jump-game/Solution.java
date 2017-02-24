@@ -80,9 +80,9 @@ class Solution {
         for(int t=i+1; t<=reach; ++t){
             ans = jump(t, n, nums, dp);
             if(ans == 1)
-                return 1;
+                break;
         }
-        dp[i] = 0;
+        dp[i] = ans;
         return dp[i];
     }
     

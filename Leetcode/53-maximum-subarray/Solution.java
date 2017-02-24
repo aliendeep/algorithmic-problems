@@ -8,7 +8,7 @@ the contiguous subarray [4,-1,2,1] has the largest sum = 6.
 click to show more practice.
 
 More practice:
-If you have figured out the O(n) solution, try coding another solution using 
+- If you have figured out the O(n) solution, try coding another solution using 
 the divide and conquer approach, which is more subtle.
 */
 
@@ -83,10 +83,12 @@ class Solution3 {
 class Solution4 {
     // O(n) Solution
     class Info{
-        int startSum;
+        // sum starting from the start endpoint
+        int startSum; 
         int endSum;
         // Maximum sum result
         int maxSum;
+        // sum of values of the whole subarray
         int sum;
         public Info(int i, int j, int k, int s){
             startSum = i;

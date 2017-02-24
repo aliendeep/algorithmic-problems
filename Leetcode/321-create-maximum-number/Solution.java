@@ -29,7 +29,8 @@ public class Solution {
         int[] result = new int[k];
         int id = 0;
         for(int i=0; i<n; i++){
-            // If we find a number > last element of r and if we still have enough number to choose from, then we can discard the last number of r (pop)
+            // If we find a number > last element of r and if we still have 
+            // enough number to choose from, then we can discard the last number of r (pop)
             while(id > 0  && k - id < n - i && result[id-1] < A[i]){
                 id--;
             }
@@ -115,17 +116,16 @@ class SolutionStack {
 
         Deque<Integer> stk = new LinkedList<>();
         for(int i=0; i<nums.length; ++i){
-            while(k > 0 && !stk.isEmpty() && stk.peekFirst() < nums[i]){
-                System.out.println("k " + k + " " + nums[i]);
-                stk.removeFirst();
+            while(k > 0 && !stk.isEmpty() && stk.peekFirst() < nums[i]) {
+                stk.pop();
                 k--;
             }
-            stk.addFirst(nums[i]);
+            stk.push(nums[i]);
         }
         
         // For cases like: 111, 2222 etc
         while(k > 0 ){
-            stk.removeFirst();
+            stk.pop();
             k--;
         }
         
@@ -133,7 +133,7 @@ class SolutionStack {
         int[] result = new int[stk.size()];
         int i = stk.size() - 1;
         while(!stk.isEmpty()){
-            result[i] = stk.removeFirst();
+            result[i] = stk.pop();
             i--;
         }
         return result;
@@ -198,12 +198,4 @@ class SolutionStack {
         }
         return result;
     }
-
-    public static void main(String[] args){
-        SolutionStack s = new SolutionStack();
-        int[] a = {8,6,9};
-        int[] b = {1,7,5};
-        int[] r = s.maxNumber(a, b, 3);
-        s.print(r);
-    }    
 }

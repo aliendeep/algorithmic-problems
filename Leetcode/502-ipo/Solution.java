@@ -29,6 +29,7 @@ You may assume all numbers in the input are non-negative integers.
 The length of Profits array and Capital array will not exceed 50,000.
 The answer is guaranteed to fit in a 32-bit signed integer.
 */
+// O(nlogn)
 public class Solution {
     class Pair{
         int profit;
@@ -54,6 +55,9 @@ public class Solution {
         }
     }
 
+    // Greedy : We want to choose the project that maximized the profit 
+    // TreeSet capital increasing
+    // profit decreasing
     public int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) {
         if(k == 0)      return 0;
         int n = Profits.length;
@@ -69,13 +73,16 @@ public class Solution {
             public int compare(Pair x, Pair y){
                 if(x.cap == y.cap)
                     // Decreasing order profit
-                    return Integer.compare(y.profit, x.profit);     
+                    return Integer.compare(y.profit, x.profit);  
+                // tie break based on id   
                 return Integer.compare(x.cap, y.cap);
             }
         });
         
         // Active set
         // Multi TreeSet
+        // First key() contains the max profit project
+        // tie break based on capital
         TreeSet<Pair> active = new TreeSet<>(new Comparator<Pair>(){
             @Override
             public int compare(Pair x, Pair y){  
@@ -88,6 +95,7 @@ public class Solution {
                 return Integer.compare(x.id, y.id);
             }
         });
+        // Construct the initial active set
         int i = 0;
         for(i=0; i<n; ++i){
             if(W >= a[i].cap){
@@ -97,6 +105,7 @@ public class Solution {
                 break;
         }
         int curCap = W;
+        // Choose top k project
         while(!active.isEmpty()){
             if(k == 0)      break;
             Pair p = active.first();
@@ -108,6 +117,52 @@ public class Solution {
                 active.add(a[i++]);
             }
             --k;
+        }
+        return curCap;
+    }
+}
+
+// Priority queue solution
+public class Solution {
+    class Pair{
+        int profit;
+        int cap;
+        public Pair(int p, int c){
+            profit = p;
+            cap = c;
+        }
+    }
+    // capital increasing
+    // profit decreasing
+    public int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) {
+        // min Heap
+        PriorityQueue<Pair> cap = new PriorityQueue<>(1, new Comparator<Pair>() {
+            @Override
+            public int compare(Pair x, Pair y){
+                return Integer.compare(x.cap, y.cap);  
+            }
+        });
+        
+        // max heap
+        PriorityQueue<Pair> pro = new PriorityQueue<>(1, new Comparator<Pair>() {
+            @Override
+            public int compare(Pair x, Pair y){
+                return Integer.compare(y.profit, x.profit);  
+            }
+        });
+        
+        int n = Capital.length;
+        for(int i=0; i<n; ++i){
+            cap.add(new Pair(Profits[i], Capital[i]));    
+        }   
+        
+        int curCap = W;
+        for(int i=0; i<k; ++i){
+            while(!cap.isEmpty() && cap.peek().cap <= curCap)
+                pro.add(cap.poll());
+            
+            if(pro.isEmpty())   break;
+            curCap += pro.poll().profit;
         }
         return curCap;
     }

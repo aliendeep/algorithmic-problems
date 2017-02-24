@@ -36,9 +36,26 @@ public class Solution {
     }
 }
 
+// One while loop
+public class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        int minLength = Integer.MAX_VALUE;
+        int sum = 0;
+        int start = 0;
+        for(int end=0; end<nums.length; ++end){
+            sum += nums[end];
+            while(sum >= s /*&& start <= end */){
+                minLength = Math.min(minLength, end - start + 1);
+                sum -= nums[start++];
+            }
+        }
+        return (minLength == Integer.MAX_VALUE) ? 0 : minLength; 
+    }
+}
+
 // Alternative: O(nlogn)
 class Solution2 {
-    // find the index of smallest number greater than targetSum
+    // find the index of smallest number greater or equal to targetSum
     public int binarySearch(int targetSum, int[] cumsum){
         int n = cumsum.length;
         int l = 0, h = n-1;

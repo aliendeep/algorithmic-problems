@@ -25,8 +25,18 @@ There are several subsequences that achieve this length. One is [1,17,10,13,10,1
 
 Input: [1,2,3,4,5,6,7,8,9]
 Output: 2
+
+Sample Input:
+[1,7,4,9,2,5]
+[3,3,3,2,5]
+[1,17,5,10,13,15,10,5,16,8]
+Sample Output:
+6
+3
+7
 */
 // dp
+// O(n^2)
 public class Solution {
     public int signCheck(int n){
       if(n == 0)
@@ -58,6 +68,37 @@ public class Solution {
     }
 }
 
+// O(n) space
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        int n = nums.length;
+        if(n == 0)      return 0;
+        
+        int[] up = new int[n];
+        int[] down = new int[n];
+        Arrays.fill(up, 1);
+        Arrays.fill(down, 1);
+
+        for(int i=1; i<n; ++i){
+            // increasing
+            if(nums[i] > nums[i-1]){
+                up[i] = down[i-1] + 1;
+                down[i] = down[i-1];
+            }
+            // decreasing
+            else if(nums[i] < nums[i-1]){
+                down[i] = up[i-1] + 1;
+                up[i] = up[i-1];
+            }
+            // Equal number
+            else{
+                up[i] = up[i-1];
+                down[i] = down[i-1];
+            }
+        }
+        return Math.max(up[n-1], down[n-1]);
+    }
+}
 // Cleaner version O(1) space
 class Solution2 {
     // DP:  O(n) (Space Optimized)
@@ -102,4 +143,3 @@ class Solution2 {
         return len;
     }
 }
-    

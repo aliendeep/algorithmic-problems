@@ -19,6 +19,22 @@ isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
 */
 
+/*
+Sample Input:
+"aa"
+"a"
+"aab"
+"c*a*b"
+"abcd"
+"d*"
+"aasdfasdfasdfasdfas"
+"aasdf.*asdf.*asdf.*asdf.*s"
+Sample Output:
+false
+true
+false
+true
+*/
 // DP
 public class Solution {
     public boolean isCharMatch(char s, char p){
@@ -134,10 +150,13 @@ class Solution3 {
             // pc(i-1) contains the pattern char
             char patternChar = pc(i-1);
             flag = match(i-2, j);
-            for(int k=j; k>0; k--){
+            for(int k=j; k>0; --k){
                 if(!isCharMatch(sc(k), patternChar))
                     break;
                 flag = flag || match(i-2, k-1);
+                // early break
+                if(flag)
+                    break;
             }
         }
         dp[i][j] = flag ? 1 : 0;

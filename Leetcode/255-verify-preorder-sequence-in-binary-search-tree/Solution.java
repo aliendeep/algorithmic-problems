@@ -105,13 +105,15 @@ class Solution4 {
         Deque<Integer> stk = new LinkedList<>();
         int root = Integer.MIN_VALUE;
         for(int pre : preorder){
+            // if we find a node that is on the right side of root and smaller 
+            // than root, then return false
             if(pre < root)
                 return false;
-            //  Remove elements from stack while preorder[i] is greater then stack top.    
+            //  Remove elements from stack while preorder[i] is greater than stack top.    
             while(!stk.isEmpty() && stk.peekFirst() < pre){
-                root = stk.removeFirst();
+                root = stk.pop();
             }
-            stk.addFirst(pre);
+            stk.push(pre);
         }
         return true;
     }

@@ -21,13 +21,6 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 import java.util.*;
 
 public class Solution {
-    public void print(List<String> s){
-        for(String str : s){
-            System.out.print(str + " ");
-        }
-        System.out.println();
-    }
-    
     public String decodeString(String s) {
         // preprocess
         List<String> tokens = new ArrayList<>();

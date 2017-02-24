@@ -59,6 +59,7 @@ public class Solution {
 // Slightly different
 class Solution2 {
     public int calculate(String s) {
+        // store the signs
         Deque<Integer> stk = new LinkedList<>();       
         int sign = 1;
         stk.push(sign);
@@ -114,6 +115,7 @@ class Solution3 {
                     ++i;
                 }
                 else if(c == '('){
+                    // skip (
                     ++i;
                     result += sign*eval(s);
                     // reset sign

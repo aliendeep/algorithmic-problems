@@ -48,11 +48,13 @@ public class Solution {
             freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
         }
         
+        // Largest frequency
         TreeSet<Entry> active = new TreeSet<>(new Comparator<Entry>() {
             @Override
             public int compare(Entry a, Entry b) {
                 if(a.freq != b.freq)
                     return Integer.compare(b.freq, a.freq);
+                // break tie based on char value
                 return Integer.compare(a.c, b.c);
             }
         });
@@ -65,12 +67,12 @@ public class Solution {
             k = 1;
             
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i<n; ++i){
+        for(int i=0; i<n; ++i) {
             if(i >= k){
                 // re-activate k-old character.
                 char reChar = sb.charAt(i-k);
                 int freq = freqMap.get(reChar);
-                if(freq > 0){
+                if(freq > 0) {
                     active.add(new Entry(freq, reChar));
                 }
             }
@@ -129,7 +131,6 @@ class Solution2 {
 
 // Max Heap
 // O(nlg(26))
-
 public class Solution{
     class Pair{
         char c;
@@ -190,57 +191,4 @@ public class Solution{
         System.out.println(ob.rearrangeString("aaabc", 3));
         System.out.println(ob.rearrangeString("aabbcc", 3));
     }    
-}
-
-public class Solution {
-    class Entry {
-        int freq;
-        char c;
-        public Entry(int freq, char c) {
-            this.freq = freq;
-            this.c = c;
-        }
-    }
-    
-    public String rearrangeString(String str, int k) {
-        int n = str.length();
-        Map<Character, Integer> freqMap = new HashMap<>();
-        for (int i = 0; i <n; ++i) {
-            char c = str.charAt(i);
-            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
-        }
-        
-        TreeSet<Entry> active = new TreeSet<>(new Comparator<Entry>() {
-            @Override
-            public int compare(Entry a, Entry b) {
-                if(a.freq != b.freq)
-                    return Integer.compare(b.freq, a.freq);
-                return Integer.compare(a.c, b.c);
-            }
-        });
-        
-        for (Map.Entry<Character, Integer> entry : freqMap.entrySet()) {
-            active.add(new Entry(entry.getValue(), entry.getKey()));
-        }
-
-        if(k == 0) 
-            k = 1;
-            
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i<n; ++i){
-            if(i >= k){
-                // re-activate k-old character.
-                char reChar = sb.charAt(i-k);
-                int freq = freqMap.get(reChar);
-                if(freq > 0){
-                    active.add(new Entry(freq, reChar));
-                }
-            }
-            Entry e = active.pollFirst();
-            if(e == null)   return "";
-            sb.append(e.c);
-            freqMap.put(e.c, e.freq - 1);
-        }
-        return sb.toString();
-    }
 }

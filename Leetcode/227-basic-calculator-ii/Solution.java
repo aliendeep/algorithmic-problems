@@ -31,7 +31,7 @@ public class Solution {
     boolean isOperator(char c){
         if(c == ' ')
             return false;
-        return (Character.isDigit(c) == false);
+        return (!Character.isDigit(c));
     }
     public int calculate(String s) {
         int n = s.length();
@@ -47,19 +47,14 @@ public class Solution {
                 num = num*10 + c - '0';
             // operator or last character (notice the if)
             if(isOperator(c) || i == n-1){
-                if(sign == '+'){
-                    stk.addFirst(num);    
-                }
-                else if(sign == '-'){
-                    stk.addFirst(-num);    
-                }
-                else if(sign == '*'){
-                    int t = stk.removeFirst()*num;
-                    stk.addFirst(t);    
-                }
-                else if(sign == '/'){
-                    stk.addFirst(stk.removeFirst() / num);    
-                }
+                if(sign == '+')
+                    stk.push(num);    
+                else if(sign == '-')
+                    stk.push(-num);    
+                else if(sign == '*')
+                    stk.push(stk.pop()*num);    
+                else if(sign == '/')
+                    stk.push(stk.pop() / num);    
                 sign = c;
                 num = 0;
             }
@@ -67,7 +62,7 @@ public class Solution {
         
         int result = 0;
         while(!stk.isEmpty()){
-            result += stk.removeFirst();
+            result += stk.pop();
         }
         return result;
     }

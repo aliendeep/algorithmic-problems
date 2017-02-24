@@ -47,6 +47,7 @@ public class Solution {
                 }
             }
         }
+        // this is a number
         if(result.size() == 0)
             result.add(Integer.parseInt(input));
         return result;
@@ -169,4 +170,49 @@ class Solution3 {
 
         return compute(0, n-1);
     }
+}
+
+// Slight modification 
+public class Solution {
+    // i inclusive, j exclusive
+    public List<Integer> diffWays(String input, int i, int j) {
+        // base case
+        List<Integer> result = new ArrayList<>();
+        if(i > j)   
+            return result;
+
+        try{
+            int number = Integer.parseInt(input.substring(i, j));
+            result.add(number);
+            return result;
+        }
+        catch(NumberFormatException ex){
+            
+        }
+
+        for(int k=i; k<j; ++k){
+            char c = input.charAt(k);
+            // c is an operator
+            if(!Character.isDigit(c)){
+                List<Integer> left = diffWays(input, i, k);
+                // Skip the operator sign
+                List<Integer> right = diffWays(input, k+1, j);
+                for(int l : left){
+                    for(int r : right){
+                        if(c == '+')
+                            result.add(l + r);
+                        else if(c == '-')
+                            result.add(l - r);
+                        else
+                            result.add(l * r);
+                    }
+                }
+            }
+        }
+        return result;        
+    }
+
+    public List<Integer> diffWaysToCompute(String input) {
+        return diffWays(input, 0, input.length());
+    }    
 }

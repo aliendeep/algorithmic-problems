@@ -64,6 +64,7 @@ public class Solution {
         
         // Java doesn't have multimap!! this is just poor man's multimap.
         TreeMap<Integer /* height */, Integer /* count */> heightMap = new TreeMap<>();
+        // this treemap contains the running solution
         heightMap.put(0, 1);
         
         int prevHeight = 0;
@@ -82,9 +83,8 @@ public class Solution {
             }
             else{  // right
                 int newCnt = heightMap.get(height) - 1;
-                if(newCnt == 0){
+                if(newCnt == 0)
                     heightMap.remove(height); 
-                }
                 else
                     heightMap.put(height, newCnt);
             }

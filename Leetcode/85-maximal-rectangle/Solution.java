@@ -21,7 +21,8 @@ Sample Output:
 */
 // Less Space and time O(rc)
 public class Solution {
-    // if any previous height is higher than current height, then we don't need to remember that previous height 
+    // if any previous height is higher than current height, then we don't need 
+    // to remember that previous height 
     public int largestRectangleArea(int[] heights){
         int n = heights.length;
         // stack contains indices
@@ -30,12 +31,12 @@ public class Solution {
         for(int i=0; i<=n; i++){
             // stack is not empty (i is either past last index or height of A[i] < height of top of the stack)
             while(!stk.isEmpty() && (i == n || heights[i] < heights[stk.peekFirst()])){
-                int height = heights[stk.removeFirst()];
+                int height = heights[stk.pop()];
                 // if stack is empty then the rectangle can extend to 0
                 // Notice the pop: i-stk.top()-1 extend the rectangle to the earlier height 
                 maxArea = Math.max(maxArea, height * (stk.isEmpty() ? i :  i - stk.peekFirst() - 1));
             }
-            stk.addFirst(i);
+            stk.push(i);
         }
         return maxArea;
     }
