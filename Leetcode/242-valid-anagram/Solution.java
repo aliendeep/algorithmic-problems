@@ -40,7 +40,7 @@ public class Solution {
     }
 }
 
-    // Alternative : Sorting
+// Alternative : Sorting
 class Solution2 {
     public boolean isAnagram(String s, String t) {
         if(s.length() != t.length())

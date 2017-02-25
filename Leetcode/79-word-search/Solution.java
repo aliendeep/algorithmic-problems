@@ -24,24 +24,23 @@ public class Solution {
             return true;
         return false;
     }
+    
     int[][] move = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-    boolean dfs(char[][] board, int r, int c, boolean[][] visited, String word){
-        if(word.length() == 0)
+    boolean dfs(char[][] board, int r, int c, boolean[][] visited, String word, int lev){
+        if(lev == word.length())
             return true;
             
-        visited[r][c] = true;
         for(int i=0; i<4; i++){
             int r1 = r + move[i][0];
             int c1 = c + move[i][1];
-            if(!isValid(r1, c1, board.length, board[0].length) || visited[r1][c1] == true)
+            if(!isValid(r1, c1, board.length, board[0].length) || word.charAt(lev) != board[r1][c1] || visited[r1][c1])
                 continue;
             
-            if(word.charAt(0) == board[r1][c1]){
-                if(dfs(board, r1, c1, visited, word.substring(1)))
-                    return true;
-            }
+            visited[r1][c1] = true;
+            if(dfs(board, r1, c1, visited, word, lev+1))
+                return true;
+            visited[r1][c1] = false;
         }
-        visited[r][c] = false;
         return false;
     }
     
@@ -55,7 +54,8 @@ public class Solution {
             for(int j=0; j<c; j++){
                 if(word.charAt(0) == board[i][j]){
                     boolean[][] visited = new boolean[r][c];
-                    if(dfs(board, i, j, visited, word.substring(1)))
+                    visited[i][j] = true;
+                    if(dfs(board, i, j, visited, word, 1))
                         return true;
                 }
             }

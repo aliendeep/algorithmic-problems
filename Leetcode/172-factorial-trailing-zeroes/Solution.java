@@ -1,3 +1,8 @@
+/*
+Given an integer n, return the number of trailing zeroes in n!.
+
+Note: Your solution should be in logarithmic time complexity.
+*/
 public class Solution {
     public int trailingZeroes(int n) {
         // 10 = 5*2, number of multiples of 2 > number of multiples of 5

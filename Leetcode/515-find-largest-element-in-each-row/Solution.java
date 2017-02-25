@@ -43,3 +43,27 @@ public class Solution {
         return result;        
     }
 }
+
+// Recursive
+public class Solution {
+    List<Integer> result;
+    
+    void findLargestLev(TreeNode node, int depth){
+        if(node == null)    return;
+        if(result.size() == depth){
+            result.add(node.val);
+        }    
+        int max = Math.max(result.get(depth), node.val);
+        result.set(depth, max);
+        
+        findLargestLev(node.left, depth + 1);
+        findLargestLev(node.right, depth + 1);
+    }
+    
+    public List<Integer> largestValues(TreeNode root) {
+        result = new ArrayList<>();
+        if(root == null)    return result;
+        findLargestLev(root, 0);
+        return result;        
+    }
+}

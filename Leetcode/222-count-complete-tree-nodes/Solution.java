@@ -2,7 +2,8 @@
 Given a complete binary tree, count the number of nodes.
 
 Definition of a complete binary tree from Wikipedia:
-In a complete binary tree every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible. 
+In a complete binary tree every level, except possibly the last, is completely 
+filled, and all nodes in the last level are as far left as possible. 
 It can have between 1 and 2h nodes inclusive at the last level h.
 */
 /**
@@ -16,7 +17,7 @@ It can have between 1 and 2h nodes inclusive at the last level h.
  */
 //O(log(n)^2).
 public class Solution {
-    //  A tree consisting of only a root node has a height of 0. In a full binary tree, number of nodes = 2^(h+1) - 1
+    // A tree consisting of only a root node has a height of 0. In a full binary tree, number of nodes = 2^(h+1) - 1
     // Here a tree consisting of only a root node returns 1
     public int depth(TreeNode root, int dir){
         int h = 0;
@@ -37,9 +38,8 @@ public class Solution {
             return 0;
         int lDepth = depth(root, -1);
         int rDepth = depth(root, 1);
-        // full binary treee
+        // full binary tree
         if(lDepth == rDepth){
-            // number of node 2^(h+1) - 1
             return (1<<lDepth) - 1;
         }
         return countNodes(root.left) + 1 + countNodes(root.right);

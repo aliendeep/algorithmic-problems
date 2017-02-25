@@ -128,6 +128,7 @@ class Solution3 {
             map.put(t, map.getOrDefault(t, 0) + 1);
         }        
     
+        // Maximum frequency of any number can be at most length of the nums array
         List<Integer>[] bucket = new List[n+1];
         for(int key : map.keySet()){
             int frequency = map.get(key);

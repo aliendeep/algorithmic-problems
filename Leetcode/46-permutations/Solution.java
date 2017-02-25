@@ -23,7 +23,9 @@ public class Solution {
             if(taken[i] == true)    continue;
             cur[lev] = nums[i];
             taken[i] = true;
+
             bktk(cur, nums, lev+1, taken, r);
+
             cur[lev] = -1;
             taken[i] = false;
         }

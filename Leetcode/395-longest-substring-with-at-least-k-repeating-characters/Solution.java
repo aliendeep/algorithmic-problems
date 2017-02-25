@@ -28,6 +28,7 @@ public class Solution {
         return longestSubstringHelper(s, k, 0, s.length());
     }
     
+    // end exclusive
     public int longestSubstringHelper(String s, int k, int start, int end){
         if(s.length() < k || end < start)
             return 0;

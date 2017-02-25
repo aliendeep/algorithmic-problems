@@ -1,5 +1,6 @@
 /*
-A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+A linked list is given such that each node contains an additional random pointer 
+which could point to any node in the list or null.
 
 Return a deep copy of the list.
 */
@@ -14,6 +15,14 @@ Return a deep copy of the list.
 
 // Time: O(n)
 // Space: O(1)
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
 public class Solution {
     // First pass: make a copy of each node and copy the random pointer 
     // Update the random pointer
@@ -41,17 +50,20 @@ public class Solution {
         
         // Seperate two lists
         cur = head;
-        RandomListNode copyHead = head.next;
-        RandomListNode prev = copyHead;
-        while(cur != null){
-           cur.next = cur.next.next;
-           if(prev.next != null)
-                prev.next = prev.next.next;
-        
+        RandomListNode dummy = new RandomListNode(-1);
+        RandomListNode prev = dummy, copy;
+        while(cur != null && cur.next != null){
+            RandomListNode next = cur.next.next;
+            
+            // Get the copy
+            prev.next = cur.next;
             prev = prev.next;
+            
+            // restore original list
+            cur.next = next;
             cur = cur.next;
         }
         
-        return copyHead;
+        return dummy.next;
     }
 }

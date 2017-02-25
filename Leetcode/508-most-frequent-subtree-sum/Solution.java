@@ -72,3 +72,44 @@ public class Solution {
         return result;
     }
 }
+
+// concise
+public class Solution {
+    // Subtree sum, frequency
+    Map<Integer, Integer> map;
+    int maxFreq;
+    int cnt;
+    
+    public int getSubtreeSum(TreeNode node){
+        if(node == null)    return 0;
+        int leftSum = getSubtreeSum(node.left);
+        int rightSum = getSubtreeSum(node.right);
+        int sum = leftSum + node.val + rightSum;
+        int freq = map.getOrDefault(sum, 0) + 1;
+        map.put(sum, freq);
+        if(maxFreq < freq)  {
+            maxFreq = freq;
+            cnt = 1;
+        }
+        else if(maxFreq == freq)
+            cnt++;
+        return sum;
+    }
+
+    public int[] findFrequentTreeSum(TreeNode root) {
+        if(root == null)    return new int[0];
+        map = new HashMap<>();
+        maxFreq = 0;
+        cnt = 0;
+        getSubtreeSum(root);
+
+        int i = 0;
+        int[] result = new int[cnt];
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if(entry.getValue() == maxFreq){
+                result[i++] = entry.getKey();
+            }
+        }
+        return result;
+    }
+}

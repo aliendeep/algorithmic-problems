@@ -1,5 +1,6 @@
 /*
-Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
+Given a binary search tree (BST), find the lowest common ancestor (LCA) of two 
+given nodes in the BST.
 
 According to the definition of LCA on Wikipedia: “The lowest common ancestor is 
 defined between two nodes v and w as the lowest node in T that has both v and w 

@@ -8,14 +8,6 @@ You may assume that there will be only one unique solution.
 public class Solution {
     public static final int GRID_SIZE = 9;
     
-    void print(char[][] board){
-        for(int r=0; r<GRID_SIZE; r++){
-            for(int c=0; c<GRID_SIZE; c++){
-                System.out.print(board[r][c]);                
-            }        
-            System.out.println();
-        }
-    }
     boolean bktk(char[][] board, int r, int c, boolean[][] row, boolean[][] col, boolean[][][] box){
         // if column is out of range, go to the next row
         if(c == GRID_SIZE){
@@ -59,7 +51,7 @@ public class Solution {
         boolean[][] col = new boolean[GRID_SIZE][10];
         boolean[][][] box = new boolean[GRID_SIZE/3][GRID_SIZE/3][10];
         
-        // initialization
+        // initialization (already filled up numbers)
         for(int r=0; r<GRID_SIZE; r++){
             for(int c=0; c<GRID_SIZE; c++){
                 if(board[r][c] != '.'){

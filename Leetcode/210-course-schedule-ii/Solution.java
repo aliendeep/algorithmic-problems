@@ -85,6 +85,7 @@ class Solution2{
     private static final int GRAY = 1;
     private static final int BLACK = 2;
     
+    // return true if there is a cycle
     public boolean dfs(int node, List<List<Integer>> adjacency, int[] color, 
                         Stack<Integer> stk){
         color[node] = GRAY;        

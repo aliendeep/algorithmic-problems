@@ -32,6 +32,9 @@ public class Solution {
             a.add(i);
         }        
         
+        // Block size = (n-1)!
+        // Element = (k-1) / block size
+        // k = k - selected * block size
         k--;
         StringBuilder r = new StringBuilder();
         for(int i=n-1; i>=0; i--){

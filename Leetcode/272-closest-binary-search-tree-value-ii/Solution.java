@@ -68,8 +68,10 @@ public class Solution {
         s1 = new LinkedList<>();
         s2 = new LinkedList<>();
         // inorder traversal - predecessor
+        // nodes smaller than target
         inorder(root, true, target, s1);
         // reverse inorder traversal - successor
+        // nodes larger or equal to than target
         inorder(root, false, target, s2);
         
         List<Integer> result = new ArrayList<>();
@@ -79,18 +81,18 @@ public class Solution {
                 int t2 = s2.peekFirst();
                 if(Math.abs(t1 - target) < Math.abs(t2 - target)){
                     result.add(t1);
-                    s1.removeFirst();
+                    s1.pop();
                 }
                 else{
                     result.add(t2);
-                    s2.removeFirst();
+                    s2.pop();
                 }
             }
             else if(!s1.isEmpty()){
-                result.add(s1.removeFirst());
+                result.add(s1.pop());
             }
             else if(!s2.isEmpty()){
-                result.add(s2.removeFirst());
+                result.add(s2.pop());
             }
         }
         return result;
@@ -217,7 +219,6 @@ class Solution5 {
         Deque<TreeNode> pred = new LinkedList<>();
 
         TreeNode cur = root;
-        // logn
         while(cur != null){
             if(target <= cur.val){
                 succ.push(cur);

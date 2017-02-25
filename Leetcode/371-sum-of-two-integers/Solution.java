@@ -1,5 +1,6 @@
 /*
-Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -.
+Calculate the sum of two integers a and b, but you are not allowed to use the 
+operator + and -.
 
 Example:
 Given a = 1 and b = 2, return 3.
@@ -31,6 +32,23 @@ class Solution2 {
             // unsigned bit operation is necessary (Example: -1 + 1)
             tA >>>= 1;
             tB >>>= 1;
+        }
+        return sum | carryin;
+    }
+}
+
+public class Solution {
+    // Time: O(n)
+    public int getSum(int a, int b) {
+        int sum = 0, carryin = 0, k;
+        long tA = a, tB = b;
+        for(int i=0; i<32; ++i) {
+            k = (1<<i);
+            // Get the kth bit
+            int ak = a & k, bk = b & k;
+            int carryout = (ak & bk) | (ak & carryin) | (bk & carryin);
+            sum |= (ak ^ bk ^ carryin);
+            carryin = carryout << 1;
         }
         return sum | carryin;
     }

@@ -110,7 +110,9 @@ class Solution3 {
                 continue;
             taken[i] = true;
             cur.add(i);
+
             bktk(n, lev+1, cur, taken);
+
             cur.remove(cur.size()-1);
             taken[i] = false;
         }

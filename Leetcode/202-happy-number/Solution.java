@@ -9,7 +9,7 @@ this process ends in 1 are happy numbers.
 
 Example: 19 is a happy number
 
-1^2 + 9^ 2 = 82
+1^2 + 9^2 = 82
 8^2 + 2^2 = 68
 6^2 + 8^2 = 100
 1^2 + 0^2 + 0^2 = 1

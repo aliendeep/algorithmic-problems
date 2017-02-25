@@ -35,7 +35,9 @@ public class Solution {
                 continue;
             cur[lev] = candidates.charAt(i);
             taken[i] = true;
+
             permute(candidates, taken, lev+1, cur);
+
             taken[i] = false;
         }
     }
@@ -51,12 +53,14 @@ public class Solution {
           if(cnt[i] == 0)       continue;
           if(cnt[i] % 2 != 0)   odd++;
         }  
+        // empty
         if(odd > 1)     return result;
         
         mid = new StringBuilder();
         StringBuilder candidates = new StringBuilder();
         for(int i=0; i<256; i++){
             int val = cnt[i];
+            // middle char
             if(val % 2 != 0)        
                 mid.append((char)(i));
             for(int j=0; j<val/2; ++j){

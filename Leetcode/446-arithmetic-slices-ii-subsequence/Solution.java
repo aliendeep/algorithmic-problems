@@ -51,7 +51,7 @@ public class Solution {
             for(int j=1; j<i; ++j){
                 for(int k=0; k<j; ++k){ 
                     long diff = (long)A[i] - A[j];
-                    if(diff== (long)A[j] - A[k]){
+                    if(diff == (long)A[j] - A[k]){
                         dp[i][j] += dp[j][k] + 1;
                     }
                 }

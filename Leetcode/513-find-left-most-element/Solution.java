@@ -46,3 +46,26 @@ public class Solution {
         return result == null ? -1 : result.val;
     }
 }
+
+// Recursive
+public class Solution {
+    int maxDepth;
+    int r;
+    
+    void findLeftMost(TreeNode node, int depth){
+        if(node == null)    return;
+        if(maxDepth < depth){
+            maxDepth = depth;
+            r = node.val;
+        }    
+        findLeftMost(node.left, depth + 1);
+        findLeftMost(node.right, depth + 1);
+    }
+    
+    public int findBottomLeftValue(TreeNode root) {
+        maxDepth = -1;
+        r = -1;
+        findLeftMost(root, 0);
+        return r;
+    }
+}

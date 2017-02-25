@@ -26,7 +26,6 @@ serialize and deserialize algorithms should be stateless.
 public class Codec {
     public void serialize(TreeNode node, StringBuilder s) {
         if(node == null){
-            s.append("# ");
             return;
         }
         s.append(node.val);
@@ -42,18 +41,16 @@ public class Codec {
         return s.toString();
     }
     
-    int index;
+    static int index;
     public TreeNode buildTree(String[] s, int min, int max) {
         if(index == s.length)
             return null;
 
-        if(s[index].equals("#")){
-            index++;
-            return null;
-        }
-        int rootVal = Integer.parseInt(s[index++]);
+        int rootVal = Integer.parseInt(s[index]);
         if(rootVal < min || rootVal > max)
             return null;
+
+        index++;
         TreeNode root = new TreeNode(rootVal);
         root.left = buildTree(s, min, root.val);
         root.right = buildTree(s, root.val, max);
@@ -62,6 +59,7 @@ public class Codec {
     
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
+        if(data.length() == 0)    return null;
         String[] s = data.split(" ");
         index = 0;
         return buildTree(s, Integer.MIN_VALUE, Integer.MAX_VALUE);

@@ -87,6 +87,7 @@ class Solution2 {
     }
 }
 
+// cleaner
 class Solution3 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == p || root == q || root == null)      return root;

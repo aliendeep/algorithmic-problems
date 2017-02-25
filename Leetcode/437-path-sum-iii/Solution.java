@@ -39,7 +39,8 @@ Return 3. The paths that sum to 8 are:
 public class Solution {
     int count;
     public int pathSumCnt(TreeNode root, int curSum, int sum) {
-        if(root == null)                                return 0;
+        if(root == null)   
+            return 0;
         curSum += root.val;
         int r = (sum == curSum ? 1 : 0);
         int left = pathSumCnt(root.left, curSum, sum);
@@ -108,13 +109,7 @@ class Solution3 {
         if(curSum == target)
             npaths++;
         
-        // increment path Count
-        if(!map.containsKey(curSum)){
-            map.put(curSum, 1);
-        }
-        else{
-            map.put(curSum, map.get(curSum) + 1);
-        }
+        map.put(curSum, map.getOrDefault(curSum, 0) + 1);
         npaths += pathSumHelper(root.left, target, curSum, map);
         npaths += pathSumHelper(root.right, target, curSum, map);
         // decrement path Count

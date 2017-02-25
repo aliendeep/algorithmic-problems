@@ -33,6 +33,7 @@ Can you figure out ways to solve it with O(n) time complexity?
 // Space: O(h)
 public class Solution {
     class Info{
+        // size of the BST
         int cnt;
         boolean isBST;
         int min;

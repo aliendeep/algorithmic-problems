@@ -51,26 +51,18 @@ public class Solution {
         }
         if(root.left == null && root.right == null){
             if(r.size() == 0){
-                List<Integer> l = new ArrayList<>();
-                l.add(root.val);
-                r.add(l);
+                r.add(new ArrayList<>());
             }
-            else{
-                r.get(0).add(root.val);
-            }
+            r.get(0).add(root.val);
             return 1;
         }
         int lH = computeHeight(root.left);
         int rH = computeHeight(root.right);
         int height = Math.max(lH, rH) + 1;
         if(r.size() == height - 1){
-            List<Integer> l = new ArrayList<>();
-            l.add(root.val);
-            r.add(l);
+            r.add(new ArrayList<>());
         }
-        else{
-            r.get(height-1).add(root.val);
-        }
+        r.get(height-1).add(root.val);
         return height;
     }
     

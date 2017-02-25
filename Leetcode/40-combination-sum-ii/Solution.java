@@ -94,7 +94,6 @@ class Solution3 {
     public void bktk(int[] nums, int target, int start, int sum, List<Integer> cur, List<List<Integer>> result ){
         if(sum == target){
             // add to the result set
-            System.out.println(cur);
             result.add(new ArrayList<Integer>(cur));
             return;
         }
