@@ -1,4 +1,4 @@
-## Solved Leetcode problems (472)
+## Solved Leetcode problems (~480)
 
 1   Two Sum
 
@@ -947,6 +947,14 @@
 
 520 Detect Capital
 
+523 Continuous Subarray Sum
+
+524 Longest Word in Dictionary through Deleting
+
 525 Contiguous Array
 
 526 Beautiful Arrangement
+
+529 Minesweeper
+
+530 Minimum Absolute Difference in BST

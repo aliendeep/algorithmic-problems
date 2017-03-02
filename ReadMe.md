@@ -1,4 +1,4 @@
-## Solved LeetCode Problems (~440)
+## Solved LeetCode Problems (~480)
 <https://github.com/masruba/algorithmic-problems/tree/master/Leetcode>
 
 ## Dynamic Programming

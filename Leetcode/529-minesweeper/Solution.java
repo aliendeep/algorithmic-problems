@@ -65,6 +65,7 @@ For simplicity, not mentioned rules should be ignored in this problem. For examp
 you don't need to reveal all the unrevealed mines when the game is over, consider 
 any cases that you will win the game or flag any squares.
 */
+// BFS
 public class Solution {
     int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
     int r, c;
@@ -121,6 +122,65 @@ public class Solution {
                 visited[r1][c1] = true;
             }
         }
+        return board;
+    }
+}
+
+// DFS
+class Solution2 {
+    int[][] move = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
+    int r, c;
+    int[][] mineCount;
+    
+    class Pair{
+        int r, c;
+        public Pair(int r1, int c1){
+            r = r1;
+            c = c1;
+        }
+    }
+    
+    public void dfs(char[][] board, int x, int y, boolean[][] visited){
+        visited[x][y] = true;
+        board[x][y] = mineCount[x][y] == 0 ? 'B' : (char)(mineCount[x][y] + '0');
+        if(mineCount[x][y] != 0)
+            return;
+            
+        for(int k=0; k<8; ++k) {
+            int r1 = x + move[k][0];
+            int c1 = y + move[k][1];
+            if(r1 < 0 || r1 >= r || c1 < 0 || c1 >= c || visited[r1][c1] || board[r1][c1] != 'E')
+                continue;
+            dfs(board, r1, c1, visited);
+        }
+    }
+    
+    public char[][] updateBoard(char[][] board, int[] click) {
+        r = board.length;
+        c = board[0].length;
+        
+        int cr = click[0];    
+        int cc = click[1];
+        if(board[cr][cc] == 'M'){
+            board[cr][cc] = 'X';
+            return board;
+        }
+        
+        mineCount = new int[r][c];
+        for(int i=0; i<r; ++i){
+            for(int j=0; j<c; ++j){
+                mineCount[i][j] = 0;
+                for(int k=0; k<8; ++k){
+                    int r1 = i + move[k][0];
+                    int c1 = j + move[k][1];
+                    if(r1 < 0 || r1 >= r || c1 < 0 || c1 >= c || board[r1][c1] != 'M')
+                        continue;
+                    mineCount[i][j]++;
+                }
+            }
+        }
+        boolean[][] visited = new boolean[r][c];
+        dfs(board, cr, cc, visited);
         return board;
     }
 }
