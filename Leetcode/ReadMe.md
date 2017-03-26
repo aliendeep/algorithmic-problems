@@ -958,3 +958,11 @@
 529 Minesweeper
 
 530 Minimum Absolute Difference in BST
+
+531 Lonely Pixel I
+
+532 K-diff Pairs in an Array
+
+542 01 Matrix
+
+543 Diameter of Binary Tree
