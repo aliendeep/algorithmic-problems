@@ -963,6 +963,14 @@
 
 532 K-diff Pairs in an Array
 
+535 Encode and Decode TinyURL
+
+540 Single Element in a Sorted Array
+
 542 01 Matrix
 
 543 Diameter of Binary Tree
+
+556 Next Greater Element III
+
+557 Reverse Words in a String III
